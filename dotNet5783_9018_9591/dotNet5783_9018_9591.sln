@@ -9,8 +9,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EBD6505B-CCBE-4C9F-8EBC-9821C3F2025E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBD6505B-CCBE-4C9F-8EBC-9821C3F2025E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBD6505B-CCBE-4C9F-8EBC-9821C3F2025E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBD6505B-CCBE-4C9F-8EBC-9821C3F2025E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BD32E6BF-C1A0-4DC1-85DD-0CDCB41D3249} = {7F31E1D6-3241-4D6D-8414-DB1D14771EAC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9B6D4D04-F718-4450-BCB2-678DC72BE59A}
