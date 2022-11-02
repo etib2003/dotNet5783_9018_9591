@@ -10,10 +10,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BA809A5B-1488-462F-95A4-76911B73413B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items (2)", "Solution Items (2)", "{BA809A5B-1488-462F-95A4-76911B73413B}"
 	ProjectSection(SolutionItems) = preProject
 		..\README.md = ..\README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalList", "DalList\DalList.csproj", "{BC34CD01-7E24-4DB1-B429-840BE39A840E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +27,10 @@ Global
 		{EBD6505B-CCBE-4C9F-8EBC-9821C3F2025E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBD6505B-CCBE-4C9F-8EBC-9821C3F2025E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBD6505B-CCBE-4C9F-8EBC-9821C3F2025E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC34CD01-7E24-4DB1-B429-840BE39A840E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC34CD01-7E24-4DB1-B429-840BE39A840E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC34CD01-7E24-4DB1-B429-840BE39A840E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC34CD01-7E24-4DB1-B429-840BE39A840E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
