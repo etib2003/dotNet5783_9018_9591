@@ -1,5 +1,4 @@
-﻿
-namespace Dal;
+﻿namespace Dal.DalApi;
 internal static class DataSource
 {
     //static readonly
