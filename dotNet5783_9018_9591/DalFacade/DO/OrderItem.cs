@@ -1,10 +1,22 @@
-﻿namespace DO;
+﻿using static DO.Enums;
+using System.Xml.Linq;
+
+namespace DO;
 
 public struct OrderItem
 {
-    public int ProductID { get; set; }
+    public int ID { get; set; }
     public int OrderID { get; set; }
+    public int ProductID { get; set; }
     public double Price { get; set; }
     public int Amount { get; set; }
+
+    public override string ToString() => $@"
+        Identification number={ID} 
+        Order ID: {OrderID}
+        Product ID: {ProductID}
+    	Price: {Price}
+    	Amount: {Amount}
+";
 
 }
