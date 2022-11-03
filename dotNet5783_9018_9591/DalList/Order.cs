@@ -1,7 +1,6 @@
 ﻿namespace DalList
 {
-    public class Class1
+    public class Order
     {
-
     }
 }
