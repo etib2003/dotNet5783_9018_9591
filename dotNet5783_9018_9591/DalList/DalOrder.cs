@@ -1,4 +1,6 @@
 ﻿namespace DalList;
+
+using Dal;
 using System.Collections.Generic;
 
 public class DalOrder
@@ -9,30 +11,30 @@ public class DalOrder
     }
     public void Add(Order O)
     {
-        if (DataSource.Order_vec.Exists(i => i.ID == s.ID))
+        if (DataSource.Orders.Exists(i => i.ID == O.ID))
             throw new Exception("cannot create an order that is already exists");
-        DataSource.Order_vec.Add(O);
+        DataSource.Orders.Add(O);
     }
 
-    public Order[] RequestAll()
+    public list<Order> RequestAll()
     {
-        return DataSource.Order_vec ;
+        return DataSource.Orders ;
     }
 
     public Order RequestById(int id)
     {
-        if (!DataSource.Order_vec.Exists(i => i.ID == id))
+        if (!DataSource.Orders.Exists(i => i.ID == id))
             throw new Exception("the order is not exist");
 
-        return DataSource.Order_vec.Find(i => i.ID == id);
+        return DataSource.Orders.Find(i => i.ID == id);
     }
 
     public void Update(Order s)
     {
         //if order exist throw exception 
-        if (!DataSource.students.Exists(i => i.StudentId == s.StudentId))
+        if (!DataSource.Orders.Exists(i => i.ID == O.ID))
             throw new Exception("cannot update a student, is not exists");
-        Student sToRemove = DataSource.students.Find(i => i.StudentId == s.StudentId);
+        Order sToRemove = DataSource.Orders.Find(i => i.ID == s.ID);
         DataSource.students.Remove(sToRemove);
         DataSource.students.Add(s);
 

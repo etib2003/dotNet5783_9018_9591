@@ -1,10 +1,15 @@
 ﻿
+using DalList;
+
 namespace Dal;
 internal static class DataSource
 {
+    //internal static readonly object Order_vec;
+
     //static readonly
-    internal static Product[] Products_vec = new Product[50];
-    internal static Order[] Orders_vec = new Order[100];
-    internal static OrderItem[] orderItems_vec = new OrderItem[200];
+    internal static List<Product> Products  = new List<Product>();
+    internal static List<Order> Orders = new List<Order> ();
+    internal static List<OrderItem> OrderItems = new List<OrderItem> ();
+    
 
 }
