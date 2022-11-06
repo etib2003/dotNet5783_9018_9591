@@ -1,13 +1,10 @@
-﻿using Dal;
-using System.Collections.Generic;
-namespace DalList;
+﻿using DO;
+
+namespace Dal;
 
 public class DalProduct
 {
-    void s_Initialize()
-    {
-        
-    }
+
     //public void Create(Product p)
     //{
     //}
@@ -17,10 +14,10 @@ public class DalProduct
 
     //}
 
-    public int Add(Product product)
+    public void Add(Product product)
     {
-        if(DataSource.Products_vec.
-            (i => i.ID = product.ID))
+        if (!DataSource.Products.Exists(x => x.ID == product.ID))
+            DataSource.Products.Add(product);
     }
 
     internal struct Config

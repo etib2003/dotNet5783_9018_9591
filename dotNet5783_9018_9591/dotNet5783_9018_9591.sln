@@ -11,6 +11,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalFacade", "DalFacade\DalFacade.csproj", "{40977969-8ECB-44C2-98F8-A365148F6055}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalList", "DalList\DalList.csproj", "{E68ACE82-8E04-4A13-98AE-5446EBA11485}"
+	ProjectSection(ProjectDependencies) = postProject
+		{40977969-8ECB-44C2-98F8-A365148F6055} = {40977969-8ECB-44C2-98F8-A365148F6055}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalTest", "DalTest\DalTest.csproj", "{5EA0109C-1533-4E9A-9A44-86699AF40785}"
 EndProject

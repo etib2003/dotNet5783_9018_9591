@@ -1,14 +1,10 @@
-﻿namespace DalList;
+﻿using DO;
 
-using Dal;
-using System.Collections.Generic;
+namespace Dal;
 
 public class DalOrder
 {
- void  s_Initialize()
-    {
-
-    }
+  
     public void Add(Order O)
     {
         if (DataSource.Orders.Exists(i => i.ID == O.ID))
@@ -16,7 +12,7 @@ public class DalOrder
         DataSource.Orders.Add(O);
     }
 
-    public list<Order> RequestAll()
+    public List<Order> RequestAll()
     {
         return DataSource.Orders ;
     }
