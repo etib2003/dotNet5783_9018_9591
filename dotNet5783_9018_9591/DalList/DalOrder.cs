@@ -4,17 +4,23 @@ namespace Dal;
 
 public class DalOrder
 {
-  
-    public void Add(Order O)
+    public int Create(Order O)
     {
-        if (DataSource.Orders.Exists(i => i.ID == O.ID))
+        if (!DataSource.Orders.Exists(i => i.ID == O.ID))
+        {
+            DataSource.Orders.Add(O);
+            return O.ID;
+        }
+        else
             throw new Exception("cannot create an order that is already exists");
-        DataSource.Orders.Add(O);
+
     }
 
     public List<Order> RequestAll()
     {
-        return DataSource.Orders ;
+        List<Order> listToReturn = DataSource.Orders;
+        return listToReturn;
+
     }
 
     public Order RequestById(int id)
@@ -24,25 +30,27 @@ public class DalOrder
 
         return DataSource.Orders.Find(i => i.ID == id);
     }
-
-    public void Update(Order s)
+  
+    public void Update(Order O)
     {
-        //if order exist throw exception 
+        //if order does not exist throw exception 
         if (!DataSource.Orders.Exists(i => i.ID == O.ID))
-            throw new Exception("cannot update a student, is not exists");
-        Order sToRemove = DataSource.Orders.Find(i => i.ID == s.ID);
-        DataSource.students.Remove(sToRemove);
-        DataSource.students.Add(s);
+            throw new Exception("cannot update an order,that is not exists");
+        Order OToRemove = DataSource.Orders.Find(i => i.ID == O.ID); //מחזיר את האובייקט
+        int index = DataSource.Orders.IndexOf(OToRemove);//מחזיר אינדקס לאובייקט ברשימה
+        DataSource.Orders.Remove(OToRemove);//מסיר את האובייקט
+        DataSource.Orders.Insert(index, O);//שם את המעודכן שמקום של האינדקס
+
 
     }
-
-    public void Delete(Student s)
+    public void Delete(int id)
     {
-        //if student exist throw exception 
-        if (!DataSource.students.Exists(i => i.StudentId == s.StudentId))
-            throw new Exception("cannot delete a student, is not exists");
-        DataSource.students.Remove(s); //or set Active..
+        //if student does not exist throw exception 
+        if (!DataSource.Orders.Exists(i => i.ID ==id))
+            throw new Exception("cannot delete an order,that is not exists");
+        Order  OToRemove = DataSource.Orders.Find(i => i.ID == id);
+        DataSource.Orders.Remove(OToRemove);
+ 
     }
-
 
 }
