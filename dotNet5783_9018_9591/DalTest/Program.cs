@@ -3,7 +3,7 @@ Console.WriteLine("Hello, World!");
 string choice ;
 string ch;
 do
-{ choice = Console.ReadLine();
+{   choice = Console.ReadLine();
     switch (choice)
     {
         case "0":
@@ -20,7 +20,7 @@ do
 
 
                 }
-                
+                break;
             }
         case "2":  
              
@@ -30,7 +30,7 @@ do
                 {
                      
                 }
-                 
+                break;
             }
         case "3":
             {
