@@ -29,16 +29,7 @@ internal static class DataSource
                                   "Dan Bar", "Tal Cohen", "Ori Gal", "Gal Adam", "Adam Prais", "Hadar Muchtar", "Bibi Netanyahu",
                                   "Eden Ben Zaken", "Daniel Yona" };
 
-        Order order1 = new Order
-        {
-            ID = Config.LastIdOr
-            CustomerName = "Hadar",
-            CustomerEmail = "Hadar@gmail.com",
-            CustomerAdress = "Gan 1, jerusalem",
-            OrderDate = DateTime.Now.AddDays(1),
-            ShipDate = DateTime.Now.AddDays(2),
-            DeliveryDate = DateTime.Now.AddDays(7)
-        };
+        
 
         Order order2 = new Order
         {
@@ -51,6 +42,8 @@ internal static class DataSource
             DeliveryDate = DateTime.Now.AddDays(7)
         };
 
+        Product product = new Product();
+        product.Category = Enums.category.
 
     }
 
@@ -64,13 +57,13 @@ internal static class DataSource
 
     }
 
-    static internal class Config
+    internal static class config
     {
-        static private int LastIdOr = 1;//לבדוק לגבי זה
-        static private int LastIdOi = 1;//לבדוק לגבי זה
+        private static int LastIdOr = 100000;//לבדוק לגבי זה
+        private static int LastIdOi = 100000;//לבדוק לגבי זה
 
 
-        static int indexOr = 0;
+    static int indexOr = 0;
         static int indexpdct = 0;
         static int indexOi = 0;
     }
