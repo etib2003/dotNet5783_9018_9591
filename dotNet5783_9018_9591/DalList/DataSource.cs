@@ -53,30 +53,45 @@ internal static class DataSource
                 if(i<=12)
                 order.DeliveryDate = order.ShipDate.AddDays(random.Next(7, 21));
             }
-
-
+            Orders.Add(order);
         }
-        for (int i = 1; i <= 10; i++)
-        {
-            Product product = new Product();
-            do
-            { product.ID = random.Next(100000, 99999); }
-            while (Products.Exists(x => x.ID ==product.ID));
-            product.Category =(Enums.category)random.Next(0,4);
-            product.Name
-        }
-
 
     }
 
     static void ProductInitialize()
     {
+        for (int i = 1; i <= 10; i++)
+        {
+            Product product = new Product();
+            do
+            { product.ID = random.Next(100000, 99999); }
+            while (Products.Exists(x => x.ID == product.ID));
+
+            product.Name = "product" + i;
+            product.Price= random.Next(400,2000);
+            product.Category = (Enums.category)random.Next(0, 4); //לבדוק איך יודעים שיש את כל הקטגוריות
+            if (i == 1)
+                product.InStock = 0;
+            else
+                product.InStock = i*3;
+            Products.Add(product);
+        }
 
     }
 
     static void OrderItemInitialize()
     {
-
+        for (int i = 1; i <= 40; i++)
+        {
+            OrderItem orderItem = new OrderItem();
+            orderItem.ID = config._LastIdOi;
+            orderItem.OrderID = Orders[random.Next(0, 19)].ID;
+            Product p = Products[random.Next(0, 9)];
+            orderItem.ProductID = p.ID;
+            orderItem.Price = p.Price;
+            orderItem.Amount = random.Next(1, 4);
+            OrderItems.Add(orderItem);
+        } 
     }
 
     internal static class config
