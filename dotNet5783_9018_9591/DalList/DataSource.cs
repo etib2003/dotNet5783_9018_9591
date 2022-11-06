@@ -1,4 +1,5 @@
 ﻿using DO;
+using static DO.Enums;
 
 namespace Dal;
 internal static class DataSource
@@ -25,31 +26,45 @@ internal static class DataSource
 
     static void OrderInitialize()
     {
-        string[] CustomerName = { "Hadar Haim" , "Chavi Bombach" , "Eti Bernat", "Michal Gad", "Shir Ben", "Gad Dan",
-                                  "Dan Bar", "Tal Cohen", "Ori Gal", "Gal Adam", "Adam Prais", "Hadar Muchtar", "Bibi Netanyahu",
-                                  "Eden Ben Zaken", "Daniel Yona" };
+        string[] CustomerFirstName = { "Shawn" , "Chavi" , "Eti", "Michal", "Shir",
+                                       "Gad","Dan","Tal","Ori","Gal","Adam",
+                                       "Hadar", "Bibi", "Eden", "Daniel" };
+        string[] CustomerLastName = { "Mendes" , "Bombach" , "Bernat", "Gad", "Ben",
+                                      "Dan","Bar","Cohen","Gal","Adam","Prais",
+                                      "Muchtar", "Netanyahu", "Ben_Zaken", "Yona" };
+        string[] Customer_Adress = { "Pinkas 1,Bnei Brak", "Eliezer 54, Petach Tikva", "David 12,Herzelia", "Herzog 14,Bnei Brak",
+                                    "gehula 30, jerusalem","Mohaliver 9, Bnei Brak", "Menachem 7, Tel Aviv", "Byalik 87, Ramat Gan",
+                                    "Daniel 8, Beit Shemesh", "Segal 21, Netania", "Havradim 3, Chulon","Rotshild 17, Tel Aviv" };
 
-        Order order1 = new Order
-        {
-            ID = Config.LastIdOr
-            CustomerName = "Hadar",
-            CustomerEmail = "Hadar@gmail.com",
-            CustomerAdress = "Gan 1, jerusalem",
-            OrderDate = DateTime.Now.AddDays(1),
-            ShipDate = DateTime.Now.AddDays(2),
-            DeliveryDate = DateTime.Now.AddDays(7)
-        };
 
-        Order order2 = new Order
+        for (int i = 1; i <= 20; i++)
         {
-            ID = 1111,
-            CustomerName = "Chavi",
-            CustomerEmail = "Hadar@gmail.com",
-            CustomerAdress = "Gan 1, jerusalem",
-            OrderDate = DateTime.Now.AddDays(1),
-            ShipDate = DateTime.Now.AddDays(2),
-            DeliveryDate = DateTime.Now.AddDays(7)
-        };
+            Order order = new Order();
+            order.ID = config._LastIdOr;
+            string CustomerFName = CustomerFirstName[random.Next(0, 14)];
+            string CustomerLName = CustomerLastName[random.Next(0, 14)];
+            order.CustomerName = CustomerFName + " " + CustomerLName;
+            order.CustomerEmail = CustomerFName + CustomerLName + "@gmail.com";
+            order.CustomerAdress = Customer_Adress[random.Next(0, 14)];
+            order.OrderDate = DateTime.Now.AddMonths(random.Next(-5, -1));
+            if (i <= 16)
+            {
+                order.ShipDate = order.OrderDate.AddDays(random.Next(1, 3));//לבדוק
+                if(i<=12)
+                order.DeliveryDate = order.ShipDate.AddDays(random.Next(7, 21));
+            }
+
+
+        }
+        for (int i = 1; i <= 10; i++)
+        {
+            Product product = new Product();
+            do
+            { product.ID = random.Next(100000, 99999); }
+            while (Products.Exists(x => x.ID ==product.ID));
+            product.Category =(Enums.category)random.Next(0,4);
+            product.Name
+        }
 
 
     }
@@ -64,11 +79,20 @@ internal static class DataSource
 
     }
 
-    static internal class Config
+    internal static class config
     {
-        static private int LastIdOr = 1;//לבדוק לגבי זה
-        static private int LastIdOi = 1;//לבדוק לגבי זה
+        static private int LastIdOr = 100000;
+        static private int LastIdOi = 100000;
 
+        public static int _LastIdOr
+        {
+            get { return LastIdOr++; }
+        }
+
+        public static int _LastIdOi
+        {
+            get { return LastIdOi++; }
+        }
 
         static int indexOr = 0;
         static int indexpdct = 0;
