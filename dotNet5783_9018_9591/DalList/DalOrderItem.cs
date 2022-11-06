@@ -61,7 +61,7 @@ public class DalOrderItem
         OrderItem OiToRemove = DataSource.OrderItems.Find(i => i.ID == Oi.ID); //מחזיר את האובייקט
         int index = DataSource.OrderItems.IndexOf(OiToRemove);//מחזיר אינדקס לאובייקט ברשימה
         DataSource.OrderItems.Remove(OiToRemove);//מסיר את האובייקט
-        DataSource.OrderItems.Insert(index, OiToRemove);//שם את המעודכן שמקום של האינדקס
+        DataSource.OrderItems.Insert(index, Oi);//שם את המעודכן שמקום של האינדקס
     }
     public void Delete(int id)
     {
