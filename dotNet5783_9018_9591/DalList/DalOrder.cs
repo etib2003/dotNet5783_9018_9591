@@ -13,7 +13,6 @@ public class DalOrder
         }
         else
             throw new Exception("cannot create an order that is already exists");
-
     }
 
     public List<Order> RequestAll()

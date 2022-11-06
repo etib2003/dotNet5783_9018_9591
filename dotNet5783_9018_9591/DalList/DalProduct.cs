@@ -3,7 +3,6 @@ namespace Dal;
 
 public class DalProduct
 {
-    //internal struct Config
 
     //CRUD for Products
 
