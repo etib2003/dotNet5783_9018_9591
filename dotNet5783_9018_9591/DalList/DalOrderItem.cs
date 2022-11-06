@@ -1,4 +1,6 @@
 ﻿using DO;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Dal;
 
@@ -6,50 +8,70 @@ public class DalOrderItem
 {
     //CRUD for Student
 
-    public void Create(OrderItem Oi)
+    public int Create(OrderItem Oi)
     {
-
-        //if (int i = 0;i< DataSource.OrderItems.)
         if (!DataSource.OrderItems.Exists(x => x.ID == Oi.ID))
+        {
             DataSource.OrderItems.Add(Oi);
+            return Oi.ID;
+        }
         else
-            throw new Exception("cannot create a student, is already exists");
+            throw new Exception("cannot create an OrderItem,that is already exists");
     }
 
     public List<OrderItem> RequestAll()
     {
-        return DataSource.OrderItems;
+        List<OrderItem> listToReturn = DataSource.OrderItems;
+        return listToReturn;
     }
-
 
     public OrderItem RequestById(int id)
     {
         if (!DataSource.OrderItems.Exists(x => x.ID == id))
-            throw new Exception("the student is not exist");
+            throw new Exception("the OrderItem is not exist");
 
         return DataSource.OrderItems.Find(i => i.ID == id);
+    }
+    //public List<OrderItem> RequestByOrderId(int orderId)
+    //{
+    //    if (!DataSource.OrderItems.Exists(x => x.OrderID == orderId))
+    //        throw new Exception("the OrderId is not exist");
+
+    //    List<OrderItem> listByOrderId= new List<OrderItem>();
+    //    //foreach (OrderItem orderId in DataSource.OrderItems.OrderId)
+    //    //{
+    //    //    DataSource.OrderItems.ForEach(listByOrderId.Add())
+    //    //}
+    //    //return DataSource.OrderItems.Find(i => i.OrderID == orderId);
+    //}
+
+    public OrderItem RequestByOrderIDProductID(int orderId, int productId)
+    {
+        if (!DataSource.OrderItems.Exists(i => i.OrderID == orderId && i.ProductID == productId))
+            throw new Exception("the OrderItem is not exist");
+
+        return DataSource.OrderItems.Find(i => i.OrderID == orderId && i.ProductID == productId);
     }
 
     public void Update(OrderItem Oi)
     {
-        //if student exist throw exception 
+        //if OrderItems does not exist throw exception 
         if (!DataSource.OrderItems.Exists(i => i.ID == Oi.ID))
-            throw new Exception("cannot update a student, is not exists");
-        OrderItem sToRemove = DataSource.OrderItems.Find(i => i.ID == Oi.ID);
-        DataSource.OrderItems.Remove(sToRemove);
-        DataSource.OrderItems.Add(Oi);
-
-        //פונקציה נוספת
-        //if(DataSource.OrderItems.Exists(i => i.OrderID == Order_ID && i.ProductID == Product_ID))
-        //    return DataSource.OrderItems.Find(i => i.OrderID== Order_ID && i.ProductID == Product_ID);
+            throw new Exception("cannot update an OrderItem, that is not exists");
+        OrderItem OiToRemove = DataSource.OrderItems.Find(i => i.ID == Oi.ID); //מחזיר את האובייקט
+        int index = DataSource.OrderItems.IndexOf(OiToRemove);//מחזיר אינדקס לאובייקט ברשימה
+        DataSource.OrderItems.Remove(OiToRemove);//מסיר את האובייקט
+        DataSource.OrderItems.Insert(index, OiToRemove);//שם את המעודכן שמקום של האינדקס
     }
-
-
-    public void Delete(OrderItem Oi)
+    public void Delete(int id)
     {
-        //if student exist throw exception 
-        if (!DataSource.OrderItems.Exists(i => i.ID == Oi.ID))
-            throw new Exception("cannot delete a student, is not exists");
-        DataSource.OrderItems.Remove(Oi); //or set Active..
+        //if OrderItems does not exist throw exception 
+        if (!DataSource.OrderItems.Exists(i => i.ID == id))
+            throw new Exception("cannot delete an OrderItem,that is not exists");
+        OrderItem OiToRemove = DataSource.OrderItems.Find(i => i.ID == id);
+        DataSource.OrderItems.Remove(OiToRemove);
     }
+
+   
+
 }
