@@ -2,7 +2,7 @@
 
 public struct Order
 {
-    public int ID { get; set; }
+    public int seqNum { get; set; }
     public string CustomerName { get; set; }
     public string CustomerEmail { get; set; }
     public string CustomerAdress { get; set; }
@@ -10,7 +10,7 @@ public struct Order
     public DateTime ShipDate { get; set; }
     public DateTime DeliveryDate { get; set; }
     public override string ToString() => $@"
-        Customer ID={ID}: {CustomerName}, 
+ k       Customer ID={seqNum}: {CustomerName}, 
         Email: {CustomerEmail}
         Adress: {CustomerAdress}
         Order date: {OrderDate}

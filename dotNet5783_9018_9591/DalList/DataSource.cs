@@ -1,4 +1,5 @@
 ﻿using DO;
+using System.Windows.Markup;
 using static DO.Enums;
 
 namespace Dal;
@@ -32,15 +33,17 @@ internal static class DataSource
         string[] CustomerLastName = { "Mendes" , "Bombach" , "Bernat", "Gad", "Ben",
                                       "Dan","Bar","Cohen","Gal","Adam","Prais",
                                       "Muchtar", "Netanyahu", "Ben_Zaken", "Yona" };
-        string[] Customer_Adress = { "Pinkas 1,Bnei Brak", "Eliezer 54, Petach Tikva", "David 12,Herzelia", "Herzog 14,Bnei Brak",
-                                    "gehula 30, jerusalem","Mohaliver 9, Bnei Brak", "Menachem 7, Tel Aviv", "Byalik 87, Ramat Gan",
-                                    "Daniel 8, Beit Shemesh", "Segal 21, Netania", "Havradim 3, Chulon","Rotshild 17, Tel Aviv" };
+        string[] Customer_Adress =  { "Pinkas 1,Bnei Brak", "Eliezer 54, Petach Tikva", "David 12,Herzelia", "Herzog 14,Bnei Brak",
+                                      "gehula 30, jerusalem","Mohaliver 9, Bnei Brak", "Menachem 7, Tel Aviv", "Byalik 87, Ramat Gan",
+                                      "Daniel 8, Beit Shemesh", "Segal 21, Netania", "Havradim 3, Chulon","Rotshild 17, Tel Aviv" };
 
-
+        
         for (int i = 1; i <= 20; i++)
         {
             Order order = new Order();
-            order.ID = config._LastIdOr;
+            //לוודא שלא יצא אותו בן אדם- נשלח דרך create
+
+            order.seqNum = config._LastIdOr;
             string CustomerFName = CustomerFirstName[random.Next(0, 14)];
             string CustomerLName = CustomerLastName[random.Next(0, 14)];
             order.CustomerName = CustomerFName + " " + CustomerLName;
@@ -50,30 +53,35 @@ internal static class DataSource
             if (i <= 16)
             {
                 order.ShipDate = order.OrderDate.AddDays(random.Next(1, 3));//לבדוק
-                if(i<=12)
-                order.DeliveryDate = order.ShipDate.AddDays(random.Next(7, 21));
+                if (i <= 12)
+                    order.DeliveryDate = order.ShipDate.AddDays(random.Next(7, 21));
             }
-            Orders.Add(order);
+            Orders.Add(order); //Orders.create(order);
+            //Orders.Add(new Order() { CustomerAdress = order.CustomerAdress, OrderDate = order.OrderDate });
         }
 
     }
 
     static void ProductInitialize()
     {
+        Array Values = Enum.GetValues(typeof(category));
+        //Product product = new Product();
         for (int i = 1; i <= 10; i++)
         {
-            Product product = new Product();
+             Product product = new Product();
             do
             { product.ID = random.Next(100000, 99999); }
             while (Products.Exists(x => x.ID == product.ID));
 
             product.Name = "product" + i;
-            product.Price= random.Next(400,2000);
+            product.Price = random.Next(400, 2000);
+
+            //product.Category = (category)values.Getvalue(random.Next(Values.Length));
             product.Category = (Enums.category)random.Next(0, 4); //לבדוק איך יודעים שיש את כל הקטגוריות
             if (i == 1)
                 product.InStock = 0;
             else
-                product.InStock = i*3;
+                product.InStock = i * 3;
             Products.Add(product);
         }
 
@@ -81,23 +89,27 @@ internal static class DataSource
 
     static void OrderItemInitialize()
     {
+        //OrderItem orderItem = new OrderItem();
         for (int i = 1; i <= 40; i++)
         {
             OrderItem orderItem = new OrderItem();
-            orderItem.ID = config._LastIdOi;
-            orderItem.OrderID = Orders[random.Next(0, 19)].ID;
+            orderItem.seqNum = config._LastIdOi;
+            orderItem.OrderID = Orders[random.Next(0, 19)].seqNum;
             Product p = Products[random.Next(0, 9)];
             orderItem.ProductID = p.ID;
             orderItem.Price = p.Price;
             orderItem.Amount = random.Next(1, 4);
             OrderItems.Add(orderItem);
-        } 
+        }
     }
 
     internal static class config
     {
         static private int LastIdOr = 100000;
         static private int LastIdOi = 100000;
+
+        //public static int _LastIdOr => LastIdOr++;  צורה  מקוצרת
+        // public static int _LastIdOi=> _LastIdOi++
 
         public static int _LastIdOr
         {
