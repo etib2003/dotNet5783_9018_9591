@@ -51,11 +51,14 @@ internal static class DataSource
             order.CustomerAdress = Customer_Adress[random.Next(0, 14)];
             order.OrderDate = DateTime.Now.AddMonths(random.Next(-5, -1));
             if (i <= AmountOfOrders*0.8)
-            {
                 order.ShipDate = order.OrderDate.AddDays(random.Next(1, 3));//לבדוק
-                if (i <= AmountOfOrders * 0.6)
-                    order.DeliveryDate = order.ShipDate.AddDays(random.Next(7, 21));
-            }
+            else
+                order.ShipDate = DateTime.MinValue;//לבדוק
+            if (i <= AmountOfOrders * 0.6)
+                order.DeliveryDate = order.ShipDate.AddDays(random.Next(7, 21));
+            else
+                order.DeliveryDate= DateTime.MinValue;
+
             Orders.Add(order); //Orders.create(order);
             //Orders.Add(new Order() { CustomerAdress = order.CustomerAdress, OrderDate = order.OrderDate });
         }
