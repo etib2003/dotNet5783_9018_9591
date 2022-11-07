@@ -23,18 +23,7 @@ internal static class DataSource
         ProductInitialize();
         OrderItemInitialize();
     }
-    internal static class config
-    {
-        internal static int seqNumOi = 0;
-        internal static int seqNumOr = 0;
-
-        public static int SeqNumOi => ++seqNumOi;
-        public static int SeqNumOr => ++seqNumOr;
-        //internal static int indexOr = 0;
-        //internal static int indexpdct = 0;//לבדוק למה זה?
-        //internal static int indexOi = 0;
-    }
-
+    
     static void OrderInitialize()
     {
         string[] CustomerFirstName = { "Shawn" , "Chavi" , "Eti", "Michal", "Shir",
@@ -109,5 +98,17 @@ internal static class DataSource
             orderItem.Amount = random.Next(1, 4);
             OrderItems.Add(orderItem);
         }
+    }
+
+    internal static class config
+    {
+        internal static int seqNumOi = 0;
+        internal static int seqNumOr = 0;
+
+        public static int SeqNumOi => ++seqNumOi;
+        public static int SeqNumOr => ++seqNumOr;
+        //internal static int indexOr = 0;
+        //internal static int indexpdct = 0;//לבדוק למה זה?
+        //internal static int indexOi = 0;
     }
 }
