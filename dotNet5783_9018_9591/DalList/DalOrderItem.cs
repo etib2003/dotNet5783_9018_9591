@@ -1,6 +1,7 @@
 ﻿using DO;
 using System.Collections.Generic;
 using System.Linq;
+using static Dal.DataSource;
 
 namespace Dal;
 
@@ -10,14 +11,13 @@ public class DalOrderItem
 
     public int Create(OrderItem Oi)
     {
-        if (!DataSource.OrderItems.Exists(x => x.seqNum == Oi.seqNum))
-        {
-            //לעשות קונפיג
-            DataSource.OrderItems.Add(Oi);
-            return Oi.seqNum;
-        }
-        else
+        if (DataSource.OrderItems.Exists(x => x.seqNum == Oi.seqNum))
             throw new Exception("cannot create an OrderItem,that is already exists");
+        if(!(DataSource.Orders.Exists(x => x.seqNum == Oi.OrderID)&& DataSource.Products.Exists(x => x.ID == Oi.ProductID)))
+            throw new Exception("cannot create an OrderItem,because there is no this order/product");
+        Oi.seqNum = config.SeqNumOi;
+        DataSource.OrderItems.Add(Oi);
+        return Oi.seqNum;
     }
 
     public List<OrderItem> RequestAll()
@@ -26,53 +26,48 @@ public class DalOrderItem
         return listToReturn;
     }
 
-    public OrderItem RequestById(int id)
+    public OrderItem RequestBySeqNum(int id)
     {
         if (!DataSource.OrderItems.Exists(x => x.seqNum == id))
             throw new Exception("the OrderItem is not exist");
 
-        return DataSource.OrderItems.Find(i => i.seqNum == id);
+        return DataSource.OrderItems.Find(x => x.seqNum == id);
     }
-    //public List<OrderItem> RequestByOrderId(int orderId)
-    //{
-    //    if (!DataSource.OrderItems.Exists(x => x.OrderID == orderId))
-    //        throw new Exception("the OrderId is not exist");
-
-    //    List<OrderItem> listByOrderId= new List<OrderItem>();
-    //    //foreach (OrderItem orderId in DataSource.OrderItems.OrderId)
-    //    //{
-    //    //    DataSource.OrderItems.ForEach(listByOrderId.Add())
-    //    //}
-    //    //return DataSource.OrderItems.Find(i => i.OrderID == orderId);
-    //}
 
     public OrderItem RequestByOrderIDProductID(int orderId, int productId)
     {
-        if (!DataSource.OrderItems.Exists(i => i.OrderID == orderId && i.ProductID == productId))
+        if (!DataSource.OrderItems.Exists(x => x.OrderID == orderId && x.ProductID == productId))
             throw new Exception("the OrderItem is not exist");
 
-        return DataSource.OrderItems.Find(i => i.OrderID == orderId && i.ProductID == productId);
+        return DataSource.OrderItems.Find(x => x.OrderID == orderId && x.ProductID == productId);
+    }
+    public List<OrderItem> RequestByOrderId(int orderId)
+    {
+        if (!DataSource.OrderItems.Exists(x => x.OrderID == orderId))
+            throw new Exception("the OrderId is not exist");
+
+        return DataSource.OrderItems.FindAll(x => x.OrderID == orderId);
     }
 
     public void Update(OrderItem Oi)
     {
         //if OrderItems does not exist throw exception 
-        if (!DataSource.OrderItems.Exists(i => i.seqNum == Oi.seqNum))
+        if (!DataSource.OrderItems.Exists(x => x.seqNum == Oi.seqNum))
             throw new Exception("cannot update an OrderItem, that is not exists");
-        OrderItem OiToRemove = DataSource.OrderItems.Find(i => i.seqNum == Oi.seqNum); //מחזיר את האובייקט
-        int index = DataSource.OrderItems.IndexOf(OiToRemove);//מחזיר אינדקס לאובייקט ברשימה
+        OrderItem OiToRemove = DataSource.OrderItems.Find(x => x.seqNum == Oi.seqNum); //מחזיר את האובייקט
+        Oi.seqNum = OiToRemove.seqNum;
         DataSource.OrderItems.Remove(OiToRemove);//מסיר את האובייקט
-        DataSource.OrderItems.Insert(index, Oi);//שם את המעודכן שמקום של האינדקס
+        DataSource.OrderItems.Add(Oi);//שם את המעודכן שמקום של האינדקס
     }
     public void Delete(int id)
     {
         //if OrderItems does not exist throw exception 
-        if (!DataSource.OrderItems.Exists(i => i.seqNum == id))
+        if (!DataSource.OrderItems.Exists(x => x.seqNum == id))
             throw new Exception("cannot delete an OrderItem,that is not exists");
-        OrderItem OiToRemove = DataSource.OrderItems.Find(i => i.seqNum == id);
+        OrderItem OiToRemove = DataSource.OrderItems.Find(x => x.seqNum == id);
         DataSource.OrderItems.Remove(OiToRemove);
     }
 
-   
+
 
 }
