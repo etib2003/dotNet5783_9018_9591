@@ -12,8 +12,6 @@ internal static class DataSource
     internal static List<Order> Orders = new List<Order>();
     internal static List<OrderItem> OrderItems = new List<OrderItem>();
 
-    //static int x = random.Next(2, 10);
-
     static DataSource() //בנאי
     {
         s_Initialize();
