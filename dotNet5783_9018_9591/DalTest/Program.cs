@@ -1,34 +1,51 @@
 ﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
-string choice ;
+using DO;
+using System;
+
+string choice;
 string ch;
 do
-{   choice = Console.ReadLine();
+{ choice = Console.ReadLine();
     switch (choice)
     {
-        case "0":
-            { 
-                break;
-            }
-        case "1":
+        case "finish":
+            break;
+        case "Order":
             {
                 ch = Console.ReadLine();
                 switch (ch)
                 {
-                    case 'c':
-                        Console.ReadLine();
+                    case "a"://להוסיף
+                        {
+                            Order newOrder = new Order();
+                            //newOrder.GetHashCode();
+                            newOrder.CustomerName = Console.ReadLine();
+                            newOrder.CustomerEmail = Console.ReadLine();
+                            newOrder.CustomerAdress = Console.ReadLine();
+                            newOrder.OrderDate=DateTime.Now;
+                            newOrder.ShipDate = newOrder.OrderDate.AddDays(2);
+                            newOrder.DeliveryDate = newOrder.ShipDate.AddDays(7);
+                            break;      
+                        }
+                    case "b":
+                    {
 
+                        break;
+                    }
 
                 }
-                break;
+                
             }
-        case "2":  
-             
+        case "2":
             {
                 ch = Console.ReadLine();
                 switch (ch)
                 {
-                     
+                    case "a":
+                        {
+                            break;
+                        }
+
                 }
                 break;
             }
@@ -37,12 +54,14 @@ do
                 ch = Console.ReadLine();
                 switch (ch)
                 {
-                     
+                    case "a":
+                        {
+                            break;
+                        }
+
                 }
+                break;
             }
-            break;
     }
-
-
 }
 while (choice != "0");
