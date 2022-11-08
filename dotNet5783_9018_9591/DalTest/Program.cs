@@ -3,93 +3,132 @@
 using Dal;
 using DO;
 using System;
+using System.Data.Common;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Xml.Linq;
 using static DO.Enums;
 
 string choice;
-string ch;
- 
-choice = Console.ReadLine();
-ch = Console.ReadLine();
-switch (choice)
+int action;
+bool flag = true;
+
+do
 {
-    case "finish":
-        break;
-
-    case "Order":
-        {
-
-            ChoiceOrder();
-            break;
-        }
-    case "Product":
-        {
-            ChoiceProduct();
-            break;
-        }
-    case "OrderItem":
-        {
-            ChoiceOrderItem();
-            break;
-        }
-
-}
-void ChoiceOrder()
-{
-    switch (ch)
+    Console.WriteLine("Enter the Topic - finish / order / product / orderItem:");
+    choice = Console.ReadLine();
+    switch (choice)
     {
-        case "add":
+        case "finish":
+            flag = false;
+            break;
+        case "order":
             {
-                Order newOrder = new Order() { 
-                    CustomerName = Console.ReadLine(),
-                    CustomerEmail = Console.ReadLine(),
-                    CustomerAdress = Console.ReadLine()};
-                 
+                Console.WriteLine(
+@"    For add a new order, press: 1 
+    For request all the orders, press: 2
+    For request an order by ID, press: 3
+    For update an order, press: 4
+    For delete an order, press: 5");
+                action = Convert.ToInt32(Console.ReadLine());
+                ChoiceOrder(action);
+            }
+            break;
+
+        case "product":
+            {
+                Console.WriteLine(
+@"    For add a new Product, press: 1 
+    For request all the Products, press: 2
+    For request a Product by ID, press: 3
+    For update a Product, press: 4
+    For delete a Product, press: 5");
+                action = Convert.ToInt32(Console.ReadLine());
+                ChoiceProduct(action);
+            }
+            break;
+
+        case "orderItem":
+            {
+                Console.WriteLine(
+@"    For add a new Order Item, press: 1 
+    For request all the Order Items, press: 2
+    For request an Order Item by seqNum, press: 3
+    For request an Order Item by order ID and product ID, press: 4
+    For request an Order Item by order ID, press: 5
+    For update an Order Item, press: 6
+    For delete an Order Item, press: 7");
+                action = Convert.ToInt32(Console.ReadLine());
+                ChoiceOrderItem(action);
+            }
+            break;
+        default:
+            Console.WriteLine("ERROR");
+            break;
+    }
+} while (flag);
+
+void ChoiceOrder(int action)
+{
+    DalOrder dalOrder = new DalOrder();
+    switch (action)
+    {
+        case 1:
+            {
+                Order newOrder = new Order();
+
+                Console.Write("Enter a Full name:");
+                newOrder.CustomerName = Console.ReadLine();
+                Console.Write("Enter an Email:");
+                newOrder.CustomerEmail = Console.ReadLine();
+                Console.Write("Enter an Adress:");
+                newOrder.CustomerAdress = Console.ReadLine();
                 newOrder.OrderDate = DateTime.Now;
                 newOrder.ShipDate = newOrder.OrderDate.AddDays(2);
                 newOrder.DeliveryDate = newOrder.ShipDate.AddDays(7);
-                DalOrder dalOrder = new DalOrder();
+
                 dalOrder.Create(newOrder);
-
                 break;
             }
-        case "request All":
+        case 2:
             {
-                DalOrder dalOrder=new DalOrder();
-                Console.WriteLine(dalOrder.RequestAll());
-
+                foreach(Order ord in dalOrder.RequestAll())
+                {
+                    Console.WriteLine(ord);
+                }
+                //Console.WriteLine(dalOrder.RequestAll());
 
                 break;
             }
-        case "request By Id":
+        case 3:
             {
                 int id = Convert.ToInt32(Console.ReadLine());
-                DalOrder dalOrder = new DalOrder();
-                Console.WriteLine(dalOrder.RequestById(id)); 
+
+                Console.WriteLine(dalOrder.RequestById(id));
                 break;
             }
-        case "update":
+        case 4:
             {
-                Order newOrder = new Order()
-                {
-                    CustomerName = Console.ReadLine(),
-                    CustomerEmail = Console.ReadLine(),
-                    CustomerAdress = Console.ReadLine()
-                };
+                Order newOrder = new Order();
 
+                Console.Write("Enter a Full name:");
+                newOrder.CustomerName = Console.ReadLine();
+                Console.Write("Enter an Email:");
+                newOrder.CustomerEmail = Console.ReadLine();
+                Console.Write("Enter an Adress:");
+                newOrder.CustomerAdress = Console.ReadLine();
                 newOrder.OrderDate = DateTime.Now;
                 newOrder.ShipDate = newOrder.OrderDate.AddDays(2);
                 newOrder.DeliveryDate = newOrder.ShipDate.AddDays(7);
-                DalOrder dalOrder = new DalOrder();
+
                 dalOrder.Update(newOrder);
                 break;
             }
-        case "delete":
+        case 5:
             {
+                Console.Write("Enter an ID:");
                 int id = Convert.ToInt32(Console.ReadLine());
-                DalOrder dalOrder = new DalOrder();
+
                 dalOrder.Delete(id);
                 break;
             }
@@ -98,16 +137,24 @@ void ChoiceOrder()
             break;
     }
 }
-void ChoiceProduct()
+
+void ChoiceProduct(int action)
 {
-    switch (ch)
+    DalProduct dalProduct = new DalProduct();
+
+    switch (action)
     {
-        case "add":
+        case 1:
             {
                 Product newProduct = new Product();
+
+                Console.Write("Enter an ID:");
                 newProduct.ID = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Enter a Product name:");
                 newProduct.Name = Console.ReadLine();
+                Console.Write("Enter a Price:");
                 newProduct.Price = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Enter a Category:");
                 string ctgr;
                 ctgr = Console.ReadLine();
                 switch (ctgr)
@@ -141,31 +188,34 @@ void ChoiceProduct()
                     default:
                         break;
                 }
+                Console.Write("Enter an Amount:");
                 newProduct.InStock = Convert.ToInt32(Console.ReadLine());
 
-                DalProduct dalProduct = new DalProduct();
                 dalProduct.Create(newProduct);
                 break;
             }
-        case "request All":
+        case 2:
             {
-                DalProduct dalProduct = new DalProduct();
                 Console.WriteLine(dalProduct.RequestAll()); //מדפיס את כל הרשימה
                 break;
             }
-        case "request By Id":
+        case 3:
             {
                 int id = Convert.ToInt32(Console.ReadLine());
-                DalProduct dalProduct = new DalProduct();
                 Console.WriteLine(dalProduct.RequestById(id));//מדפיס את כל המוצר
                 break;
             }
-        case "update":
+        case 4:
             {
                 Product newProduct = new Product();
+
+                Console.Write("Enter an ID:");
                 newProduct.ID = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Enter a Product name:");
                 newProduct.Name = Console.ReadLine();
+                Console.Write("Enter a Price:");
                 newProduct.Price = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Enter a Category:");
                 string ctgr;
                 ctgr = Console.ReadLine();
                 switch (ctgr)
@@ -199,16 +249,17 @@ void ChoiceProduct()
                     default:
                         break;
                 }
+                Console.Write("Enter an Amount:");
                 newProduct.InStock = Convert.ToInt32(Console.ReadLine());
 
-                DalProduct dalProduct = new DalProduct();
                 dalProduct.Update(newProduct);
                 break;
             }
-        case "delete":
+        case 5:
             {
+                Console.Write("Enter an ID:");
                 int id = Convert.ToInt32(Console.ReadLine());
-                DalProduct dalProduct = new DalProduct();
+
                 dalProduct.Delete(id);
                 break;
             }
@@ -216,78 +267,67 @@ void ChoiceProduct()
             break;
     }
 }
-void ChoiceOrderItem()
+void ChoiceOrderItem(int action)
 {
-    switch (ch)
-    {
-        case "add":
-            {
-                OrderItem newOrderItem = new OrderItem()
-                {
-                    OrderID = Convert.ToInt32(Console.ReadLine()),
-                    ProductID = Convert.ToInt32(Console.ReadLine()),
-                    Amount=Convert.ToInt32(Console.ReadLine()),
-                    Price=Convert.ToDouble(Console.ReadLine())
-            };
+    DalOrderItem dalOrderItem = new DalOrderItem();
 
-                DalOrderItem dalOrderItem = new DalOrderItem();
+    switch (action)
+    {
+        case 1:
+            {
+                OrderItem newOrderItem = new OrderItem();
+                newOrderItem.OrderID = Convert.ToInt32(Console.ReadLine());
+                newOrderItem.ProductID = Convert.ToInt32(Console.ReadLine());
+                newOrderItem.Amount = Convert.ToInt32(Console.ReadLine());
+                newOrderItem.Price = Convert.ToDouble(Console.ReadLine());
+
                 dalOrderItem.Create(newOrderItem);
 
                 break;
             }
-        case "request All":
+        case 2:
             {
-
-                DalOrderItem dalOrderItem = new DalOrderItem();
-                Console.WriteLine(dalOrderItem.RequestAll()); 
+                Console.WriteLine(dalOrderItem.RequestAll());
 
                 break;
             }
-        case "RequestBySeqNum":
+        case 3:
             {
                 int num = Convert.ToInt32(Console.ReadLine());
-                DalOrderItem dalOrderItem = new DalOrderItem();
-                Console.WriteLine(dalOrderItem.RequestBySeqNum(num)); 
+                Console.WriteLine(dalOrderItem.RequestBySeqNum(num));
                 break;
             }
-        case "RequestByOrderIDProductID":
+        case 4:
             {
                 int P_ID = Convert.ToInt32(Console.ReadLine());
                 int O_ID = Convert.ToInt32(Console.ReadLine());
-                DalOrderItem dalOrderItem = new DalOrderItem();
-                Console.WriteLine(dalOrderItem.RequestByOrderIDProductID(O_ID, P_ID)); 
+                Console.WriteLine(dalOrderItem.RequestByOrderIDProductID(O_ID, P_ID));
                 break;
             }
-        case "request By OrderId":
+        case 5:
             {
                 int O_ID = Convert.ToInt32(Console.ReadLine());
-                DalOrderItem dalOrderItem = new DalOrderItem();
-                Console.WriteLine(dalOrderItem.RequestByOrderId(O_ID)); 
+                Console.WriteLine(dalOrderItem.RequestByOrderId(O_ID));
                 break;
             }
-        case "update":
+        case 6:
             {
-                OrderItem newOrderItem = new OrderItem()
-                {
-                    OrderID = Convert.ToInt32(Console.ReadLine()),
-                    ProductID = Convert.ToInt32(Console.ReadLine()),
-                    Amount = Convert.ToInt32(Console.ReadLine()),
-                    Price = Convert.ToDouble(Console.ReadLine())
-                };
+                OrderItem newOrderItem = new OrderItem();
 
-                DalOrderItem dalOrderItem = new DalOrderItem();
+                newOrderItem.OrderID = Convert.ToInt32(Console.ReadLine());
+                newOrderItem.ProductID = Convert.ToInt32(Console.ReadLine());
+                newOrderItem.Amount = Convert.ToInt32(Console.ReadLine());
+                newOrderItem.Price = Convert.ToDouble(Console.ReadLine());
                 dalOrderItem.Update(newOrderItem);
 
                 break;
             }
-        case "delete":
+        case 7:
             {
                 int id = Convert.ToInt32(Console.ReadLine());
-                DalOrderItem dalOrderItem = new DalOrderItem();
                 dalOrderItem.Delete(id);
                 break;
             }
-
         default:
             break;
     }
@@ -296,4 +336,3 @@ void ChoiceOrderItem()
 
 
 
- 

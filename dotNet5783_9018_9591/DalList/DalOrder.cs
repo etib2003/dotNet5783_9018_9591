@@ -17,8 +17,10 @@ public class DalOrder
 
     public List<Order> RequestAll()
     {
-        List<Order> listToReturn = DataSource.Orders;
-        return listToReturn;
+        //List<Order> listToReturn = new List<Order>();
+        //for (int i = 0; i <3; i++)
+        //    listToReturn.Add(DataSource.Orders.);
+        return DataSource.Orders;
     }
 
     public Order RequestById(int id)
