@@ -26,6 +26,10 @@ public struct Product
     /// </summary>
     public int InStock { get; set; }
     /// <summary>
+    /// Product's color
+    /// </summary>
+    public color Color { get; set; }
+    /// <summary>
     /// the product's print method
     /// </summary>
     /// <returns>the way the product is printed</returns>
