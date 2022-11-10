@@ -6,4 +6,5 @@
 public struct Enums 
 {
     public enum category {Percussions,StringInstrument,WindInstrument,KeyBoard,BowInstrument };
+    public enum color {black,red,white,brown};
 }

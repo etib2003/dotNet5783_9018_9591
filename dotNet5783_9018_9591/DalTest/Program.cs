@@ -14,6 +14,7 @@ namespace DalTest
     {
         static void Main()
         {
+            //for the switch loop
             string Choice;
             int Action;
             bool Flag = true;
@@ -51,7 +52,7 @@ namespace DalTest
 
             } while (Flag);
 
-
+            //in case the user chose order
             void ChoiceOrder()
             {
                 bool FlagOrder = true;
@@ -71,7 +72,7 @@ namespace DalTest
                     {
                         switch (Action)
                         {
-                            case 1:
+                            case 1://add a new order
                                 {
                                     Order NewOrder = new Order();
 
@@ -119,7 +120,7 @@ namespace DalTest
 
                                     break;
                                 }
-                            case 2:
+                            case 2://return the orders
                                 {
                                     foreach (Order ord in dalOrderObj.RequestAll())
                                     {
@@ -128,14 +129,14 @@ namespace DalTest
 
                                     break;
                                 }
-                            case 3:
+                            case 3://return the order that matches the id
                                 {
                                     Console.Write("Enter the order's seqNum: ");
                                     int id = Convert.ToInt32(Console.ReadLine());
                                     Console.WriteLine(dalOrderObj.RequestById(id));
                                     break;
                                 }
-                            case 4:
+                            case 4://update an order
                                 {
                                     Console.Write("Enter a seqNum: ");
                                     int seqNum_; int.TryParse(Console.ReadLine(), out seqNum_);
@@ -151,8 +152,7 @@ namespace DalTest
                                     Console.Write("Enter an Email: ");
                                     updatedOrder.CustomerEmail = Console.ReadLine();
                                     Console.Write("Enter an Adress: ");
-                                    updatedOrder.CustomerAdress = Console.ReadLine();
-                                    //DateTime.TryParse(Console.ReadLine(), out updatedOrder.OrderDate);
+                                    updatedOrder.CustomerAdress = Console.ReadLine();                                  
                                     updatedOrder.OrderDate = DateTime.Now;
                                     updatedOrder.ShipDate = updatedOrder.OrderDate.AddDays(2);
                                     updatedOrder.DeliveryDate = updatedOrder.ShipDate.AddDays(7);
@@ -160,7 +160,7 @@ namespace DalTest
                                     dalOrderObj.Update(updatedOrder);
                                     break;
                                 }
-                            case 5:
+                            case 5://delete an order
                                 {
                                     Console.Write("Enter the order's seqNum: ");
                                     int id = Convert.ToInt32(Console.ReadLine());
@@ -184,6 +184,7 @@ namespace DalTest
                 } while (FlagOrder);
             }
 
+            //in case the user chose product
             void ChoiceProduct()
             {
                 bool flagProduct = true;
@@ -204,7 +205,7 @@ namespace DalTest
                         switch (Action)
                         {
 
-                            case 1:
+                            case 1://adds a product
                                 {
                                     Product newProduct = new Product();
                                     Console.Write("Enter a barcode: ");
@@ -225,7 +226,7 @@ namespace DalTest
 
                                     break;
                                 }
-                            case 2:
+                            case 2://return the products
                                 {
                                     foreach (Product pdct in dalProduct.RequestAll())
                                     {
@@ -233,14 +234,14 @@ namespace DalTest
                                     }
                                     break;
                                 }
-                            case 3:
+                            case 3://return the product that matches the given barcode
                                 {
                                     Console.Write("Enter the product's barcode: ");
                                     int id = Convert.ToInt32(Console.ReadLine());
                                     Console.WriteLine(dalProduct.RequestById(id));
                                     break;
                                 }
-                            case 4:
+                            case 4://update a product
                                 {
                                     Product newProduct = new Product();
 
@@ -260,7 +261,7 @@ namespace DalTest
                                     dalProduct.Update(newProduct);
                                     break;
                                 }
-                            case 5:
+                            case 5://delete a product
                                 {
                                     Console.Write("Enter the product's barcode: ");
                                     int id = Convert.ToInt32(Console.ReadLine());
@@ -283,7 +284,8 @@ namespace DalTest
                 } while (flagProduct);
             }
 
-            void ChoiceOrderItem()
+            //in case the user chose orderItem
+            void ChoiceOrderItem() 
             {
                 bool flagOrderItem = true;
                 DalOrderItem DalOrderItem = new DalOrderItem();
@@ -303,7 +305,7 @@ namespace DalTest
                     {
                         switch (Action)
                         {
-                            case 1:
+                            case 1://adds an orderItem
                                 {
                                     OrderItem newOrderItem = new OrderItem();
                                     Console.Write("Enter the order's seqNum: ");
@@ -319,7 +321,7 @@ namespace DalTest
 
                                     break;
                                 }
-                            case 2:
+                            case 2://returns all the orderItems
                                 {
                                     foreach (OrderItem OI in DalOrderItem.RequestAll())
                                     {
@@ -328,14 +330,14 @@ namespace DalTest
 
                                     break;
                                 }
-                            case 3:
+                            case 3://returns the orderItem that matches the given seqNum
                                 {
                                     Console.Write("Enter the orderItem's seqNum: ");
                                     int seqNum = Convert.ToInt32(Console.ReadLine());
                                     Console.WriteLine(DalOrderItem.RequestBySeqNum(seqNum));
                                     break;
                                 }
-                            case 4:
+                            case 4://returns the orderItem that matches the given order's seqNum and  the product's barcode
                                 {
                                     Console.Write("Enter the order's seqNum: ");
                                     int O_ID = Convert.ToInt32(Console.ReadLine());
@@ -344,7 +346,7 @@ namespace DalTest
                                     Console.WriteLine(DalOrderItem.RequestByOrderIDProductID(O_ID, P_ID));
                                     break;
                                 }
-                            case 5:
+                            case 5://returns the orderItem that matches the given order's seqNum
                                 {
                                     Console.Write("Enter the order's seqNum: ");
                                     int O_ID = Convert.ToInt32(Console.ReadLine());
@@ -354,7 +356,7 @@ namespace DalTest
                                     }
                                     break;
                                 }
-                            case 6:
+                            case 6://update an orderItem
                                 {
 
                                     OrderItem updatedOrderItem = new OrderItem();
@@ -374,7 +376,7 @@ namespace DalTest
 
                                     break;
                                 }
-                            case 7:
+                            case 7://delete an orderItem
                                 {
                                     Console.Write("Enter the orderItem's seqNum: ");
 
