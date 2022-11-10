@@ -16,8 +16,6 @@ public class DalOrder
     /// <exception cref="Exception"> the order already exists </exception >
     public int Create(Order Or)
     {
-        if (DataSource.Orders.Exists(x => x.seqNum == Or.seqNum)) 
-            throw new Exception("cannot create an order that is already exists");
         Or.seqNum = config.SeqNumOr;
         DataSource.Orders.Add(Or);
         return Or.seqNum;

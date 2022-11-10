@@ -16,8 +16,6 @@ public class DalOrderItem
     /// <exception cref="Exception">the orderItem already exists</exception >
     public int Create(OrderItem Oi)
     {
-        if (DataSource.OrderItems.Exists(x => x.seqNum == Oi.seqNum))
-            throw new Exception("cannot create an OrderItem,that is already exists");
         if(!(DataSource.Orders.Exists(x => x.seqNum == Oi.OrderID)&& DataSource.Products.Exists(x => x.ID == Oi.ProductID)))
             throw new Exception("cannot create an OrderItem,because there is no this order/product");
         Oi.seqNum = config.SeqNumOi;
@@ -68,7 +66,7 @@ public class DalOrderItem
     public List<OrderItem> RequestByOrderId(int orderId)
     {
         if (!DataSource.OrderItems.Exists(x => x.OrderID == orderId))
-            throw new Exception("the OrderId is not exist");
+            throw new Exception("the OrderItem with this OrderId does not exist");
 
         List<OrderItem> listToReturn = DataSource.OrderItems.FindAll(x => x.OrderID == orderId);
 

@@ -29,19 +29,14 @@ namespace DalTest
                         case "order":
                             ChoiceOrder();
                             break;
-
                         case "product":
                             ChoiceProduct();
-
                             break;
-
                         case "orderItem":
                             ChoiceOrderItem();
-
                             break;
                         case "finish":
                             Console.Write("Thank you and have a nice day :) ");
-
                             Flag = false;
                             break;
                         default:
@@ -55,6 +50,7 @@ namespace DalTest
                 }
 
             } while (Flag);
+
 
             void ChoiceOrder()
             {
@@ -196,7 +192,7 @@ namespace DalTest
                 do
                 {
                     Console.WriteLine(
-            @"    For add a new Product, press: 1 
+@"    For add a new Product, press: 1 
     For request all the Products, press: 2
     For request a Product by ID, press: 3
     For update a Product, press: 4
@@ -294,7 +290,7 @@ namespace DalTest
                 do
                 {
                     Console.WriteLine(
-            @"    For add a new Order Item, press: 1 
+@"    For add a new Order Item, press: 1 
     For request all the Order Items, press: 2
     For request an Order Item by seqNum, press: 3
     For request an Order Item by order ID and product ID, press: 4
