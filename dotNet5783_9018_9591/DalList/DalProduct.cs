@@ -6,7 +6,8 @@ namespace Dal;
 public class DalProduct
 {
 
-    //CRUD for Products
+    //CRUD for Products:
+
     /// <summary>
     /// the function adds a new product to the orders' list
     /// </summary>

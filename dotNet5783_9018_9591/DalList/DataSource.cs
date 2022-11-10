@@ -5,20 +5,36 @@ using static DO.Enums;
 namespace Dal;
 internal static class DataSource
 {
-    //internal static readonly object Order_vec:
-
+    /// <summary>
+    /// internal static readonly object Order_vec
+    /// </summary>
     static readonly Random random = new Random();
+
+    /// <summary>
+    /// List of Products
+    /// </summary>
     internal static List<Product> Products = new List<Product>();
+    /// <summary>
+    /// List of Orders
+    /// </summary>
     internal static List<Order> Orders = new List<Order>();
+    /// <summary>
+    /// List of OrderItems
+    /// </summary>
     internal static List<OrderItem> OrderItems = new List<OrderItem>();
 
 
-    //constructor
+    /// <summary>
+    /// constructor
+    /// </summary>
     static DataSource()  
     {
         s_Initialize();
     }
 
+    /// <summary>
+    /// call the order/product*orderItem initialize methods
+    /// </summary>
     static void s_Initialize()
     {
         OrderInitialize();
