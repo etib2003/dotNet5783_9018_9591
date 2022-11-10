@@ -1,5 +1,7 @@
 ﻿namespace DO;
-
+/// <summary>
+/// a struct for the orders that contains all of the order's parameters
+/// </summary>
 public struct Order
 {
     public int seqNum { get; set; }

@@ -8,7 +8,12 @@ namespace Dal;
 public class DalOrderItem
 {
     //CRUD for Student
-
+    /// <summary>
+    /// the function adds a new orderItem to the orderItems' list
+    /// </summary>
+    /// <param name="Oi">the orderItem you want to add</param  >
+    /// <returns>the added orderItem id</returns >
+    /// <exception cref="Exception">the orderItem already exists</exception >
     public int Create(OrderItem Oi)
     {
         if (DataSource.OrderItems.Exists(x => x.seqNum == Oi.seqNum))
@@ -20,6 +25,10 @@ public class DalOrderItem
         return Oi.seqNum;
     }
 
+    /// <summary>
+    /// the function returns the orderItems' list
+    /// </summary>
+    /// <returns>the orderItems' list</returns >
     public List<OrderItem> RequestAll()
     {
         List<OrderItem> listToReturn = new List<OrderItem>();
@@ -28,18 +37,31 @@ public class DalOrderItem
         return listToReturn;
     }
 
+    /// <summary>
+    /// the function returns the orderItem that matches the given seqNum
+    /// </summary>
+    /// <param name="id">the given seqNum</param >
+    /// <returns>the orderItem of the given seqNum</returns >
+    /// <exception cref="Exception">OrderItem does not exist</exceptionthe  >
     public OrderItem RequestBySeqNum(int id)
     {
         if (!DataSource.OrderItems.Exists(x => x.seqNum == id))
-            throw new Exception("the OrderItem is not exist");
+            throw new Exception("the OrderItem does not exist");
 
         return DataSource.OrderItems.Find(x => x.seqNum == id);
     }
 
+    /// <summary>
+    /// the function returns the orderItem that matches the given order's id and product's id
+    /// </summary>
+    /// <param name="orderId">the given order's id</param >
+    /// <param name="productId"> the given product's id</param>
+    /// <returns></returns>
+    /// <exception cref="Exception">the OrderItem does not exist</exception >
     public OrderItem RequestByOrderIDProductID(int orderId, int productId)
     {
         if (!DataSource.OrderItems.Exists(x => x.OrderID == orderId && x.ProductID == productId))
-            throw new Exception("the OrderItem is not exist");
+            throw new Exception("the OrderItem does not exist");
 
         return DataSource.OrderItems.Find(x => x.OrderID == orderId && x.ProductID == productId);
     }
@@ -52,7 +74,11 @@ public class DalOrderItem
 
         return listToReturn;
     }
-
+    /// <summary>
+    /// the function updates a certain orderItem with the given one
+    /// </summary>
+    /// <param name="Oi"> the new orderItem you want to put instead of the old one</param>
+    /// <exception cref="Exception"> the orderItem you want to update does not exist</exception>
     public void Update(OrderItem Oi)
     {
         //if OrderItems does not exist throw exception 
@@ -63,6 +89,11 @@ public class DalOrderItem
         DataSource.OrderItems.Remove(OiToRemove);//מסיר את האובייקט
         DataSource.OrderItems.Add(Oi);//שם את המעודכן שמקום של האינדקס
     }
+    /// <summary>
+    /// the function deletes the orderItem with the given id
+    /// </summary>
+    /// <param name="id"> the id of the orderItem you want to delete</param>
+    /// <exception cref="Exception">the orderItem already exist</exception>
     public void Delete(int id)
     {
         //if OrderItems does not exist throw exception 

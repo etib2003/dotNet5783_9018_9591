@@ -11,12 +11,12 @@ public class DalOrder
     /// <summary>
     /// the function adds a new order to the orders' list
     /// </summary>
-    /// <param name="Or"></param the order you want to add>
-    /// <returns></returnsreturns the added order id>
-    /// <exception cref="Exception"></exception  the order is already exist >
+    /// <param name="Or">the order you want to add</param >
+    /// <returns>the added order id</returnsreturns >
+    /// <exception cref="Exception"> the order already exists </exception >
     public int Create(Order Or)
     {
-        if (DataSource.Orders.Exists(x => x.seqNum == Or.seqNum))//לוודא לגבי זה כי בעיקרון לא יכול להיות קיים כי עכשיו המספר המזהה נוצר
+        if (DataSource.Orders.Exists(x => x.seqNum == Or.seqNum)) 
             throw new Exception("cannot create an order that is already exists");
         Or.seqNum = config.SeqNumOr;
         DataSource.Orders.Add(Or);
@@ -25,7 +25,7 @@ public class DalOrder
     /// <summary>
     /// the function returns the orders' list
     /// </summary>
-    /// <returns></returns the orders' list>
+    /// <returns> the order already exists </returns x>
     public List<Order> RequestAll()
     {
         List<Order> listToReturn = new List<Order>();
@@ -35,11 +35,11 @@ public class DalOrder
         return listToReturn;
     }
     /// <summary>
-    /// the function returns the order with the given id
+    /// the function returns the order of the given id
     /// </summary>
-    /// <param name="id"></param the order id >
-    /// <returns></returns>
-    /// <exception cref="Exception"></exception the order isn't exist>
+    /// <param name="id">the order's id </param >
+    /// <returns>the order of the given id</returns >
+    /// <exception cref="Exception">the order isn't exist</exception >
     public Order RequestById(int id)
     {
         if (!DataSource.Orders.Exists(x => x.seqNum == id))
@@ -47,17 +47,26 @@ public class DalOrder
 
         return DataSource.Orders.Find(x => x.seqNum == id);
     }
-
+    /// <summary>
+    /// the function updates a certain order with the given one
+    /// </summary>
+    /// <param name="Or">the new order you want to put instead of the old one</param >
+    /// <exception cref="Exception">the order you want to update does not exist</exception >
     public void Update(Order Or)
     {
         //if order does not exist throw exception 
         if (!DataSource.Orders.Exists(x => x.seqNum == Or.seqNum))
             throw new Exception("cannot update an order,that is not exists");
-        Order OToRemove = DataSource.Orders.Find(x => x.seqNum == Or.seqNum); //מחזיר את האובייקט
+        Order OToRemove = DataSource.Orders.Find(x => x.seqNum == Or.seqNum); 
         Or.seqNum = OToRemove.seqNum;
-        DataSource.Orders.Remove(OToRemove);//מסיר את האובייקט
-        DataSource.Orders.Add(Or);//שם את המעודכן שמקום של האינדקס
+        DataSource.Orders.Remove(OToRemove);
+        DataSource.Orders.Add(Or);
     }
+    /// <summary>
+    /// the function deletes the order with the given id
+    /// </summary>
+    /// <param name="id"> the id of the order you want to delete</param >
+    /// <exception cref="Exception">if the order does not exist</exception >
     public void Delete(int id)
     {
         //if student does not exist throw exception 
