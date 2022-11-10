@@ -4,7 +4,8 @@
 /// </summary>
 public struct Order
 {
-    public int seqNum { get; set; }
+
+    public int seqNum { get; set; }//running number
     public string CustomerName { get; set; }
     public string CustomerEmail { get; set; }
     public string CustomerAdress { get; set; }

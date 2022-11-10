@@ -3,9 +3,9 @@
 public struct OrderItem
 {
     /// <summary>
-    /// 
+    /// links between the order and the product
     /// </summary>
-    public int seqNum { get; set; }
+    public int seqNum { get; set; }//running number
     public int OrderID { get; set; }
     public int ProductID { get; set; }
     public double Price { get; set; }
