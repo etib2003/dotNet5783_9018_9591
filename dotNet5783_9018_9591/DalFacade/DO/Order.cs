@@ -10,7 +10,7 @@ public struct Order
     public DateTime ShipDate { get; set; }
     public DateTime DeliveryDate { get; set; }
     public override string ToString() => $@"
-        Customer ID={seqNum}: {CustomerName}, 
+        Customer seqNum={seqNum}: {CustomerName}, 
         Email: {CustomerEmail}
         Adress: {CustomerAdress}
         Order date: {OrderDate}

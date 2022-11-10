@@ -17,7 +17,9 @@ public class DalProduct
 
     public List<Product> RequestAll()
     {
-        List<Product> listToReturn = DataSource.Products;
+        List<Product> listToReturn = new List<Product>();
+        for (int i = 0; i < DataSource.Products.Count; i++)
+            listToReturn.Add(DataSource.Products[i]);
         return listToReturn;
     }
 

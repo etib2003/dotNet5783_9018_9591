@@ -22,7 +22,9 @@ public class DalOrderItem
 
     public List<OrderItem> RequestAll()
     {
-        List<OrderItem> listToReturn = DataSource.OrderItems;
+        List<OrderItem> listToReturn = new List<OrderItem>();
+        for (int i = 0; i < DataSource.OrderItems.Count; i++)
+            listToReturn.Add(DataSource.OrderItems[i]);
         return listToReturn;
     }
 
@@ -46,7 +48,9 @@ public class DalOrderItem
         if (!DataSource.OrderItems.Exists(x => x.OrderID == orderId))
             throw new Exception("the OrderId is not exist");
 
-        return DataSource.OrderItems.FindAll(x => x.OrderID == orderId);
+        List<OrderItem> listToReturn = DataSource.OrderItems.FindAll(x => x.OrderID == orderId);
+
+        return listToReturn;
     }
 
     public void Update(OrderItem Oi)

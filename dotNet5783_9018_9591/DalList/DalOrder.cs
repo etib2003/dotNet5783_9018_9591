@@ -17,10 +17,11 @@ public class DalOrder
 
     public List<Order> RequestAll()
     {
-        //List<Order> listToReturn = new List<Order>();
-        //for (int i = 0; i <3; i++)
-        //    listToReturn.Add(DataSource.Orders.);
-        return DataSource.Orders;
+        List<Order> listToReturn = new List<Order>();
+        for (int i = 0; i < DataSource.Orders.Count; i++)
+            listToReturn.Add(DataSource.Orders[i]);
+
+        return listToReturn;
     }
 
     public Order RequestById(int id)
