@@ -80,10 +80,10 @@ public class DalOrderItem
         //if OrderItems does not exist throw exception 
         if (!DataSource.OrderItems.Exists(x => x.seqNum == Oi.seqNum))
             throw new Exception("cannot update an OrderItem, that is not exists");
-        OrderItem OiToRemove = DataSource.OrderItems.Find(x => x.seqNum == Oi.seqNum); //מחזיר את האובייקט
+        OrderItem OiToRemove = DataSource.OrderItems.Find(x => x.seqNum == Oi.seqNum);
         Oi.seqNum = OiToRemove.seqNum;
-        DataSource.OrderItems.Remove(OiToRemove);//מסיר את האובייקט
-        DataSource.OrderItems.Add(Oi);//שם את המעודכן שמקום של האינדקס
+        DataSource.OrderItems.Remove(OiToRemove);
+        DataSource.OrderItems.Add(Oi);
     }
     /// <summary>
     /// the function deletes the orderItem with the given id
