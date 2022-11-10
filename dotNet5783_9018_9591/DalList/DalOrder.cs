@@ -3,9 +3,17 @@ using System.Runtime.CompilerServices;
 using static Dal.DataSource;
 
 namespace Dal;
-
+/// <summary>
+/// The class of orders
+/// </summary>
 public class DalOrder
 {
+    /// <summary>
+    /// the function adds a new order to the orders' list
+    /// </summary>
+    /// <param name="Or"></param the order you want to add>
+    /// <returns></returnsreturns the added order id>
+    /// <exception cref="Exception"></exception  the order is already exist >
     public int Create(Order Or)
     {
         if (DataSource.Orders.Exists(x => x.seqNum == Or.seqNum))//לוודא לגבי זה כי בעיקרון לא יכול להיות קיים כי עכשיו המספר המזהה נוצר
@@ -14,7 +22,10 @@ public class DalOrder
         DataSource.Orders.Add(Or);
         return Or.seqNum;
     }
-
+    /// <summary>
+    /// the function returns the orders' list
+    /// </summary>
+    /// <returns></returns the orders' list>
     public List<Order> RequestAll()
     {
         List<Order> listToReturn = new List<Order>();
@@ -23,7 +34,12 @@ public class DalOrder
 
         return listToReturn;
     }
-
+    /// <summary>
+    /// the function returns the order with the given id
+    /// </summary>
+    /// <param name="id"></param the order id >
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception the order isn't exist>
     public Order RequestById(int id)
     {
         if (!DataSource.Orders.Exists(x => x.seqNum == id))

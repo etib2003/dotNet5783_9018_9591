@@ -1,4 +1,10 @@
-﻿using Dal;
+﻿/*
+ * try catch
+ * 
+ */
+
+
+using Dal;
 using DO;
 using System;
 using System.Data.Common;
@@ -23,6 +29,7 @@ Kטפל בעדכוניייים
 
  * 
  * */
+
 do
 {
     Console.WriteLine("Enter the Topic - order / product / orderItem / finish: ");
@@ -30,17 +37,17 @@ do
     switch (Choice)
     {
         case "order":
-                ChoiceOrder();
+            ChoiceOrder();
             break;
 
         case "product":
-                ChoiceProduct();
-        
+            ChoiceProduct();
+
             break;
 
-        case "orderItem":  
-                ChoiceOrderItem();
-       
+        case "orderItem":
+            ChoiceOrderItem();
+
             break;
         case "finish":
             Console.Write("Thank you and have a nice day :) ");
@@ -53,10 +60,12 @@ do
     }
 } while (Flag);
 
+
+
 void ChoiceOrder()
 {
     bool FlagOrder = true;
-    DalOrder DalOrder_ = new DalOrder();
+    DalOrder dalOrderObj = new DalOrder();
     do
     {
         Console.WriteLine(
@@ -80,16 +89,19 @@ void ChoiceOrder()
                     NewOrder.CustomerEmail = Console.ReadLine();
                     Console.Write("Enter an Adress: ");
                     NewOrder.CustomerAdress = Console.ReadLine();
+
                     NewOrder.OrderDate = DateTime.Now;
                     NewOrder.ShipDate = NewOrder.OrderDate.AddDays(2);
                     NewOrder.DeliveryDate = NewOrder.ShipDate.AddDays(7);
 
-                    DalOrder_.Create(NewOrder);
+                    Console.Write(" The order's seqNum is: ");
+                    Console.WriteLine(dalOrderObj.Create(NewOrder));
+                    
                     break;
                 }
             case 2:
                 {
-                    foreach (Order ord in DalOrder_.RequestAll())
+                    foreach (Order ord in dalOrderObj.RequestAll())
                     {
                         Console.Write(ord);
                     }
@@ -100,9 +112,7 @@ void ChoiceOrder()
                 {
                     Console.Write("Enter the order's seqNum: ");
                     int id = Convert.ToInt32(Console.ReadLine());
-
-
-                    Console.WriteLine(DalOrder_.RequestById(id));
+                    Console.WriteLine(dalOrderObj.RequestById(id));
                     break;
                 }
             case 4:
@@ -110,12 +120,12 @@ void ChoiceOrder()
                     Console.Write("Enter a seqNum: ");
                     int seqNum_; int.TryParse(Console.ReadLine(), out seqNum_);
 
-                    Console.WriteLine(DalOrder_.RequestById(seqNum_));
+                    Console.WriteLine(dalOrderObj.RequestById(seqNum_));
 
                     Order updatedOrder = new Order();
 
                     Console.Write("Enter a seqNum: ");
-                    updatedOrder.seqNum= Convert.ToInt32(Console.ReadLine());
+                    updatedOrder.seqNum = Convert.ToInt32(Console.ReadLine());
                     Console.Write("Enter a Full name: ");
                     updatedOrder.CustomerName = Console.ReadLine();
                     Console.Write("Enter an Email: ");
@@ -127,7 +137,7 @@ void ChoiceOrder()
                     updatedOrder.ShipDate = updatedOrder.OrderDate.AddDays(2);
                     updatedOrder.DeliveryDate = updatedOrder.ShipDate.AddDays(7);
 
-                    DalOrder_.Update(updatedOrder);
+                    dalOrderObj.Update(updatedOrder);
                     break;
                 }
             case 5:
@@ -135,7 +145,7 @@ void ChoiceOrder()
                     Console.Write("Enter the order's seqNum: ");
                     int id = Convert.ToInt32(Console.ReadLine());
 
-                    DalOrder_.Delete(id);
+                    dalOrderObj.Delete(id);
                     break;
                 }
             case 6:
@@ -168,52 +178,22 @@ void ChoiceProduct()
             case 1:
                 {
                     Product newProduct = new Product();
-
                     Console.Write("Enter a barcode: ");
                     newProduct.ID = Convert.ToInt32(Console.ReadLine());
+                    Console.Write("Enter a Category: 1- Percussions , 2- StringInstrument , 3- WindInstrument , 4- KeyBoard , 5- BowInstrument: ");
+                    category ctgr = new category();
+                    string input = Console.ReadLine();
+                    ctgr = (category)Enum.Parse(typeof(category), input);
+                    newProduct.Category = ctgr;
                     Console.Write("Enter a Product name: ");
                     newProduct.Name = Console.ReadLine();
                     Console.Write("Enter a Price: ");
                     newProduct.Price = Convert.ToInt32(Console.ReadLine());
-                    Console.Write("Enter a Category: 1- Percussions , 2- StringInstrument , 3- WindInstrument , 4- KeyBoard , 5- BowInstrument: ");
-                    int ctgr;
-                    ctgr = Convert.ToInt32(Console.ReadLine());
-                    switch (ctgr)
-                    {
-                        case 1:
-                            {
-                                newProduct.Category = category.Percussions;
-                                break;
-                            }
-                        case 2:
-                            {
-                                newProduct.Category = category.StringInstrument;
-                                break;
-                            }
-                        case 3:
-                            {
-                                newProduct.Category = category.WindInstrument;
-                                break;
-                            }
-                        case 4:
-                            {
-                                newProduct.Category = category.KeyBoard;
-
-                                break;
-                            }
-                        case 5:
-                            {
-                                newProduct.Category = category.BowInstrument;
-                                break;
-                            }
-                        default:
-
-                            break;
-                    }
                     Console.Write("Enter an Amount: ");
                     newProduct.InStock = Convert.ToInt32(Console.ReadLine());
-
-                    dalProduct.Create(newProduct);
+                    Console.Write(" The prodact's barcode is: ");
+                    Console.WriteLine(dalProduct.Create(newProduct));
+                   
                     break;
                 }
             case 2:
@@ -237,47 +217,17 @@ void ChoiceProduct()
 
                     Console.Write("Enter a barcode: ");
                     newProduct.ID = Convert.ToInt32(Console.ReadLine());
+                    Console.Write("Enter a Category: 1- Percussions , 2- StringInstrument , 3- WindInstrument , 4- KeyBoard , 5- BowInstrument: ");
+                    category ctgr = new category();
+                    string input = Console.ReadLine();
+                    ctgr = (category)Enum.Parse(typeof(category), input);
+                    newProduct.Category = ctgr;
                     Console.Write("Enter a Product name: ");
                     newProduct.Name = Console.ReadLine();
                     Console.Write("Enter a Price: ");
-                    newProduct.Price = Convert.ToInt32(Console.ReadLine());
-                    Console.Write("Enter a Category: 1- Percussions , 2- StringInstrument , 3- WindInstrument , 4- KeyBoard , 5- BowInstrument: ");
-                    int ctgr;
-                    ctgr = Convert.ToInt32(Console.ReadLine());
-                    switch (ctgr)
-                    {
-                        case 1:
-                            {
-                                newProduct.Category = category.Percussions;
-                                break;
-                            }
-                        case 2:
-                            {
-                                newProduct.Category = category.StringInstrument;
-                                break;
-                            }
-                        case 3:
-                            {
-                                newProduct.Category = category.WindInstrument;
-                                break;
-                            }
-                        case 4:
-                            {
-                                newProduct.Category = category.KeyBoard;
-                                break;
-                            }
-                        case 5:
-                            {
-                                newProduct.Category = category.BowInstrument;
-                                break;
-                            }
-                        default:
-
-                            break;
-                    }
+                    newProduct.Price = Convert.ToInt32(Console.ReadLine());     
                     Console.Write("Enter an Amount: ");
                     newProduct.InStock = Convert.ToInt32(Console.ReadLine());
-
                     dalProduct.Update(newProduct);
                     break;
                 }
@@ -327,8 +277,8 @@ void ChoiceOrderItem()
                     newOrderItem.Amount = Convert.ToInt32(Console.ReadLine());
                     Console.Write("Enter a Price: ");
                     newOrderItem.Price = Convert.ToDouble(Console.ReadLine());
-
-                    DalOrderItem.Create(newOrderItem);
+                    Console.Write(" The orderItem's seqNum is: ");
+                    Console.WriteLine(DalOrderItem.Create(newOrderItem));
 
                     break;
                 }
@@ -369,7 +319,7 @@ void ChoiceOrderItem()
                 }
             case 6:
                 {
-              
+
                     OrderItem updatedOrderItem = new OrderItem();
 
                     Console.Write("Enter a seqNum: ");
@@ -403,6 +353,9 @@ void ChoiceOrderItem()
         }
     } while (flagOrderItem);
 }
+
+
+
 
 
 

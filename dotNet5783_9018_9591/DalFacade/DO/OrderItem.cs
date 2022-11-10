@@ -2,6 +2,9 @@
 
 public struct OrderItem
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public int seqNum { get; set; }
     public int OrderID { get; set; }
     public int ProductID { get; set; }
