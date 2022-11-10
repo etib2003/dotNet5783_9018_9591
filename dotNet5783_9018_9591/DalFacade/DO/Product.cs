@@ -1,7 +1,8 @@
 ﻿using static DO.Enums;
-
 namespace DO;
-
+/// <summary>
+/// a struct for products
+/// </summary>
 public struct Product
 {
     public int ID { get; set; }
