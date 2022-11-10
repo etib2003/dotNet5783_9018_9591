@@ -19,24 +19,26 @@ namespace DalTest
             int Action;
             bool Flag = true;
 
+            Console.WriteLine("Hello , we are happy to have you in our store :) ");
+
             do
             {
-                Console.WriteLine("Enter the Topic - order / product / orderItem / finish: ");
+                Console.WriteLine("Choose the Topic - Order / Product / OrderItem / Finish:");
                 Choice = Console.ReadLine();
                 try
                 {
                     switch (Choice)
                     {
-                        case "order":
+                        case "Order":
                             ChoiceOrder();
                             break;
-                        case "product":
+                        case "Product":
                             ChoiceProduct();
                             break;
-                        case "orderItem":
+                        case "OrderItem":
                             ChoiceOrderItem();
                             break;
-                        case "finish":
+                        case "Finish":
                             Console.Write("Thank you and have a nice day :) ");
                             Flag = false;
                             break;
