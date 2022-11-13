@@ -60,6 +60,7 @@ public class DalOrderItem
 
         return DataSource.OrderItems.Find(x => x.OrderID == orderId && x.ProductID == productId);
     }
+
     /// <summary>
     /// the function returns the orderItem that matches the given order's id
     /// </summary>
@@ -75,6 +76,7 @@ public class DalOrderItem
 
         return listToReturn;
     }
+
     /// <summary>
     /// the function updates a certain orderItem with the given one
     /// </summary>
@@ -90,6 +92,7 @@ public class DalOrderItem
         DataSource.OrderItems.Remove(OiToRemove);
         DataSource.OrderItems.Add(Oi);
     }
+
     /// <summary>
     /// the function deletes the orderItem with the given id
     /// </summary>
@@ -103,7 +106,4 @@ public class DalOrderItem
         OrderItem OiToRemove = DataSource.OrderItems.Find(x => x.seqNum == id);
         DataSource.OrderItems.Remove(OiToRemove);
     }
-
-
-
 }

@@ -9,22 +9,27 @@ public struct OrderItem
     /// orderItem's unique id
     /// </summary>
     public int seqNum { get; set; }
+
     /// <summary>
     /// orderItem's order id
     /// </summary>
     public int OrderID { get; set; }
+
     /// <summary>
     /// orderItem's product barcode
     /// </summary>
     public int ProductID { get; set; }
+
     /// <summary>
     /// orderItem's price
     /// </summary>
     public double Price { get; set; }
+
     /// <summary>
     /// orderItem's amount to buy
     /// </summary>
     public int Amount { get; set; }
+
     /// <summary>
     /// the orderItem's print method
     /// </summary>

@@ -12,10 +12,12 @@ internal static class DataSource
     /// List of Products
     /// </summary>
     internal static List<Product> Products = new List<Product>();
+
     /// <summary>
     /// List of Orders
     /// </summary>
     internal static List<Order> Orders = new List<Order>();
+
     /// <summary>
     /// List of OrderItems
     /// </summary>
@@ -39,6 +41,7 @@ internal static class DataSource
         ProductInitialize();
         OrderItemInitialize();
     }
+
     /// <summary>
     /// initialize the orders list
     /// </summary>
@@ -125,6 +128,7 @@ internal static class DataSource
             OrderItems.Add(orderItem);
         }
     }
+
     /// <summary>
     /// class for a running number
     /// </summary>

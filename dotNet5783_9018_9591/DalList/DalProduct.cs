@@ -27,7 +27,6 @@ public class DalProduct
     /// the function returns the products' list
     /// </summary>
     /// <returns>the products' list</returns >
-
     public List<Product> RequestAll()
     {
         List<Product> listToReturn = new List<Product>();
@@ -64,6 +63,7 @@ public class DalProduct
         DataSource.Products.Remove(PdctToRemove);
         DataSource.Products.Add(product);
     }
+
     /// <summary>
     /// the function deletes the product with the given id
     /// </summary>

@@ -19,6 +19,7 @@ public class DalOrder
         DataSource.Orders.Add(Or);
         return Or.seqNum;
     }
+
     /// <summary>
     /// the function returns the orders' list
     /// </summary>
@@ -31,6 +32,7 @@ public class DalOrder
 
         return listToReturn;
     }
+
     /// <summary>
     /// the function returns the order of the given id
     /// </summary>
@@ -44,6 +46,7 @@ public class DalOrder
 
         return DataSource.Orders.Find(x => x.seqNum == id);
     }
+
     /// <summary>
     /// the function updates a certain order with the given one
     /// </summary>
@@ -59,6 +62,7 @@ public class DalOrder
         DataSource.Orders.Remove(OToRemove);
         DataSource.Orders.Add(Or);
     }
+
     /// <summary>
     /// the function deletes the order with the given id
     /// </summary>

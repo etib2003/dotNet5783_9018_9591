@@ -210,20 +210,26 @@ Please choose the topic:
                                 Console.Write("Enter a barcode: ");
                                 int ID; int.TryParse(Console.ReadLine(), out ID);
                                 newProduct.ID = ID;
+
                                 Console.Write("Enter a Category: 0- Percussions , 1- StringInstrument , 2- WindInstrument , 3- KeyBoard , 4- BowInstrument: ");
                                 string input = Console.ReadLine();
                                 newProduct.Category = (category)int.Parse(input);
+
                                 Console.Write("Enter a Product name: ");
                                 newProduct.Name = Console.ReadLine();
+
                                 Console.Write("Enter a Color: 0- Black , 1- Red , 2- White , 3- Brown: ");
                                 input = Console.ReadLine();
                                 newProduct.Color = (color)int.Parse(input);
+
                                 Console.Write("Enter a Price: ");
                                 int price; int.TryParse(Console.ReadLine(), out price);
                                 newProduct.Price = price;
+
                                 Console.Write("Enter an Amount: ");
                                 int InStock; int.TryParse(Console.ReadLine(), out InStock);
                                 newProduct.InStock = InStock;
+
                                 Console.Write("The product's barcode is: ");
                                 Console.WriteLine(dalProductObj.Create(newProduct));
 
@@ -254,20 +260,26 @@ Please choose the topic:
 
                                 Product newProduct = new Product();
                                 newProduct.ID = barcode;
+
                                 Console.Write("Enter a Category: 0- Percussions , 1- StringInstrument , 2- WindInstrument , 3- KeyBoard , 4- BowInstrument: ");
                                 string input = Console.ReadLine();
                                 newProduct.Category = (category)int.Parse(input);
+
                                 Console.Write("Enter a Product name: ");
                                 newProduct.Name = Console.ReadLine();
+
                                 Console.Write("Enter a Color: 0- Black , 1- Red , 2- White , 3- Brown: ");
                                 input = Console.ReadLine();
                                 newProduct.Color = (color)int.Parse(input);
+
                                 Console.Write("Enter a Price: ");
                                 int Price; int.TryParse(Console.ReadLine(), out Price);
                                 newProduct.Price = Price;
+
                                 Console.Write("Enter an Amount: ");
                                 int InStock; int.TryParse(Console.ReadLine(), out InStock);
                                 newProduct.InStock = InStock;
+
                                 dalProductObj.Update(newProduct);
                                 break;
                             }
@@ -322,12 +334,15 @@ Please choose the topic:
                                 Console.Write("Enter the order's ID: ");
                                 int OrderID; int.TryParse(Console.ReadLine(), out OrderID);
                                 newOrderItem.OrderID = OrderID;
+
                                 Console.Write("Enter the product's barcode: ");
                                 int ProductID; int.TryParse(Console.ReadLine(), out ProductID);
                                 newOrderItem.ProductID = ProductID;
+
                                 Console.Write("Enter a Price: ");
                                 Double Price; double.TryParse(Console.ReadLine(), out Price);
                                 newOrderItem.Price = Price;
+
                                 Console.Write("Enter the amount: ");
                                 int Amount; int.TryParse(Console.ReadLine(), out Amount);
                                 newOrderItem.Amount = Amount;
@@ -383,12 +398,15 @@ Please choose the topic:
                                 Console.Write("Enter the order's seqNum: ");
                                 int OrderID; int.TryParse(Console.ReadLine(), out OrderID);
                                 updatedOrderItem.OrderID = OrderID;
+
                                 Console.Write("Enter the product's barcode: ");
                                 int ProductID; int.TryParse(Console.ReadLine(), out ProductID);
                                 updatedOrderItem.ProductID = ProductID;
+
                                 Console.Write("Enter the amount: ");
                                 int Amount; int.TryParse(Console.ReadLine(), out Amount);
                                 updatedOrderItem.Amount = Amount;
+
                                 Console.Write("Enter a Price: ");
                                 updatedOrderItem.Price = Convert.ToDouble(Console.ReadLine());
 
