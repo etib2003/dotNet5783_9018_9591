@@ -36,8 +36,8 @@ public struct Product
     public override string ToString() => $@"
         Product barcode: {ID}, {Name}
         Category: {Category}
+        Color: {Color}
     	Price: {Price}
-    	Amount in stock: {InStock}
-";
+    	Amount in stock: {InStock}";
 
 }

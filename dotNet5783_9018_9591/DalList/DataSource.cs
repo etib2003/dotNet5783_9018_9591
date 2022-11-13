@@ -1,6 +1,4 @@
 ﻿using DO;
-using System.Windows.Markup;
-using static DO.Enums;
 
 namespace Dal;
 internal static class DataSource
@@ -27,7 +25,7 @@ internal static class DataSource
     /// <summary>
     /// constructor
     /// </summary>
-    static DataSource()  
+    static DataSource()
     {
         s_Initialize();
     }
@@ -41,7 +39,9 @@ internal static class DataSource
         ProductInitialize();
         OrderItemInitialize();
     }
-
+    /// <summary>
+    /// initialize the orders list
+    /// </summary>
     static void OrderInitialize()
     {
         //arrays for initialization of objects
@@ -61,17 +61,17 @@ internal static class DataSource
 
             Order order = new Order();//create a new object
             order.seqNum = config.SeqNumOr;//adds to the seqNum 1
-            string CustomerFName = CustomerFirstName[random.Next(0, 14)];
-            string CustomerLName = CustomerLastName[random.Next(0, 14)];
-            order.CustomerName = CustomerFName + " " + CustomerLName;
-            order.CustomerEmail = CustomerFName + CustomerLName + "@gmail.com";
+            string customerFirstName = CustomerFirstName[random.Next(0, 14)];
+            string customerLastName = CustomerLastName[random.Next(0, 14)];
+            order.CustomerName = customerFirstName + " " + customerLastName;
+            order.CustomerEmail = customerFirstName + customerLastName + order.seqNum + "@gmail.com";
             order.CustomerAdress = Customer_Adress[random.Next(0, 11)];
-            order.OrderDate = DateTime.Now.AddMonths(random.Next(-4,-1));
+            order.OrderDate = DateTime.Now.AddMonths(random.Next(-4, -1));
             if (i <= AmountOfOrders * 0.8)
-                order.ShipDate = order.OrderDate.AddDays(random.Next(1, 3)); 
+                order.ShipDate = order.OrderDate.AddDays(random.Next(1, 3));
             else
-                order.ShipDate = DateTime.MinValue; 
-            if (i <= AmountOfOrders * 0.6)
+                order.ShipDate = DateTime.MinValue;
+            if (i <= AmountOfOrders * 0.6 * 0.8)
                 order.DeliveryDate = order.ShipDate.AddDays(random.Next(7, 21));
             else
                 order.DeliveryDate = DateTime.MinValue;
@@ -80,6 +80,9 @@ internal static class DataSource
         }
     }
 
+    /// <summary>
+    /// initialize the products list
+    /// </summary>
     static void ProductInitialize()//initializing products
     {
         int AmountOfProducts = 10;
@@ -89,12 +92,12 @@ internal static class DataSource
             do
             {
                 product.ID = random.Next(100000, 999999);
-            } 
+            }
             while (Products.Exists(x => x.ID == product.ID));
             product.Name = "product" + i;
             product.Price = random.Next(200, 2000);
-            product.Category = (Enums.category)(i%5);
-            product.Color= (Enums.color)(i%4);
+            product.Category = (Enums.category)(i % 5);
+            product.Color = (Enums.color)(i % 4);
             if (i <= AmountOfProducts * 0.05 + 1)
                 product.InStock = 0;
             else
@@ -103,6 +106,9 @@ internal static class DataSource
         }
     }
 
+    /// <summary>
+    /// initialize the order items list
+    /// </summary>
     static void OrderItemInitialize()//initializing orderItems 
     {
         int AmountOfOrderItem = 40;
@@ -119,14 +125,16 @@ internal static class DataSource
             OrderItems.Add(orderItem);
         }
     }
-    //class for a running number
+    /// <summary>
+    /// class for a running number
+    /// </summary>
     internal static class config
     {
-        internal static int seqNumOi = 0;
-        internal static int seqNumOr = 0;
+        internal static int seqNumOi = 1;
+        internal static int seqNumOr = 1;
 
-        public static int SeqNumOi => ++seqNumOi;
-        public static int SeqNumOr => ++seqNumOr;
-         
+        public static int SeqNumOi => seqNumOi++;
+        public static int SeqNumOr => seqNumOr++;
+
     }
 }

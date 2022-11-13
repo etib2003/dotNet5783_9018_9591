@@ -1,7 +1,7 @@
 ﻿using DO;
 using System.Collections.Generic;
 using System.Linq;
-using static Dal.DataSource;
+//using static Dal.DataSource;
 
 namespace Dal;
 
@@ -11,12 +11,11 @@ public class DalOrderItem
     /// <summary>
     /// the function adds a new orderItem to the orderItems' list
     /// </summary>
-    /// <param name="Oi">the orderItem you want to add</param  >
+    /// <param name="Oi">the orderItem you want to add</param>
     /// <returns>the added orderItem id</returns >
-    /// <exception cref="Exception">the orderItem already exists</exception >
     public int Create(OrderItem Oi)
     {
-        Oi.seqNum = config.SeqNumOi;
+        Oi.seqNum = DataSource.config.SeqNumOi;
         DataSource.OrderItems.Add(Oi);
         return Oi.seqNum;
     }
@@ -38,7 +37,7 @@ public class DalOrderItem
     /// </summary>
     /// <param name="id">the given seqNum</param >
     /// <returns>the orderItem of the given seqNum</returns >
-    /// <exception cref="Exception">OrderItem does not exist</exceptionthe  >
+    /// <exception cref="the OrderItem does not exist"></exceptionthe  >
     public OrderItem RequestBySeqNum(int id)
     {
         if (!DataSource.OrderItems.Exists(x => x.seqNum == id))
@@ -52,8 +51,8 @@ public class DalOrderItem
     /// </summary>
     /// <param name="orderId">the given order's id</param >
     /// <param name="productId"> the given product's id</param>
-    /// <returns></returns>
-    /// <exception cref="Exception">the OrderItem does not exist</exception >
+    /// <returns>the orderItem that matches the given order's id and product's id</returns>
+    /// <exception cref="the OrderItem does not exist"></exception >
     public OrderItem RequestByOrderIDProductID(int orderId, int productId)
     {
         if (!DataSource.OrderItems.Exists(x => x.OrderID == orderId && x.ProductID == productId))
@@ -61,6 +60,12 @@ public class DalOrderItem
 
         return DataSource.OrderItems.Find(x => x.OrderID == orderId && x.ProductID == productId);
     }
+    /// <summary>
+    /// the function returns the orderItem that matches the given order's id
+    /// </summary>
+    /// <param name="orderId">the given order's id</param>
+    /// <returns>the orderItem that matches the given order's id</returns>
+    /// <exception cref="the OrderItem does not exist"></exception>
     public List<OrderItem> RequestByOrderId(int orderId)
     {
         if (!DataSource.OrderItems.Exists(x => x.OrderID == orderId))
@@ -74,7 +79,7 @@ public class DalOrderItem
     /// the function updates a certain orderItem with the given one
     /// </summary>
     /// <param name="Oi"> the new orderItem you want to put instead of the old one</param>
-    /// <exception cref="Exception"> the orderItem you want to update does not exist</exception>
+    /// <exception cref="the orderItem you want to update does not exist"> </exception>
     public void Update(OrderItem Oi)
     {
         //if OrderItems does not exist throw exception 

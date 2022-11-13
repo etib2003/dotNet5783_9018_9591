@@ -1,7 +1,7 @@
 ﻿namespace DO;
 
 /// <summary>
-/// Enums of the categories in the store
+/// Enums of the categories in the store and the colors of the products
 /// </summary>
 public struct Enums
 {

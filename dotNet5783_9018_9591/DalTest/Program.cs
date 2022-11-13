@@ -1,11 +1,12 @@
 ﻿
 using Dal;
 using DO;
-using System;
-using System.Data.Common;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-using System.Xml.Linq;
+//using System;
+//using System.Data.Common;
+//using System.Diagnostics;
+//using System.Drawing;
+//using System.Runtime.InteropServices;
+//using System.Xml.Linq;
 using static DO.Enums;
 
 namespace DalTest
@@ -16,36 +17,38 @@ namespace DalTest
         private static DalProduct dalProductObj = new DalProduct();
         private static DalOrderItem dalOrderItemObj = new DalOrderItem();
 
-       
         static void Main()
         {
             //for the switch loop
-            string Choice;
-            int Action;
-            bool Flag = true;
+            int Choice;
+            int action;
 
             Console.WriteLine("Hello , we are happy to have you in our store :) ");
 
             do
             {
-                Console.WriteLine("Choose the Topic - Order / Product / OrderItem / Finish:");
-                Choice = Console.ReadLine();
+                Console.WriteLine(@"
+Please choose the topic:
+1: ORDER
+2: PRODUCT
+3: ORDER ITEM
+4: EXIT");
+                int.TryParse(Console.ReadLine(), out Choice);
                 try
                 {
                     switch (Choice)
                     {
-                        case "Order":
+                        case 1:
                             ChoiceOrder();
                             break;
-                        case "Product":
+                        case 2:
                             ChoiceProduct();
                             break;
-                        case "OrderItem":
+                        case 3:
                             ChoiceOrderItem();
                             break;
-                        case "Finish":
-                            Console.Write("Thank you and have a nice day :) ");
-                            Flag = false;
+                        case 4:
+                            Console.WriteLine("Thank you and have a nice day :) ");
                             break;
                         default:
                             Console.WriteLine("ERROR");
@@ -57,26 +60,26 @@ namespace DalTest
                     Console.WriteLine(e.Message);
                 }
 
-            } while (Flag);
-
+            } while (Choice!=4);
+            
             //in case the user chose order
             void ChoiceOrder()
             {
-                bool FlagOrder = true;
                 do
                 {
                     Console.WriteLine(
-@"    For add a new order, press: 1 
-    For request all the orders, press: 2
-    For request an order by ID, press: 3
-    For update an order, press: 4
-    For delete an order, press: 5
-    For exit from Order topic, press: 6");
+@"  Please choose the option:
+  1: Add Order
+  2: Get list of Order
+  3: Search Order
+  4: Update Order
+  5: Delete Order
+  6: Back");
 
-                    int.TryParse(Console.ReadLine(), out Action);
+                    int.TryParse(Console.ReadLine(), out action);
                     try
                     {
-                        switch (Action)
+                        switch (action)
                         {
                             case 1://add a new order
                                 {
@@ -89,45 +92,28 @@ namespace DalTest
                                     Console.Write("Enter an Adress: ");
                                     NewOrder.CustomerAdress = Console.ReadLine();
 
-
-                                    Console.WriteLine("enter order's date in a dd.mm.yy format:");
-                                    string strDateTime;
                                     DateTime tmpDateTime;
 
-                                    strDateTime = Console.ReadLine();
-                                    if (strDateTime.Equals(""))
-                                    {
-                                        DateTime.TryParse(strDateTime, out tmpDateTime);
-                                        NewOrder.OrderDate = tmpDateTime;
-                                    }
+                                    Console.WriteLine("enter order's date in a dd.mm.yy format:");
+                                    DateTime.TryParse(Console.ReadLine(), out tmpDateTime);
+                                    NewOrder.OrderDate = tmpDateTime;
 
                                     Console.WriteLine("enter order's ship date in a dd.mm.yy format:");
-                                    strDateTime = Console.ReadLine();
-                                    if (strDateTime.Equals(""))
-                                    {
-                                        DateTime.TryParse(strDateTime, out tmpDateTime);
-                                        NewOrder.ShipDate = tmpDateTime;
-                                    }
+                                    DateTime.TryParse(Console.ReadLine(), out tmpDateTime);
+                                    NewOrder.ShipDate = tmpDateTime;
 
                                     Console.WriteLine("enter order's delivary date in a dd.mm.yy format:");
-                                    strDateTime = Console.ReadLine();
-                                    if (strDateTime.Equals(""))
-                                    {
-                                        DateTime.TryParse(strDateTime, out tmpDateTime);
-                                        NewOrder.DeliveryDate = tmpDateTime;
-                                    }
+                                    DateTime.TryParse(Console.ReadLine(), out tmpDateTime);
+                                    NewOrder.DeliveryDate = tmpDateTime;
 
-                                    NewOrder.OrderDate = DateTime.Now;
-                                    NewOrder.ShipDate = NewOrder.OrderDate.AddDays(2);
-                                    NewOrder.DeliveryDate = NewOrder.ShipDate.AddDays(7);
-
-                                    Console.Write(" The order's seqNum is: ");
+                                    Console.Write("The order's seqNum is: ");
                                     Console.WriteLine(dalOrderObj.Create(NewOrder));
 
                                     break;
                                 }
                             case 2://return the orders
                                 {
+                                    Console.WriteLine("The orders list:");
                                     foreach (Order ord in dalOrderObj.RequestAll())
                                     {
                                         Console.Write(ord);
@@ -137,7 +123,7 @@ namespace DalTest
                                 }
                             case 3://return the order that matches the id
                                 {
-                                    Console.Write("Enter the order's seqNum: ");                                
+                                    Console.Write("Enter the order's seqNum: ");
                                     int id; int.TryParse(Console.ReadLine(), out id);
                                     Console.WriteLine(dalOrderObj.RequestById(id));
                                     break;
@@ -151,16 +137,27 @@ namespace DalTest
 
                                     Order updatedOrder = new Order();
 
-                                    updatedOrder.seqNum= seqNum_;
+                                    updatedOrder.seqNum = seqNum_;
                                     Console.Write("Enter a Full name: ");
                                     updatedOrder.CustomerName = Console.ReadLine();
                                     Console.Write("Enter an Email: ");
                                     updatedOrder.CustomerEmail = Console.ReadLine();
                                     Console.Write("Enter an Adress: ");
-                                    updatedOrder.CustomerAdress = Console.ReadLine();                                  
-                                    updatedOrder.OrderDate = DateTime.Now;
-                                    updatedOrder.ShipDate = updatedOrder.OrderDate.AddDays(2);
-                                    updatedOrder.DeliveryDate = updatedOrder.ShipDate.AddDays(7);
+                                    updatedOrder.CustomerAdress = Console.ReadLine();
+
+                                    DateTime tmpDateTime;
+
+                                    Console.WriteLine("enter order's date in a dd.mm.yy format:");
+                                    DateTime.TryParse(Console.ReadLine(), out tmpDateTime);
+                                    updatedOrder.OrderDate = tmpDateTime;
+
+                                    Console.WriteLine("enter order's ship date in a dd.mm.yy format:");
+                                    DateTime.TryParse(Console.ReadLine(), out tmpDateTime);
+                                    updatedOrder.ShipDate = tmpDateTime;
+
+                                    Console.WriteLine("enter order's delivary date in a dd.mm.yy format:");
+                                    DateTime.TryParse(Console.ReadLine(), out tmpDateTime);
+                                    updatedOrder.DeliveryDate = tmpDateTime;
 
                                     dalOrderObj.Update(updatedOrder);
                                     break;
@@ -174,9 +171,9 @@ namespace DalTest
                                     break;
                                 }
                             case 6:
-                                FlagOrder = false;
                                 break;
                             default:
+                                Console.WriteLine("ERROR");
                                 break;
                         }
                     }
@@ -186,27 +183,26 @@ namespace DalTest
 
                     }
 
-                } while (FlagOrder);
+                } while (action!=6);
             }
 
             //in case the user chose product
             void ChoiceProduct()
             {
-                bool flagProduct = true;
-
                 do
                 {
                     Console.WriteLine(
-@"    For add a new Product, press: 1 
-    For request all the Products, press: 2
-    For request a Product by ID, press: 3
-    For update a Product, press: 4
-    For delete a Product, press: 5
-    For exit from Product topic, press: 6");
-                    int Action; int.TryParse(Console.ReadLine(), out Action);
+@"  Please choose the option:
+  1: Add Product
+  2: Get list of Product
+  3: Search Product
+  4: Update Product
+  5: Delete Product
+  6: Back");
+                    int.TryParse(Console.ReadLine(), out action);
                     try
                     {
-                        switch (Action)
+                        switch (action)
                         {
 
                             case 1://adds a product
@@ -214,32 +210,30 @@ namespace DalTest
                                     Product newProduct = new Product();
                                     Console.Write("Enter a barcode: ");
                                     int ID; int.TryParse(Console.ReadLine(), out ID);
-                                    newProduct.ID=ID;
-                                    Console.Write("Enter a Category: 1- Percussions , 2- StringInstrument , 3- WindInstrument , 4- KeyBoard , 5- BowInstrument: ");
-                                    category ctgr = new category();
+                                    newProduct.ID = ID;
+                                    Console.Write("Enter a Category: 0- Percussions , 1- StringInstrument , 2- WindInstrument , 3- KeyBoard , 4- BowInstrument: ");
                                     string input = Console.ReadLine();
-                                    ctgr = (category)Enum.Parse(typeof(category), input);
-                                    newProduct.Category = ctgr;
+                                    newProduct.Category = (category)int.Parse(input);
                                     Console.Write("Enter a Product name: ");
                                     newProduct.Name = Console.ReadLine();
-                                    Console.Write("Enter a Color: 1- Black , 2- Red , 3- White , 4- Brown : ");
-                                    color c = new color();
-                                    string str = Console.ReadLine();
-                                    c  = (color)Enum.Parse(typeof(color), str);
-                                    newProduct.Color = c;
+                                    Console.Write("Enter a Color: 0- Black , 1- Red , 2- White , 3- Brown: ");
+                                    input = Console.ReadLine();
+                                    newProduct.Color = (color)int.Parse(input);
                                     Console.Write("Enter a Price: ");
                                     int price; int.TryParse(Console.ReadLine(), out price);
-                                    newProduct.Price= price;
+                                    newProduct.Price = price;
                                     Console.Write("Enter an Amount: ");
                                     int InStock; int.TryParse(Console.ReadLine(), out InStock);
-                                    newProduct.InStock= InStock;
-                                    Console.Write(" The prodact's barcode is: ");
+                                    newProduct.InStock = InStock;
+                                    Console.Write("The product's barcode is: ");
                                     Console.WriteLine(dalProductObj.Create(newProduct));
 
                                     break;
                                 }
                             case 2://return the products
                                 {
+                                    Console.WriteLine("The products list:");
+
                                     foreach (Product pdct in dalProductObj.RequestAll())
                                     {
                                         Console.Write(pdct);
@@ -250,37 +244,31 @@ namespace DalTest
                                 {
                                     Console.Write("Enter the product's barcode: ");
                                     int id; int.TryParse(Console.ReadLine(), out id);
-                                    Console.WriteLine(dalProductObj.RequestById(id));
+                                    Console.Write(dalProductObj.RequestById(id));
                                     break;
                                 }
                             case 4://update a product
-                                {
-
-
+                                {                    
                                     Console.Write("Enter a barcode: ");
                                     int barcode; int.TryParse(Console.ReadLine(), out barcode);
                                     Console.WriteLine(dalProductObj.RequestById(barcode));
 
                                     Product newProduct = new Product();
                                     newProduct.ID = barcode;
-                                    Console.Write("Enter a Category: 1- Percussions , 2- StringInstrument , 3- WindInstrument , 4- KeyBoard , 5- BowInstrument: ");
-                                    category ctgr = new category();
+                                    Console.Write("Enter a Category: 0- Percussions , 1- StringInstrument , 2- WindInstrument , 3- KeyBoard , 4- BowInstrument: ");
                                     string input = Console.ReadLine();
-                                    ctgr = (category)Enum.Parse(typeof(category), input);
-                                    newProduct.Category = ctgr;
+                                    newProduct.Category = (category)int.Parse(input);
                                     Console.Write("Enter a Product name: ");
                                     newProduct.Name = Console.ReadLine();
-                                    Console.Write("Enter a Color: 1- Black , 2- Red , 3- White , 4- Brown : ");
-                                    color c = new color();
-                                    string str = Console.ReadLine();
-                                    c = (color)Enum.Parse(typeof(color), str);
-                                    newProduct.Color = c;
+                                    Console.Write("Enter a Color: 0- Black , 1- Red , 2- White , 3- Brown: ");
+                                    input = Console.ReadLine();
+                                    newProduct.Color = (color)int.Parse(input);
                                     Console.Write("Enter a Price: ");
                                     int Price; int.TryParse(Console.ReadLine(), out Price);
-                                    newProduct.Price= Price;
+                                    newProduct.Price = Price;
                                     Console.Write("Enter an Amount: ");
                                     int InStock; int.TryParse(Console.ReadLine(), out InStock);
-                                    newProduct.InStock= InStock;
+                                    newProduct.InStock = InStock;
                                     dalProductObj.Update(newProduct);
                                     break;
                                 }
@@ -293,9 +281,9 @@ namespace DalTest
                                     break;
                                 }
                             case 6:
-                                flagProduct = false;
                                 break;
                             default:
+                                Console.WriteLine("ERROR");
                                 break;
                         }
                     }
@@ -304,52 +292,54 @@ namespace DalTest
                         Console.WriteLine(e.Message);
                     }
 
-                } while (flagProduct);
+                } while (action!=6);
             }
 
             //in case the user chose orderItem
-            void ChoiceOrderItem() 
+            void ChoiceOrderItem()
             {
-                bool flagOrderItem = true;            
                 do
                 {
                     Console.WriteLine(
-@"    For add a new Order Item, press: 1 
-    For request all the Order Items, press: 2
-    For request an Order Item by seqNum, press: 3
-    For request an Order Item by order ID and product ID, press: 4
-    For request an Order Item by order ID, press: 5
-    For update an Order Item, press: 6
-    For delete an Order Item, press: 7
-    For exit from Order Item topic, press: 8");
-                    int Action; int.TryParse(Console.ReadLine(), out Action);
+@"  Please choose the option:
+  1: Add Order item
+  2: Get list of Order item
+  3: Search Order item 
+  4: Get Order item by order seq number & product barcode
+  5: Get list of Order item by order seq number
+  6: Update Order item
+  7: Delete Order item
+  8: Back");
+                int.TryParse(Console.ReadLine(), out action);
                     try
                     {
-                        switch (Action)
+                        switch (action)
                         {
                             case 1://adds an orderItem
                                 {
                                     OrderItem newOrderItem = new OrderItem();
-                                    Console.Write("Enter the order's seqNum: ");
+                                    Console.Write("Enter the order's ID: ");
                                     int OrderID; int.TryParse(Console.ReadLine(), out OrderID);
-                                    newOrderItem.OrderID= OrderID;
+                                    newOrderItem.OrderID = OrderID;
                                     Console.Write("Enter the product's barcode: ");
                                     int ProductID; int.TryParse(Console.ReadLine(), out ProductID);
-                                    newOrderItem.ProductID= ProductID;
+                                    newOrderItem.ProductID = ProductID;
                                     Console.Write("Enter a Price: ");
                                     Double Price; double.TryParse(Console.ReadLine(), out Price);
-                                    newOrderItem.Price= Price;
-                                     Console.Write("Enter the amount: ");
+                                    newOrderItem.Price = Price;
+                                    Console.Write("Enter the amount: ");
                                     int Amount; int.TryParse(Console.ReadLine(), out Amount);
-                                    newOrderItem.Amount= Amount;
-                                    
-                                    Console.Write(" The orderItem's seqNum is: ");
+                                    newOrderItem.Amount = Amount;
+
+                                    Console.Write("The orderItem's seqNum is: ");
                                     Console.WriteLine(dalOrderItemObj.Create(newOrderItem));
 
                                     break;
                                 }
                             case 2://returns all the orderItems
                                 {
+                                    Console.WriteLine("The order items list:");
+
                                     foreach (OrderItem OI in dalOrderItemObj.RequestAll())
                                     {
                                         Console.Write(OI);
@@ -361,7 +351,7 @@ namespace DalTest
                                 {
                                     Console.Write("Enter the orderItem's seqNum: ");
                                     int seqNum; int.TryParse(Console.ReadLine(), out seqNum);
-                                    Console.WriteLine(dalOrderItemObj.RequestBySeqNum(seqNum));
+                                    Console.Write(dalOrderItemObj.RequestBySeqNum(seqNum));
                                     break;
                                 }
                             case 4://returns the orderItem that matches the given order's seqNum and  the product's barcode
@@ -384,13 +374,11 @@ namespace DalTest
                                 }
                             case 6://update an orderItem
                                 {
-
-
                                     Console.Write("Enter a seqNum: ");
                                     int seqNum_; int.TryParse(Console.ReadLine(), out seqNum_);
                                     Console.WriteLine(dalOrderItemObj.RequestBySeqNum(seqNum_));
 
-                                    OrderItem updatedOrderItem = new OrderItem();                                  
+                                    OrderItem updatedOrderItem = new OrderItem();
                                     Console.Write("Enter the order's seqNum: ");
                                     int OrderID; int.TryParse(Console.ReadLine(), out OrderID);
                                     updatedOrderItem.OrderID = OrderID;
@@ -416,9 +404,9 @@ namespace DalTest
                                     break;
                                 }
                             case 8:
-                                flagOrderItem = false;
                                 break;
                             default:
+                                Console.WriteLine("ERROR");
                                 break;
                         }
                     }
@@ -426,18 +414,9 @@ namespace DalTest
                     {
                         Console.WriteLine(e.Message);
                     }
-
-                } while (flagOrderItem);
+                } while (action!=8);
             }
         }
     }
-
 }
-
-
-
-
-
- 
-
 

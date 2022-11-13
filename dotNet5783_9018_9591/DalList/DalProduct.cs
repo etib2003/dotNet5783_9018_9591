@@ -41,7 +41,7 @@ public class DalProduct
     /// </summary>
     /// <param name="id"> the produc's id</param>
     /// <returns> a list of all the products with the given id</returns>
-    /// <exception cref="Exception">the product does not exist</exception >
+    /// <exception cref="the product does not exist"></exception >
     public Product RequestById(int id)
     {
         if (!DataSource.Products.Exists(x => x.ID == id))
@@ -54,7 +54,7 @@ public class DalProduct
     /// the function updates a certain product with the given one
     /// </summary>
     /// <param name="product"> the new product you want to put instead of the old one</param >
-    /// <exception cref="Exception">the product you want to update does not exist</exception >
+    /// <exception cref="the product you want to update does not exist"></exception >
     public void Update(Product product)
     {
         //if product does not exist throw exception 
@@ -68,7 +68,7 @@ public class DalProduct
     /// the function deletes the product with the given id
     /// </summary>
     /// <param name="id">the id of the product you want to delete</param  >
-    /// <exception cref="Exception">the product does not exist</exception  >
+    /// <exception cref="the product does not exist"></exception  >
     public void Delete(int id)
     {
         //if product does not exist throw exception 
