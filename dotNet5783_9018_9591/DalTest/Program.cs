@@ -1,12 +1,6 @@
-﻿
-using Dal;
+﻿using Dal;
 using DO;
-//using System;
-//using System.Data.Common;
-//using System.Diagnostics;
-//using System.Drawing;
-//using System.Runtime.InteropServices;
-//using System.Xml.Linq;
+
 using static DO.Enums;
 
 namespace DalTest
@@ -21,7 +15,7 @@ namespace DalTest
         {
             //for the switch loop
             int Choice;
-            int action;
+
 
             Console.WriteLine("Hello , we are happy to have you in our store :) ");
 
@@ -60,15 +54,18 @@ Please choose the topic:
                     Console.WriteLine(e.Message);
                 }
 
-            } while (Choice!=4);
+            } while (Choice != 4);
+        }
             
-            //in case the user chose order
-            void ChoiceOrder()
+        //in case the user chose order
+        static void ChoiceOrder()
             {
+                int action;
                 do
                 {
                     Console.WriteLine(
-@"  Please choose the option:
+@"  
+  Please choose the option:
   1: Add Order
   2: Get list of Order
   3: Search Order
@@ -76,7 +73,7 @@ Please choose the topic:
   5: Delete Order
   6: Back");
 
-                    int.TryParse(Console.ReadLine(), out action);
+                     int.TryParse(Console.ReadLine(), out action);
                     try
                     {
                         switch (action)
@@ -186,20 +183,22 @@ Please choose the topic:
                 } while (action!=6);
             }
 
-            //in case the user chose product
-            void ChoiceProduct()
+        //in case the user chose product
+        static void ChoiceProduct()
             {
+                int action;
                 do
                 {
                     Console.WriteLine(
-@"  Please choose the option:
+@"  
+  Please choose the option:
   1: Add Product
   2: Get list of Product
   3: Search Product
   4: Update Product
   5: Delete Product
   6: Back");
-                    int.TryParse(Console.ReadLine(), out action);
+                     int.TryParse(Console.ReadLine(), out action);
                     try
                     {
                         switch (action)
@@ -236,7 +235,7 @@ Please choose the topic:
 
                                     foreach (Product pdct in dalProductObj.RequestAll())
                                     {
-                                        Console.Write(pdct);
+                                        Console.WriteLine(pdct);
                                     }
                                     break;
                                 }
@@ -295,13 +294,15 @@ Please choose the topic:
                 } while (action!=6);
             }
 
-            //in case the user chose orderItem
-            void ChoiceOrderItem()
+        //in case the user chose orderItem
+        static void ChoiceOrderItem()
             {
+                int action;
                 do
                 {
                     Console.WriteLine(
-@"  Please choose the option:
+@"  
+  Please choose the option:
   1: Add Order item
   2: Get list of Order item
   3: Search Order item 
@@ -310,7 +311,7 @@ Please choose the topic:
   6: Update Order item
   7: Delete Order item
   8: Back");
-                int.TryParse(Console.ReadLine(), out action);
+                    int.TryParse(Console.ReadLine(), out action);
                     try
                     {
                         switch (action)
@@ -416,7 +417,7 @@ Please choose the topic:
                     }
                 } while (action!=8);
             }
-        }
+       
     }
 }
 
