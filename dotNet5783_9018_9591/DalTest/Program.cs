@@ -8,8 +8,8 @@ namespace DalTest
 {
     public class Program
     {
-        public IDal dalList = new DalList();
-        static void Main()
+        static IDal dalList = new DalList();
+         static void Main()
         {
             //for the switch loop
             int Choice;
@@ -56,7 +56,7 @@ Please choose the topic:
         }
 
         //in case the user chose order
-        public void ChoiceOrder()
+       static void ChoiceOrder()
         {
             int action;
             do
@@ -188,7 +188,7 @@ Please choose the topic:
         }
 
         //in case the user chose product
-        public void ChoiceProduct()
+        static void ChoiceProduct()
         {
             int action;
             do
@@ -311,7 +311,7 @@ Please choose the topic:
         }
 
         //in case the user chose orderItem
-        void ChoiceOrderItem()
+        static void ChoiceOrderItem()
         {
             int action;
             do
