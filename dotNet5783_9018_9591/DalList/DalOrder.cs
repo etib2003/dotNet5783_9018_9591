@@ -1,4 +1,5 @@
 ﻿using DO;
+using DalApi;
 using System.Runtime.CompilerServices;
 //using static Dal.DataSource;
 
@@ -6,7 +7,7 @@ namespace Dal;
 /// <summary>
 /// The class of orders
 /// </summary>
-public class DalOrder
+internal class DalOrder: IOrder
 {
     /// <summary>
     /// the function adds a new order to the orders' list
@@ -24,7 +25,7 @@ public class DalOrder
     /// the function returns the orders' list
     /// </summary>
     /// <returns> the order already exists </returns x>
-    public List<Order> RequestAll()
+    public IEnumerable<Order> RequestAll()
     {
         List<Order> listToReturn = new List<Order>();
         for (int i = 0; i < DataSource.Orders.Count; i++)

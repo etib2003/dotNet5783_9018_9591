@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DO;
+
 namespace DalApi;
 
-public interface IProduct :ICrud<Product>
+internal class Exceptions: Exception
 {
-   
+    public int ID;
+    public 
+    //public expNotExist(string message);
+
 }

@@ -1,11 +1,13 @@
 ﻿using DO;
+using DalApi;
+
 using System.Collections.Generic;
 using System.Linq;
 //using static Dal.DataSource;
 
 namespace Dal;
 
-public class DalOrderItem
+internal class DalOrderItem:IOrderItem
 {
     //CRUD for Student
     /// <summary>
@@ -24,7 +26,7 @@ public class DalOrderItem
     /// the function returns the orderItems' list
     /// </summary>
     /// <returns>the orderItems' list</returns >
-    public List<OrderItem> RequestAll()
+    public IEnumerable<OrderItem> RequestAll()
     {
         List<OrderItem> listToReturn = new List<OrderItem>();
         for (int i = 0; i < DataSource.OrderItems.Count; i++)
