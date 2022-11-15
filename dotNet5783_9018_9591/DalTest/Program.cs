@@ -1,4 +1,5 @@
 ﻿using Dal;
+using DalApi;
 using DO;
 
 using static DO.Enums;
@@ -7,9 +8,9 @@ namespace DalTest
 {
     public class Program
     {
-        private static DalOrder dalOrderObj = new DalOrder();
-        private static DalProduct dalProductObj = new DalProduct();
-        private static DalOrderItem dalOrderItemObj = new DalOrderItem();
+        private static IOrder dalOrderObj = new IOrder();
+        private static IProduct dalProductObj = new IProduct();
+        private static IOrderItem dalOrderItemObj = new IOrderItem();
 
         static void Main()
         {
