@@ -38,7 +38,6 @@ Please choose the topic:
                             break;
                         case 3:
                             ChoiceOrderItem();
-
                             break;
                         case 4:
                             Console.WriteLine("Thank you and have a nice day :) ");
