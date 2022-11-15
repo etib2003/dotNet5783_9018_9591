@@ -136,7 +136,7 @@ internal static class DataSource
     {
         internal static int seqNumOi = 1;
         internal static int seqNumOr = 1;
-
+ 
         public static int SeqNumOi => seqNumOi++;
         public static int SeqNumOr => seqNumOr++;
 

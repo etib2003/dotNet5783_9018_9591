@@ -1,9 +1,11 @@
-﻿using DO;
+﻿using DalApi;
+
+using DO;
 namespace Dal;
 /// <summary>
 /// The class of products
 /// </summary>
-public class DalProduct
+internal class DalProduct : IProduct
 {
 
     //CRUD for Products:
@@ -27,7 +29,7 @@ public class DalProduct
     /// the function returns the products' list
     /// </summary>
     /// <returns>the products' list</returns >
-    public List<Product> RequestAll()
+    public IEnumerable<Product> RequestAll()
     {
         List<Product> listToReturn = new List<Product>();
         for (int i = 0; i < DataSource.Products.Count; i++)

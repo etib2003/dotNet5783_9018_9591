@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DalApi;
 
-internal interface ICrud <T>
+public interface ICrud <T>
 {
     public int Create(T Or);
     public IEnumerable<T> RequestAll();
