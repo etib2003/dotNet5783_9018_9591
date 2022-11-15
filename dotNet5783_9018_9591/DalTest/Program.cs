@@ -1,5 +1,4 @@
 ﻿using Dal;
-using DalApi;
 using DO;
 using DalApi;
 
@@ -9,10 +8,7 @@ namespace DalTest
 {
     public class Program
     {
-        private static IOrder dalOrderObj = new IOrder();
-        private static IProduct dalProductObj = new IProduct();
-        private static IOrderItem dalOrderItemObj = new IOrderItem();
-
+        public IDal dalList = new DalList();
         static void Main()
         {
             //for the switch loop
@@ -447,4 +443,5 @@ Please choose the topic:
 
     }
 }
+
 
