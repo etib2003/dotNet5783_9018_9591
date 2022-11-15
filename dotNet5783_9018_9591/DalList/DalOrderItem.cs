@@ -38,7 +38,7 @@ public class DalOrderItem
     /// <param name="id">the given seqNum</param >
     /// <returns>the orderItem of the given seqNum</returns >
     /// <exception cref="the OrderItem does not exist"></exceptionthe  >
-    public OrderItem RequestBySeqNum(int id)
+    public OrderItem RequestById(int id)
     {
         if (!DataSource.OrderItems.Exists(x => x.seqNum == id))
             throw new Exception("the OrderItem does not exist");

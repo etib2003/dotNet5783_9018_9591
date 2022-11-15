@@ -132,6 +132,12 @@ Please choose the topic:
 
                                 Console.WriteLine(dalOrderObj.RequestById(seqNum_));
 
+                                //Console.Write("If you still want to update, press 1, else press 0 ");
+                                //int.TryParse(Console.ReadLine(), out int yes);
+
+                                //if (yes == 1)
+                                //    break;
+
                                 Order updatedOrder = new Order();
 
                                 updatedOrder.seqNum = seqNum_;
@@ -367,7 +373,7 @@ Please choose the topic:
                             {
                                 Console.Write("Enter the orderItem's seqNum: ");
                                 int seqNum; int.TryParse(Console.ReadLine(), out seqNum);
-                                Console.Write(dalOrderItemObj.RequestBySeqNum(seqNum));
+                                Console.Write(dalOrderItemObj.RequestById(seqNum));
                                 break;
                             }
                         case 4://returns the orderItem that matches the given order's seqNum and  the product's barcode
@@ -392,7 +398,7 @@ Please choose the topic:
                             {
                                 Console.Write("Enter a seqNum: ");
                                 int seqNum_; int.TryParse(Console.ReadLine(), out seqNum_);
-                                Console.WriteLine(dalOrderItemObj.RequestBySeqNum(seqNum_));
+                                Console.WriteLine(dalOrderItemObj.RequestById(seqNum_));
 
                                 OrderItem updatedOrderItem = new OrderItem();
                                 Console.Write("Enter the order's seqNum: ");
