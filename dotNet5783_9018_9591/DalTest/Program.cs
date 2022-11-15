@@ -124,7 +124,7 @@ Please choose the topic:
                             {
                                 Console.Write("Enter the order's seqNum: ");
                                 int id; int.TryParse(Console.ReadLine(), out id);
-                                Console.WriteLine(dalList.RequestById(id));
+                                Console.WriteLine(dalList.Order.RequestById(id));
                                 break;
                             }
                         case 4://update an order
