@@ -1,5 +1,6 @@
 ﻿using Dal;
 using DO;
+using DalApi;
 
 using static DO.Enums;
 
@@ -7,10 +8,7 @@ namespace DalTest
 {
     public class Program
     {
-        private static DalOrder dalOrderObj = new DalOrder();
-        private static DalProduct dalProductObj = new DalProduct();
-        private static DalOrderItem dalOrderItemObj = new DalOrderItem();
-
+        public IDal dalList = new DalList();
         static void Main()
         {
             //for the switch loop
@@ -58,7 +56,7 @@ Please choose the topic:
         }
 
         //in case the user chose order
-        static void ChoiceOrder()
+        public void ChoiceOrder()
         {
             int action;
             do
@@ -104,14 +102,14 @@ Please choose the topic:
                                 NewOrder.DeliveryDate = tmpDateTime;
 
                                 Console.Write("The order's seqNum is: ");
-                                Console.WriteLine(dalOrderObj.Create(NewOrder));
+                                Console.WriteLine(dalList.Order.Create(NewOrder));
 
                                 break;
                             }
                         case 2://return the orders
                             {
                                 Console.WriteLine("The orders list:");
-                                foreach (Order ord in dalOrderObj.RequestAll())
+                                foreach (Order ord in dalList.Order.RequestAll())
                                 {
                                     Console.Write(ord);
                                 }
@@ -122,7 +120,7 @@ Please choose the topic:
                             {
                                 Console.Write("Enter the order's seqNum: ");
                                 int id; int.TryParse(Console.ReadLine(), out id);
-                                Console.WriteLine(dalOrderObj.RequestById(id));
+                                Console.WriteLine(dalList.RequestById(id));
                                 break;
                             }
                         case 4://update an order
@@ -162,7 +160,7 @@ Please choose the topic:
                                 DateTime.TryParse(Console.ReadLine(), out tmpDateTime);
                                 updatedOrder.DeliveryDate = tmpDateTime;
 
-                                dalOrderObj.Update(updatedOrder);
+                                dalList.Order.Update(updatedOrder);
                                 break;
                             }
                         case 5://delete an order
@@ -170,7 +168,7 @@ Please choose the topic:
                                 Console.Write("Enter the order's seqNum: ");
                                 int id; int.TryParse(Console.ReadLine(), out id);
 
-                                dalOrderObj.Delete(id);
+                                dalList.Order.Delete(id);
                                 break;
                             }
                         case 6:
@@ -190,7 +188,7 @@ Please choose the topic:
         }
 
         //in case the user chose product
-        static void ChoiceProduct()
+        public void ChoiceProduct()
         {
             int action;
             do
@@ -237,7 +235,7 @@ Please choose the topic:
                                 newProduct.InStock = InStock;
 
                                 Console.Write("The product's barcode is: ");
-                                Console.WriteLine(dalProductObj.Create(newProduct));
+                                Console.WriteLine(dalList.Product.Create(newProduct));
 
                                 break;
                             }
@@ -245,7 +243,7 @@ Please choose the topic:
                             {
                                 Console.WriteLine("The products list:");
 
-                                foreach (Product pdct in dalProductObj.RequestAll())
+                                foreach (Product pdct in dalList.Product.RequestAll())
                                 {
                                     Console.WriteLine(pdct);
                                 }
@@ -313,7 +311,7 @@ Please choose the topic:
         }
 
         //in case the user chose orderItem
-        static void ChoiceOrderItem()
+        void ChoiceOrderItem()
         {
             int action;
             do
