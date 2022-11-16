@@ -19,7 +19,7 @@ internal class DalProduct : IProduct
     public int Create(Product product)
     {
         if (DataSource.Products.Exists(x => x.ID == product.ID))
-            throw new Exception("cannot create a product,that already exists");
+            throw new CreateException("cannot create a product,that already exists");
 
         DataSource.Products.Add(product);
         return product.ID;  
@@ -46,7 +46,7 @@ internal class DalProduct : IProduct
     public Product RequestById(int id)
     {
         if (!DataSource.Products.Exists(x => x.ID == id))
-            throw new Exception("the product that does not exist");
+            throw new RequestException("cannot return a product,that does not exist");
 
         return DataSource.Products.Find(x => x.ID == id);
     }
@@ -60,7 +60,7 @@ internal class DalProduct : IProduct
     {
         //if product does not exist throw exception 
         if (!DataSource.Products.Exists(x => x.ID == product.ID))
-            throw new Exception("cannot update a product, that does not exist");
+            throw new UpdateException("cannot update a product, that does not exist");
         Product PdctToRemove = DataSource.Products.Find(x => x.ID == product.ID); 
         DataSource.Products.Remove(PdctToRemove);
         DataSource.Products.Add(product);
@@ -75,7 +75,7 @@ internal class DalProduct : IProduct
     {
         //if product does not exist throw exception 
         if (!DataSource.Products.Exists(x => x.ID == id))
-            throw new Exception("cannot delete a product,that does not exist");
+            throw new DeleteException("cannot delete a product,that does not exist");
         Product PdctToRemove = DataSource.Products.Find(x => x.ID == id);
         DataSource.Products.Remove(PdctToRemove);
     }

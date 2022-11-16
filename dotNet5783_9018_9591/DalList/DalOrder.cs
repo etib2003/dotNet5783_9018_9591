@@ -43,7 +43,7 @@ internal class DalOrder: IOrder
     public Order RequestById(int id)
     {
         if (!DataSource.Orders.Exists(x => x.seqNum == id))
-            throw new Exception("the order is not exist");
+            throw new RequestException("cannot return an order,that does not exist");
 
         return DataSource.Orders.Find(x => x.seqNum == id);
     }
@@ -57,7 +57,7 @@ internal class DalOrder: IOrder
     {
         //if order does not exist throw exception 
         if (!DataSource.Orders.Exists(x => x.seqNum == Or.seqNum))
-            throw new Exception("cannot update an order,that is not exists");
+            throw new UpdateException("cannot update an order,that does not exist");
         Order OToRemove = DataSource.Orders.Find(x => x.seqNum == Or.seqNum); 
         Or.seqNum = OToRemove.seqNum;
         DataSource.Orders.Remove(OToRemove);
@@ -73,7 +73,7 @@ internal class DalOrder: IOrder
     {
         //if student does not exist throw exception 
         if (!DataSource.Orders.Exists(x => x.seqNum == id))
-            throw new Exception("cannot delete an order,that is not exists");
+            throw new DeleteException("cannot delete an order,that does not exist");
         Order OToRemove = DataSource.Orders.Find(x => x.seqNum == id);
         DataSource.Orders.Remove(OToRemove);
     }
