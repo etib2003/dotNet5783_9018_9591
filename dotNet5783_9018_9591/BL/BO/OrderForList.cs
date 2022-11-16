@@ -1,4 +1,5 @@
 ﻿using DO;
+using DocumentFormat.OpenXml.Spreadsheet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,4 +29,11 @@ internal class OrderForList
     public int AmountOfItems { get; set; }
 
     public double TotalPrice { get; set; }
+
+    public override string ToString() => $@"
+            Customer ID= {ID}: {CustomerName}, 
+            Status: {Status}
+            Amount of items: {AmountOfItems}
+            Total price: {TotalPrice}
+    ";
 }

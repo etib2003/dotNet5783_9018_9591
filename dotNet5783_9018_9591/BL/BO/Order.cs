@@ -35,7 +35,6 @@ internal class Order
     /// </summary>
     public DateTime OrderDate { get; set; }
 
-
     /// <summary>
     /// order's status date
     /// </summary>
@@ -60,16 +59,20 @@ internal class Order
 
     public double TotalPrice { get; set; }
 
-    //    /// <summary>
-    //    /// the order's print method
-    //    /// </summary>
-    //    /// <returns>the way the order is printed</returns>
-    //    public override string ToString() => $@"
-    //        Customer seqNum= {seqNum}: {CustomerName}, 
-    //        Email: {CustomerEmail}
-    //        Adress: {CustomerAdress}
-    //        Order date: {OrderDate}
-    //        Ship date: {ShipDate}    	
-    //        Delivery date: {DeliveryDate} 
-    //";
+    /// <summary>
+    /// the order's print method
+    /// </summary>
+    /// <returns>the way the order is printed</returns>
+    public override string ToString() => $@"
+            Customer ID= {ID}: {CustomerName}, 
+            Email: {CustomerEmail}
+            Adress: {CustomerAdress}
+            Status: {Status}
+            Order date: {OrderDate}
+            Payment date: {PaymentDate}
+            Ship date: {ShipDate}    	
+            Delivery date: {DeliveryDate} 
+            Items : {Items}
+            Total price: {TotalPrice}
+    ";
 }

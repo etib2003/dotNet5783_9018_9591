@@ -16,7 +16,6 @@ internal class OrderItem
      
     public string Name{ get; set; }
      
-
     /// <summary>
     /// orderItem's product barcode
     /// </summary>
@@ -37,12 +36,11 @@ internal class OrderItem
     /// the orderItem's print method
     /// </summary>
     /// <returns>the way the orderItem is printed</returns>
-//    public override string ToString() => $@"
-//        Identification number= {seqNum} 
-//        Order ID: {OrderID}
-//        Product ID: {ProductID}
-//    	Price: {Price}
-//    	Amount: {Amount}
-//";
-//    public int Id { get; set; }
+    public override string ToString() => $@"
+        Identification number= {ID}, {Name}
+        Product ID: {ProductID}
+    	Price: {Price}
+    	Amount: {Amount}
+        Total price: {TotalPrice}
+";
 }
