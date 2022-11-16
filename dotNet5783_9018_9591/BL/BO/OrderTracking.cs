@@ -12,6 +12,7 @@ internal class OrderTracking
 {
     public int ID { get; set; }
     public OrderStatus Status { get; set; }
+    //רשימה של צמדים?
 
     public override string ToString() => $@"
         ID  :  {ID}
