@@ -16,6 +16,5 @@ internal class OrderTracking
     public override string ToString() => $@"
         ID  :  {ID}
         Status: {Status}     	 
-       
 ";
 }

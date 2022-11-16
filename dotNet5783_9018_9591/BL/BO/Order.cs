@@ -31,19 +31,19 @@ internal class Order
     public string CustomerAdress { get; set; }
 
     /// <summary>
-    /// order's order date
-    /// </summary>
-    public DateTime OrderDate { get; set; }
-
-    /// <summary>
     /// order's status date
     /// </summary>
     public OrderStatus Status { get; set; }
 
     /// <summary>
-    /// order's payment date
+    /// order's order date
     /// </summary>
-    public DateTime PaymentDate { get; set; }
+    public DateTime OrderDate { get; set; }
+
+    ///// <summary>
+    ///// order's payment date
+    ///// </summary>
+    //public DateTime PaymentDate { get; set; }
 
     /// <summary>
     /// order's ship date
@@ -54,7 +54,6 @@ internal class Order
     /// order's delivery date
     /// </summary>
     public DateTime DeliveryDate { get; set; }
-
     public OrderItem Items { get; set; }
 
     public double TotalPrice { get; set; }
@@ -69,7 +68,6 @@ internal class Order
             Adress: {CustomerAdress}
             Status: {Status}
             Order date: {OrderDate}
-            Payment date: {PaymentDate}
             Ship date: {ShipDate}    	
             Delivery date: {DeliveryDate} 
             Items : {Items}
