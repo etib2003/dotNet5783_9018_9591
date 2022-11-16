@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static BO.Enums;
 
-namespace  BO;
+namespace BO;
 
 internal class ProductForList
 {
@@ -13,4 +14,9 @@ internal class ProductForList
     public string Name { get; set; }
     public double Price { get; set; }
     public Category category { get; set; }
+
+    public override string ToString() => $@"
+        Product barcode: {ID}, {Name}
+        Category: {category}
+     	Price: {Price}";
 }

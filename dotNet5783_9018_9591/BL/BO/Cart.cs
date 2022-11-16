@@ -1,10 +1,12 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Office2010.Excel;
+using DocumentFormat.OpenXml.Wordprocessing;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace  BO;
+namespace BO;
 
 internal class Cart
 {
@@ -14,4 +16,11 @@ internal class Cart
     public OrderItem Items { get; set; }
     public double TotalPrice { get; set; }
 
+    public override string ToString() => $@"
+        CustomerName  :  {CustomerName}
+        CustomerEmail: {CustomerEmail}
+     	CustomerAdress: {CustomerAdress}
+        Items: {Items}
+     	TotalPrice: {TotalPrice}
+";
 }
