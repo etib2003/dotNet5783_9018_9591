@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlApi;
 
-internal interface IOrder
+public interface IOrder
 {
     public OrderForList GetOrderListForManager();
     public Order GetOrderDetails(int orderID);

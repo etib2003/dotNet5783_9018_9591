@@ -7,7 +7,7 @@ using static BO.Enums;
 
 namespace  BO;
 
-internal class Product
+public class Product
 {
 
     /// <summary>

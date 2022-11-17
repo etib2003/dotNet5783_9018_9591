@@ -8,7 +8,7 @@ using static BO.Enums;
 
 namespace BO;
 
-internal class ProductItem
+public class ProductItem
 {
     public int ID { get; set; }
     public string Name { get; set; }

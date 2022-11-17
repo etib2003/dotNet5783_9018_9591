@@ -8,7 +8,7 @@ using static BO.Enums;
 
 namespace BO;
 
-internal class Order
+public class Order
 {
     /// <summary>
     /// order's unique id

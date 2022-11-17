@@ -9,7 +9,7 @@ using static BO.Enums;
 
 namespace BO;
 
-internal class OrderForList
+public class OrderForList
 {
     /// <summary>
     /// order's unique id

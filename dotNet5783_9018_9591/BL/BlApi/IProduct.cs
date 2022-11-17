@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace  BlApi;
 
-internal interface IProduct
+public interface IProduct
 {
     public ProductForList GetProductList();
     public Product GetProductDetailsForManager(int productId);

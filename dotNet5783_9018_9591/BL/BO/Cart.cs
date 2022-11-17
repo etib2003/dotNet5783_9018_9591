@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BO;
 
-internal class Cart
+public class Cart
 {
     public string CustomerName { get; set; }
     public string CustomerEmail { get; set; }
