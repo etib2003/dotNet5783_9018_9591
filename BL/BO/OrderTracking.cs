@@ -12,7 +12,8 @@ public class OrderTracking
 {
     public int ID { get; set; }
     public OrderStatus Status { get; set; }
-    //רשימה של צמדים?
+    //רשימה של צמדים
+    public List<Tuple<DateTime, OrderStatus>> orderProgress { get; set; }
 
     public override string ToString() => $@"
         ID  :  {ID}
