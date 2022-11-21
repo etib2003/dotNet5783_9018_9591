@@ -54,7 +54,7 @@ public class Order
     /// order's delivery date
     /// </summary>
     public DateTime DeliveryDate { get; set; }
-    public OrderItem Items { get; set; }
+    public IEnumerable <OrderItem> Items { get; set; }
 
     public double TotalPrice { get; set; }
 
@@ -62,7 +62,8 @@ public class Order
     /// the order's print method
     /// </summary>
     /// <returns>the way the order is printed</returns>
-    public override string ToString() => $@"
+    public override string ToString() { 
+            string s =$@"
             Customer ID= {ID}: {CustomerName}, 
             Email: {CustomerEmail}
             Adress: {CustomerAdress}
@@ -70,7 +71,10 @@ public class Order
             Order date: {OrderDate}
             Ship date: {ShipDate}    	
             Delivery date: {DeliveryDate} 
-            Items : {Items}
             Total price: {TotalPrice}
-    ";
+            Items :";
+            foreach(var item in Items)
+            { s = s + item+ "       \n"; };
+            return s;
+    }
 }
