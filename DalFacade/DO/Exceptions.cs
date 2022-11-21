@@ -8,60 +8,12 @@ using System.Threading.Tasks;
 
 namespace DalApi;
 
-[Serializable]
-public class CreateException : Exception
+public class DalDoesNoExistException : Exception
 {
-    public CreateException() : base() { }
-    public CreateException(string message) : base(message) { }
-    public CreateException(string message, Exception inner) : base(message, inner) { }
-    protected CreateException(SerializationInfo info, StreamingContext context) : base(info, context) { }
-
-    override public string ToString() => "Already exists!";
+    public DalDoesNoExistException(string type) : base($"{type} was not found") { }
 }
 
-[Serializable]
-public class RequestException : Exception
+public class DalAlreadyExistsException : Exception
 {
-    public RequestException() : base() { }
-    public RequestException(string message) : base(message) { }
-    public RequestException(string message, Exception inner) : base(message, inner) { }
-    protected RequestException(SerializationInfo info, StreamingContext context) : base(info, context) { }
-
-    override public string ToString() => "Does'nt exists!";
+    public DalAlreadyExistsException(string type) : base($"{type} already exists") { }
 }
-
-
-//[Serializable]
-//public class RequestListExistException : Exception
-//{
-//    public RequestListExistException() : base() { }
-//    public RequestListExistException(string message) : base(message) { }
-//    public RequestListExistException(string message, Exception inner) : base(message, inner) { }
-//    protected RequestListExistException(SerializationInfo info, StreamingContext context) : base(info, context) { }
-//    override public string ToString() => "Does'nt exist!";
-//}
-
-[Serializable]
-public class UpdateException : Exception
-{
-    public UpdateException() : base() { }
-    public UpdateException(string message) : base(message) { }
-    public UpdateException(string message, Exception inner) : base(message, inner) { }
-    protected UpdateException(SerializationInfo info, StreamingContext context) : base(info, context) { }
-
-    override public string ToString() => "Does'nt exist!";
-}
-
-
-
-[Serializable]
-public class DeleteException : Exception
-{
-    public DeleteException() : base() { }
-    public DeleteException(string message) : base(message) { }
-    public DeleteException(string message, Exception inner) : base(message, inner) { }
-    protected DeleteException(SerializationInfo info, StreamingContext context) : base(info, context) { }
-
-    override public string ToString() => "Does'nt exist!";
-}
-

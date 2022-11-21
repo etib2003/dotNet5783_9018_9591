@@ -5,10 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using BlApi;
 
+
 namespace BlImplementation;
 
 internal class Product : IProduct
 {
+    private IDal dal = new DalList();
     public void AddProduct(BO.Product p)
     {
         throw new NotImplementedException();
