@@ -23,8 +23,8 @@ internal class Cart : ICart
         {
 
         }
-        throw new NotImplementedException();//למחוק
 
+        throw new NotImplementedException();//למחוק
     }
 
     public BO.Cart UpdateAmountOfProduct(BO.Cart cart, int productId, int newAmount) //לעשות
