@@ -12,7 +12,7 @@ internal class Cart : ICart
 {
     private DalApi.IDal Dal = new Dal.DalList();
 
-    public BO.Cart AddProductToCart(BO.Cart cart, int productId)
+    public Do.Cart AddProductToCart(Do.Cart cart, int productId)
     {
         DO.Product DOproduct = Dal.Product.RequestById(productId);
         //איך יודעים אם מוצר קיים בעגלה?
@@ -21,7 +21,7 @@ internal class Cart : ICart
 
     }
 
-    public BO.Cart UpdateAmountOfProduct(BO.Cart cart, int productId, int newAmount) //לעשות
+    public Do.Cart UpdateAmountOfProduct(Do.Cart cart, int productId, int newAmount) //לעשות
     {
         throw new NotImplementedException();
         DO.Product DOproduct = Dal.Product.RequestById(productId);
@@ -31,7 +31,7 @@ internal class Cart : ICart
 
     }
 
-    public void CommitOrder(BO.Cart cart, string customerName, string customerEmail, string customerAdress)
+    public void CommitOrder(Do.Cart cart, string customerName, string customerEmail, string customerAdress)
     {
         throw new NotImplementedException();
     }

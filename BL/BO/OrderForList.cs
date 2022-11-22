@@ -1,6 +1,6 @@
 ﻿using DO;
 
-namespace BO;
+namespace Do;
 
 public class OrderForList
 {
@@ -17,7 +17,7 @@ public class OrderForList
     /// <summary>
     /// order's status date
     /// </summary>
-    public BO.OrderStatus Status { get; set; }
+    public Do.OrderStatus Status { get; set; }
 
     public int AmountOfItems { get; set; }
 

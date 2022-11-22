@@ -7,22 +7,22 @@ internal class Product : IProduct
 {
     private DalApi.IDal Dal = new Dal.DalList();
 
-    public IEnumerable<BO.ProductForList> GetListProductForManagerAndCatalog()
+    public IEnumerable<Do.ProductForList> GetListProductForManagerAndCatalog()
     {
         IEnumerable<DO.Product> list = Dal.Product.RequestAll();
-        IEnumerable<BO.ProductForList> productList = from product in list
-                                                     select new BO.ProductForList
+        IEnumerable<Do.ProductForList> productList = from product in list
+                                                     select new Do.ProductForList
                                                      {
                                                          ID = product.ID,
                                                          Name = product.Name,
                                                          Price = product.Price,
-                                                         Category = (BO.Category)product.Category,
-                                                         Color = (BO.Color)product.Color
+                                                         Category = (Do.Category)product.Category,
+                                                         Color = (Do.Color)product.Color
                                                      };
         return productList;
     }
 
-    public BO.Product GetProductDetailsForManager(int productId)
+    public Do.Product GetProductDetailsForManager(int productId)
     {
         try
         {
@@ -30,14 +30,14 @@ internal class Product : IProduct
                 throw new Exception(); //
             DO.Product DOproduct = Dal.Product.RequestById(productId);
 
-            BO.Product BOproduct = new BO.Product
+            Do.Product BOproduct = new Do.Product
             {
                 ID = DOproduct.ID,
                 Name = DOproduct.Name,
                 Price = DOproduct.Price,
                 InStock = DOproduct.InStock,
-                Category = (BO.Category)DOproduct.Category,
-                Color = (BO.Color)DOproduct.Color
+                Category = (Do.Category)DOproduct.Category,
+                Color = (Do.Color)DOproduct.Color
             };
             return BOproduct;
         }
@@ -56,13 +56,13 @@ internal class Product : IProduct
 
         DO.Product DOproduct = Dal.Product.RequestById(productId);
 
-        BO.ProductItem BOproduct = new BO.ProductItem
+        Do.ProductItem BOproduct = new Do.ProductItem
         {
             ID = DOproduct.ID,
             Name = DOproduct.Name,
             Price = DOproduct.Price,
-            Category = (BO.Category)DOproduct.Category,
-            Color = (BO.Color)DOproduct.Color,
+            Category = (Do.Category)DOproduct.Category,
+            Color = (Do.Color)DOproduct.Color,
             Amount = DOproduct.InStock,
             InStock = DOproduct.InStock > 0
         };
@@ -76,7 +76,7 @@ internal class Product : IProduct
     }
 
 
-    public int AddProduct(BO.Product p)
+    public int AddProduct(Do.Product p)
     {
         //if (p.ID < 100000 || p.Name.Length < 1 || p.Price <= 0 || p.InStock < 0)
         //   throw new DalAlreadyExistsException("Invalid product data");
@@ -94,7 +94,7 @@ internal class Product : IProduct
         return Dal.Product.Create(DOproduct);
     }
 
-    public void UpdateProduct(BO.Product p)
+    public void UpdateProduct(Do.Product p)
     {
         //if (p.ID < 100000 || p.Name.Length < 1 || p.Price <= 0 || p.InStock < 0)
         //    throw new CreateException("Invalid product data");

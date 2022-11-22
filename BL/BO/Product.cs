@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace  BO;
+namespace  Do;
 
 public class Product
 {
@@ -27,12 +27,12 @@ public class Product
     /// <summary>
     /// product's Category
     /// </summary>
-    public BO.Category Category { get; set; }
+    public Do.Category Category { get; set; }
 
     /// <summary>
     /// Product's Color
     /// </summary>
-    public BO.Color Color { get; set; }
+    public Do.Color Color { get; set; }
 
     /// <summary>
     /// product's amount in stock

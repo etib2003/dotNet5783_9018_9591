@@ -4,7 +4,7 @@ public class Cart
     public string CustomerName { get; set; }
     public string CustomerEmail { get; set; }
     public string CustomerAdress { get; set; }
-    public IEnumerable <BO.OrderItem> Items { get; set; } //לשנות לlist
+    public IEnumerable <Do.OrderItem> Items { get; set; } //לשנות לlist
     public double TotalPrice { get; set; }
 
     public override string ToString() {

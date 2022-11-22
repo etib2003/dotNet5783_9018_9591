@@ -1,4 +1,4 @@
-﻿using BO;
+﻿using Do;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,7 @@ public interface IProduct
     public BO.Product GetProductDetailsForManager(int productId);
     public BO.ProductItem GetProductDetailsForCustomer(int productId, BO.Cart cart);
 
-    public int AddProduct(BO.Product p);
-    public void UpdateProduct(BO.Product p);
+    public int AddProduct(Do.Product p);
+    public void UpdateProduct(Do.Product p);
     public void DeleteProduct(int productId);
 }

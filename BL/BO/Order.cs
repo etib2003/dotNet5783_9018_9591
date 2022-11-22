@@ -1,6 +1,6 @@
 ﻿using DO;
 
-namespace BO;
+namespace Do;
 
 public class Order
 {
@@ -27,7 +27,7 @@ public class Order
     /// <summary>
     /// order's status date
     /// </summary>
-    public BO.OrderStatus Status { get; set; } //לראות מה קורה פה
+    public Do.OrderStatus Status { get; set; } //לראות מה קורה פה
 
     /// <summary>
     /// order's order date
