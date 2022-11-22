@@ -44,7 +44,7 @@ internal class DalOrderItem:IOrderItem
     public OrderItem RequestById(int id)
     {
         if (!DataSource.OrderItems.Exists(x => x.seqNum == id))
-            throw new RequestException("cannot return an orderItem ,that does not exist");
+            throw new DalDoesNoExistException("cannot return an orderItem ,that does not exist");
 
         return DataSource.OrderItems.Find(x => x.seqNum == id);
     }
@@ -59,7 +59,7 @@ internal class DalOrderItem:IOrderItem
     public OrderItem RequestByOrderIDProductID(int orderId, int productId)
     {
         if (!DataSource.OrderItems.Exists(x => x.OrderID == orderId && x.ProductID == productId))
-            throw new RequestException("cannot return an orderItem ,that does not exist");
+            throw new DalDoesNoExistException("cannot return an orderItem ,that does not exist");
 
         return DataSource.OrderItems.Find(x => x.OrderID == orderId && x.ProductID == productId);
     }
@@ -73,7 +73,7 @@ internal class DalOrderItem:IOrderItem
     public List<OrderItem> RequestByOrderId(int orderId)
     {
         if (!DataSource.OrderItems.Exists(x => x.OrderID == orderId))
-            throw new RequestException("OrderItems with this OrderId don't exist");
+            throw new DalDoesNoExistException("OrderItems with this OrderId don't exist");
 
         List<OrderItem> listToReturn = DataSource.OrderItems.FindAll(x => x.OrderID == orderId);
 
@@ -89,7 +89,7 @@ internal class DalOrderItem:IOrderItem
     {
         //if OrderItems does not exist throw exception 
         if (!DataSource.OrderItems.Exists(x => x.seqNum == Oi.seqNum))
-            throw new UpdateException("cannot update an OrderItem, that is not exists");
+            throw new UpdateException("cannot update an OrderItem, that is not exists");//לא הגדרתם חריגה כזאת להוסיף????
         OrderItem OiToRemove = DataSource.OrderItems.Find(x => x.seqNum == Oi.seqNum);
         Oi.seqNum = OiToRemove.seqNum;
         DataSource.OrderItems.Remove(OiToRemove);
@@ -105,7 +105,7 @@ internal class DalOrderItem:IOrderItem
     {
         //if OrderItems does not exist throw exception 
         if (!DataSource.OrderItems.Exists(x => x.seqNum == id))
-            throw new DeleteException("cannot delete an OrderItem,that is not exists");
+            throw new DalDoesNoExistException("cannot delete an OrderItem,that is not exists");
         OrderItem OiToRemove = DataSource.OrderItems.Find(x => x.seqNum == id);
         DataSource.OrderItems.Remove(OiToRemove);
     }

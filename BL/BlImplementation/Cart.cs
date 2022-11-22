@@ -8,7 +8,7 @@ using BlApi;
 
 namespace BlImplementation;
 
-internal class Cart:ICart
+internal class Cart : ICart
 {
     private DalApi.IDal Dal = new Dal.DalList();
 
@@ -25,8 +25,8 @@ internal class Cart:ICart
     {
         throw new NotImplementedException();
         DO.Product DOproduct = Dal.Product.RequestById(productId);
-       // if (DOproduct.ID==0)
-            //throw new CreateException("Invalid product id"); //לשנות את החריגה
+        // if (DOproduct.ID==0)
+        //throw new CreateException("Invalid product id"); //לשנות את החריגה
         //if(newAmount==0)
 
     }

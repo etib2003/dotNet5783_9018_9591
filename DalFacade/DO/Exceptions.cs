@@ -13,6 +13,13 @@ public class DalDoesNoExistException : Exception
     public DalDoesNoExistException(string type) : base($"{type} was not found") { }
 }
 
+
+public class UpdateException : Exception
+{
+    public UpdateException(string type) : base($"{type} already exists") { }
+}
+
+
 public class DalAlreadyExistsException : Exception
 {
     public DalAlreadyExistsException(string type) : base($"{type} already exists") { }

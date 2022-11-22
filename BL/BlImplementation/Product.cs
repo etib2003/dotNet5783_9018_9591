@@ -1,15 +1,16 @@
 ﻿using BlApi;
-using DalApi;
+using BlApi;
 
 namespace BlImplementation;
 
-internal class Product : BlApi.IProduct
+internal class Product : IProduct
 {
     private DalApi.IDal Dal = new Dal.DalList();
 
     public IEnumerable<BO.ProductForList> GetListProductForManagerAndCatalog()
     {
-        IEnumerable<BO.ProductForList> productList = from product in Dal.Product.RequestAll()
+        IEnumerable<DO.Product> list = Dal.Product.RequestAll();
+        IEnumerable<BO.ProductForList> productList = from product in list
                                                      select new BO.ProductForList
                                                      {
                                                          ID = product.ID,
@@ -40,7 +41,7 @@ internal class Product : BlApi.IProduct
             };
             return BOproduct;
         }
-        catch (DalDoesNoExistException e) //
+        catch (Exception e) 
         {
             throw new Exception("Invalid product id", e);//change
         }

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace  BlApi;
+namespace BlApi;
 
 public interface IProduct
 {
@@ -15,6 +16,4 @@ public interface IProduct
     public int AddProduct(BO.Product p);
     public void UpdateProduct(BO.Product p);
     public void DeleteProduct(int productId);
-
-
 }
