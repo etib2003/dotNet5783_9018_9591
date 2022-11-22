@@ -56,7 +56,7 @@ internal class Product : IProduct
 
         DO.Product DOproduct = Dal.Product.RequestById(productId);
 
-        BO.ProductItem BOproduct = new Do.ProductItem
+        BO.ProductItem BOproduct = new BO.ProductItem
         {
             ID = DOproduct.ID,
             Name = DOproduct.Name,

@@ -4,26 +4,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BlApi;
 using DalApi;
 using DocumentFormat.OpenXml.Vml.Spreadsheet;
 
 namespace BlImplementation;
 
-internal class Order : IOrder
+internal class Order : BlApi.IOrder
 {
     private DalApi.IDal Dal = new Dal.DalList();
 
     public IEnumerable<BO.OrderForList> GetOrderListForManager()
     {
         IEnumerable<BO.OrderForList> orderList = from order in Dal.Order.RequestAll()
+                                                 let orderItems = Dal.OrderItem.RequestByOrderId(order.seqNum)
                                                  select new BO.OrderForList
                                                  {
                                                      ID = order.seqNum,
                                                      CustomerName = order.CustomerName,
-                                                     Status = order.Status,
-                                                     AmountOfItems = order.AmountOfItems,
-                                                     TotalPrice = order.TotalPrice,
+                                                     AmountOfItems = orderItems.Count(),
+                                                     TotalPrice = orderItems.Sum(orderItem => orderItem.Price * orderItem.Amount)
+                                                     //TotalPrice = (from orderItem in orderItems 
+                                                     //             select orderItem.Price * orderItem.Amount).Sum(),
                                                  };
         return orderList;
         //throw new Exception();

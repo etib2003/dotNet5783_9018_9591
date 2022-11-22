@@ -48,7 +48,8 @@ public class Order
     /// order's delivery date
     /// </summary>
     public DateTime DeliveryDate { get; set; }
-    public IEnumerable <OrderItem> Items { get; set; } //לשנות לרשימה
+
+    public List <OrderItem> OrderItems { get; set; } //לשנות לרשימה
 
     public double TotalPrice { get; set; }
 
@@ -65,7 +66,7 @@ public class Order
             Order date: {OrderDate}
             Ship date: {ShipDate}    	
             Delivery date: {DeliveryDate} 
-            Items: {string.Join("", "", Items)}
+            Items: {string.Join("", "", OrderItems)}
             Total price: {TotalPrice}";
         //    Items :";
         //    foreach(var item in Items)
