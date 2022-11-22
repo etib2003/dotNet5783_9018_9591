@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,22 @@ namespace BlImplementation;
 internal class Order : IOrder
 {
     private DalApi.IDal Dal = new Dal.DalList();
+
+    public IEnumerable<BO.OrderForList> GetOrderListForManager()
+    {
+        IEnumerable<BO.OrderForList> orderList = from order in Dal.Order.RequestAll()
+                                                 select new BO.OrderForList
+                                                 {
+                                                     ID = order.seqNum,
+                                                     CustomerName = order.CustomerName,
+                                                     Status = order.Status,
+                                                     AmountOfItems = order.AmountOfItems,
+                                                     TotalPrice = order.TotalPrice,
+                                                 };
+        return orderList;
+        //throw new Exception();
+
+    }
     public BO.Order GetOrderDetails(int orderID)
     {
         // if(orderID <0)
@@ -28,20 +45,7 @@ internal class Order : IOrder
         throw new NotImplementedException();
     }
 
-    public BO.OrderForList GetOrderListForManager() //להמשיך
-    {
-        IEnumerable<BO.OrderForList> orderList = from order in Dal.Order.RequestAll()
-                                                 select new BO.OrderForList
-                                                 {
-                                                     ID = order.seqNum,
-                                                     CustomerName= order.CustomerName,
-                                                    //  Status=order.,
-                                              
-                                                 };
-        // return productList;
-        throw new Exception();
-
-    }
+    
 
     public BO.Order TrakingOrder(int orderID)
     {
