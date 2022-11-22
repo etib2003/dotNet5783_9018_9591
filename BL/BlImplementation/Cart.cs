@@ -18,7 +18,6 @@ internal class Cart : ICart
         //איך יודעים אם מוצר קיים בעגלה?
         throw new NotImplementedException();//למחוק
 
-
     }
 
     public BO.Cart UpdateAmountOfProduct(BO.Cart cart, int productId, int newAmount) //לעשות
