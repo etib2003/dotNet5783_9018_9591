@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using BlApi;
 
-
 namespace BlImplementation;
 
 internal class Cart : ICart
@@ -16,6 +15,14 @@ internal class Cart : ICart
     {
         DO.Product DOproduct = Dal.Product.RequestById(productId);
         //איך יודעים אם מוצר קיים בעגלה?
+        BO.OrderItem orderItem = (from _orderItem in cart.Items
+                                  where _orderItem.ID == productId
+                                  select _orderItem).First();
+
+        if (orderItem is not null)
+        {
+
+        }
         throw new NotImplementedException();//למחוק
 
     }
