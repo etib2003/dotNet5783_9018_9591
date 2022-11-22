@@ -11,13 +11,18 @@ internal class Product : IProduct
 {
     private DalApi.IDal Dal = new Dal.DalList();
 
-    public List<ProductForList> GetListProductForManager()
+    public IEnumerable<BO.ProductForList> GetListProductForManagerAndCatalog()
     {
         IEnumerable<DO.Product> list = Dal.Product.RequestAll();
-        List<BO.ProductForList> productList =
-                        (from product in list
-                         select new BO.ProductForList() {  Category = (BO.Category)product.Category, ID = product.ID, Color = , Name = product.Name, Price = product.Price }
-                        
+        IEnumerable<BO.ProductForList> productList =  from product in list
+                                               select new BO.ProductForList
+                                               { ID=product.ID, Name=product.Name,
+                                                   Price = product.Price,
+                                                   Category = (BO.Category)product.Category,
+                                                   Color = (BO.Color)product.Color
+                                               };
+                                            
+
         return productList;
     }
 
