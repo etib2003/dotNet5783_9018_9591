@@ -5,15 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BO;
+namespace Do;
 
 public class OrderTracking
 {
     public int ID { get; set; }
-    public BO.OrderStatus Status { get; set; }
+    public Do.OrderStatus Status { get; set; }
 
     //רשימה של צמדים
-    public List<Tuple<DateTime, BO.OrderStatus>> OrderProgress { get; set; }
+    public List<Tuple<DateTime, Do.OrderStatus>> OrderProgress { get; set; }
 
     public override string ToString() => $@"
         ID  :  {ID}

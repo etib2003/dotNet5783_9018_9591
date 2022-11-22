@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BlApi;
+using DalApi;
 
 namespace BlImplementation;
 
@@ -12,8 +13,13 @@ internal class Order : IOrder
     private DalApi.IDal Dal = new Dal.DalList();
     public BO.Order GetOrderDetails(int orderID)
     {
-        throw new NotImplementedException();
+        // if(orderID <0)
+        // throw
+        DO.Order DOorder = Dal.Order.RequestById(orderID);
+        BO.Order
     }
+        
+
 
     public BO.OrderForList GetOrderListForCustomer()
     {
@@ -22,8 +28,15 @@ internal class Order : IOrder
 
     public BO.OrderForList GetOrderListForManager() //להמשיך
     {
-        throw new NotImplementedException();//למחוק
-        IEnumerable<DO.Order> list = Dal.Order.RequestAll();
+        IEnumerable<Do.OrderForList> orderList = from order in Dal.Order.RequestAll()
+                                                 select new Do.OrderForList
+                                                 {
+                                                     ID = order.seqNum,
+                                                     CustomerName= order.CustomerName,
+                                                      Status=order.,
+                                              
+                                                 };
+        return productList;
 
 
     }

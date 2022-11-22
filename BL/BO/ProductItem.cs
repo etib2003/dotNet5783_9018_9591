@@ -5,19 +5,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BO;
+namespace Do;
 
 public class ProductItem
 {
     public int ID { get; set; }
     public string Name { get; set; }
     public double Price { get; set; }
-    public BO.Category Category { get; set; }
+    public Do.Category Category { get; set; }
 
     /// <summary>
     /// Product's color
     /// </summary>
-    public BO.Color Color { get; set; }
+    public Do.Color Color { get; set; }
     public int  Amount { get; set; }
     public bool InStock { get; set; }
 

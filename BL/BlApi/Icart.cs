@@ -1,4 +1,4 @@
-﻿using BO;
+﻿using Do;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ namespace BlApi;
 
 public interface ICart
 {
-    public BO.Cart AddProductToCart(BO.Cart cart, int productId);
-    public BO.Cart UpdateAmountOfProduct(BO.Cart cart, int productId,int newAmount);
-    public void CommitOrder(BO.Cart cart, string customerName, string customerEmail, string customerAdress);
+    public Do.Cart AddProductToCart(Do.Cart cart, int productId);
+    public Do.Cart UpdateAmountOfProduct(Do.Cart cart, int productId,int newAmount);
+    public void CommitOrder(Do.Cart cart, string customerName, string customerEmail, string customerAdress);
 }
