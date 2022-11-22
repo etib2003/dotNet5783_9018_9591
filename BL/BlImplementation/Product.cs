@@ -1,28 +1,24 @@
 ﻿using BlApi;
-using BO;
 using DalApi;
-using DO;
-using DocumentFormat.OpenXml.Drawing.Charts;
-using DocumentFormat.OpenXml.Drawing.Diagrams;
 
 namespace BlImplementation;
 
-internal class Product : IProduct
+internal class Product : BlApi.IProduct
 {
     private DalApi.IDal Dal = new Dal.DalList();
 
     public IEnumerable<BO.ProductForList> GetListProductForManagerAndCatalog()
     {
         IEnumerable<DO.Product> list = Dal.Product.RequestAll();
-        IEnumerable<BO.ProductForList> productList =  from product in list
-                                               select new BO.ProductForList
-                                               { ID=product.ID, Name=product.Name,
-                                                   Price = product.Price,
-                                                   Category = (BO.Category)product.Category,
-                                                   Color = (BO.Color)product.Color
-                                               };
-                                            
-
+        IEnumerable<BO.ProductForList> productList = from product in list
+                                                     select new BO.ProductForList
+                                                     {
+                                                         ID = product.ID,
+                                                         Name = product.Name,
+                                                         Price = product.Price,
+                                                         Category = (BO.Category)product.Category,
+                                                         Color = (BO.Color)product.Color
+                                                     };
         return productList;
     }
 
@@ -30,6 +26,8 @@ internal class Product : IProduct
     {
         try
         {
+            if (productId < 100000) //
+                throw new Exception(); //
             DO.Product DOproduct = Dal.Product.RequestById(productId);
 
             BO.Product BOproduct = new BO.Product
@@ -42,84 +40,87 @@ internal class Product : IProduct
                 Color = (BO.Color)DOproduct.Color
             };
             return BOproduct;
-
-
         }
-        catch (DalDoesNoExistException e)
+        catch (DalDoesNoExistException e) //
         {
             throw new Exception("Invalid product id", e);//change
         }
-
-
-
-
     }
+
+    public BO.ProductItem GetProductDetailsForCustomer(int productId, Cart cart)
+    {
+        //try
+        //{
+        if (productId < 100000) //
+            throw new Exception(); //
+
+        DO.Product DOproduct = Dal.Product.RequestById(productId);
+
+        BO.ProductItem BOproduct = new BO.ProductItem
+        {
+            ID = DOproduct.ID,
+            Name = DOproduct.Name,
+            Price = DOproduct.Price,
+            Category = (BO.Category)DOproduct.Category,
+            Color = (BO.Color)DOproduct.Color,
+            Amount = DOproduct.InStock,
+            InStock = DOproduct.InStock > 0
+        };
+
+        return BOproduct;
+
+        //catch (DalDoesNoExistException e) //
+        //{
+        //    throw new Exception("Invalid product id", e);//change
+        //}
+    }
+
 
     public int AddProduct(BO.Product p)
     {
-        if (p.ID < 100000 || p.Name.Length < 1 || p.Price <= 0 || p.InStock < 0)
-            throw new CreateException("Invalid product data");
+        //if (p.ID < 100000 || p.Name.Length < 1 || p.Price <= 0 || p.InStock < 0)
+        //   throw new DalAlreadyExistsException("Invalid product data");
 
         //צריך להוסיף זריקת חריגה אם לא הצליח להוסיף-עקב מזהה זהה וכדומה
-        return Dal.Product.Create(new DO.Product
-        { ID = p.ID, Name = p.Name, Price = p.Price, Category = (DO.Category)p.Category, Color = (DO.Color)p.Color, InStock = p.InStock });
+        DO.Product DOproduct = new DO.Product
+        {
+            ID = p.ID,
+            Name = p.Name,
+            Price = p.Price,
+            Category = (DO.Category)p.Category,
+            Color = (DO.Color)p.Color,
+            InStock = p.InStock
+        };
+        return Dal.Product.Create(DOproduct);
     }
 
     public void UpdateProduct(BO.Product p)
     {
-        if (p.ID < 100000 || p.Name.Length < 1 || p.Price <= 0 || p.InStock < 0)
-            throw new CreateException("Invalid product data");
-
+        //if (p.ID < 100000 || p.Name.Length < 1 || p.Price <= 0 || p.InStock < 0)
+        //    throw new CreateException("Invalid product data");
         //צריך להוסיף זריקת חריגה אם לא הצליח לעדכן-עקב מזהה זהה וכדומה
-        Dal.Product.Update(new DO.Product
-        { ID = p.ID, Name = p.Name, Price = p.Price, Category = (DO.Category)p.Category, Color = (DO.Color)p.Color, InStock = p.InStock });
+
+        DO.Product DOproduct = new DO.Product
+        {
+            ID = p.ID,
+            Name = p.Name,
+            Price = p.Price,
+            Category = (DO.Category)p.Category,
+            Color = (DO.Color)p.Color,
+            InStock = p.InStock
+        };
+        Dal.Product.Update(DOproduct);
     }
-    public void DeleteProduct(BO.Product p)
+    public void DeleteProduct(int productId)
     {
-        IEnumerable<DO.Order> list = Dal.Order.RequestAll();
-        //להמשיך
+        //חריגה-או ששייך להזמנה או שלא קיים מוצר כזה
 
-        throw new NotImplementedException();
+        IEnumerable<DO.OrderItem> orderItemList = from orderItem in Dal.OrderItem.RequestAll()
+                                                  where orderItem.ProductID == productId
+                                                  select orderItem;
+        if (!orderItemList.Any())
+            Dal.Product.Delete(productId);
+
+        throw new NotImplementedException(); //למחוקקקק
     }
-
-    public List<BO.ProductItem> RequestCatalog()
-    {
-        IEnumerable<DO.Product> list = Dal.Product.RequestAll();
-        List<BO.ProductItem> _ProductItem =
-                        (List<BO.ProductItem>)(from productItem in list
-                        select new
-                        {
-                            ID = productItem.ID,
-                            Name = productItem.Name,
-                            price = productItem.Price,
-                            Category = productItem.Category,
-                            Color = productItem.Color,
-                            Amount = productItem.InStock,
-                            InStock = productItem.InStock > 0
-                        });
-        return _ProductItem;
-    }
-
-
-    public BO.Product GetProductDetailsForCustomer(int productId)
-    {
-        DO.Product DOproduct=Dal.Product.RequestById(productId);
-        if (DOproduct.ID==0)
-            throw new CreateException("Invalid product id"); //לשנות את החריגה
-
-        //לא יודעת
-        //BO.ProductItem BOproduct = new BO.ProductItem
-        //{
-        //    ID = DOproduct.ID,
-        //    Name = DOproduct.Name,
-        //    Price = DOproduct.Price,
-        //    InStock = DOproduct.InStock,
-        //    Category = (Enums.category)DOproduct.Category,
-        //    Color = (Enums.color)DOproduct.Color
-        //};
-
-        //return BOproduct;
-
-    }
-
 }

@@ -11,10 +11,11 @@ public interface IProduct
 {
     public IEnumerable<BO.ProductForList> GetListProductForManagerAndCatalog();
     public BO.Product GetProductDetailsForManager(int productId);
+    public BO.ProductItem GetProductDetailsForCustomer(int productId, Cart cart);
+
     public int AddProduct(BO.Product p);
     public void UpdateProduct(BO.Product p);
-    public void DeleteProduct(BO.Product p);
-    public BO.Product GetProductDetailsForCustomer(int productId);
+    public void DeleteProduct(int productId);
 
 
 }
