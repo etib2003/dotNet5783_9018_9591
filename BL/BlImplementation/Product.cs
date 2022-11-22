@@ -12,7 +12,7 @@ internal class Product : IProduct
     public List<ProductForList> GetListProductForManager()
     {
         IEnumerable<DO.Product> list = Dal.Product.RequestAll();
-        List<ProductForList> productList = (List<ProductForList>)
+        List<BO.ProductForList> productList = (List<BO.ProductForList>)
                         (from product in list
                         select new
                         { ID=product.ID ,
@@ -34,8 +34,8 @@ internal class Product : IProduct
             Name = DOproduct.Name,
             Price = DOproduct.Price,
             InStock = DOproduct.InStock,
-            Category = DOproduct.Category,
-            Color = DOproduct.Color
+            Category = (BO.Category)DOproduct.Category,
+            Color = (BO.Color)DOproduct.Color
         };
 
         return BOproduct;
@@ -48,7 +48,7 @@ internal class Product : IProduct
 
         //צריך להוסיף זריקת חריגה אם לא הצליח להוסיף-עקב מזהה זהה וכדומה
         return Dal.Product.Create(new DO.Product
-        { ID = p.ID, Name = p.Name, Price = p.Price, Category = p.Category, Color = p.Color, InStock = p.InStock });
+        { ID = p.ID, Name = p.Name, Price = p.Price, Category = (DO.Category)p.Category, Color = (DO.Color)p.Color, InStock = p.InStock });
     }
 
     public void UpdateProduct(BO.Product p)
@@ -58,7 +58,7 @@ internal class Product : IProduct
 
         //צריך להוסיף זריקת חריגה אם לא הצליח לעדכן-עקב מזהה זהה וכדומה
         Dal.Product.Update(new DO.Product
-        { ID = p.ID, Name = p.Name, Price = p.Price, Category = p.Category, Color = p.Color, InStock = p.InStock });
+        { ID = p.ID, Name = p.Name, Price = p.Price, Category = (DO.Category)p.Category, Color = (DO.Color)p.Color, InStock = p.InStock });
     }
     public void DeleteProduct(BO.Product p)
     {
