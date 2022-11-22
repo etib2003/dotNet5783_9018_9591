@@ -1,5 +1,7 @@
 ﻿using BlApi;
 using BO;
+using DalApi;
+using DO;
 using DocumentFormat.OpenXml.Drawing.Charts;
 using DocumentFormat.OpenXml.Drawing.Diagrams;
 
@@ -12,33 +14,40 @@ internal class Product : IProduct
     public List<ProductForList> GetListProductForManager()
     {
         IEnumerable<DO.Product> list = Dal.Product.RequestAll();
-        List<BO.ProductForList> productList = (List<BO.ProductForList>)
+        List<BO.ProductForList> productList =
                         (from product in list
-                        select new
-                        { ID=product.ID ,
-                          Name=product.Name,
-                          price=product.Price,
-                          Category= product.Category });
+                         select new BO.ProductForList() {  Category = (BO.Category)product.Category, ID = product.ID, Color = , Name = product.Name, Price = product.Price }
+                        
         return productList;
     }
 
     public BO.Product GetProductDetailsForManager(int productId)
     {
-        DO.Product DOproduct=Dal.Product.RequestById(productId);
-        if (DOproduct.ID==0)
-            throw new CreateException("Invalid product id"); //לשנות את החריגה
-
-        BO.Product BOproduct = new BO.Product
+        try
         {
-            ID = DOproduct.ID,
-            Name = DOproduct.Name,
-            Price = DOproduct.Price,
-            InStock = DOproduct.InStock,
-            Category = (BO.Category)DOproduct.Category,
-            Color = (BO.Color)DOproduct.Color
-        };
+            DO.Product DOproduct = Dal.Product.RequestById(productId);
 
-        return BOproduct;
+            BO.Product BOproduct = new BO.Product
+            {
+                ID = DOproduct.ID,
+                Name = DOproduct.Name,
+                Price = DOproduct.Price,
+                InStock = DOproduct.InStock,
+                Category = (BO.Category)DOproduct.Category,
+                Color = (BO.Color)DOproduct.Color
+            };
+            return BOproduct;
+
+
+        }
+        catch (DalDoesNoExistException e)
+        {
+            throw new Exception("Invalid product id", e);//change
+        }
+
+
+
+
     }
 
     public int AddProduct(BO.Product p)

@@ -8,12 +8,11 @@ using System.Threading.Tasks;
 namespace BO;
 
 [Serializable]
-public class CreateException : Exception
+public class DalAlreadyExistsException : Exception
 {
-    public CreateException() : base() { }
-    public CreateException(string message) : base(message) { }
-    public CreateException(string message, Exception inner) : base(message, inner) { }
-    protected CreateException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+    public DalAlreadyExistsException() : base() { }
+    public DalAlreadyExistsException(string message) : base(message) { }
+    public DalAlreadyExistsException(string message, Exception inner) : base(message, inner) { }
 
     override public string ToString() => "Already exists!";
 }
