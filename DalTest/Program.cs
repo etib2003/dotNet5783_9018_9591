@@ -2,8 +2,6 @@
 using DO;
 using DalApi;
 
-using static DO.Enums;
-
 namespace DalTest
 {
     public class Program
@@ -217,14 +215,14 @@ Please choose the topic:
 
                                 Console.Write("Enter a Category: 0- Percussions , 1- StringInstrument , 2- WindInstrument , 3- KeyBoard , 4- BowInstrument: ");
                                 string input = Console.ReadLine();
-                                newProduct.Category = (category)int.Parse(input);
+                                newProduct.Category = (Category)int.Parse(input);
 
                                 Console.Write("Enter a Product name: ");
                                 newProduct.Name = Console.ReadLine();
 
                                 Console.Write("Enter a Color: 0- Black , 1- Red , 2- White , 3- Brown: ");
                                 input = Console.ReadLine();
-                                newProduct.Color = (color)int.Parse(input);
+                                newProduct.Color = (Color)int.Parse(input);
 
                                 Console.Write("Enter a Price: ");
                                 int price; int.TryParse(Console.ReadLine(), out price);
@@ -267,14 +265,14 @@ Please choose the topic:
 
                                 Console.Write("Enter a Category: 0- Percussions , 1- StringInstrument , 2- WindInstrument , 3- KeyBoard , 4- BowInstrument: ");
                                 string input = Console.ReadLine();
-                                newProduct.Category = (category)int.Parse(input);
+                                newProduct.Category = (Category)int.Parse(input);
 
                                 Console.Write("Enter a Product name: ");
                                 newProduct.Name = Console.ReadLine();
 
                                 Console.Write("Enter a Color: 0- Black , 1- Red , 2- White , 3- Brown: ");
                                 input = Console.ReadLine();
-                                newProduct.Color = (color)int.Parse(input);
+                                newProduct.Color = (Color)int.Parse(input);
 
                                 Console.Write("Enter a Price: ");
                                 int Price; int.TryParse(Console.ReadLine(), out Price);

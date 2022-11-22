@@ -9,14 +9,13 @@ namespace  BlApi;
 
 public interface IProduct
 {
-    public ProductForList GetProductList();
-    public Product GetProductDetailsForManager(int productId);
-    public void AddProduct(Product p);
-    public void UpdateProduct(Product p);
-    public void DeleteProduct(Product p);
-    public ProductItem RequestCatalog();
-    public Product GetProductDetailsForCustomer(int productId);
-
+    public List<ProductForList> GetListProductForManager();
+    public BO.Product GetProductDetailsForManager(int productId);
+    public int AddProduct(BO.Product p);
+    public void UpdateProduct(BO.Product p);
+    public void DeleteProduct(BO.Product p);
+    public List<BO.ProductItem> RequestCatalog();
+    public BO.Product GetProductDetailsForCustomer(int productId);
 
 
 }

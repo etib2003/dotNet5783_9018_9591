@@ -99,8 +99,8 @@ internal static class DataSource
             while (Products.Exists(x => x.ID == product.ID));
             product.Name = "product" + i;
             product.Price = random.Next(200, 2000);
-            product.Category = (Enums.category)(i % 5);
-            product.Color = (Enums.color)(i % 4);
+            product.Category = (Enums.Category)(i % 5);
+            product.Color = (Enums.Color)(i % 4);
             if (i <= AmountOfProducts * 0.05 + 1)
                 product.InStock = 0;
             else

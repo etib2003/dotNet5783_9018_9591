@@ -9,6 +9,7 @@ namespace BlImplementation;
 
 internal class Order : IOrder
 {
+    private DalApi.IDal Dal = new Dal.DalList();
     public BO.Order GetOrderDetails(int orderID)
     {
         throw new NotImplementedException();
@@ -19,9 +20,12 @@ internal class Order : IOrder
         throw new NotImplementedException();
     }
 
-    public BO.OrderForList GetOrderListForManager()
+    public BO.OrderForList GetOrderListForManager() //להמשיך
     {
-        throw new NotImplementedException();
+        throw new NotImplementedException();//למחוק
+        IEnumerable<DO.Order> list = Dal.Order.RequestAll();
+
+
     }
 
     public BO.Order TrakingOrder(int orderID)

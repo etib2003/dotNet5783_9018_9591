@@ -8,7 +8,7 @@ namespace BlApi;
 
 public interface IB1
 {
-    public Icart Cart { get; }
+    public ICart Cart { get; }
     public IOrder Order { get; }
     public IProduct Product { get; }
 

@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace BO;
 
-public class Enums
-{
-    public enum OrderStatus { confirmed, shipped, provided};
-    public enum category { Percussions, StringInstrument, WindInstrument, KeyBoard, BowInstrument };
-    public enum color { black, red, white, brown };
-}
+
+public enum OrderStatus { confirmed, shipped, provided };
+public enum Category { Percussions, StringInstrument, WindInstrument, KeyBoard, BowInstrument };
+public enum Color { black, red, white, brown };
+

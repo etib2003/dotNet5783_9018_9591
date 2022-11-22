@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static BO.Enums;
 
 namespace BO;
 
@@ -33,7 +32,7 @@ public class Order
     /// <summary>
     /// order's status date
     /// </summary>
-    public OrderStatus Status { get; set; }
+    public BO.OrderStatus Status { get; set; } //לראות מה קורה פה
 
     /// <summary>
     /// order's order date
@@ -54,7 +53,7 @@ public class Order
     /// order's delivery date
     /// </summary>
     public DateTime DeliveryDate { get; set; }
-    public IEnumerable <OrderItem> Items { get; set; }
+    public IEnumerable <OrderItem> Items { get; set; } //לשנות לרשימה
 
     public double TotalPrice { get; set; }
 
@@ -62,8 +61,8 @@ public class Order
     /// the order's print method
     /// </summary>
     /// <returns>the way the order is printed</returns>
-    public override string ToString() { 
-            string s =$@"
+    public override string ToString() {
+            return $@"
             Customer ID= {ID}: {CustomerName}, 
             Email: {CustomerEmail}
             Adress: {CustomerAdress}
@@ -71,10 +70,12 @@ public class Order
             Order date: {OrderDate}
             Ship date: {ShipDate}    	
             Delivery date: {DeliveryDate} 
-            Total price: {TotalPrice}
-            Items :";
-            foreach(var item in Items)
-            { s = s + item+ "       \n"; };
-            return s;
+            Items: {string.Join("", "", Items)}
+            Total price: {TotalPrice}";
+        //    Items :";
+        //    foreach(var item in Items)
+        //    { s = s + item+ "       \n"; };
+        //    return s;
+        ////string.Join(", ", Items)}
     }
 }

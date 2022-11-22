@@ -4,19 +4,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static BO.Enums;
 
 namespace BO;
 
 public class OrderTracking
 {
     public int ID { get; set; }
-    public OrderStatus Status { get; set; }
+    public BO.OrderStatus Status { get; set; }
+
     //רשימה של צמדים
-    public List<Tuple<DateTime, OrderStatus>> orderProgress { get; set; }
+    public List<Tuple<DateTime, BO.OrderStatus>> OrderProgress { get; set; }
 
     public override string ToString() => $@"
         ID  :  {ID}
-        Status: {Status}     	 
-";
+        Status: {Status}
+        OrderProgress:
+"; //לטפל בהדפסה
+
 }

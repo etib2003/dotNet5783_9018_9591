@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static BO.Enums;
 
 namespace BO;
 
@@ -24,7 +23,7 @@ public class OrderForList
     /// <summary>
     /// order's status date
     /// </summary>
-    public OrderStatus Status { get; set; }
+    public BO.OrderStatus Status { get; set; }
 
     public int AmountOfItems { get; set; }
 

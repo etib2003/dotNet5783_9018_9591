@@ -29,17 +29,6 @@ public class RequestException : Exception
     override public string ToString() => "Does'nt exists!";
 }
 
-
-//[Serializable]
-//public class RequestListExistException : Exception
-//{
-//    public RequestListExistException() : base() { }
-//    public RequestListExistException(string message) : base(message) { }
-//    public RequestListExistException(string message, Exception inner) : base(message, inner) { }
-//    protected RequestListExistException(SerializationInfo info, StreamingContext context) : base(info, context) { }
-//    override public string ToString() => "Does'nt exist!";
-//}
-
 [Serializable]
 public class UpdateException : Exception
 {

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static BO.Enums;
 
 namespace  BO;
 
@@ -28,17 +27,17 @@ public class Product
     /// <summary>
     /// product's Category
     /// </summary>
-    public category Category { get; set; }
+    public BO.Category Category { get; set; }
+
+    /// <summary>
+    /// Product's Color
+    /// </summary>
+    public BO.Color Color { get; set; }
 
     /// <summary>
     /// product's amount in stock
     /// </summary>
     public int InStock { get; set; }
-
-    /// <summary>
-    /// Product's color
-    /// </summary>
-    public color Color { get; set; }
 
 
     /// <summary>
