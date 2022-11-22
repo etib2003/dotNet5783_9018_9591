@@ -9,8 +9,7 @@ internal class Product : BlApi.IProduct
 
     public IEnumerable<BO.ProductForList> GetListProductForManagerAndCatalog()
     {
-        IEnumerable<DO.Product> list = Dal.Product.RequestAll();
-        IEnumerable<BO.ProductForList> productList = from product in list
+        IEnumerable<BO.ProductForList> productList = from product in Dal.Product.RequestAll()
                                                      select new BO.ProductForList
                                                      {
                                                          ID = product.ID,
@@ -47,7 +46,7 @@ internal class Product : BlApi.IProduct
         }
     }
 
-    public BO.ProductItem GetProductDetailsForCustomer(int productId, Cart cart)
+    public BO.ProductItem GetProductDetailsForCustomer(int productId, BO.Cart cart)
     {
         //try
         //{

@@ -11,7 +11,7 @@ public interface IProduct
 {
     public IEnumerable<BO.ProductForList> GetListProductForManagerAndCatalog();
     public BO.Product GetProductDetailsForManager(int productId);
-    public BO.ProductItem GetProductDetailsForCustomer(int productId, Cart cart);
+    public BO.ProductItem GetProductDetailsForCustomer(int productId, BO.Cart cart);
 
     public int AddProduct(BO.Product p);
     public void UpdateProduct(BO.Product p);
