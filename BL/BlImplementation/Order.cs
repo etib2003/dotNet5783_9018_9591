@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BlApi;
 using DalApi;
+using DocumentFormat.OpenXml.Vml.Spreadsheet;
 
 namespace BlImplementation;
 
@@ -16,7 +17,8 @@ internal class Order : IOrder
         // if(orderID <0)
         // throw
         DO.Order DOorder = Dal.Order.RequestById(orderID);
-        BO.Order
+        // BO.Order
+        throw new Exception();// זה בשביל עכשיו שלא יהיה טעות קומפילציה
     }
         
 
@@ -28,16 +30,16 @@ internal class Order : IOrder
 
     public BO.OrderForList GetOrderListForManager() //להמשיך
     {
-        IEnumerable<Do.OrderForList> orderList = from order in Dal.Order.RequestAll()
-                                                 select new Do.OrderForList
+        IEnumerable<BO.OrderForList> orderList = from order in Dal.Order.RequestAll()
+                                                 select new BO.OrderForList
                                                  {
                                                      ID = order.seqNum,
                                                      CustomerName= order.CustomerName,
-                                                      Status=order.,
+                                                    //  Status=order.,
                                               
                                                  };
-        return productList;
-
+        // return productList;
+        throw new Exception();
 
     }
 

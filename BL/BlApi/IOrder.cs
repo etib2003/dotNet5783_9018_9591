@@ -1,10 +1,4 @@
-﻿using Do;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace BlApi;
 
 public interface IOrder
@@ -15,5 +9,5 @@ public interface IOrder
     public BO.Order UpdateOrderDelivery(int orderID);
     public BO.Order TrakingOrder(int orderID);
     public void UpdateOrder();//בונוס
-    public  OrderForList GetOrderListForCustomer();
+    public  BO.OrderForList GetOrderListForCustomer();
 }
