@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BO;
 using DalApi;
 using DocumentFormat.OpenXml.Vml.Spreadsheet;
 
@@ -22,7 +23,9 @@ internal class Order : BlApi.IOrder
                                                      ID = order.seqNum,
                                                      CustomerName = order.CustomerName,
                                                      AmountOfItems = orderItems.Count(),
-                                                     TotalPrice = orderItems.Sum(orderItem => orderItem.Price * orderItem.Amount)
+                                                     Status = GetOrderStatus(GetOrderDetails(order.seqNum)),
+                                                     TotalPrice = orderItems.Sum(orderItem => orderItem.Price * orderItem.Amount),
+                                                   
                                                      //TotalPrice = (from orderItem in orderItems 
                                                      //             select orderItem.Price * orderItem.Amount).Sum(),
                                                  };
@@ -30,6 +33,18 @@ internal class Order : BlApi.IOrder
         //throw new Exception();
 
     }
+
+    private OrderStatus GetOrderStatus(BO.Order order)
+    {
+        return OrderStatus.confirmed;
+        //return order switch
+        //{
+         
+        //   OrderDate < DateTime.Now and order.ShipDate > DateTime.Now => OrderStatus.confirmed,
+
+        //};
+    }
+
     public BO.Order GetOrderDetails(int orderID)
     {
         // if(orderID <0)
