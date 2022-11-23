@@ -49,7 +49,7 @@ public class Order
     /// </summary>
     public DateTime DeliveryDate { get; set; }
 
-    public List <OrderItem> OrderItems { get; set; }
+    public List <BO.OrderItem> OrderItems { get; set; }
 
     public double TotalPrice { get; set; }
 

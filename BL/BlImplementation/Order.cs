@@ -23,13 +23,13 @@ internal class Order : BlApi.IOrder
                                                      ID = order.seqNum,
                                                      CustomerName = order.CustomerName,
                                                      AmountOfItems = orderItems.Count(),
-                                                     Status = GetOrderStatus(GetOrderDetails(order.seqNum)),
+                                                     Status = GetOrderDetails(order.seqNum).Status,
                                                      TotalPrice = orderItems.Sum(orderItem => orderItem.Price * orderItem.Amount),                                               
                                                  };
         return orderList;
         //throw new Exception();
     }
-    private OrderStatus GetOrderStatus(BO.Order order)
+    private OrderStatus GetOrderStatus(DO.Order order)
     {
         if (order.OrderDate < DateTime.Now && order.ShipDate > DateTime.Now)
             return OrderStatus.confirmed;
@@ -43,8 +43,33 @@ internal class Order : BlApi.IOrder
     {
         // if(orderID <0)
         // throw
-        DO.Order DOorder = Dal.Order.RequestById(orderID);
-        // BO.Order
+
+        IEnumerable<BO.OrderItem> orderItemList = from orderItem in Dal.OrderItem.RequestByOrderId(orderID)
+                                                  select new BO.OrderItem
+                                                  {
+                                                      ID = orderItem.seqNum,
+                                                      Name = Dal.Product.RequestById(orderItem.ProductID).Name,
+                                                      ProductID = orderItem.ProductID,
+                                                      Price = orderItem.Price,
+                                                      //Amount = orderItem.Amount,
+                                                      //TotalPrice = orderItem.Price * orderItem.Amount
+
+                                                  };
+        DO.Order  DOorder = Dal.Order.RequestById(orderID);
+       
+        BO.Order order = new BO.Order
+        {
+            ID = DOorder.seqNum,
+            CustomerName = DOorder.CustomerName,
+            CustomerEmail = DOorder.CustomerEmail,
+            CustomerAdress = DOorder.CustomerAdress,
+            Status = GetOrderStatus(DOorder),
+            OrderDate = DOorder.OrderDate,
+            DeliveryDate = DOorder.DeliveryDate,
+            ShipDate = DOorder.ShipDate
+        };
+
+
         throw new Exception();// זה בשביל עכשיו שלא יהיה טעות קומפילציה
     }
         
