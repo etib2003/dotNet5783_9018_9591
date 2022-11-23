@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Intrinsics.X86;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using BlApi;
+using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace BlImplementation;
 
@@ -74,6 +76,15 @@ internal class Cart : ICart
 
     public void CommitOrder(BO.Cart cart)
     {
+        Regex regex = new Regex("^[a-zA-Z]$");
+
+        if (cart.CustomerName=="" || cart.CustomerAdress == ""|| cart.CustomerEmail == "" ||!cart.CustomerEmail.Contains("@")) //' continueלוודא מה זה עושה
+            throw new Exception("ivalid customer details");
+
+
+        //IEnumerable<BO.Product> orderItemsList = from orderItem in cart.Items
+
+
         throw new NotImplementedException();
     }
 }
