@@ -9,11 +9,11 @@ namespace BlImplementation;
 
 internal class Cart : ICart
 {
-    private DalApi.IDal Dal = new Dal.DalList();
+    private DalApi.IDal _dal = new Dal.DalList();
 
     public BO.Cart AddProductToCart(BO.Cart cart, int productId)
     {
-        DO.Product DOproduct = Dal.Product.RequestById(productId);
+        DO.Product  product = _dal.Product.RequestById(productId);
         //איך יודעים אם מוצר קיים בעגלה?
         BO.OrderItem orderItem = (from OrderItem in cart.Items
                                   where OrderItem.ProductID == productId
@@ -21,7 +21,7 @@ internal class Cart : ICart
 
         if (orderItem is not null)
         {
-            //if()
+             
         }
 
         throw new NotImplementedException();//למחוק
@@ -30,14 +30,14 @@ internal class Cart : ICart
     public BO.Cart UpdateAmountOfProduct(BO.Cart cart, int productId, int newAmount) //לעשות
     {
         throw new NotImplementedException();
-        DO.Product DOproduct = Dal.Product.RequestById(productId);
+        DO.Product DOproduct = _dal.Product.RequestById(productId);
         // if (DOproduct.ID==0)
         //throw new CreateException("Invalid product id"); //לשנות את החריגה
         //if(newAmount==0)
 
     }
 
-    public void CommitOrder(BO.Cart cart, string customerName, string customerEmail, string customerAdress)
+    public void CommitOrder(BO.Cart cart)
     {
         throw new NotImplementedException();
     }
