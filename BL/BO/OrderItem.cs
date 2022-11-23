@@ -6,8 +6,8 @@ public class OrderItem
     /// <summary>
     /// orderItem's unique id
     /// </summary>
-   // public List<int> ID = new List<int>();
-    public int  ID { get; set; }
+   // public List<int> OrderID = new List<int>();
+    public int  OrderID { get; set; }
      
     public string Name{ get; set; }
      
@@ -32,8 +32,8 @@ public class OrderItem
     /// </summary>
     /// <returns>the way the orderItem is printed</returns>
     public override string ToString() => $@"
-        Identification number= {ID}, {Name}
-        Product ID: {ProductID}
+        Identification number= {OrderID}, {Name}
+        Product OrderID: {ProductID}
     	Price: {Price}
     	Amount: {Amount}
         Total price: {TotalPrice}

@@ -56,7 +56,7 @@ internal class Order : BlApi.IOrder
         order.OrderItems = (from orderItem in orderItemsList
                             select new BO.OrderItem
                             {
-                                ID = orderItem.seqNum,
+                                OrderID = orderItem.seqNum,
                                 Name = Dal.Product.RequestById(orderItem.ProductID).Name,
                                 ProductID = orderItem.ProductID,
                                 Price = orderItem.Price,
@@ -64,9 +64,6 @@ internal class Order : BlApi.IOrder
                                 TotalPrice = orderItem.Price * orderItem.Amount
 
                             }).ToList();//orderitemsהמרה לרשימה כדי שיכנס ל 
-
-
-
 
 
         throw new Exception();// זה בשביל עכשיו שלא יהיה טעות קומפילציה

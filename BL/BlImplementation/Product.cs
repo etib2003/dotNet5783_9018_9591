@@ -78,7 +78,7 @@ internal class Product : IProduct
 
     public int AddProduct(BO.Product p)
     {
-        //if (p.ID < 100000 || p.Name.Length < 1 || p.Price <= 0 || p.InStock < 0)
+        //if (p.OrderID < 100000 || p.Name.Length < 1 || p.Price <= 0 || p.InStock < 0)
         //   throw new DalAlreadyExistsException("Invalid product data");
 
         //צריך להוסיף זריקת חריגה אם לא הצליח להוסיף-עקב מזהה זהה וכדומה
@@ -96,7 +96,7 @@ internal class Product : IProduct
 
     public void UpdateProduct(BO.Product p)
     {
-        //if (p.ID < 100000 || p.Name.Length < 1 || p.Price <= 0 || p.InStock < 0)
+        //if (p.OrderID < 100000 || p.Name.Length < 1 || p.Price <= 0 || p.InStock < 0)
         //    throw new CreateException("Invalid product data");
         //צריך להוסיף זריקת חריגה אם לא הצליח לעדכן-עקב מזהה זהה וכדומה
 

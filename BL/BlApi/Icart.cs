@@ -8,7 +8,7 @@ namespace BlApi;
 
 public interface ICart
 {
-    void CommitOrder(BO.Cart cart, string customerName, string customerEmail, string customerAdress);
+    void CommitOrder(BO.Cart cart);
     BO.Cart UpdateAmountOfProduct(BO.Cart cart, int productId, int newAmount);
     BO.Cart AddProductToCart(BO.Cart cart, int productId);
 }

@@ -9,7 +9,7 @@ public class OrderTracking
     public List<Tuple<DateTime, BO.OrderStatus>> OrderProgress { get; set; }
 
     public override string ToString() => $@"
-        ID  :  {ID}
+        OrderID  :  {ID}
         Status: {Status}
         OrderProgress:
 "; //לטפל בהדפסה
