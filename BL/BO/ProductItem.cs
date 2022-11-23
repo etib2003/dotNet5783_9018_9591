@@ -13,8 +13,9 @@ public class ProductItem
     /// Product's color
     /// </summary>
     public BO.Color Color { get; set; }
-    public int  Amount { get; set; }
     public bool InStock { get; set; }
+    public int Amount { get; set; }
+
 
     public override string ToString() => $@"
         Product barcode: {ID}, {Name}

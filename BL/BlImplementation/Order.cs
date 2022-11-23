@@ -24,25 +24,19 @@ internal class Order : BlApi.IOrder
                                                      CustomerName = order.CustomerName,
                                                      AmountOfItems = orderItems.Count(),
                                                      Status = GetOrderStatus(GetOrderDetails(order.seqNum)),
-                                                     TotalPrice = orderItems.Sum(orderItem => orderItem.Price * orderItem.Amount),
-                                                   
-                                                     //TotalPrice = (from orderItem in orderItems 
-                                                     //             select orderItem.Price * orderItem.Amount).Sum(),
+                                                     TotalPrice = orderItems.Sum(orderItem => orderItem.Price * orderItem.Amount),                                               
                                                  };
         return orderList;
         //throw new Exception();
-
     }
-
     private OrderStatus GetOrderStatus(BO.Order order)
     {
-        return OrderStatus.confirmed;
-        //return order switch
-        //{
-         
-        //   OrderDate < DateTime.Now and order.ShipDate > DateTime.Now => OrderStatus.confirmed,
-
-        //};
+        if (order.OrderDate < DateTime.Now && order.ShipDate > DateTime.Now)
+            return OrderStatus.confirmed;
+        else if (order.ShipDate < DateTime.Now && order.DeliveryDate > DateTime.Now)
+            return OrderStatus.shipped;
+        else
+            return OrderStatus.provided;
     }
 
     public BO.Order GetOrderDetails(int orderID)
@@ -54,8 +48,6 @@ internal class Order : BlApi.IOrder
         throw new Exception();// זה בשביל עכשיו שלא יהיה טעות קומפילציה
     }
         
-
-
     public BO.OrderForList GetOrderListForCustomer()
     {
         throw new NotImplementedException();
