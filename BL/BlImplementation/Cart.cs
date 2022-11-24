@@ -64,7 +64,7 @@
 
     public void CommitOrder(BO.Cart cart)
     {
-        if (cart.CustomerName=="" || cart.CustomerAdress == ""|| cart.CustomerEmail=="" || cart.CustomerEmail[0]=='@' ||cart.CustomerEmail[cart.CustomerEmail.Length-1]=='@')                                                                                                                                                                                                                                                                                                                    
+        if (cart.CustomerName == "" || cart.CustomerAdress == "" || cart.CustomerEmail == "" || cart.CustomerEmail[0] == '@' || cart.CustomerEmail[cart.CustomerEmail.Length - 1] == '@')
             throw new Exception("ivalid customer details");
 
         IEnumerable<BO.Product> orderItemsList = from orderItem in cart.Items
@@ -73,6 +73,6 @@
 
 
 
-        throw new NotImplementedException();
+            throw new NotImplementedException();
     }
 }
