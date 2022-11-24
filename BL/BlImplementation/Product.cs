@@ -1,7 +1,4 @@
-﻿
-namespace BlImplementation;
-
-internal class Product : BlApi.IProduct
+﻿internal class Product : BlApi.IProduct
 {
     private DalApi.IDal Dal = new Dal.DalList();
 

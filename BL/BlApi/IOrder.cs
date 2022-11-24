@@ -10,5 +10,5 @@ public interface IOrder
     public BO.Order UpdateOrderDelivery(int orderID);
 
     public BO.OrderTracking TrakingOrder(int orderID);
-    public void UpdateOrder();//בונוס
+    //public void UpdateOrder();//בונוס
 }

@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BO;
-using DalApi;
-using DocumentFormat.OpenXml.Vml.Spreadsheet;
-
-namespace BlImplementation;
-
-internal class Order : BlApi.IOrder
+﻿internal class Order : BlApi.IOrder
 {
     private DalApi.IDal _dal = new Dal.DalList();
 
@@ -29,10 +17,10 @@ internal class Order : BlApi.IOrder
         return orderList;
         //throw new Exception();
     }
-    private OrderStatus GetOrderStatus(DO.Order order)
+    private BO.OrderStatus GetOrderStatus(DO.Order order)
     {
-        return order.DeliveryDate != DateTime.MinValue ? OrderStatus.provided : order.ShipDate != DateTime.MinValue ?
-        OrderStatus.shipped : OrderStatus.confirmed;
+        return order.DeliveryDate != DateTime.MinValue ? BO.OrderStatus.provided : order.ShipDate != DateTime.MinValue ?
+        BO.OrderStatus.shipped : BO.OrderStatus.confirmed;
     }
 
     private BO.Order getBoOrder(DO.Order doOrder) //מעתיק הזמנה DO להזמנה BO
@@ -152,10 +140,10 @@ internal class Order : BlApi.IOrder
 
     }
 
-    public void UpdateOrder()
-    {
-        throw new NotImplementedException();
-    }
+    //public void UpdateOrder() //בונוס
+    //{
+    //    throw new NotImplementedException();
+    //}
 
 
 
