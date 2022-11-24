@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Intrinsics.X86;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using BlApi;
-using DocumentFormat.OpenXml.Wordprocessing;
-
-namespace BlImplementation;
-
-internal class Cart : ICart
+﻿internal class Cart : BlApi.ICart
 {
     private DalApi.IDal _dal = new Dal.DalList();
 
