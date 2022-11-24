@@ -76,13 +76,13 @@ internal class Cart : ICart
 
     public void CommitOrder(BO.Cart cart)
     {
-        Regex regex = new Regex("^[a-zA-Z]$");
-
-        if (cart.CustomerName=="" || cart.CustomerAdress == ""|| cart.CustomerEmail == "" ||!cart.CustomerEmail.Contains("@")) //' continueלוודא מה זה עושה
+        if (cart.CustomerName=="" || cart.CustomerAdress == ""|| cart.CustomerEmail=="" || cart.CustomerEmail[0]=='@' ||cart.CustomerEmail[cart.CustomerEmail.Length-1]=='@')                                                                                                                                                                                                                                                                                                                    
             throw new Exception("ivalid customer details");
 
+        IEnumerable<BO.Product> orderItemsList = from orderItem in cart.Items
+                                                 let Product = _dal.Product.RequestById(orderItem.ProductID)
+                                                 if ()
 
-        //IEnumerable<BO.Product> orderItemsList = from orderItem in cart.Items
 
 
         throw new NotImplementedException();

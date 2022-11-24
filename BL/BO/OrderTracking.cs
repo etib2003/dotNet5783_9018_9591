@@ -6,7 +6,7 @@ public class OrderTracking
     public BO.OrderStatus Status { get; set; }
 
     //רשימה של צמדים
-    public List<Tuple<DateTime, BO.OrderStatus>> OrderProgress { get; set; }
+    public List<Tuple<DateTime, string>> OrderProgress { get; set; }
 
     public override string ToString() => $@"
         OrderID  :  {ID}
