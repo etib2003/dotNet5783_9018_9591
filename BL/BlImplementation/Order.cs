@@ -1,23 +1,26 @@
-﻿internal class Order : BlApi.IOrder
+﻿using DalApi;
+using OtherFunctions;
+using System.Runtime.Serialization;
+
+internal class Order : BlApi.IOrder
 {
     private DalApi.IDal _dal = new Dal.DalList();
 
     public IEnumerable<BO.OrderForList> GetOrderListForManager()
     {
-        IEnumerable<BO.OrderForList> orderList = from order in _dal.Order.RequestAll()
-                                                 let orderItems = _dal.OrderItem.RequestByOrderId(order.seqNum)
-                                                 select new BO.OrderForList
-                                                 {
-                                                     ID = order.seqNum,
-                                                     CustomerName = order.CustomerName,
-                                                     AmountOfItems = orderItems.Count(),
-                                                     Status = GetOrderStatus(order),
-                                                     TotalPrice = orderItems.Sum(orderItem => orderItem.Price * orderItem.Amount),
-                                                 };
-        return orderList;
-        //throw new Exception();
+        return from order in _dal.Order.RequestAll()
+               let orderItems = _dal.OrderItem.RequestByOrderId(order.seqNum)
+               select new BO.OrderForList
+               {
+                   ID = order.seqNum,
+                   CustomerName = order.CustomerName,
+                   AmountOfItems = orderItems.Count(),
+                   Status = getOrderStatus(order),
+                   TotalPrice = orderItems.Sum(orderItem => orderItem.Price * orderItem.Amount),
+               }; ;
+         
     }
-    private BO.OrderStatus GetOrderStatus(DO.Order order)
+    private BO.OrderStatus getOrderStatus(DO.Order order)//לבדוק איך צריך להיות כתוב השם של הפונקציה
     {
         return order.DeliveryDate != DateTime.MinValue ? BO.OrderStatus.provided : order.ShipDate != DateTime.MinValue ?
         BO.OrderStatus.shipped : BO.OrderStatus.confirmed;
@@ -31,7 +34,7 @@
             CustomerName = doOrder.CustomerName,
             CustomerEmail = doOrder.CustomerEmail,
             CustomerAdress = doOrder.CustomerAdress,
-            Status = GetOrderStatus(doOrder),
+            Status = getOrderStatus(doOrder),
             OrderDate = doOrder.OrderDate,
             DeliveryDate = doOrder.DeliveryDate,
             ShipDate = doOrder.ShipDate
@@ -40,27 +43,36 @@
     }
     public BO.Order GetOrderDetails(int orderID)
     {
-        // if(orderID <0)
-        // throw
-        DO.Order DOorder = _dal.Order.RequestById(orderID);
+        try
+        {
+            orderID.negativeNumber();
 
-        BO.Order order = getBoOrder(DOorder);
+            //exception
+            DO.Order DOorder = _dal.Order.RequestById(orderID);
 
-        IEnumerable<DO.OrderItem> orderItemsList = _dal.OrderItem.RequestByOrderId(orderID);
-        order.OrderItems = (from orderItem in orderItemsList
-                            select new BO.OrderItem
-                            {
-                                OrderID = orderItem.seqNum,
-                                Name = _dal.Product.RequestById(orderItem.ProductID).Name,
-                                ProductID = orderItem.ProductID,
-                                Price = orderItem.Price,
-                                Amount = orderItem.Amount,
-                                TotalPrice = orderItem.Price * orderItem.Amount
+            BO.Order order = getBoOrder(DOorder);
 
-                            }).ToList();//orderitemsהמרה לרשימה כדי שיכנס ל 
+            IEnumerable<DO.OrderItem> orderItemsList = _dal.OrderItem.RequestByOrderId(orderID);
+            order.OrderItems = (from orderItem in orderItemsList
+                                select new BO.OrderItem
+                                {
+                                    OrderID = orderItem.seqNum,
+                                    Name = _dal.Product.RequestById(orderItem.ProductID).Name,
+                                    ProductID = orderItem.ProductID,
+                                    Price = orderItem.Price,
+                                    Amount = orderItem.Amount,
+                                    TotalPrice = orderItem.Price * orderItem.Amount
+
+                                }).ToList();//orderitemsהמרה לרשימה כדי שיכנס ל 
 
 
-        throw new Exception();// זה בשביל עכשיו שלא יהיה טעות קומפילציה
+            return order;
+        }
+        catch (DalApi.DalDoesNoExistException ex)
+        {
+
+            throw new BoDoesNoExistException(string.Empty, ex);
+        }
     }
 
     public BO.Order UpdateOrderShip(int orderID)
@@ -149,3 +161,4 @@
 
 
 }
+

@@ -1,6 +1,9 @@
 ﻿using BO;
 using DalApi;
 using DO;
+using System.ComponentModel.DataAnnotations;
+using System.Net.Mail;
+using System.Text.RegularExpressions;
 
 internal class Cart : BlApi.ICart
 {
@@ -14,6 +17,7 @@ internal class Cart : BlApi.ICart
         BO.OrderItem orderItem = (from OrderItem in cart.Items
                                   where OrderItem.ProductID == productId
                                   select OrderItem).First();
+
         if (product.InStock > 0)
         {
             if (orderItem is null)
@@ -26,6 +30,8 @@ internal class Cart : BlApi.ICart
         }
         else
             throw new Exception();
+
+
         cart.TotalPrice += orderItem.Price;
 
         return cart;
@@ -35,9 +41,11 @@ internal class Cart : BlApi.ICart
     public BO.Cart UpdateAmountOfProduct(BO.Cart cart, int productId, int newAmount) //לעשות
     {
         DO.Product doProduct = _dal.Product.RequestById(productId);
+
         BO.OrderItem orderItem = (from OrderItem in cart.Items
                                   where OrderItem.ProductID == productId
-                                  select OrderItem).First();
+                                  select OrderItem).First() ?? throw new Exception();
+
         if (orderItem.Amount > newAmount)
         {
             int amountToRemove = orderItem.Amount - newAmount;
@@ -68,45 +76,71 @@ internal class Cart : BlApi.ICart
 
     public void CommitOrder(BO.Cart cart)
     {
-        if (cart.CustomerName == "" || cart.CustomerAdress == "" || cart.CustomerEmail == ""
-        || cart.CustomerEmail[0] == '@' || cart.CustomerEmail[cart.CustomerEmail.Length - 1] == '@' || !cart.CustomerEmail.Contains('@'))
-            throw new Exception("ivalid customer details");
-        foreach (BO.OrderItem orderItem in cart.Items)
+        try
         {
-            if (orderItem.Amount < 1)
-                throw new Exception("  ");
-            DO.Product doProduct = _dal.Product.RequestById(orderItem.ProductID);
-            //יזרוק חריגה אם איו את המוצר
-            if (orderItem.Amount < doProduct.InStock)
-                throw new Exception("  ");
+            Regex regex = new Regex("^[A-Za-z]+$");
+
+            if (!new EmailAddressAttribute().IsValid(cart.CustomerEmail))
+            {
+
+            }
+
+            if (!regex.IsMatch(cart.CustomerName))
+            {
+
+            }
+
+            if (cart.CustomerName == "" || cart.CustomerAdress == "" || cart.CustomerEmail == ""
+            || cart.CustomerEmail[0] == '@' || cart.CustomerEmail[cart.CustomerEmail.Length - 1] == '@' || !cart.CustomerEmail.Contains('@'))
+                throw new Exception("ivalid customer details");
+            foreach (BO.OrderItem orderItem in cart.Items)
+            {
+                if (orderItem.Amount < 1)//זה לא נכון את צריכה לבדוק שזה לא קטן ממספר ההזמנה
+                    throw new Exception("  ");
+
+                DO.Product doProduct = _dal.Product.RequestById(orderItem.ProductID);
+                //יזרוק חריגה אם איו את המוצר
+
+
+
+                if (orderItem.Amount < doProduct.InStock)
+                    throw new Exception("  ");
+
+            }
+
+            //if everything is ok
+            int orderId = _dal.Order.Create(new DO.Order()
+            {
+                CustomerName = cart.CustomerName,
+                CustomerEmail = cart.CustomerEmail,
+                CustomerAdress = cart.CustomerAdress,
+                OrderDate = DateTime.Now,
+                ShipDate = null,
+                DeliveryDate = null
+            });
+
+            (from orderItem in cart.Items
+             select new DO.OrderItem()
+             {
+                 OrderID = orderId,
+                 ProductID = orderItem.ProductID,
+                 Amount = orderItem.Amount,
+                 Price = orderItem.Price
+             }).ToList().ForEach(orderItem =>
+             {
+                 _dal.OrderItem.Create(orderItem);
+                 DO.Product product = _dal.Product.RequestById(orderItem.ProductID);
+                 product.InStock -= orderItem.Amount;
+                 _dal.Product.Update(product);
+             });
+        }
+        catch (Exception)
+        {
+
+            throw;
+
 
         }
-        //if everything is ok
-        int orderId = _dal.Order.Create(new DO.Order()
-        {
-            CustomerName = cart.CustomerName,
-            CustomerEmail = cart.CustomerEmail,
-            CustomerAdress = cart.CustomerAdress,
-            OrderDate = DateTime.Now,
-            ShipDate = DateTime.MinValue,
-            DeliveryDate = DateTime.MinValue
-        });
 
-        IEnumerable<DO.OrderItem> orderItemsForDataLayer = from orderItem in cart.Items
-                                                           select new DO.OrderItem()
-                                                           {
-                                                               OrderID = orderId,
-                                                               ProductID = orderItem.ProductID,
-                                                               Amount = orderItem.Amount,
-                                                               Price = orderItem.Price
-                                                           };
-
-        orderItemsForDataLayer.Select(orderItem => _dal.OrderItem.Create(orderItem));
-        foreach (DO.OrderItem orderItem in orderItemsForDataLayer)
-        {
-            DO.Product product = _dal.Product.RequestById(orderItem.ProductID);
-            product.InStock -= orderItem.Amount;
-            _dal.Product.Update(product);
-        }
     }
 }

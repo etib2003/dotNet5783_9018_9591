@@ -19,6 +19,8 @@ internal class DalOrderItem:IOrderItem
     public int Create(OrderItem Oi)
     {
         Oi.seqNum = DataSource.config.SeqNumOi;
+        if (DataSource.Orders.Exists(x => x.seqNum == Oi.seqNum))
+            throw new DalAlreadyExistsException("Order");
         DataSource.OrderItems.Add(Oi);
         return Oi.seqNum;
     }

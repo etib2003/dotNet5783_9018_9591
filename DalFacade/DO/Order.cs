@@ -27,17 +27,17 @@ public struct Order
     /// <summary>
     /// order's order date
     /// </summary>
-    public DateTime OrderDate { get; set; }
+    public DateTime? OrderDate { get; set; }
 
     /// <summary>
     /// order's ship date
     /// </summary>
-    public DateTime ShipDate { get; set; }
+    public DateTime? ShipDate { get; set; }
 
     /// <summary>
     /// order's delivery date
     /// </summary>
-    public DateTime DeliveryDate { get; set; }
+    public DateTime? DeliveryDate { get; set; }
 
     /// <summary>
     /// the order's print method

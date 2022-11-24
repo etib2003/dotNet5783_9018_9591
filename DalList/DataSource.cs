@@ -71,13 +71,14 @@ internal static class DataSource
             order.CustomerAdress = Customer_Adress[random.Next(0, 11)];
             order.OrderDate = DateTime.Now.AddMonths(random.Next(-4, -1));
             if (i <= AmountOfOrders * 0.8)
-                order.ShipDate = order.OrderDate.AddDays(random.Next(1, 3));
+                order.ShipDate = order.OrderDate + new TimeSpan (random.Next(24), random.Next(60), random.Next(60));
             else
-                order.ShipDate = DateTime.MinValue;
-            if (i <= AmountOfOrders * 0.6 * 0.8)
-                order.DeliveryDate = order.ShipDate.AddDays(random.Next(7, 21));
+                order.ShipDate = null;
+            if (i <= AmountOfOrders
+                * 0.6 * 0.8)
+                order.DeliveryDate = order.ShipDate + new TimeSpan(random.Next(24), random.Next(60), random.Next(60));
             else
-                order.DeliveryDate = DateTime.MinValue;
+                order.DeliveryDate = null;
 
             Orders.Add(order);  //adds the new order to the order's list.
         }

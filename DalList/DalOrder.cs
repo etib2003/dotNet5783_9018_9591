@@ -17,6 +17,8 @@ internal class DalOrder: IOrder
     public int Create(Order Or)
     {
         Or.seqNum = DataSource.config.SeqNumOr;
+        if (DataSource.OrderItems.Exists(x => x.seqNum == Or.seqNum))
+            throw new DalAlreadyExistsException("OrderItem");
         DataSource.Orders.Add(Or);
         return Or.seqNum;
     }
