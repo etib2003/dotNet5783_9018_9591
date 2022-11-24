@@ -1,4 +1,8 @@
-﻿internal class Cart : BlApi.ICart
+﻿using BO;
+using DalApi;
+using DO;
+
+internal class Cart : BlApi.ICart
 {
     private DalApi.IDal _dal = new Dal.DalList();
 
@@ -45,7 +49,7 @@
         {
             if (doProduct.InStock > 0)
             {
-                int amountToAdd = newAmount-orderItem.Amount;
+                int amountToAdd = newAmount - orderItem.Amount;
                 orderItem.Amount += amountToAdd;
                 orderItem.TotalPrice += orderItem.Price * amountToAdd;
                 cart.TotalPrice += orderItem.Price * amountToAdd;
@@ -53,7 +57,7 @@
             else
                 throw new Exception();
         }
-        else if(newAmount==0)
+        else if (newAmount == 0)
         {
             cart.TotalPrice -= orderItem.TotalPrice;
             cart.Items.Remove(orderItem);
@@ -64,15 +68,45 @@
 
     public void CommitOrder(BO.Cart cart)
     {
-        if (cart.CustomerName == "" || cart.CustomerAdress == "" || cart.CustomerEmail == "" || cart.CustomerEmail[0] == '@' || cart.CustomerEmail[cart.CustomerEmail.Length - 1] == '@')
+        if (cart.CustomerName == "" || cart.CustomerAdress == "" || cart.CustomerEmail == ""
+        || cart.CustomerEmail[0] == '@' || cart.CustomerEmail[cart.CustomerEmail.Length - 1] == '@' || !cart.CustomerEmail.Contains('@'))
             throw new Exception("ivalid customer details");
+        foreach (BO.OrderItem orderItem in cart.Items)
+        {
+            if (orderItem.Amount < 1)
+                throw new Exception("  ");
+            DO.Product doProduct = _dal.Product.RequestById(orderItem.ProductID);
+            //יזרוק חריגה אם איו את המוצר
+            if (orderItem.Amount < doProduct.InStock)
+                throw new Exception("  ");
 
-        IEnumerable<BO.Product> orderItemsList = from orderItem in cart.Items
-                                                 let Product = _dal.Product.RequestById(orderItem.ProductID)
-                                                 if ()
+        }
+        //if everything is ok
+        int orderId = _dal.Order.Create(new DO.Order()
+        {
+            CustomerName = cart.CustomerName,
+            CustomerEmail = cart.CustomerEmail,
+            CustomerAdress = cart.CustomerAdress,
+            OrderDate = DateTime.Now,
+            ShipDate = DateTime.MinValue,
+            DeliveryDate = DateTime.MinValue
+        });
 
+        IEnumerable<DO.OrderItem> orderItemsForDataLayer = from orderItem in cart.Items
+                                                           select new DO.OrderItem()
+                                                           {
+                                                               OrderID = orderId,
+                                                               ProductID = orderItem.ProductID,
+                                                               Amount = orderItem.Amount,
+                                                               Price = orderItem.Price
+                                                           };
 
-
-            throw new NotImplementedException();
+        orderItemsForDataLayer.Select(orderItem => _dal.OrderItem.Create(orderItem));
+        foreach (DO.OrderItem orderItem in orderItemsForDataLayer)
+        {
+            DO.Product product = _dal.Product.RequestById(orderItem.ProductID);
+            product.InStock -= orderItem.Amount;
+            _dal.Product.Update(product);
+        }
     }
 }
