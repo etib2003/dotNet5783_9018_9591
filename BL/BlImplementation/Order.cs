@@ -71,7 +71,7 @@ internal class Order : BlApi.IOrder
         catch (DalApi.DalDoesNoExistException ex)
         {
 
-            throw new BoDoesNoExistException(string.Empty, ex);
+            throw new BO.BoDoesNoExistException(string.Empty, ex);
         }
     }
 
@@ -102,7 +102,7 @@ internal class Order : BlApi.IOrder
         DO.Order doOrder = _dal.Order.RequestById(orderID);
         //אם הוא לא קיים אז תהיה חריגה
         BO.Order order = new BO.Order();
-        if (doOrder.ShipDate != DateTime.MinValue && doOrder.DeliveryDate == DateTime.MinValue)
+        if (doOrder.ShipDate != null && doOrder.DeliveryDate == null)
         {
             doOrder.DeliveryDate = DateTime.Now;
             _dal.Order.Update(doOrder);
@@ -120,19 +120,19 @@ internal class Order : BlApi.IOrder
         if (orderID < 0)
             throw new Exception();
         DO.Order doOrder = _dal.Order.RequestById(orderID);
-        List<Tuple<DateTime, string>> tupleList = new List<Tuple<DateTime, string>>();
-        Tuple<DateTime, string> tuple;
+        List<Tuple<DateTime?, string>> tupleList = new List<Tuple<DateTime?, string>>();
+        Tuple<DateTime?, string> tuple;
         BO.OrderTracking orderTracking = new BO.OrderTracking();
-        if (doOrder.OrderDate != DateTime.MinValue)
+        if (doOrder.OrderDate != null)
         {
             tuple = new(doOrder.OrderDate, "The order has been confirmed");
             tupleList.Add(tuple);
-            if (doOrder.ShipDate != DateTime.MinValue)
+            if (doOrder.ShipDate != null)
             {
                 tuple = new(doOrder.ShipDate, "The invitation has been shipped");
                 tupleList.Add(tuple);
 
-                if (doOrder.DeliveryDate != DateTime.MinValue)
+                if (doOrder.DeliveryDate != null)
                 {
                     tuple = new(doOrder.DeliveryDate, "The invitation has been provided");
                     tupleList.Add(tuple);
@@ -142,7 +142,7 @@ internal class Order : BlApi.IOrder
         }
         orderTracking.OrderProgress = tupleList;
         orderTracking.ID = orderID;
-        orderTracking.Status = GetOrderStatus(doOrder);
+        orderTracking.Status = getOrderStatus(doOrder);
          //הגענו עד לפה
         return orderTracking;
 
