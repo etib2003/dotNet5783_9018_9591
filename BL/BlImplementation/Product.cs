@@ -1,4 +1,5 @@
-﻿using OtherFunctions;
+﻿using BO;
+using OtherFunctions;
 using System.Runtime.Serialization;
 
 internal class Product : BlApi.IProduct
@@ -44,12 +45,12 @@ internal class Product : BlApi.IProduct
         }
         catch (DalApi.DalDoesNoExistException ex) 
         {
-            throw new BO.BoDoesNoExistException(string.Empty, ex);//change
+            throw new BO.BoDoesNoExistException("the product does not exist", ex); 
            
         }
 
 
-        //catch(BO.BoDoesNoExistException ex)
+        //catch(BO.BoDoesNoExistException ex)//main
         //{
         //    Console.WriteLine(ex.Message + " " + ex.InnerException.Message);
         //}
@@ -57,37 +58,45 @@ internal class Product : BlApi.IProduct
 
     public BO.ProductItem GetProductDetailsForCustomer(int productId, BO.Cart cart)
     {
-        //try
-        //{
-        if (productId < 100000) //
-            throw new Exception(); //
-
-        DO.Product doProduct = _dal.Product.RequestById(productId);
-
-        BO.ProductItem boProduct = new BO.ProductItem
+        try
         {
-            ID = doProduct.ID,
-            Name = doProduct.Name,
-            Price = doProduct.Price,
-            Category = (BO.Category)doProduct.Category,
-            Color = (BO.Color)doProduct.Color,
-            InStock = doProduct.InStock > 0,
-            Amount = doProduct.InStock
-        };
+            productId.negativeNumber();
 
-        return boProduct;
+            productId.wrongLengthNumber(6);
 
-        //catch (DalDoesNoExistException e) //
-        //{
-        //    throw new Exception("Invalid product id", e);//change
-        //}
+            DO.Product doProduct = _dal.Product.RequestById(productId);
+     
+            return new BO.ProductItem
+            {
+                ID = doProduct.ID,
+                Name = doProduct.Name,
+                Price = doProduct.Price,
+                Category = (BO.Category)doProduct.Category,
+                Color = (BO.Color)doProduct.Color,
+                InStock = doProduct.InStock > 0,
+                Amount = (from orderItem in cart.Items
+                          where orderItem.ProductID == productId
+                          select orderItem.Amount).FirstOrDefault(0)
+            };
+        }
+        catch (DalApi.DalDoesNoExistException ex)
+        {
+            throw new BO.BoDoesNoExistException("the product does not exist", ex); 
+
+        }
+    
     }
 
 
     public int AddProduct(BO.Product product)
     {
-        if (product.ID < 100000 || product.Name.Length < 1 || product.Price <= 0 || product.InStock < 0)//
-            throw new Exception("Invalid product data");//
+
+        product.ID.negativeNumber();
+        product.ID.wrongLengthNumber(6);
+        product.Name.wrongLengthName();
+        product.Price.negativeDoubleNumber();
+        product.InStock.negativeNumber();
+
 
         DO.Product doProduct = new DO.Product
         {
@@ -103,10 +112,13 @@ internal class Product : BlApi.IProduct
 
     public void UpdateProduct(BO.Product product)
     {
-        if (product.ID < 100000 || product.Name.Length < 1 || product.Price <= 0 || product.InStock < 0)//
-            throw new Exception("Invalid product data");//
-        //צריך להוסיף זריקת חריגה אם לא הצליח לעדכן-עקב מזהה זהה וכדומה
 
+        product.ID.negativeNumber();
+        product.ID.wrongLengthNumber(6);
+        product.Name.wrongLengthName();
+        product.Price.negativeDoubleNumber();
+        product.InStock.negativeNumber();
+       
         DO.Product doProduct = new DO.Product
         {
             ID = product.ID,
@@ -120,7 +132,6 @@ internal class Product : BlApi.IProduct
     }
     public void DeleteProduct(int productId)
     {
-        //חריגה-או ששייך להזמנה או שלא קיים מוצר כזה
 
         IEnumerable<DO.OrderItem> orderItemList = from orderItem in _dal.OrderItem.RequestAll()
                                                   where orderItem.ProductID == productId
@@ -128,7 +139,11 @@ internal class Product : BlApi.IProduct
         if (!orderItemList.Any())
             _dal.Product.Delete(productId);
 
-        throw new NotImplementedException(); //למחוקקקק
+        else
+            throw new productAlreadyInOrderProssesException("product Already In Order Prosses");
+        
+
+         
     }
 }
 

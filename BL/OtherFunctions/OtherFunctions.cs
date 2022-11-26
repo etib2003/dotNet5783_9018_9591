@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+
+using BO;
+using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 namespace OtherFunctions
 {
@@ -11,7 +10,7 @@ namespace OtherFunctions
     {
         internal static void negativeNumber(this int number)
         {
-            if (number < 0)
+            if (number <= 0)
                 throw new BO.NegativeNumberException("");
 
         }
@@ -21,6 +20,25 @@ namespace OtherFunctions
             if (number.ToString().Length < length)
                 throw new BO.WrongLengthException("");
 
+
         }
+        internal static void wrongLengthName(this string name)
+        {
+            Regex regex = new Regex("^[A-Za-z]+$");
+            if(!regex.IsMatch(name))           
+                throw new BO.wrongLengthNameException("");
+        }
+        internal static void negativeDoubleNumber(this double number)
+        {
+            if (number <= 0)
+                throw new BO.negativeDoubleNumberException("");
+        }
+        internal static void notValidEmail(this string email)
+        {
+            if (!new EmailAddressAttribute().IsValid(email))
+                throw new BO.notValidEmailException("");
+        }
+    
+
     }
 }

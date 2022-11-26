@@ -1,32 +1,43 @@
-﻿using DalApi;
+﻿ 
 using OtherFunctions;
-using System.Runtime.Serialization;
+ 
 
 internal class Order : BlApi.IOrder
 {
     private DalApi.IDal _dal = new Dal.DalList();
 
     public IEnumerable<BO.OrderForList> GetOrderListForManager()
-    {
-        return from order in _dal.Order.RequestAll()
-               let orderItems = _dal.OrderItem.RequestByOrderId(order.seqNum)
-               select new BO.OrderForList
-               {
-                   ID = order.seqNum,
-                   CustomerName = order.CustomerName,
-                   AmountOfItems = orderItems.Count(),
-                   Status = getOrderStatus(order),
-                   TotalPrice = orderItems.Sum(orderItem => orderItem.Price * orderItem.Amount),
-               }; ;
-         
+    { //לשאול את יהודה אם צריך חריגה
+
+        try
+        {
+            IEnumerable<DO.Order> orderItemsList = _dal.Order.RequestAll();
+            return from order in orderItemsList
+                   let orderItems = _dal.OrderItem.RequestByOrderId(order.seqNum)
+                   select new BO.OrderForList
+                   {
+                       ID = order.seqNum,
+                       CustomerName = order.CustomerName,
+                       AmountOfItems = orderItems.Count(),
+                       Status = getOrderStatus(order),
+                       TotalPrice = orderItems.Sum(orderItem => orderItem.Price * orderItem.Amount),
+                   }; 
+        }
+        catch (DalApi.DalDoesNoExistException ex)
+        {
+            throw new BO.BoDoesNoExistException("the order does not exist", ex);//change
+
+        }
+
     }
-    private BO.OrderStatus getOrderStatus(DO.Order order)//לבדוק איך צריך להיות כתוב השם של הפונקציה
+
+    private BO.OrderStatus getOrderStatus(DO.Order order)
     {
         return order.DeliveryDate != DateTime.MinValue ? BO.OrderStatus.provided : order.ShipDate != DateTime.MinValue ?
         BO.OrderStatus.shipped : BO.OrderStatus.confirmed;
     }
 
-    private BO.Order getBoOrder(DO.Order doOrder) //מעתיק הזמנה DO להזמנה BO
+    private BO.Order getBoOrder(DO.Order doOrder)  
     {
         BO.Order boOrder = new BO.Order
         {
@@ -47,7 +58,7 @@ internal class Order : BlApi.IOrder
         {
             orderID.negativeNumber();
 
-            //exception
+             
             DO.Order DOorder = _dal.Order.RequestById(orderID);
 
             BO.Order order = getBoOrder(DOorder);
@@ -63,7 +74,7 @@ internal class Order : BlApi.IOrder
                                     Amount = orderItem.Amount,
                                     TotalPrice = orderItem.Price * orderItem.Amount
 
-                                }).ToList();//orderitemsהמרה לרשימה כדי שיכנס ל 
+                                }).ToList(); 
 
 
             return order;
@@ -71,94 +82,105 @@ internal class Order : BlApi.IOrder
         catch (DalApi.DalDoesNoExistException ex)
         {
 
-            throw new BO.BoDoesNoExistException(string.Empty, ex);
+            throw new BO.BoDoesNoExistException("order does not exist", ex);
         }
     }
 
     public BO.Order UpdateOrderShip(int orderID)
     {
-        if (orderID < 0)
-            throw new Exception();
-        DO.Order doOrder = _dal.Order.RequestById(orderID);
-        //אם הוא לא קיים אז תהיה חריגה
-        BO.Order order = new BO.Order();
-        if (doOrder.OrderDate != DateTime.MinValue && doOrder.ShipDate == DateTime.MinValue)
+        try
         {
-            doOrder.ShipDate = DateTime.Now;
-            _dal.Order.Update(doOrder);
-            order = getBoOrder(doOrder);
+            orderID.negativeNumber();
+
+            DO.Order doOrder = _dal.Order.RequestById(orderID);
+
+            BO.Order order = new BO.Order();
+            if (doOrder.OrderDate != DateTime.MinValue && doOrder.ShipDate == DateTime.MinValue)
+            {
+                doOrder.ShipDate = DateTime.Now;
+                _dal.Order.Update(doOrder);
+                order = getBoOrder(doOrder);
+            }
+            else
+            {            
+                throw new BO.DateAlreadyUpdatedException("ship date is already updated");
+            }
+            return order;
         }
-        else
+        catch (DalApi.DalDoesNoExistException ex)
         {
-            throw new Exception("ship date is already updated");
+
+            throw new BO.BoDoesNoExistException("order does not exist", ex);
         }
-        return order;
     }
 
     public BO.Order UpdateOrderDelivery(int orderID)
     {
-        if (orderID < 0)
-            throw new Exception();
-        DO.Order doOrder = _dal.Order.RequestById(orderID);
-        //אם הוא לא קיים אז תהיה חריגה
-        BO.Order order = new BO.Order();
-        if (doOrder.ShipDate != null && doOrder.DeliveryDate == null)
+        try
         {
-            doOrder.DeliveryDate = DateTime.Now;
-            _dal.Order.Update(doOrder);
-            order = getBoOrder(doOrder);
+            orderID.negativeNumber();
+
+            DO.Order doOrder = _dal.Order.RequestById(orderID);
+
+            BO.Order order = new BO.Order();
+            if (doOrder.ShipDate != null && doOrder.DeliveryDate == null)
+            {
+                doOrder.DeliveryDate = DateTime.Now;
+                _dal.Order.Update(doOrder);
+                order = getBoOrder(doOrder);
+            }
+            else
+            {
+                throw new BO.DateAlreadyUpdatedException("Delivery date is already updated");
+            }
+            return order;
         }
-        else
+        catch (DalApi.DalDoesNoExistException ex)
         {
-            throw new Exception("Delivery date is already updated");
+
+            throw new BO.BoDoesNoExistException("order does not exist", ex);
         }
-        return order;
     }
 
     public BO.OrderTracking TrakingOrder(int orderID)
     {
-        if (orderID < 0)
-            throw new Exception();
-        DO.Order doOrder = _dal.Order.RequestById(orderID);
-        List<Tuple<DateTime?, string>> tupleList = new List<Tuple<DateTime?, string>>();
-        Tuple<DateTime?, string> tuple;
-        BO.OrderTracking orderTracking = new BO.OrderTracking();
-        if (doOrder.OrderDate != null)
+        try
         {
-            tuple = new(doOrder.OrderDate, "The order has been confirmed");
-            tupleList.Add(tuple);
-            if (doOrder.ShipDate != null)
+            orderID.negativeNumber();
+
+            DO.Order doOrder = _dal.Order.RequestById(orderID);
+            List<Tuple<DateTime?, string>> tupleList = new List<Tuple<DateTime?, string>>();
+            Tuple<DateTime?, string> tuple;
+            BO.OrderTracking orderTracking = new BO.OrderTracking();
+            if (doOrder.OrderDate != null)
             {
-                tuple = new(doOrder.ShipDate, "The invitation has been shipped");
+                tuple = new(doOrder.OrderDate, "The order has been confirmed");
                 tupleList.Add(tuple);
-
-                if (doOrder.DeliveryDate != null)
+                if (doOrder.ShipDate != null)
                 {
-                    tuple = new(doOrder.DeliveryDate, "The invitation has been provided");
+                    tuple = new(doOrder.ShipDate, "The invitation has been shipped");
                     tupleList.Add(tuple);
+
+                    if (doOrder.DeliveryDate != null)
+                    {
+                        tuple = new(doOrder.DeliveryDate, "The invitation has been provided");
+                        tupleList.Add(tuple);
+                    }
+
                 }
-
             }
+            orderTracking.OrderProgress = tupleList;
+            orderTracking.ID = orderID;
+            orderTracking.Status = getOrderStatus(doOrder);
+            
+            return orderTracking;
+
+         }
+        catch (DalApi.DalDoesNoExistException ex)
+        {
+
+            throw new BO.BoDoesNoExistException("order does not exist", ex);
         }
-        orderTracking.OrderProgress = tupleList;
-        orderTracking.ID = orderID;
-        orderTracking.Status = getOrderStatus(doOrder);
-         //הגענו עד לפה
-        return orderTracking;
-
-
-
-        throw new NotImplementedException();
-
     }
-
-    //public void UpdateOrder() //בונוס
-    //{
-    //    throw new NotImplementedException();
-    //}
-
-
-
-
 }
 
