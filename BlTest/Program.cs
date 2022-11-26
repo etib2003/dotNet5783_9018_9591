@@ -139,10 +139,9 @@ Please choose the topic:
                             break;
                     }
                 }
-                catch (Exception e)
+                catch (BO.BoDoesNoExistException ex)//main /////////////
                 {
-                    Console.WriteLine(e.Message);
-
+                    Console.WriteLine(ex.Message + " " + ex.InnerException.Message);
                 }
 
             } while (action != 6);

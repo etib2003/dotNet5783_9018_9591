@@ -57,7 +57,7 @@ public class Order
     /// </summary>
     /// <returns>the way the order is printed</returns>
     public override string ToString() {
-            return $@"
+        return $@"
             Customer OrderID= {ID}: {CustomerName}, 
             Email: {CustomerEmail}
             Adress: {CustomerAdress}
@@ -65,12 +65,9 @@ public class Order
             Order date: {OrderDate}
             Ship date: {ShipDate}    	
             Delivery date: {DeliveryDate} 
-            Items: {string.Join(", ", OrderItems)}
+
+            Items: {string.Join("\n", OrderItems)}
+
             Total price: {TotalPrice}";
-        //    Items :";
-        //    foreach(var item in Items)
-        //    { s = s + item+ "       \n"; };
-        //    return s;
-        ////string.Join(", ", Items)}
     }
 }

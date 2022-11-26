@@ -9,9 +9,9 @@ public class OrderTracking
     public List<Tuple<DateTime?, string>> OrderProgress { get; set; }
 
     public override string ToString() => $@"
-        OrderID  :  {ID}
-        Status: {Status}
-        OrderProgress:
-"; //לטפל בהדפסה
+            OrderID  :  {ID}
+            Status: {Status}
+            OrderProgress: 
+            {string.Join("\n            ", OrderProgress)}"; //לטפל בהדפסה
 
 }

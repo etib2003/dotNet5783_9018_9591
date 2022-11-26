@@ -8,16 +8,11 @@ public class Cart
     public double TotalPrice { get; set; }
 
     public override string ToString() {
-        string s = $@"
-        CustomerName  :  {CustomerName}
-        CustomerEmail: {CustomerEmail}
-     	CustomerAddress: {CustomerAdress}
-     	TotalPrice: {TotalPrice}
-        Items: ";
-        foreach (var item in Items)
-        { s = s + item+ "       \n"; };
-        return s;
-
-        //items: {string.Join(", ", Items)}
+        return $@"
+            CustomerName  : {CustomerName}
+            CustomerEmail: {CustomerEmail}
+     	    CustomerAddress: {CustomerAdress}
+            Items: {string.Join("\n", Items)}
+     	    TotalPrice: {TotalPrice}";
     }
 }

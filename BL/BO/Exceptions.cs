@@ -110,21 +110,21 @@ internal class negativeDoubleNumberException : Exception
     }
 }
 [Serializable]
-internal class DateAlreadyUpdatedException : Exception
+internal class dateAlreadyUpdatedException : Exception
 {
-    public DateAlreadyUpdatedException()
+    public dateAlreadyUpdatedException()
     {
     }
 
-    public DateAlreadyUpdatedException(string? message) : base(message)
+    public dateAlreadyUpdatedException(string? message) : base(message)
     {
     }
 
-    public DateAlreadyUpdatedException(string? message, Exception? innerException) : base(message, innerException)
+    public dateAlreadyUpdatedException(string? message, Exception? innerException) : base(message, innerException)
     {
     }
 
-    protected DateAlreadyUpdatedException(SerializationInfo info, StreamingContext context) : base(info, context)
+    protected dateAlreadyUpdatedException(SerializationInfo info, StreamingContext context) : base(info, context)
     {
     }
 }
@@ -170,21 +170,21 @@ internal class notValidAmountException : Exception
 }
 
 [Serializable]
-internal class productAlreadyInOrderProssesException : Exception
+internal class notValidDeleteException : Exception
 {
-    public productAlreadyInOrderProssesException()
+    public notValidDeleteException()
     {
     }
 
-    public productAlreadyInOrderProssesException(string? message) : base(message)
+    public notValidDeleteException(string? message) : base(message)
     {
     }
 
-    public productAlreadyInOrderProssesException(string? message, Exception? innerException) : base(message, innerException)
+    public notValidDeleteException(string? message, Exception? innerException) : base(message, innerException)
     {
     }
 
-    protected productAlreadyInOrderProssesException(SerializationInfo info, StreamingContext context) : base(info, context)
+    protected notValidDeleteException(SerializationInfo info, StreamingContext context) : base(info, context)
     {
     }
 }

@@ -49,11 +49,6 @@ internal class Product : BlApi.IProduct
            
         }
 
-
-        //catch(BO.BoDoesNoExistException ex)//main
-        //{
-        //    Console.WriteLine(ex.Message + " " + ex.InnerException.Message);
-        //}
     }
 
     public BO.ProductItem GetProductDetailsForCustomer(int productId, BO.Cart cart)
@@ -140,7 +135,7 @@ internal class Product : BlApi.IProduct
             _dal.Product.Delete(productId);
 
         else
-            throw new productAlreadyInOrderProssesException("product Already In Order Prosses");
+            throw new notValidDeleteException("product Already In Order Prosses");
         
 
          

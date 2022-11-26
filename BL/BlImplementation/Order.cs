@@ -7,10 +7,7 @@ internal class Order : BlApi.IOrder
     private DalApi.IDal _dal = new Dal.DalList();
 
     public IEnumerable<BO.OrderForList> GetOrderListForManager()
-    { //לשאול את יהודה אם צריך חריגה
-
-        try
-        {
+    { 
             IEnumerable<DO.Order> orderItemsList = _dal.Order.RequestAll();
             return from order in orderItemsList
                    let orderItems = _dal.OrderItem.RequestByOrderId(order.seqNum)
@@ -22,19 +19,18 @@ internal class Order : BlApi.IOrder
                        Status = getOrderStatus(order),
                        TotalPrice = orderItems.Sum(orderItem => orderItem.Price * orderItem.Amount),
                    }; 
-        }
-        catch (DalApi.DalDoesNoExistException ex)
-        {
-            throw new BO.BoDoesNoExistException("the order does not exist", ex);//change
-
-        }
-
+        
+      
     }
 
     private BO.OrderStatus getOrderStatus(DO.Order order)
     {
-        return order.DeliveryDate != DateTime.MinValue ? BO.OrderStatus.provided : order.ShipDate != DateTime.MinValue ?
-        BO.OrderStatus.shipped : BO.OrderStatus.confirmed;
+        return order switch
+        {
+            DO.Order _order when _order.DeliveryDate != null => BO.OrderStatus.provided,
+            DO.Order _order when _order.ShipDate != null => BO.OrderStatus.shipped,
+            _ => BO.OrderStatus.confirmed,
+        };
     }
 
     private BO.Order getBoOrder(DO.Order doOrder)  
@@ -74,8 +70,9 @@ internal class Order : BlApi.IOrder
                                     Amount = orderItem.Amount,
                                     TotalPrice = orderItem.Price * orderItem.Amount
 
-                                }).ToList(); 
+                                }).ToList();
 
+            order.TotalPrice = orderItemsList.Sum(orderItem=> orderItem.Price * orderItem.Amount);
 
             return order;
         }
@@ -103,7 +100,7 @@ internal class Order : BlApi.IOrder
             }
             else
             {            
-                throw new BO.DateAlreadyUpdatedException("ship date is already updated");
+                throw new BO.dateAlreadyUpdatedException("ship date is already updated");
             }
             return order;
         }
@@ -131,7 +128,7 @@ internal class Order : BlApi.IOrder
             }
             else
             {
-                throw new BO.DateAlreadyUpdatedException("Delivery date is already updated");
+                throw new BO.dateAlreadyUpdatedException("Delivery date is already updated");
             }
             return order;
         }

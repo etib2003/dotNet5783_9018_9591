@@ -31,12 +31,11 @@ public class OrderItem
     /// the orderItem's print method
     /// </summary>
     /// <returns>the way the orderItem is printed</returns>
-    public override string ToString() => $@"
-        Identification number= {OrderID}, {Name}
-        Product OrderID: {ProductID}
-    	Price: {Price}
-    	Amount: {Amount}
-        Total price: {TotalPrice}
-";
+    public override string ToString() => $@" 
+            Identification number= {OrderID}, {Name}
+            Product OrderID: {ProductID}
+    	    Price: {Price}
+    	    Amount: {Amount}
+            Total price: {TotalPrice}";
 
 }
