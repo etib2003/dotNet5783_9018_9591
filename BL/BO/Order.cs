@@ -1,5 +1,4 @@
-﻿using DO;
-
+﻿
 namespace BO;
 
 public class Order
@@ -66,7 +65,7 @@ public class Order
             Order date: {OrderDate}
             Ship date: {ShipDate}    	
             Delivery date: {DeliveryDate} 
-            Items: {string.Join("", "", OrderItems)}
+            Items: {string.Join(", ", OrderItems)}
             Total price: {TotalPrice}";
         //    Items :";
         //    foreach(var item in Items)

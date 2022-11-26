@@ -10,7 +10,7 @@ namespace DalTest
          static void Main()
         {
             //for the switch loop
-            int Choice;
+            int choice;
 
 
             Console.WriteLine("Hello , we are happy to have you in our store :) ");
@@ -23,10 +23,10 @@ Please choose the topic:
 2: PRODUCT
 3: ORDER ITEM
 4: EXIT");
-                int.TryParse(Console.ReadLine(), out Choice);
+                int.TryParse(Console.ReadLine(), out choice);
                 try
                 {
-                    switch (Choice)
+                    switch (choice)
                     {
                         case 1:
                             ChoiceOrder();
@@ -50,7 +50,7 @@ Please choose the topic:
                     Console.WriteLine(e.Message);
                 }
 
-            } while (Choice != 4);
+            } while (choice != 4);
         }
 
         //in case the user chose order
@@ -225,7 +225,7 @@ Please choose the topic:
                                 newProduct.Color = (Color)int.Parse(input);
 
                                 Console.Write("Enter a Price: ");
-                                int price; int.TryParse(Console.ReadLine(), out price);
+                                double price; double.TryParse(Console.ReadLine(), out price);
                                 newProduct.Price = price;
 
                                 Console.Write("Enter an Amount: ");

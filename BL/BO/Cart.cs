@@ -11,7 +11,7 @@ public class Cart
         string s = $@"
         CustomerName  :  {CustomerName}
         CustomerEmail: {CustomerEmail}
-     	CustomerAdress: {CustomerAdress}
+     	CustomerAddress: {CustomerAdress}
      	TotalPrice: {TotalPrice}
         Items: ";
         foreach (var item in Items)
