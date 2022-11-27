@@ -1,28 +1,36 @@
 ﻿ 
 using OtherFunctions;
- 
 
 internal class Order : BlApi.IOrder
 {
     private DalApi.IDal _dal = new Dal.DalList();
 
+    /// <summary>
+    /// Gets a list of orders
+    /// </summary>
+    /// <returns></returns>
     public IEnumerable<BO.OrderForList> GetOrderListForManager()
     { 
-            IEnumerable<DO.Order> orderItemsList = _dal.Order.RequestAll();
+            IEnumerable<DO.Order> orderItemsList = _dal.Order.RequestAll();//gets all the orders from the data layer
             return from order in orderItemsList
-                   let orderItems = _dal.OrderItem.RequestByOrderId(order.seqNum)
+                   let orderItems = _dal.OrderItem.RequestByOrderId(order.seqNum)//gets the right order using its seqnum
+                   //Initializes the data
                    select new BO.OrderForList
                    {
                        ID = order.seqNum,
                        CustomerName = order.CustomerName,
                        AmountOfItems = orderItems.Count(),
                        Status = getOrderStatus(order),
-                       TotalPrice = orderItems.Sum(orderItem => orderItem.Price * orderItem.Amount),
+                       TotalPrice = orderItems.Sum(orderItem => orderItem.Price * orderItem.Amount),//calculate the total price
                    }; 
         
       
     }
-
+    /// <summary>
+    ///  help function to calculate the order's status
+    /// </summary>
+    /// <param name="order">the order you wants to update its status</param>
+    /// <returns></returns>
     private BO.OrderStatus getOrderStatus(DO.Order order)
     {
         return order switch
@@ -32,11 +40,16 @@ internal class Order : BlApi.IOrder
             _ => BO.OrderStatus.confirmed,
         };
     }
-
+    /// <summary>
+    /// help function that gets an order from the data layer
+    /// </summary>
+    /// <param name="doOrder">an order from the data layer</param>
+    /// <returns></returns>
     private BO.Order getBoOrder(DO.Order doOrder)  
     {
-        BO.Order boOrder = new BO.Order
+        BO.Order boOrder = new BO.Order //create a new order of the logical layer
         {
+            //Initializes the data
             ID = doOrder.seqNum,
             CustomerName = doOrder.CustomerName,
             CustomerEmail = doOrder.CustomerEmail,
@@ -48,21 +61,29 @@ internal class Order : BlApi.IOrder
         };
         return boOrder;
     }
+
+    /// <summary>
+    /// get an order's datails
+    /// </summary>
+    /// <param name="orderID">the order's id of the order that you want to get its details</param>
+    /// <returns></returns>
+    /// <exception cref="BO.BoDoesNoExistException">order does not exist"</exception>
     public BO.Order GetOrderDetails(int orderID)
     {
         try
         {
-            orderID.negativeNumber();
+            orderID.negativeNumber();//exception
 
              
-            DO.Order DOorder = _dal.Order.RequestById(orderID);
+            DO.Order DOorder = _dal.Order.RequestById(orderID);//gets the right order using its id
 
-            BO.Order order = getBoOrder(DOorder);
+            BO.Order order = getBoOrder(DOorder);//call the help function
 
             IEnumerable<DO.OrderItem> orderItemsList = _dal.OrderItem.RequestByOrderId(orderID);
             order.OrderItems = (from orderItem in orderItemsList
                                 select new BO.OrderItem
                                 {
+                                    //Initializes the data for each order item
                                     OrderID = orderItem.seqNum,
                                     Name = _dal.Product.RequestById(orderItem.ProductID).Name,
                                     ProductID = orderItem.ProductID,
@@ -72,108 +93,129 @@ internal class Order : BlApi.IOrder
 
                                 }).ToList();
 
-            order.TotalPrice = orderItemsList.Sum(orderItem=> orderItem.Price * orderItem.Amount);
+            order.TotalPrice = orderItemsList.Sum(orderItem=> orderItem.Price * orderItem.Amount);//calculate the order's total price
 
             return order;
         }
-        catch (DalApi.DalDoesNoExistException ex)
+        catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
         {
 
             throw new BO.BoDoesNoExistException("order does not exist", ex);
         }
     }
 
+    /// <summary>
+    /// Update the order ship date
+    /// </summary>
+    /// <param name="orderID">the order's id that you wants to update its ship date </param>
+    /// <returns></returns>
+    /// <exception cref="BO.DateAlreadyUpdatedException">ship date is already updated</exception>
+    /// <exception cref="BO.BoDoesNoExistException">order does not exist</exception>
     public BO.Order UpdateOrderShip(int orderID)
     {
         try
         {
-            orderID.negativeNumber();
+            orderID.negativeNumber();//exception
 
-            DO.Order doOrder = _dal.Order.RequestById(orderID);
+            DO.Order doOrder = _dal.Order.RequestById(orderID);//gets the order by using its id
 
-            BO.Order order = new BO.Order();
+            BO.Order order = new BO.Order();//create a new order of the logical layer
             if (doOrder.OrderDate != DateTime.MinValue && doOrder.ShipDate == DateTime.MinValue)
             {
                 doOrder.ShipDate = DateTime.Now;
                 _dal.Order.Update(doOrder);
-                order = getBoOrder(doOrder);
+                order = getBoOrder(doOrder);//call the help function
             }
             else
             {            
-                throw new BO.DateAlreadyUpdatedException("ship date is already updated");
+                throw new BO.DateAlreadyUpdatedException("ship date is already updated");//exception
             }
             return order;
         }
-        catch (DalApi.DalDoesNoExistException ex)
+        catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
         {
 
             throw new BO.BoDoesNoExistException("order does not exist", ex);
         }
     }
 
+    /// <summary>
+    /// Update the order delivery date
+    /// </summary>
+    /// <param name="orderID">the order's id that you wants to update its delivery date</param>
+    /// <returns></returns>
+    /// <exception cref="BO.DateAlreadyUpdatedException">Delivery date is already updated</exception>
+    /// <exception cref="BO.BoDoesNoExistException">order does not exist</exception>
     public BO.Order UpdateOrderDelivery(int orderID)
     {
         try
         {
-            orderID.negativeNumber();
+            orderID.negativeNumber();//exception
 
-            DO.Order doOrder = _dal.Order.RequestById(orderID);
+            DO.Order doOrder = _dal.Order.RequestById(orderID);//gets the order by using its id
 
-            BO.Order order = new BO.Order();
+            BO.Order order = new BO.Order();//create a new order of the logical layer
             if (doOrder.ShipDate != null && doOrder.DeliveryDate == null)
             {
                 doOrder.DeliveryDate = DateTime.Now;
                 _dal.Order.Update(doOrder);
-                order = getBoOrder(doOrder);
+                order = getBoOrder(doOrder);//call the help function
             }
             else
             {
-                throw new BO.DateAlreadyUpdatedException("Delivery date is already updated");
+                throw new BO.DateAlreadyUpdatedException("Delivery date is already updated");//exception
             }
             return order;
         }
-        catch (DalApi.DalDoesNoExistException ex)
+        catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
         {
 
             throw new BO.BoDoesNoExistException("order does not exist", ex);
         }
     }
 
+    /// <summary>
+    /// Track the order
+    /// </summary>
+    /// <param name="orderID">the order's id that you wants to track</param>
+    /// <returns></returns>
+    /// <exception cref="BO.BoDoesNoExistException">order does not exist</exception>
     public BO.OrderTracking TrakingOrder(int orderID)
     {
         try
         {
-            orderID.negativeNumber();
+            orderID.negativeNumber();//exception
 
-            DO.Order doOrder = _dal.Order.RequestById(orderID);
+            DO.Order doOrder = _dal.Order.RequestById(orderID);//gets the right order by using its id
             List<Tuple<DateTime?, string>> tupleList = new List<Tuple<DateTime?, string>>();
             Tuple<DateTime?, string> tuple;
-            BO.OrderTracking orderTracking = new BO.OrderTracking();
-            if (doOrder.OrderDate != null)
+            BO.OrderTracking orderTracking = new BO.OrderTracking();//create a new OrderTracking object
+            if (doOrder.OrderDate != null) //The order has been confirmed
             {
                 tuple = new(doOrder.OrderDate, "The order has been confirmed");
                 tupleList.Add(tuple);
-                if (doOrder.ShipDate != null)
+                if (doOrder.ShipDate != null)//The order has been shipped
                 {
-                    tuple = new(doOrder.ShipDate, "The invitation has been shipped");
+                    tuple = new(doOrder.ShipDate, "The order has been shipped");
                     tupleList.Add(tuple);
 
-                    if (doOrder.DeliveryDate != null)
+                    if (doOrder.DeliveryDate != null)//The order has been provided
                     {
-                        tuple = new(doOrder.DeliveryDate, "The invitation has been provided");
+                        tuple = new(doOrder.DeliveryDate, "The order has been provided");
                         tupleList.Add(tuple);
                     }
 
                 }
             }
+            //Initializes the data  
             orderTracking.OrderProgress = tupleList;
             orderTracking.ID = orderID;
-            orderTracking.Status = getOrderStatus(doOrder);
+            orderTracking.Status = getOrderStatus(doOrder);//call the help function
             
             return orderTracking;
 
          }
-        catch (DalApi.DalDoesNoExistException ex)
+        catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
         {
 
             throw new BO.BoDoesNoExistException("order does not exist", ex);
