@@ -33,11 +33,6 @@ public class Order
     /// </summary>
     public DateTime? OrderDate { get; set; }
 
-    ///// <summary>
-    ///// order's payment date
-    ///// </summary>
-    //public DateTime PaymentDate { get; set; }
-
     /// <summary>
     /// order's ship date
     /// </summary>
@@ -58,7 +53,7 @@ public class Order
     /// <returns>the way the order is printed</returns>
     public override string ToString() {
         return $@"
-            Customer OrderID= {ID}: {CustomerName}, 
+            Customer Id= {ID}: {CustomerName}, 
             Email: {CustomerEmail}
             Adress: {CustomerAdress}
             Status: {Status}
@@ -68,6 +63,6 @@ public class Order
 
             Items: {string.Join("\n", OrderItems)}
 
-            Total price: {TotalPrice}";
+            Order's total price: {TotalPrice}";
     }
 }

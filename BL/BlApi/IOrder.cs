@@ -42,6 +42,6 @@ public interface IOrder
     /// <param name="orderID">the order's id that you wants to track</param>
     /// <returns>order tracking object</returns>
     /// <exception cref="BO.BoDoesNoExistException">order does not exist</exception>
-    public BO.OrderTracking TrakingOrder(int orderID);
+    public BO.OrderTracking TrackingOrder(int orderID);
  
 }

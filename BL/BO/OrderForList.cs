@@ -24,9 +24,8 @@ public class OrderForList
     public double TotalPrice { get; set; }
 
     public override string ToString() => $@"
-            Customer OrderID= {ID}: {CustomerName}, 
+            Customer Id= {ID}: {CustomerName}, 
             Status: {Status}
             Amount of items: {AmountOfItems}
-            Total price: {TotalPrice}
-    ";
+            Total price: {TotalPrice}";
 }

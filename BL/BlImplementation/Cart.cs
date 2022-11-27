@@ -10,17 +10,20 @@ using System.Text.RegularExpressions;
 internal class Cart : BlApi.ICart
 {
     private DalApi.IDal _dal = new Dal.DalList();
-    
+
 
     public BO.Cart AddProductToCart(BO.Cart cart, int productId)
     {
         try
         {
             DO.Product product = _dal.Product.RequestById(productId); //get the right product using its id
-
-            BO.OrderItem orderItem = (from OrderItem in cart.Items
-                                      where OrderItem.ProductID == productId
-                                      select OrderItem).First();
+            BO.OrderItem orderItem = new BO.OrderItem();
+            if (cart.Items != null)
+            {
+                orderItem = (from OrderItem in cart.Items
+                             where OrderItem.ProductID == productId
+                             select OrderItem).FirstOrDefault();
+            }
 
             if (product.InStock > 0) // the stock is not empty
             {
@@ -36,7 +39,7 @@ internal class Cart : BlApi.ICart
                 product.InStock.negativeNumber(); //exception
 
 
-            cart.TotalPrice += orderItem.Price; // update the total price anyway
+            cart.TotalPrice += product.Price; // update the total price anyway
 
             return cart;
         }
@@ -45,9 +48,9 @@ internal class Cart : BlApi.ICart
 
             throw new BO.BoDoesNoExistException("product does not exist", ex);
         }
-        
+
     }
-    
+
     public BO.Cart UpdateAmountOfProduct(BO.Cart cart, int productId, int newAmount)
     {
         try
@@ -58,30 +61,31 @@ internal class Cart : BlApi.ICart
                                       where OrderItem.ProductID == productId
                                       select OrderItem).First() ?? throw new BO.BoDoesNoExistException("the orderItem does not exist");
 
-            if (orderItem.Amount > newAmount) //in case the new amount is smaller- remove products from the cart
+            if (newAmount == 0) //remove the product's order from the cart
             {
-                int amountToRemove = orderItem.Amount - newAmount;
-                orderItem.Amount -= amountToRemove;
-                orderItem.TotalPrice -= orderItem.Price * amountToRemove;
-                cart.TotalPrice -= orderItem.Price * amountToRemove;
+                cart.TotalPrice -= orderItem.TotalPrice;
+                cart.Items.Remove(orderItem);
+            }
+            else if(orderItem.Amount > newAmount) //in case the new amount is smaller- remove products from the cart
+            {
+                //int amountToRemove = orderItem.Amount - newAmount;
+                orderItem.Amount -= newAmount;
+                orderItem.TotalPrice -= orderItem.Price * newAmount;
+                cart.TotalPrice -= orderItem.Price * newAmount;
             }
             else if (orderItem.Amount < newAmount)//in case the new amount is bigger- add products to the cart
             {
                 if (doProduct.InStock > 0) // the products requested are in stock
                 {
-                    int amountToAdd = newAmount - orderItem.Amount;
-                    orderItem.Amount += amountToAdd;
-                    orderItem.TotalPrice += orderItem.Price * amountToAdd;
-                    cart.TotalPrice += orderItem.Price * amountToAdd;
+                    //int amountToAdd = newAmount - orderItem.Amount;
+                    orderItem.Amount += newAmount;
+                    orderItem.TotalPrice += orderItem.Price * newAmount;
+                    cart.TotalPrice += orderItem.Price * newAmount;
                 }
                 else
                     doProduct.InStock.negativeNumber();//exception
             }
-            else if (newAmount == 0) //remove the product's order from the cart
-            {
-                cart.TotalPrice -= orderItem.TotalPrice;
-                cart.Items.Remove(orderItem);
-            }
+            
             return cart;
 
         }
@@ -91,21 +95,19 @@ internal class Cart : BlApi.ICart
             throw new BO.BoDoesNoExistException("product does not exist", ex);
         }
     }
-    
-    public void CommitOrder(BO.Cart cart) 
+
+    public void CommitOrder(BO.Cart cart)
     {
         try
         {
             //exceptions
             cart.CustomerEmail.notValidEmail();
-            cart.CustomerName.wrongLengthName();
-            cart.CustomerAdress.wrongLengthName();     
-                
-            foreach (BO.OrderItem orderItem in cart.Items) 
-            {
+            cart.CustomerName.NotValidName();
+            cart.CustomerAdress.NotValidName();
 
-                if (orderItem.Amount < 1)
-                    orderItem.Amount.negativeNumber();//exception
+            foreach (BO.OrderItem orderItem in cart.Items)
+            {
+                orderItem.Amount.negativeNumber();//exception
 
                 DO.Product doProduct = _dal.Product.RequestById(orderItem.ProductID);//get the right product using its id
 

@@ -49,7 +49,7 @@ internal class Product : BlApi.IProduct
         }
         catch (DalApi.DalDoesNoExistException ex) //catches the exception from the data layer
         {
-            throw new BO.BoDoesNoExistException("the product does not exist", ex); 
+            throw new BO.BoDoesNoExistException("Data exception:", ex); 
            
         }
 
@@ -83,7 +83,7 @@ internal class Product : BlApi.IProduct
         }
         catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
         {
-            throw new BO.BoDoesNoExistException("the product does not exist", ex); 
+            throw new BO.BoDoesNoExistException("Data exception:", ex); 
 
         }
     
@@ -96,7 +96,7 @@ internal class Product : BlApi.IProduct
        //exceptions
         product.ID.negativeNumber();
         product.ID.wrongLengthNumber(6);
-        product.Name.wrongLengthName();
+        product.Name.NotValidName();
         product.Price.negativeDoubleNumber();
         product.InStock.negativeNumber();
 
@@ -120,7 +120,7 @@ internal class Product : BlApi.IProduct
         //exceptions
         product.ID.negativeNumber();
         product.ID.wrongLengthNumber(6);
-        product.Name.wrongLengthName();
+        product.Name.NotValidName();
         product.Price.negativeDoubleNumber();
         product.InStock.negativeNumber();
        

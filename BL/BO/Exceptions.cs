@@ -8,12 +8,8 @@ namespace BO;
 public class WrongLengthException : Exception
 {
     public WrongLengthException() { }
-
     public WrongLengthException(string? message) : base(message) { }
-
-
     public WrongLengthException(string? message, Exception? innerException) : base(message, innerException) { }
-
     protected WrongLengthException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 }
 
@@ -22,11 +18,8 @@ public class WrongLengthException : Exception
 public class NegativeNumberException : Exception
 {
     public NegativeNumberException() { }
-
     public NegativeNumberException(string? message) : base(message) { }
-
     public NegativeNumberException(string? message, Exception? innerException) : base(message, innerException) { }
-
     protected NegativeNumberException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 }
 
@@ -35,11 +28,8 @@ public class NegativeNumberException : Exception
 public class BoDoesNoExistException : Exception
 {
     public BoDoesNoExistException() { }
-
     public BoDoesNoExistException(string? message) : base(message) { }
-
     public BoDoesNoExistException(string? message, Exception? innerException) : base(message, innerException) { }
-
     protected BoDoesNoExistException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 }
 
@@ -50,11 +40,8 @@ public class BoDoesNoExistException : Exception
 public class WrongLengthNameException : Exception
 {
     public WrongLengthNameException() { }
-
     public WrongLengthNameException(string? message) : base(message) { }
-
     public WrongLengthNameException(string? message, Exception? innerException) : base(message, innerException) { }
-
     protected WrongLengthNameException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
 }
@@ -63,22 +50,16 @@ public class WrongLengthNameException : Exception
 public class NegativeDoubleNumberException : Exception
 {
     public NegativeDoubleNumberException() { }
-
     public NegativeDoubleNumberException(string? message) : base(message) { }
-
     public NegativeDoubleNumberException(string? message, Exception? innerException) : base(message, innerException) { }
-
     protected NegativeDoubleNumberException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 }
 [Serializable]
 public class DateAlreadyUpdatedException : Exception
 {
     public DateAlreadyUpdatedException() { }
-
     public DateAlreadyUpdatedException(string? message) : base(message) { }
-
     public DateAlreadyUpdatedException(string? message, Exception? innerException) : base(message, innerException) { }
-
     protected DateAlreadyUpdatedException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 }
 
@@ -86,11 +67,8 @@ public class DateAlreadyUpdatedException : Exception
 public class NotValidEmailException : Exception
 {
     public NotValidEmailException() { }
-
     public NotValidEmailException(string? message) : base(message) { }
-
     public NotValidEmailException(string? message, Exception? innerException) : base(message, innerException) { }
-
     protected NotValidEmailException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 }
 
@@ -98,11 +76,8 @@ public class NotValidEmailException : Exception
 public class NotValidAmountException : Exception
 {
     public NotValidAmountException() { }
-
     public NotValidAmountException(string? message) : base(message) { }
-
     public NotValidAmountException(string? message, Exception? innerException) : base(message, innerException) { }
-
     protected NotValidAmountException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 }
 
@@ -110,10 +85,7 @@ public class NotValidAmountException : Exception
 public class NotValidDeleteException : Exception
 {
     public NotValidDeleteException() { }
-
     public NotValidDeleteException(string? message) : base(message) { }
-
     public NotValidDeleteException(string? message, Exception? innerException) : base(message, innerException) { }
-
     protected NotValidDeleteException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 }

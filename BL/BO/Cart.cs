@@ -9,10 +9,12 @@ public class Cart
 
     public override string ToString() {
         return $@"
-            CustomerName  : {CustomerName}
-            CustomerEmail: {CustomerEmail}
-     	    CustomerAddress: {CustomerAdress}
+            Customer Name  : {CustomerName}
+            Customer Email: {CustomerEmail}
+     	    Customer Address: {CustomerAdress}
+
             Items: {string.Join("\n", Items)}
-     	    TotalPrice: {TotalPrice}";
+
+     	    Cart's Total Price: {TotalPrice}";
     }
 }

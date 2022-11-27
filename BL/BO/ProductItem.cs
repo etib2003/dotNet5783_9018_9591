@@ -21,9 +21,8 @@ public class ProductItem
         Product barcode: {ID}, {Name}
         Price: {Price}
         Category: {Category}
-
         Color: {Color}
         Amount: {Amount}   	
-    	Amount in stock: {InStock}";
+    	In stock? {InStock}";
 
 }

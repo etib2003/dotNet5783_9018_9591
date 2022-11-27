@@ -11,32 +11,32 @@ namespace OtherFunctions
         internal static void negativeNumber(this int number)
         {
             if (number <= 0)
-                throw new BO.NegativeNumberException("");
+                throw new BO.NegativeNumberException("Negative number");
 
         }
 
         internal static void wrongLengthNumber(this int number, int length)
         {
             if (number.ToString().Length < length)
-                throw new BO.WrongLengthException("");
+                throw new BO.WrongLengthException("Wrong length number");
 
 
         }
-        internal static void wrongLengthName(this string name)
+        internal static void NotValidName(this string name)
         {
             Regex regex = new Regex("^[A-Za-z]+$");
             if(!regex.IsMatch(name))           
-                throw new BO.WrongLengthNameException("");
+                throw new BO.WrongLengthNameException("Not valid name");
         }
         internal static void negativeDoubleNumber(this double number)
         {
             if (number <= 0)
-                throw new BO.NegativeDoubleNumberException("");
+                throw new BO.NegativeDoubleNumberException("Negative double number");
         }
         internal static void notValidEmail(this string email)
         {
             if (!new EmailAddressAttribute().IsValid(email))
-                throw new BO.NotValidEmailException("");
+                throw new BO.NotValidEmailException("Not valid email");
         }
     
 

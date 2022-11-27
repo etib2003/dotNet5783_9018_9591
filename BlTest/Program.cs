@@ -10,7 +10,6 @@ namespace BlTest
         private static IBl _ibl = new Bl();
         private static Cart cart = new Cart(){ CustomerName = null, CustomerEmail = null, CustomerAdress = null, Items = new List<BO.OrderItem>(), TotalPrice = 0 };
 
-
         static void Main()
         {
 
@@ -74,7 +73,7 @@ Please choose the topic:
   2: Get Order Details
   3: Update Order Ship
   4: Update Order Delivery
-  5: Traking Order
+  5: Tracking Order
   6: Back");
 
 
@@ -129,7 +128,7 @@ Please choose the topic:
                                 tmpOrderId = Console.ReadLine();
                                 int.TryParse(tmpOrderId, out orderId);
 
-                                OrderTracking orderTrack = _ibl.Order.TrakingOrder(orderId);
+                                OrderTracking orderTrack = _ibl.Order.TrackingOrder(orderId);
                                 Console.WriteLine(orderTrack);
                                 break;
                             }
@@ -141,11 +140,11 @@ Please choose the topic:
                     }
                 }
 
-                catch (BO.BoDoesNoExistException ex)
+                catch (BoDoesNoExistException ex)
                 {
                     Console.WriteLine(ex.Message + " " + ex.InnerException.Message);
                 }
-                catch (BO.NegativeNumberException ex)
+                catch (NegativeNumberException ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
@@ -191,6 +190,7 @@ Please choose the topic:
                             }
                         case 2://Get Product Details For Manager
                             {
+                                Console.WriteLine("Enter product's id");
                                 tmpProductId = Console.ReadLine();
                                 int.TryParse(tmpProductId, out productId);
 
@@ -200,6 +200,7 @@ Please choose the topic:
                             }
                         case 3://Get Product Details For Customer
                             {
+                                Console.WriteLine("Enter product's id");
                                 tmpProductId = Console.ReadLine();
                                 int.TryParse(tmpProductId, out productId);
 
@@ -222,9 +223,11 @@ Please choose the topic:
                             }
                         case 6://Delete Product
                             {
+                                Console.WriteLine("Enter product's id");
                                 tmpProductId = Console.ReadLine();
                                 int.TryParse(tmpProductId, out productId);
                                 _ibl.Product.DeleteProduct(productId);
+                                Console.WriteLine($"Product number {productId} deleted");
 
                                 break;
                             }
@@ -237,27 +240,27 @@ Please choose the topic:
                             break;
                     }
                 }
-                catch (BO.BoDoesNoExistException ex)
+                catch (BoDoesNoExistException ex)
                 {
-                    Console.WriteLine(ex.Message + " " + ex.InnerException.Message);
+                    Console.WriteLine(ex.Message + ", " + ex.InnerException.Message);
                 }
-                catch (BO.NegativeNumberException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-                catch (BO.WrongLengthException ex)
+                catch (NegativeNumberException ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
-                catch (BO.WrongLengthNameException ex)
+                catch (WrongLengthException ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
-                catch (BO.NegativeDoubleNumberException ex)
+                catch (WrongLengthNameException ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
-                catch (BO.NotValidDeleteException ex)
+                catch (NegativeDoubleNumberException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                catch (NotValidDeleteException ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
@@ -289,6 +292,7 @@ Please choose the topic:
                     {
                         case 1://Add Product To Cart
                             {
+                                Console.WriteLine("Enter product's id");
                                 tempProductsId = Console.ReadLine();
                                 int.TryParse(tempProductsId, out productId);
                                 _ibl.Cart.AddProductToCart(cart, productId);
@@ -296,8 +300,10 @@ Please choose the topic:
                             }
                         case 2://Update Amount Of Product
                             {
+                                Console.WriteLine("Enter product's id");
                                 tempProductsId = Console.ReadLine();
                                 int.TryParse(tempProductsId, out productId);
+                                Console.WriteLine("Enter product's amount");
                                 string tempAmount = Console.ReadLine();
                                 int amount; int.TryParse(tempAmount, out amount);
                                 _ibl.Cart.UpdateAmountOfProduct(cart, productId, amount);
@@ -317,19 +323,19 @@ Please choose the topic:
                             break;
                     }
                 }
-                catch (BO.BoDoesNoExistException ex)
+                catch (BoDoesNoExistException ex)
                 {
-                    Console.WriteLine(ex.Message + " " + ex.InnerException.Message);
+                    Console.WriteLine(ex.Message + ", " + ex.InnerException.Message);
                 }
-                catch (BO.NegativeNumberException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-                catch (BO.WrongLengthNameException ex)
+                catch (NegativeNumberException ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
-                catch (BO.NotValidEmailException ex)
+                catch (WrongLengthNameException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                catch (NotValidEmailException ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
