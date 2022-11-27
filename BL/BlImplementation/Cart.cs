@@ -46,7 +46,7 @@ internal class Cart : BlApi.ICart
         catch (DalApi.DalDoesNoExistException ex) //catches the exception from the data layer
         {
 
-            throw new BO.BoDoesNoExistException("product does not exist", ex);
+            throw new BO.BoDoesNoExistException("Data exception:", ex);
         }
 
     }
@@ -59,7 +59,7 @@ internal class Cart : BlApi.ICart
 
             BO.OrderItem orderItem = (from OrderItem in cart.Items
                                       where OrderItem.ProductID == productId
-                                      select OrderItem).First() ?? throw new BO.BoDoesNoExistException("the orderItem does not exist");
+                                      select OrderItem).First() ?? throw new BO.BoDoesNoExistException("Data exception:");//
 
             if (newAmount == 0) //remove the product's order from the cart
             {
@@ -92,7 +92,7 @@ internal class Cart : BlApi.ICart
         catch (DalApi.DalDoesNoExistException ex) //catches the exception from the data layer
         {
 
-            throw new BO.BoDoesNoExistException("product does not exist", ex);
+            throw new BO.BoDoesNoExistException("Data exception:", ex);
         }
     }
 
@@ -145,7 +145,7 @@ internal class Cart : BlApi.ICart
         catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
         {
 
-            throw new BO.BoDoesNoExistException("product does not exist", ex);
+            throw new BO.BoDoesNoExistException("Data exception:", ex);
         }
 
     }
