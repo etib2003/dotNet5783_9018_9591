@@ -5,10 +5,7 @@ internal class Order : BlApi.IOrder
 {
     private DalApi.IDal _dal = new Dal.DalList();
 
-    /// <summary>
-    /// Gets a list of orders
-    /// </summary>
-    /// <returns></returns>
+  
     public IEnumerable<BO.OrderForList> GetOrderListForManager()
     { 
             IEnumerable<DO.Order> orderItemsList = _dal.Order.RequestAll();//gets all the orders from the data layer
@@ -26,6 +23,7 @@ internal class Order : BlApi.IOrder
         
       
     }
+
     /// <summary>
     ///  help function to calculate the order's status
     /// </summary>
@@ -40,6 +38,7 @@ internal class Order : BlApi.IOrder
             _ => BO.OrderStatus.confirmed,
         };
     }
+
     /// <summary>
     /// help function that gets an order from the data layer
     /// </summary>
@@ -62,12 +61,6 @@ internal class Order : BlApi.IOrder
         return boOrder;
     }
 
-    /// <summary>
-    /// get an order's datails
-    /// </summary>
-    /// <param name="orderID">the order's id of the order that you want to get its details</param>
-    /// <returns></returns>
-    /// <exception cref="BO.BoDoesNoExistException">order does not exist"</exception>
     public BO.Order GetOrderDetails(int orderID)
     {
         try
@@ -104,13 +97,7 @@ internal class Order : BlApi.IOrder
         }
     }
 
-    /// <summary>
-    /// Update the order ship date
-    /// </summary>
-    /// <param name="orderID">the order's id that you wants to update its ship date </param>
-    /// <returns></returns>
-    /// <exception cref="BO.DateAlreadyUpdatedException">ship date is already updated</exception>
-    /// <exception cref="BO.BoDoesNoExistException">order does not exist</exception>
+    
     public BO.Order UpdateOrderShip(int orderID)
     {
         try
@@ -139,13 +126,7 @@ internal class Order : BlApi.IOrder
         }
     }
 
-    /// <summary>
-    /// Update the order delivery date
-    /// </summary>
-    /// <param name="orderID">the order's id that you wants to update its delivery date</param>
-    /// <returns></returns>
-    /// <exception cref="BO.DateAlreadyUpdatedException">Delivery date is already updated</exception>
-    /// <exception cref="BO.BoDoesNoExistException">order does not exist</exception>
+    
     public BO.Order UpdateOrderDelivery(int orderID)
     {
         try
@@ -174,12 +155,7 @@ internal class Order : BlApi.IOrder
         }
     }
 
-    /// <summary>
-    /// Track the order
-    /// </summary>
-    /// <param name="orderID">the order's id that you wants to track</param>
-    /// <returns></returns>
-    /// <exception cref="BO.BoDoesNoExistException">order does not exist</exception>
+    
     public BO.OrderTracking TrakingOrder(int orderID)
     {
         try

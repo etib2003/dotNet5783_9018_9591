@@ -6,10 +6,7 @@ internal class Product : BlApi.IProduct
 {
     private DalApi.IDal _dal = new Dal.DalList();
 
-    /// <summary>
-    /// Get a list of products for the manager and the catalog
-    /// </summary>
-    /// <returns></returns>
+   
     public IEnumerable<BO.ProductForList> GetListProductForManagerAndCatalog()
     {
         IEnumerable<DO.Product> doProductList = _dal.Product.RequestAll();//gets the products from the data layer
@@ -26,12 +23,7 @@ internal class Product : BlApi.IProduct
         return productForLists;
     }
 
-    /// <summary>
-    /// Gets a product's details for the manager
-    /// </summary>
-    /// <param name="productId">the product's id</param>
-    /// <returns></returns>
-    /// <exception cref="BO.BoDoesNoExistException">the product does not exist</exception>
+   
     public BO.Product GetProductDetailsForManager(int productId)
     {
         try
@@ -63,13 +55,7 @@ internal class Product : BlApi.IProduct
 
     }
 
-    /// <summary>
-    ///  Gets a product's details for the customer
-    /// </summary>
-    /// <param name="productId">the product's id</param>
-    /// <param name="cart">the customer's cart of products</param>
-    /// <returns></returns>
-    /// <exception cref="BO.BoDoesNoExistException">the product does not exist</exception>
+    
     public BO.ProductItem GetProductDetailsForCustomer(int productId, BO.Cart cart)
     {
         try
@@ -103,11 +89,7 @@ internal class Product : BlApi.IProduct
     
     }
 
-    /// <summary>
-    /// add a product
-    /// </summary>
-    /// <param name="product">the product you want to add</param>
-    /// <returns></returns>
+    
     public int AddProduct(BO.Product product)
     {
 
@@ -132,10 +114,7 @@ internal class Product : BlApi.IProduct
         return _dal.Product.Create(doProduct);
     }
 
-    /// <summary>
-    /// update a product
-    /// </summary>
-    /// <param name="product">the product you want to update</param>
+    
     public void UpdateProduct(BO.Product product)
     {
         //exceptions
@@ -158,11 +137,7 @@ internal class Product : BlApi.IProduct
         _dal.Product.Update(doProduct);//send the product to the data layer function that updates it
     }
 
-    /// <summary>
-    /// delete a product
-    /// </summary>
-    /// <param name="productId"> the product's id that you want to delete</param>
-    /// <exception cref="NotValidDeleteException">product Already In Order Prosses</exception>
+    
     public void DeleteProduct(int productId)
     {
         //find the product to delete

@@ -10,13 +10,7 @@ using System.Text.RegularExpressions;
 internal class Cart : BlApi.ICart
 {
     private DalApi.IDal _dal = new Dal.DalList();
-    /// <summary>
-    /// Add a product to the cart
-    /// </summary>
-    /// <param name="cart">the customer's cart</param>
-    /// <param name="productId">the barcode of the product you want to add to the cart</param>
-    /// <returns></returns>
-    /// <exception cref="BO.BoDoesNoExistException">product does not exist</exception>
+    
 
     public BO.Cart AddProductToCart(BO.Cart cart, int productId)
     {
@@ -53,15 +47,7 @@ internal class Cart : BlApi.ICart
         }
         
     }
-    /// <summary>
-    /// Update the amount of the product in the cart
-    /// </summary>
-    /// <param name="cart">the customer's cart</param>
-    /// <param name="productId">the product's barcode</param>
-    /// <param name="newAmount">the new amount of the product that you want</param>
-    /// <returns></returns>
-    /// <exception cref="Exception">the orderItem does not exist</exception>
-    /// <exception cref="BO.BoDoesNoExistException">product does not exist</exception>
+    
     public BO.Cart UpdateAmountOfProduct(BO.Cart cart, int productId, int newAmount)
     {
         try
@@ -105,13 +91,8 @@ internal class Cart : BlApi.ICart
             throw new BO.BoDoesNoExistException("product does not exist", ex);
         }
     }
-    /// <summary>
-    /// place an order
-    /// </summary>
-    /// <param name="cart">the customer's cart</param>
-    /// <exception cref="NotValidAmountException">not Valid Amount</exception>
-    /// <exception cref="BO.BoDoesNoExistException">product does not exist</exception>
-    public void CommitOrder(BO.Cart cart)//place the order
+    
+    public void CommitOrder(BO.Cart cart) 
     {
         try
         {
