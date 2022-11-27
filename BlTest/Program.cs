@@ -147,7 +147,7 @@ Please choose the topic:
                 }
                 catch (BO.NegativeNumberException ex)
                 {
-                    Console.WriteLine(ex.Message + " " + ex.InnerException.Message);
+                    Console.WriteLine(ex.Message);
                 }
 
             } while (action != 6);
@@ -243,23 +243,23 @@ Please choose the topic:
                 }
                 catch (BO.NegativeNumberException ex)
                 {
-                    Console.WriteLine(ex.Message + " " + ex.InnerException.Message);
+                    Console.WriteLine(ex.Message);
                 }
                 catch (BO.WrongLengthException ex)
                 {
-                    Console.WriteLine(ex.Message + " " + ex.InnerException.Message);
+                    Console.WriteLine(ex.Message);
                 }
                 catch (BO.WrongLengthNameException ex)
                 {
-                    Console.WriteLine(ex.Message + " " + ex.InnerException.Message);
+                    Console.WriteLine(ex.Message);
                 }
                 catch (BO.NegativeDoubleNumberException ex)
                 {
-                    Console.WriteLine(ex.Message + " " + ex.InnerException.Message);
+                    Console.WriteLine(ex.Message);
                 }
                 catch (BO.NotValidDeleteException ex)
                 {
-                    Console.WriteLine(ex.Message + " " + ex.InnerException.Message);
+                    Console.WriteLine(ex.Message);
                 }
 
             } while (action != 7);
@@ -323,15 +323,15 @@ Please choose the topic:
                 }
                 catch (BO.NegativeNumberException ex)
                 {
-                    Console.WriteLine(ex.Message + " " + ex.InnerException.Message);
+                    Console.WriteLine(ex.Message);
                 }
                 catch (BO.WrongLengthNameException ex)
                 {
-                    Console.WriteLine(ex.Message + " " + ex.InnerException.Message);
+                    Console.WriteLine(ex.Message);
                 }
                 catch (BO.NotValidEmailException ex)
                 {
-                    Console.WriteLine(ex.Message + " " + ex.InnerException.Message);
+                    Console.WriteLine(ex.Message);
                 }
 
             } while (action != 4);

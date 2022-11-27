@@ -59,7 +59,7 @@ internal class DalOrder: IOrder
     {
         //if order does not exist throw exception 
         if (!DataSource.Orders.Exists(x => x.seqNum == Or.seqNum))
-            throw new UpdateException("cannot update an order,that does not exist");
+            throw new DalDoesNoExistException("cannot update an order,that does not exist");
         Order OToRemove = DataSource.Orders.Find(x => x.seqNum == Or.seqNum); 
         Or.seqNum = OToRemove.seqNum;
         DataSource.Orders.Remove(OToRemove);
