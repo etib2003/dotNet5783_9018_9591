@@ -1,17 +1,16 @@
 ﻿using BO;
 using BlApi;
 using BlImplementation;
-using Order = BO.Order;
-using Product = BO.Product;
 using System;
-using Category = BO.Category;
-using Color = BO.Color;
 
 namespace BlTest
 {
     public class Program
     {
         private static IBl _ibl = new Bl();
+        private static Cart cart = new Cart(){ CustomerName = null, CustomerEmail = null, CustomerAdress = null, Items = new List<BO.OrderItem>(), TotalPrice = 0 };
+
+
         static void Main()
         {
 
@@ -141,7 +140,7 @@ Please choose the topic:
                             break;
                     }
                 }
-                
+
                 catch (BO.BoDoesNoExistException ex)
                 {
                     Console.WriteLine(ex.Message + " " + ex.InnerException.Message);
@@ -162,7 +161,6 @@ Please choose the topic:
             int productId;
             Product product = new Product();
             ProductItem productItem = new ProductItem();
-            Cart cart = new BO.Cart();
             do
             {
                 Console.WriteLine(
@@ -275,7 +273,6 @@ Please choose the topic:
             int productId;
             Product product = new Product();
             ProductItem productItem = new ProductItem();
-            Cart cart = new BO.Cart();
             do
             {
                 Console.WriteLine(

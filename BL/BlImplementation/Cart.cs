@@ -100,7 +100,7 @@ internal class Cart : BlApi.ICart
             cart.CustomerName.wrongLengthName();
             cart.CustomerAdress.wrongLengthName();     
                 
-            foreach (BO.OrderItem orderItem in cart.Items)
+            foreach (BO.OrderItem orderItem in cart.Items) //לזרוק חריגה אם העגלה ריקה
             {
 
                 if (orderItem.Amount < 1)
