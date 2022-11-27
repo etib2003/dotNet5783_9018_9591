@@ -26,17 +26,17 @@ namespace OtherFunctions
         {
             Regex regex = new Regex("^[A-Za-z]+$");
             if(!regex.IsMatch(name))           
-                throw new BO.wrongLengthNameException("");
+                throw new BO.WrongLengthNameException("");
         }
         internal static void negativeDoubleNumber(this double number)
         {
             if (number <= 0)
-                throw new BO.negativeDoubleNumberException("");
+                throw new BO.NegativeDoubleNumberException("");
         }
         internal static void notValidEmail(this string email)
         {
             if (!new EmailAddressAttribute().IsValid(email))
-                throw new BO.notValidEmailException("");
+                throw new BO.NotValidEmailException("");
         }
     
 

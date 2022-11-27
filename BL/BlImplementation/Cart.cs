@@ -109,7 +109,7 @@ internal class Cart : BlApi.ICart
                 DO.Product doProduct = _dal.Product.RequestById(orderItem.ProductID);
                 
                 if (orderItem.Amount > doProduct.InStock)//לבדוק
-                    throw new notValidAmountException("not Valid Amount");
+                    throw new NotValidAmountException("not Valid Amount");
 
             }
 

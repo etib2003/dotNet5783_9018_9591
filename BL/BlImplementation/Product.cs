@@ -135,7 +135,7 @@ internal class Product : BlApi.IProduct
             _dal.Product.Delete(productId);
 
         else
-            throw new notValidDeleteException("product Already In Order Prosses");
+            throw new NotValidDeleteException("product Already In Order Prosses");
         
 
          

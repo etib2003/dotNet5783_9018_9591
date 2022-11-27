@@ -100,7 +100,7 @@ internal class Order : BlApi.IOrder
             }
             else
             {            
-                throw new BO.dateAlreadyUpdatedException("ship date is already updated");
+                throw new BO.DateAlreadyUpdatedException("ship date is already updated");
             }
             return order;
         }
@@ -128,7 +128,7 @@ internal class Order : BlApi.IOrder
             }
             else
             {
-                throw new BO.dateAlreadyUpdatedException("Delivery date is already updated");
+                throw new BO.DateAlreadyUpdatedException("Delivery date is already updated");
             }
             return order;
         }

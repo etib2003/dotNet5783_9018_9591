@@ -14,6 +14,7 @@ namespace BlTest
         private static IBl _ibl = new Bl();
         static void Main()
         {
+
             //for the switch loop
             int Choice;
 
@@ -55,6 +56,7 @@ Please choose the topic:
                 }
 
             } while (Choice != 4);
+
         }
 
         //in case the user chose order
@@ -67,7 +69,7 @@ Please choose the topic:
             do
             {
                 Console.WriteLine(
-@"  
+    @"  
   Please choose the option:
   1: Get Order List For Manager
   2: Get Order Details
@@ -75,8 +77,8 @@ Please choose the topic:
   4: Update Order Delivery
   5: Traking Order
   6: Back");
-                
-                
+
+
                 int.TryParse(Console.ReadLine(), out action);
                 try
                 {
@@ -139,7 +141,12 @@ Please choose the topic:
                             break;
                     }
                 }
-                catch (BO.BoDoesNoExistException ex)//main /////////////
+                
+                catch (BO.BoDoesNoExistException ex)
+                {
+                    Console.WriteLine(ex.Message + " " + ex.InnerException.Message);
+                }
+                catch (BO.NegativeNumberException ex)
                 {
                     Console.WriteLine(ex.Message + " " + ex.InnerException.Message);
                 }
@@ -159,7 +166,7 @@ Please choose the topic:
             do
             {
                 Console.WriteLine(
-@"  
+    @"  
   Please choose the option:
   1: Get List Product For Manager And Catalog
   2: Get Product Details For Manager
@@ -225,16 +232,36 @@ Please choose the topic:
                             }
 
                         case 7:
-                                break;
+                            break;
 
                         default:
                             Console.WriteLine("ERROR");
                             break;
                     }
                 }
-                catch (Exception e)
+                catch (BO.BoDoesNoExistException ex)
                 {
-                    Console.WriteLine(e.Message);
+                    Console.WriteLine(ex.Message + " " + ex.InnerException.Message);
+                }
+                catch (BO.NegativeNumberException ex)
+                {
+                    Console.WriteLine(ex.Message + " " + ex.InnerException.Message);
+                }
+                catch (BO.WrongLengthException ex)
+                {
+                    Console.WriteLine(ex.Message + " " + ex.InnerException.Message);
+                }
+                catch (BO.WrongLengthNameException ex)
+                {
+                    Console.WriteLine(ex.Message + " " + ex.InnerException.Message);
+                }
+                catch (BO.NegativeDoubleNumberException ex)
+                {
+                    Console.WriteLine(ex.Message + " " + ex.InnerException.Message);
+                }
+                catch (BO.NotValidDeleteException ex)
+                {
+                    Console.WriteLine(ex.Message + " " + ex.InnerException.Message);
                 }
 
             } while (action != 7);
@@ -252,7 +279,7 @@ Please choose the topic:
             do
             {
                 Console.WriteLine(
-@"  
+    @"  
   Please choose the option:
   1: Add Product To Cart
   2: Update Amount Of Product
@@ -293,10 +320,23 @@ Please choose the topic:
                             break;
                     }
                 }
-                catch (Exception e)
+                catch (BO.BoDoesNoExistException ex)
                 {
-                    Console.WriteLine(e.Message);
+                    Console.WriteLine(ex.Message + " " + ex.InnerException.Message);
                 }
+                catch (BO.NegativeNumberException ex)
+                {
+                    Console.WriteLine(ex.Message + " " + ex.InnerException.Message);
+                }
+                catch (BO.WrongLengthNameException ex)
+                {
+                    Console.WriteLine(ex.Message + " " + ex.InnerException.Message);
+                }
+                catch (BO.NotValidEmailException ex)
+                {
+                    Console.WriteLine(ex.Message + " " + ex.InnerException.Message);
+                }
+
             } while (action != 4);
         }
         static Cart getCartDetails(ref Cart cart)
@@ -312,7 +352,6 @@ Please choose the topic:
 
             return cart;
         }
-
         static Product GetProductDetails(ref Product product)
         {
             Console.WriteLine("Enter product's barcode:");
