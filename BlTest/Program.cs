@@ -8,7 +8,7 @@ namespace BlTest
     public class Program
     {
         private static IBl _ibl = new Bl();
-        private static Cart cart = new Cart(){ CustomerName = null, CustomerEmail = null, CustomerAdress = null, Items = new List<BO.OrderItem>(), TotalPrice = 0 };
+        private static Cart cart = new Cart() { CustomerName = null, CustomerEmail = null, CustomerAdress = null, Items = new List<BO.OrderItem>(), TotalPrice = 0 };
 
         static void Main()
         {
@@ -260,6 +260,10 @@ Please choose the topic:
                 {
                     Console.WriteLine(ex.Message);
                 }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
 
             } while (action != 7);
         }
@@ -350,8 +354,11 @@ Please choose the topic:
 
             return cart;
         }
+
+
         static Product GetProductDetails(ref Product product)
         {
+
             Console.WriteLine("Enter product's barcode:");
             int barcode; int.TryParse(Console.ReadLine(), out barcode);
             product.ID = barcode;
@@ -360,12 +367,18 @@ Please choose the topic:
             product.Name = Console.ReadLine()!;
 
             Console.Write("Enter product's category: 0- Percussions , 1- StringInstrument , 2- WindInstrument , 3- KeyBoard , 4- BowInstrument: ");
-            string input = Console.ReadLine()!;//להוסיף בדיקה פה
-            product.Category = (Category)int.Parse(input);
+            string sinput = Console.ReadLine()!;
+            int.TryParse(sinput, out int input);
+            if (input <= 4)
+                product.Category = (Category)input;
+            else throw new Exception("Not valid category exception");
 
             Console.Write("Enter product's color: 0- Black , 1- Red , 2- White , 3- Brown: ");
-            input = Console.ReadLine()!;
-            product.Color = (Color)int.Parse(input);
+            sinput = Console.ReadLine()!;
+            int.TryParse(sinput, out input);
+            if (input <= 3)
+                product.Color = (Color)input;
+            else throw new Exception("Not valid color exception");
 
             Console.WriteLine("Enter product's price:");
             double price; double.TryParse(Console.ReadLine(), out price);
@@ -377,6 +390,7 @@ Please choose the topic:
             product.InStock = inStock;
 
             return product;
+
         }
 
     }
