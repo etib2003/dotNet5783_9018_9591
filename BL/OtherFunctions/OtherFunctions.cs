@@ -25,7 +25,7 @@ namespace OtherFunctions
         internal static void NotValidName(this string name)
         {
             if(string.IsNullOrWhiteSpace(name))           
-                throw new BO.NotValidNameException("Not valid name");
+                throw new BO.NotValidFormatNameException("Not valid name");
         }
         internal static void negativeDoubleNumber(this double number)
         {

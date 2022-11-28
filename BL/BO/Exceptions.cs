@@ -37,12 +37,12 @@ public class BoDoesNoExistException : Exception
 
 
 [Serializable]
-public class NotValidNameException : Exception
+public class NotValidFormatNameException : Exception
 {
-    public NotValidNameException() { }
-    public NotValidNameException(string? message) : base(message) { }
-    public NotValidNameException(string? message, Exception? innerException) : base(message, innerException) { }
-    protected NotValidNameException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+    public NotValidFormatNameException() { }
+    public NotValidFormatNameException(string? message) : base(message) { }
+    public NotValidFormatNameException(string? message, Exception? innerException) : base(message, innerException) { }
+    protected NotValidFormatNameException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
 }
 
