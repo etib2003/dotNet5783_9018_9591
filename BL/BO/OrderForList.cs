@@ -19,10 +19,20 @@ public class OrderForList
     /// </summary>
     public BO.OrderStatus Status { get; set; }
 
+    /// <summary>
+    /// the amount of the items in the order's list
+    /// </summary>
     public int AmountOfItems { get; set; }
 
+    /// <summary>
+    /// total price of the orders in list
+    /// </summary>
     public double TotalPrice { get; set; }
 
+    /// <summary>
+    /// the list of orders print method
+    /// </summary>
+    /// <returns>the way the order's list data is printed</returns>
     public override string ToString() => $@"
             Customer Id= {ID}: {CustomerName}, 
             Status: {Status}
