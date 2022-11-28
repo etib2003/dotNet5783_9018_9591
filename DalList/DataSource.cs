@@ -1,7 +1,7 @@
 ﻿using DO;
 
 namespace Dal;
-internal static class DataSource
+internal static class dataSource
 {
     /// <summary>
     /// internal static readonly object Order_vec
@@ -9,25 +9,25 @@ internal static class DataSource
     static readonly Random random = new Random();
 
     /// <summary>
-    /// List of Products
+    /// List of _products
     /// </summary>
-    internal static List<Product> Products = new List<Product>();
+    internal static List<Product> _products = new List<Product>();
 
     /// <summary>
-    /// List of Orders
+    /// List of _orders
     /// </summary>
-    internal static List<Order> Orders = new List<Order>();
+    internal static List<Order> _orders = new List<Order>();
 
     /// <summary>
-    /// List of OrderItems
+    /// List of _orderItems
     /// </summary>
-    internal static List<OrderItem> OrderItems = new List<OrderItem>();
+    internal static List<OrderItem> _orderItems = new List<OrderItem>();
 
 
     /// <summary>
     /// constructor
     /// </summary>
-    static DataSource()
+    static dataSource()
     {
         s_Initialize();
     }
@@ -38,8 +38,8 @@ internal static class DataSource
     static void s_Initialize()
     {
         OrderInitialize();
-        ProductInitialize();
-        OrderItemInitialize();
+        productInitialize();
+        orderItemInitialize();
     }
 
     /// <summary>
@@ -80,14 +80,14 @@ internal static class DataSource
             else
                 order.DeliveryDate = null;
 
-            Orders.Add(order);  //adds the new order to the order's list.
+            _orders.Add(order);  //adds the new order to the order's list.
         }
     }
 
     /// <summary>
     /// initialize the products list
     /// </summary>
-    static void ProductInitialize()//initializing products
+    static void productInitialize()//initializing products
     {
         int AmountOfProducts = 10;
         for (int i = 1; i <= AmountOfProducts; i++)
@@ -97,7 +97,7 @@ internal static class DataSource
             {
                 product.ID = random.Next(100000, 999999);
             }
-            while (Products.Exists(x => x.ID == product.ID));
+            while (_products.Exists(x => x.ID == product.ID));
             product.Name = "product" + i;
             product.Price = random.Next(200, 2000);
             product.Category = (Category)(i % 5);
@@ -106,27 +106,27 @@ internal static class DataSource
                 product.InStock = 0;
             else
                 product.InStock = i * 3;
-            Products.Add(product);
+            _products.Add(product);
         }
     }
 
     /// <summary>
     /// initialize the order items list
     /// </summary>
-    static void OrderItemInitialize()//initializing orderItems 
+    static void orderItemInitialize()//initializing orderItems 
     {
-        int AmountOfOrderItem = 40;
+        int _amountOfOrderItem = 40;
 
-        for (int i = 1; i <= AmountOfOrderItem; i++)
+        for (int i = 1; i <= _amountOfOrderItem; i++)
         {
             OrderItem orderItem = new OrderItem();//create a new object
             orderItem.seqNum = config.SeqNumOi;//adds to the seqNum 1;
-            orderItem.OrderID = Orders[i % 25].seqNum;
-            Product p = Products[random.Next(0, 9)];
+            orderItem.OrderID = _orders[i % 25].seqNum;
+            Product p = _products[random.Next(0, 9)];
             orderItem.ProductID = p.ID;
             orderItem.Price = p.Price;
             orderItem.Amount = random.Next(1, 4);
-            OrderItems.Add(orderItem);
+            _orderItems.Add(orderItem);
         }
     }
 

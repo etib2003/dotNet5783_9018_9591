@@ -5,10 +5,10 @@ namespace Dal;
 /// <summary>
 /// The class of products
 /// </summary>
-internal class DalProduct : IProduct
+internal class dalProduct : IProduct
 {
 
-    //CRUD for Products:
+    //CRUD for _products:
 
     /// <summary>
     /// the function adds a new product to the orders' list
@@ -18,10 +18,10 @@ internal class DalProduct : IProduct
     /// <exception cref="cannot create a product,that already exists"></exception>
     public int Create(Product product)
     {
-        if (DataSource.Products.Exists(x => x.ID == product.ID))
+        if (dataSource._products.Exists(x => x.ID == product.ID))
             throw new DalAlreadyExistsException("Product");
 
-        DataSource.Products.Add(product);
+        dataSource._products.Add(product);
         return product.ID;  
     }
 
@@ -32,8 +32,8 @@ internal class DalProduct : IProduct
     public IEnumerable<Product> RequestAll()
     {
         List<Product> listToReturn = new List<Product>();
-        for (int i = 0; i < DataSource.Products.Count; i++)
-            listToReturn.Add(DataSource.Products[i]);
+        for (int i = 0; i < dataSource._products.Count; i++)
+            listToReturn.Add(dataSource._products[i]);
         return listToReturn;
     }
 
@@ -45,10 +45,10 @@ internal class DalProduct : IProduct
     /// <exception cref="the product does not exist"></exception >
     public Product RequestById(int id)
     {
-        if (!DataSource.Products.Exists(x => x.ID == id))
+        if (!dataSource._products.Exists(x => x.ID == id))
             throw new DalDoesNoExistException("Product");
 
-        return DataSource.Products.Find(x => x.ID == id);
+        return dataSource._products.Find(x => x.ID == id);
     }
 
     /// <summary>
@@ -59,11 +59,11 @@ internal class DalProduct : IProduct
     public void Update(Product product)
     {
         //if product does not exist throw exception 
-        if (!DataSource.Products.Exists(x => x.ID == product.ID))
+        if (!dataSource._products.Exists(x => x.ID == product.ID))
             throw new DalDoesNoExistException("Product");
-        Product PdctToRemove = DataSource.Products.Find(x => x.ID == product.ID); 
-        DataSource.Products.Remove(PdctToRemove);
-        DataSource.Products.Add(product);
+        Product PdctToRemove = dataSource._products.Find(x => x.ID == product.ID); 
+        dataSource._products.Remove(PdctToRemove);
+        dataSource._products.Add(product);
     }
 
     /// <summary>
@@ -74,10 +74,10 @@ internal class DalProduct : IProduct
     public void Delete(int id)
     {
         //if product does not exist throw exception 
-        if (!DataSource.Products.Exists(x => x.ID == id))
+        if (!dataSource._products.Exists(x => x.ID == id))
             throw new DalDoesNoExistException("Product");
-        Product PdctToRemove = DataSource.Products.Find(x => x.ID == id);
-        DataSource.Products.Remove(PdctToRemove);
+        Product PdctToRemove = dataSource._products.Find(x => x.ID == id);
+        dataSource._products.Remove(PdctToRemove);
     }
 
 }

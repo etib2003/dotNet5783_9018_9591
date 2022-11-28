@@ -1,13 +1,13 @@
 ﻿using DO;
 using DalApi;
 using System.Runtime.CompilerServices;
-//using static Dal.DataSource;
+//using static Dal.dataSource;
 
 namespace Dal;
 /// <summary>
 /// The class of orders
 /// </summary>
-internal class DalOrder: IOrder
+internal class dalOrder: IOrder
 {
     /// <summary>
     /// the function adds a new order to the orders' list
@@ -16,10 +16,10 @@ internal class DalOrder: IOrder
     /// <returns>the added order id</returnsreturns >
     public int Create(Order Or)
     {
-        Or.seqNum = DataSource.config.SeqNumOr;
-        if (DataSource.Orders.Exists(x => x.seqNum == Or.seqNum))
+        Or.seqNum = dataSource.config.SeqNumOr;
+        if (dataSource._orders.Exists(x => x.seqNum == Or.seqNum))
             throw new DalAlreadyExistsException("Order");
-        DataSource.Orders.Add(Or);
+        dataSource._orders.Add(Or);
         return Or.seqNum;
     }
 
@@ -30,8 +30,8 @@ internal class DalOrder: IOrder
     public IEnumerable<Order> RequestAll()
     {
         List<Order> listToReturn = new List<Order>();
-        for (int i = 0; i < DataSource.Orders.Count; i++)
-            listToReturn.Add(DataSource.Orders[i]);
+        for (int i = 0; i < dataSource._orders.Count; i++)
+            listToReturn.Add(dataSource._orders[i]);
 
         return listToReturn;
     }
@@ -44,10 +44,10 @@ internal class DalOrder: IOrder
     /// <exception cref="the order isn't exist"></exception >
     public Order RequestById(int id)
     {
-        if (!DataSource.Orders.Exists(x => x.seqNum == id))
+        if (!dataSource._orders.Exists(x => x.seqNum == id))
             throw new DalDoesNoExistException("Order");
 
-        return DataSource.Orders.Find(x => x.seqNum == id);
+        return dataSource._orders.Find(x => x.seqNum == id);
     }
 
     /// <summary>
@@ -58,12 +58,12 @@ internal class DalOrder: IOrder
     public void Update(Order Or)
     {
         //if order does not exist throw exception 
-        if (!DataSource.Orders.Exists(x => x.seqNum == Or.seqNum))
+        if (!dataSource._orders.Exists(x => x.seqNum == Or.seqNum))
             throw new DalDoesNoExistException("Order");
-        Order OToRemove = DataSource.Orders.Find(x => x.seqNum == Or.seqNum); 
+        Order OToRemove = dataSource._orders.Find(x => x.seqNum == Or.seqNum); 
         Or.seqNum = OToRemove.seqNum;
-        DataSource.Orders.Remove(OToRemove);
-        DataSource.Orders.Add(Or);
+        dataSource._orders.Remove(OToRemove);
+        dataSource._orders.Add(Or);
     }
 
     /// <summary>
@@ -74,10 +74,10 @@ internal class DalOrder: IOrder
     public void Delete(int id)
     {
         //if student does not exist throw exception 
-        if (!DataSource.Orders.Exists(x => x.seqNum == id))
+        if (!dataSource._orders.Exists(x => x.seqNum == id))
             throw new DalDoesNoExistException("Order");
-        Order OToRemove = DataSource.Orders.Find(x => x.seqNum == id);
-        DataSource.Orders.Remove(OToRemove);
+        Order OToRemove = dataSource._orders.Find(x => x.seqNum == id);
+        dataSource._orders.Remove(OToRemove);
     }
 
 }
