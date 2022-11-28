@@ -22,10 +22,9 @@ namespace OtherFunctions
 
 
         }
-        internal static void NotValidName(this string name) //string.IsNullOrWhiteSpace(str)
+        internal static void NotValidName(this string name)
         {
-            Regex regex = new Regex(@"^[A-Za-z]+\s?[1-9A-Za-z]*$");
-            if(!regex.IsMatch(name))           
+            if(string.IsNullOrWhiteSpace(name))           
                 throw new BO.WrongLengthNameException("Not valid name");
         }
         internal static void negativeDoubleNumber(this double number)
