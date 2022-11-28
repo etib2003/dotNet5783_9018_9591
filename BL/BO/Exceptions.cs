@@ -1,5 +1,4 @@
-﻿
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
 
 namespace BO;
@@ -89,3 +88,4 @@ public class NotValidDeleteException : Exception
     public NotValidDeleteException(string? message, Exception? innerException) : base(message, innerException) { }
     protected NotValidDeleteException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 }
+

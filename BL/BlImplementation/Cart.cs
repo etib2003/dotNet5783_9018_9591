@@ -1,11 +1,6 @@
 ﻿using BO;
-using DalApi;
 using DO;
 using OtherFunctions;
-using System.ComponentModel.DataAnnotations;
-using System.Net.Mail;
-using System.Runtime.Serialization;
-using System.Text.RegularExpressions;
 
 internal class Cart : BlApi.ICart
 {
@@ -99,8 +94,8 @@ internal class Cart : BlApi.ICart
         {
             //exceptions
             cart.CustomerEmail.notValidEmail();
-            cart.CustomerName.NotValidName();
-            cart.CustomerAdress.NotValidName();
+            cart.CustomerName.notValidName();
+            cart.CustomerAdress.notValidName();
 
             foreach (BO.OrderItem orderItem in cart.Items)
             {

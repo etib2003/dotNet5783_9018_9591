@@ -1,5 +1,4 @@
-﻿ 
-using OtherFunctions;
+﻿ using OtherFunctions;
 
 internal class Order : BlApi.IOrder
 {

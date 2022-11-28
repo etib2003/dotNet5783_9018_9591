@@ -1,8 +1,5 @@
-﻿
-
-using BO;
+﻿using DocumentFormat.OpenXml.Spreadsheet;
 using System.ComponentModel.DataAnnotations;
-using System.Text.RegularExpressions;
 
 namespace OtherFunctions
 {
@@ -22,9 +19,9 @@ namespace OtherFunctions
 
 
         }
-        internal static void NotValidName(this string name)
+        internal static void notValidName(this string name)
         {
-            if(string.IsNullOrWhiteSpace(name))           
+            if (string.IsNullOrWhiteSpace(name))
                 throw new BO.NotValidFormatNameException("Not valid name");
         }
         internal static void negativeDoubleNumber(this double number)
@@ -37,7 +34,5 @@ namespace OtherFunctions
             if (!new EmailAddressAttribute().IsValid(email))
                 throw new BO.NotValidEmailException("Not valid email");
         }
-    
-
     }
 }

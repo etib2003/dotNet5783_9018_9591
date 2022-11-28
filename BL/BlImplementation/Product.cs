@@ -91,7 +91,7 @@ internal class Product : BlApi.IProduct
         //exceptions
         product.ID.negativeNumber();
         product.ID.wrongLengthNumber(6);
-        product.Name.NotValidName();
+        product.Name.notValidName();
         product.Price.negativeDoubleNumber();
         product.InStock.negativeNumber();
 
@@ -114,7 +114,7 @@ internal class Product : BlApi.IProduct
         //exceptions
         product.ID.negativeNumber();
         product.ID.wrongLengthNumber(6);
-        product.Name.NotValidName();
+        product.Name.notValidName();
         product.Price.negativeDoubleNumber();
         product.InStock.negativeNumber();
 

@@ -92,7 +92,7 @@ Please choose the topic:
                         case 2://Get Order Details
                             {
                                 Console.WriteLine("Enter order's id");
-                                tmpOrderId = Console.ReadLine();
+                                tmpOrderId = Console.ReadLine()!;
                                 int.TryParse(tmpOrderId, out orderId);
 
                                 order = _ibl.Order.GetOrderDetails(orderId);
@@ -102,7 +102,7 @@ Please choose the topic:
                         case 3://Update Order Ship
                             {
                                 Console.WriteLine("Enter order's id");
-                                tmpOrderId = Console.ReadLine();
+                                tmpOrderId = Console.ReadLine()!;
                                 int.TryParse(tmpOrderId, out orderId);
 
                                 order = _ibl.Order.UpdateOrderShip(orderId);
@@ -113,7 +113,7 @@ Please choose the topic:
                         case 4://Update Order Delivery
                             {
                                 Console.WriteLine("Enter order's id");
-                                tmpOrderId = Console.ReadLine();
+                                tmpOrderId = Console.ReadLine()!;
                                 int.TryParse(tmpOrderId, out orderId);
 
                                 order = _ibl.Order.UpdateOrderDelivery(orderId);
@@ -123,7 +123,7 @@ Please choose the topic:
                         case 5://Traking Order
                             {
                                 Console.WriteLine("Enter order's id");
-                                tmpOrderId = Console.ReadLine();
+                                tmpOrderId = Console.ReadLine()!;
                                 int.TryParse(tmpOrderId, out orderId);
 
                                 OrderTracking orderTrack = _ibl.Order.TrackingOrder(orderId);
@@ -189,7 +189,7 @@ Please choose the topic:
                         case 2://Get Product Details For Manager
                             {
                                 Console.WriteLine("Enter product's id");
-                                tmpProductId = Console.ReadLine();
+                                tmpProductId = Console.ReadLine()!;
                                 int.TryParse(tmpProductId, out productId);
 
                                 product = _ibl.Product.GetProductDetailsForManager(productId);
@@ -199,7 +199,7 @@ Please choose the topic:
                         case 3://Get Product Details For Customer
                             {
                                 Console.WriteLine("Enter product's id");
-                                tmpProductId = Console.ReadLine();
+                                tmpProductId = Console.ReadLine()!;
                                 int.TryParse(tmpProductId, out productId);
 
                                 productItem = _ibl.Product.GetProductDetailsForCustomer(productId, cart);
@@ -221,7 +221,7 @@ Please choose the topic:
                         case 6://Delete Product
                             {
                                 Console.WriteLine("Enter product's id");
-                                tmpProductId = Console.ReadLine();
+                                tmpProductId = Console.ReadLine()!;
                                 int.TryParse(tmpProductId, out productId);
                                 _ibl.Product.DeleteProduct(productId);
                                 Console.WriteLine($"Product number {productId} deleted");
@@ -289,7 +289,7 @@ Please choose the topic:
                         case 1://Add Product To Cart
                             {
                                 Console.WriteLine("Enter product's id");
-                                tempProductsId = Console.ReadLine();
+                                tempProductsId = Console.ReadLine()!;
                                 int.TryParse(tempProductsId, out productId);
                                 _ibl.Cart.AddProductToCart(cart, productId);
                                 break;
@@ -297,10 +297,10 @@ Please choose the topic:
                         case 2://Update Amount Of Product
                             {
                                 Console.WriteLine("Enter product's id");
-                                tempProductsId = Console.ReadLine();
+                                tempProductsId = Console.ReadLine()!;
                                 int.TryParse(tempProductsId, out productId);
                                 Console.WriteLine("Enter product's amount");
-                                string tempAmount = Console.ReadLine();
+                                string tempAmount = Console.ReadLine()!;
                                 int amount; int.TryParse(tempAmount, out amount);
                                 _ibl.Cart.UpdateAmountOfProduct(cart, productId, amount);
                                 break;
@@ -340,13 +340,13 @@ Please choose the topic:
         static Cart getCartDetails(ref Cart cart)
         {
             Console.WriteLine("Enter customer's name:");
-            cart.CustomerName = Console.ReadLine();
+            cart.CustomerName = Console.ReadLine()!;
 
             Console.WriteLine("Enter customer's email:");
-            cart.CustomerEmail = Console.ReadLine();
+            cart.CustomerEmail = Console.ReadLine()!;
 
             Console.WriteLine("Enter customer's address:");
-            cart.CustomerAdress = Console.ReadLine();
+            cart.CustomerAdress = Console.ReadLine()!;
 
             return cart;
         }
@@ -357,14 +357,14 @@ Please choose the topic:
             product.ID = barcode;
 
             Console.WriteLine("Enter product's name:");
-            product.Name = Console.ReadLine();
+            product.Name = Console.ReadLine()!;
 
             Console.Write("Enter product's category: 0- Percussions , 1- StringInstrument , 2- WindInstrument , 3- KeyBoard , 4- BowInstrument: ");
-            string input = Console.ReadLine();
+            string input = Console.ReadLine()!;//להוסיף בדיקה פה
             product.Category = (Category)int.Parse(input);
 
             Console.Write("Enter product's color: 0- Black , 1- Red , 2- White , 3- Brown: ");
-            input = Console.ReadLine();
+            input = Console.ReadLine()!;
             product.Color = (Color)int.Parse(input);
 
             Console.WriteLine("Enter product's price:");
@@ -372,7 +372,7 @@ Please choose the topic:
             product.Price = price;
 
             Console.WriteLine("Enter product's amount in stock:");
-            string tempInStock = Console.ReadLine();
+            string tempInStock = Console.ReadLine()!;
             int inStock; int.TryParse(tempInStock, out inStock);
             product.InStock = inStock;
 
