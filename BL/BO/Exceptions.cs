@@ -37,12 +37,12 @@ public class BoDoesNoExistException : Exception
 
 
 [Serializable]
-public class WrongLengthNameException : Exception
+public class NotValidNameException : Exception
 {
-    public WrongLengthNameException() { }
-    public WrongLengthNameException(string? message) : base(message) { }
-    public WrongLengthNameException(string? message, Exception? innerException) : base(message, innerException) { }
-    protected WrongLengthNameException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+    public NotValidNameException() { }
+    public NotValidNameException(string? message) : base(message) { }
+    public NotValidNameException(string? message, Exception? innerException) : base(message, innerException) { }
+    protected NotValidNameException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
 }
 

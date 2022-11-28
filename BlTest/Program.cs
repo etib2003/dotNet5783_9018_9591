@@ -248,7 +248,7 @@ Please choose the topic:
                 {
                     Console.WriteLine(ex.Message);
                 }
-                catch (WrongLengthNameException ex)
+                catch (NotValidNameException ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
@@ -326,7 +326,7 @@ Please choose the topic:
                 {
                     Console.WriteLine(ex.Message);
                 }
-                catch (WrongLengthNameException ex)
+                catch (NotValidNameException ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
