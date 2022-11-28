@@ -8,6 +8,9 @@ public class OrderItem
     /// </summary>
     public int  Id { get; set; }
      
+    /// <summary>
+    /// product's name
+    /// </summary>
     public string Name{ get; set; }
      
     /// <summary>

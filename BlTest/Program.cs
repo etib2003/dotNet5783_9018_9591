@@ -8,7 +8,7 @@ namespace BlTest
     public class Program
     {
         private static IBl _ibl = new Bl();
-        private static Cart cart = new Cart(){ CustomerName = null, CustomerEmail = null, CustomerAdress = null, Items = new List<BO.OrderItem>(), TotalPrice = 0 };
+        private static Cart cart = new Cart(){ CustomerName = null, CustomerEmail = null, CustomerAddress = null, Items = new List<BO.OrderItem>(), TotalPrice = 0 };
 
         static void Main()
         {
@@ -346,7 +346,7 @@ Please choose the topic:
             cart.CustomerEmail = Console.ReadLine()!;
 
             Console.WriteLine("Enter customer's address:");
-            cart.CustomerAdress = Console.ReadLine()!;
+            cart.CustomerAddress = Console.ReadLine()!;
 
             return cart;
         }

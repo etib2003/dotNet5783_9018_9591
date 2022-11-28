@@ -95,7 +95,7 @@ internal class Cart : BlApi.ICart
             //exceptions
             cart.CustomerEmail.notValidEmail();
             cart.CustomerName.notValidName();
-            cart.CustomerAdress.notValidName();
+            cart.CustomerAddress.notValidName();
 
             foreach (BO.OrderItem orderItem in cart.Items)
             {
@@ -113,7 +113,7 @@ internal class Cart : BlApi.ICart
             {
                 CustomerName = cart.CustomerName,
                 CustomerEmail = cart.CustomerEmail,
-                CustomerAdress = cart.CustomerAdress,
+                CustomerAdress = cart.CustomerAddress,
                 OrderDate = DateTime.Now,
                 ShipDate = null,
                 DeliveryDate = null
