@@ -4,11 +4,11 @@ using DalApi;
 using System.Collections.Generic;
 using System.Linq;
 using DocumentFormat.OpenXml.Drawing.Charts;
-//using static Dal.DataSource;
+//using static Dal.dataSource;
 
 namespace Dal;
 
-internal class DalOrderItem:IOrderItem
+internal class dalOrderItem:IOrderItem
 {
     //CRUD for Student
     /// <summary>
@@ -18,10 +18,10 @@ internal class DalOrderItem:IOrderItem
     /// <returns>the added orderItem id</returns >
     public int Create(OrderItem Oi)
     {
-        Oi.seqNum = DataSource.config.SeqNumOi;
-        if (DataSource.OrderItems.Exists(x => x.seqNum == Oi.seqNum))
+        Oi.seqNum = dataSource.config.SeqNumOi;
+        if (dataSource._orderItems.Exists(x => x.seqNum == Oi.seqNum))
             throw new DalAlreadyExistsException("OrderItem");
-        DataSource.OrderItems.Add(Oi);
+        dataSource._orderItems.Add(Oi);
         return Oi.seqNum;
     }
 
@@ -32,8 +32,8 @@ internal class DalOrderItem:IOrderItem
     public IEnumerable<OrderItem> RequestAll()
     {
         List<OrderItem> listToReturn = new List<OrderItem>();
-        for (int i = 0; i < DataSource.OrderItems.Count; i++)
-            listToReturn.Add(DataSource.OrderItems[i]);
+        for (int i = 0; i < dataSource._orderItems.Count; i++)
+            listToReturn.Add(dataSource._orderItems[i]);
         return listToReturn;
     }
 
@@ -45,10 +45,10 @@ internal class DalOrderItem:IOrderItem
     /// <exception cref="the OrderItem does not exist"></exceptionthe  >
     public OrderItem RequestById(int id)
     {
-        if (!DataSource.OrderItems.Exists(x => x.seqNum == id))
+        if (!dataSource._orderItems.Exists(x => x.seqNum == id))
             throw new DalDoesNoExistException("OrderItem");
 
-        return DataSource.OrderItems.Find(x => x.seqNum == id);
+        return dataSource._orderItems.Find(x => x.seqNum == id);
     }
 
     /// <summary>
@@ -60,10 +60,10 @@ internal class DalOrderItem:IOrderItem
     /// <exception cref="the OrderItem does not exist"></exception >
     public OrderItem RequestByOrderIDProductID(int orderId, int productId)
     {
-        if (!DataSource.OrderItems.Exists(x => x.OrderID == orderId && x.ProductID == productId))
+        if (!dataSource._orderItems.Exists(x => x.OrderID == orderId && x.ProductID == productId))
             throw new DalDoesNoExistException("OrderItem");
 
-        return DataSource.OrderItems.Find(x => x.OrderID == orderId && x.ProductID == productId);
+        return dataSource._orderItems.Find(x => x.OrderID == orderId && x.ProductID == productId);
     }
 
     /// <summary>
@@ -74,10 +74,10 @@ internal class DalOrderItem:IOrderItem
     /// <exception cref="the OrderItem does not exist"></exception>
     public List<OrderItem> RequestByOrderId(int orderId)
     {
-        if (!DataSource.OrderItems.Exists(x => x.OrderID == orderId))
+        if (!dataSource._orderItems.Exists(x => x.OrderID == orderId))
             throw new DalDoesNoExistException("OrderItem");
 
-        List<OrderItem> listToReturn = DataSource.OrderItems.FindAll(x => x.OrderID == orderId);
+        List<OrderItem> listToReturn = dataSource._orderItems.FindAll(x => x.OrderID == orderId);
 
         return listToReturn;
     }
@@ -89,13 +89,13 @@ internal class DalOrderItem:IOrderItem
     /// <exception cref="the orderItem you want to update does not exist"> </exception>
     public void Update(OrderItem Oi)
     {
-        //if OrderItems does not exist throw exception 
-        if (!DataSource.OrderItems.Exists(x => x.seqNum == Oi.seqNum))
+        //if _orderItems does not exist throw exception 
+        if (!dataSource._orderItems.Exists(x => x.seqNum == Oi.seqNum))
             throw new DalDoesNoExistException("OrderItem");
-        OrderItem OiToRemove = DataSource.OrderItems.Find(x => x.seqNum == Oi.seqNum);
+        OrderItem OiToRemove = dataSource._orderItems.Find(x => x.seqNum == Oi.seqNum);
         Oi.seqNum = OiToRemove.seqNum;
-        DataSource.OrderItems.Remove(OiToRemove);
-        DataSource.OrderItems.Add(Oi);
+        dataSource._orderItems.Remove(OiToRemove);
+        dataSource._orderItems.Add(Oi);
     }
 
     /// <summary>
@@ -105,10 +105,10 @@ internal class DalOrderItem:IOrderItem
     /// <exception cref="Exception">the orderItem already exist</exception>
     public void Delete(int id)
     {
-        //if OrderItems does not exist throw exception 
-        if (!DataSource.OrderItems.Exists(x => x.seqNum == id))
+        //if _orderItems does not exist throw exception 
+        if (!dataSource._orderItems.Exists(x => x.seqNum == id))
             throw new DalDoesNoExistException("OrderItem");
-        OrderItem OiToRemove = DataSource.OrderItems.Find(x => x.seqNum == id);
-        DataSource.OrderItems.Remove(OiToRemove);
+        OrderItem OiToRemove = dataSource._orderItems.Find(x => x.seqNum == id);
+        dataSource._orderItems.Remove(OiToRemove);
     }
 }
