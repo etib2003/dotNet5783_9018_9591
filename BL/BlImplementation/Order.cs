@@ -5,7 +5,6 @@ internal class Order : BlApi.IOrder
 {
     private DalApi.IDal _dal = new Dal.DalList();
 
-  
     public IEnumerable<BO.OrderForList> GetOrderListForManager()
     { 
             IEnumerable<DO.Order> orderItemsList = _dal.Order.RequestAll();//gets all the orders from the data layer
@@ -80,8 +79,7 @@ internal class Order : BlApi.IOrder
         try
         {
             orderID.negativeNumber();//exception
-
-             
+    
             DO.Order DOorder = _dal.Order.RequestById(orderID);//gets the right order using its id
 
             BO.Order order = getBoOrder(DOorder);//call the help function

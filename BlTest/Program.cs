@@ -12,7 +12,6 @@ namespace BlTest
 
         static void Main()
         {
-
             //for the switch loop
             int Choice;
 
@@ -75,7 +74,6 @@ Please choose the topic:
   4: Update Order Delivery
   5: Tracking Order
   6: Back");
-
 
                 int.TryParse(Console.ReadLine(), out action);
                 try
@@ -218,7 +216,6 @@ Please choose the topic:
                             {
                                 GetProductDetails(ref product);
                                 _ibl.Product.UpdateProduct(product);
-
                                 break;
                             }
                         case 6://Delete Product
@@ -228,7 +225,6 @@ Please choose the topic:
                                 int.TryParse(tmpProductId, out productId);
                                 _ibl.Product.DeleteProduct(productId);
                                 Console.WriteLine($"Product number {productId} deleted");
-
                                 break;
                             }
 
@@ -242,7 +238,7 @@ Please choose the topic:
                 }
                 catch (BoDoesNoExistException ex)
                 {
-                    Console.WriteLine(ex.Message + ", " + ex.InnerException.Message);
+                    Console.WriteLine(ex.Message + " " + ex.InnerException.Message);
                 }
                 catch (NegativeNumberException ex)
                 {
@@ -307,7 +303,6 @@ Please choose the topic:
                                 string tempAmount = Console.ReadLine();
                                 int amount; int.TryParse(tempAmount, out amount);
                                 _ibl.Cart.UpdateAmountOfProduct(cart, productId, amount);
-
                                 break;
                             }
                         case 3://Commit Order
@@ -325,7 +320,7 @@ Please choose the topic:
                 }
                 catch (BoDoesNoExistException ex)
                 {
-                    Console.WriteLine(ex.Message + ", " + ex.InnerException.Message);
+                    Console.WriteLine(ex.Message + " " + ex.InnerException.Message);
                 }
                 catch (NegativeNumberException ex)
                 {

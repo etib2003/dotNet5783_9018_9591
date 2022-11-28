@@ -38,14 +38,12 @@ internal class Cart : BlApi.ICart
             else
                 product.InStock.negativeNumber(); //exception
 
-
             cart.TotalPrice += product.Price; // update the total price anyway
 
             return cart;
         }
         catch (DalApi.DalDoesNoExistException ex) //catches the exception from the data layer
         {
-
             throw new BO.BoDoesNoExistException("Data exception:", ex);
         }
 
@@ -91,7 +89,6 @@ internal class Cart : BlApi.ICart
         }
         catch (DalApi.DalDoesNoExistException ex) //catches the exception from the data layer
         {
-
             throw new BO.BoDoesNoExistException("Data exception:", ex);
         }
     }
@@ -144,7 +141,6 @@ internal class Cart : BlApi.ICart
         }
         catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
         {
-
             throw new BO.BoDoesNoExistException("Data exception:", ex);
         }
 
