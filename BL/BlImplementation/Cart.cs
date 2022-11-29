@@ -1,4 +1,6 @@
 ﻿using BO;
+using DalApi;
+using DO;
 using OtherFunctions;
 
 internal class Cart : BlApi.ICart
@@ -66,7 +68,7 @@ internal class Cart : BlApi.ICart
             }
             else if (orderItem.Amount > newAmount) //in case the new amount is smaller- remove products from the cart
             {
-                //int amountToRemove = orderItem.Amount - newAmount;
+                //int amountToRemove = boOrderItem.Amount - newAmount;
                 orderItem.Amount -= newAmount;
                 orderItem.TotalPrice -= orderItem.Price * newAmount;
                 cart.TotalPrice -= orderItem.Price * newAmount;
@@ -75,7 +77,7 @@ internal class Cart : BlApi.ICart
             {
                 if (doProduct.InStock > 0) // the products requested are in stock
                 {
-                    //int amountToAdd = newAmount - orderItem.Amount;
+                    //int amountToAdd = newAmount - boOrderItem.Amount;
                     orderItem.Amount += newAmount;
                     orderItem.TotalPrice += orderItem.Price * newAmount;
                     cart.TotalPrice += orderItem.Price * newAmount;
@@ -93,7 +95,7 @@ internal class Cart : BlApi.ICart
         }
     }
 
-    public void CommitOrder(BO.Cart cart)
+    public BO.Order CommitOrder(BO.Cart cart)
     {
         try
         {
@@ -124,22 +126,48 @@ internal class Cart : BlApi.ICart
                 DeliveryDate = null
             });
 
-            (from orderItem in cart.Items //go over the orders in the cart
-             select new DO.OrderItem()
-             {
-                 OrderID = orderId,
-                 ProductID = orderItem.ProductID,
-                 Amount = orderItem.Amount,
-                 Price = orderItem.Price
-             }).ToList().ForEach(orderItem =>
-             {
-                 _dal.OrderItem.Create(orderItem);
-                 DO.Product product = _dal.Product.RequestById(orderItem.ProductID);//get the right product using its id
-                 product.InStock -= orderItem.Amount; //delete from the stock
-                 _dal.Product.Update(product);
-             });
-
-
+            foreach (BO.OrderItem boOrderItem in cart.Items)
+            {
+                DO.OrderItem doOrderItem = new DO.OrderItem()
+                {
+                    OrderID = orderId,
+                    ProductID = boOrderItem.ProductID,
+                    Amount = boOrderItem.Amount,
+                    Price = boOrderItem.Price
+                };
+                boOrderItem.Id = _dal.OrderItem.Create(doOrderItem);
+                DO.Product product = _dal.Product.RequestById(doOrderItem.ProductID);//get the right product using its id
+                product.InStock -= doOrderItem.Amount; //delete from the stock
+                _dal.Product.Update(product);
+            }
+            //(from boOrderItem in cart.Items //go over the orders in the cart
+            // select new DO.OrderItem()
+            // {
+            //     OrderID = orderId,
+            //     ProductID = boOrderItem.ProductID,
+            //     Amount = boOrderItem.Amount,
+            //     Price = boOrderItem.Price
+            // }).ToList().ForEach(orderItem =>
+            // {
+            //     int orderItemId = _dal.OrderItem.Create(orderItem);
+            //     DO.Product product = _dal.Product.RequestById(orderItem.ProductID);//get the right product using its id
+            //     product.InStock -= orderItem.Amount; //delete from the stock
+            //     _dal.Product.Update(product);
+            // });
+            BO.Order boOrder = new BO.Order()
+            {
+                ID = orderId,
+                CustomerName = cart.CustomerName,
+                CustomerEmail = cart.CustomerEmail,
+                CustomerAdress = cart.CustomerAddress,
+                OrderDate = DateTime.Now,
+                ShipDate = null,
+                DeliveryDate = null,
+                TotalPrice = cart.TotalPrice,
+                Status = BO.OrderStatus.confirmed,
+                OrderItems = cart.Items
+            };
+            return boOrder;
 
         }
         catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer

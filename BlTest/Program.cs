@@ -330,8 +330,7 @@ Please choose the topic:
                         case 4://Commit Order
                             {
                                 //getCartDetails(ref _cart);
-                                _ibl.Cart.CommitOrder(_cart);
-                                Console.WriteLine(_cart);
+                                Console.WriteLine(_ibl.Cart.CommitOrder(_cart));
                                 _cart.Items.Clear(); //Emptying the _cart
                                 _cart.TotalPrice=0;
                                 
