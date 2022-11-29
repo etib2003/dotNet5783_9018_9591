@@ -1,12 +1,16 @@
 ﻿using BO;
-using DO;
 using OtherFunctions;
 
 internal class Cart : BlApi.ICart
 {
     private DalApi.IDal _dal = new Dal.DalList();
 
-
+    public void CheckFormat(BO.Cart cart)
+    {
+        cart.CustomerName.notValidName();
+        cart.CustomerEmail.notValidEmail();
+        cart.CustomerAddress.notValidName();
+    }
     public BO.Cart AddProductToCart(BO.Cart cart, int productId)
     {
         try
@@ -23,7 +27,9 @@ internal class Cart : BlApi.ICart
             if (product.InStock > 0) // the stock is not empty
             {
                 if (orderItem is null)
+                {
                     cart.Items.Add(new BO.OrderItem { Name = product.Name, ProductID = product.ID, Amount = 1, Price = product.Price, TotalPrice = product.Price });
+                }
                 else //add another one of the product
                 {
                     orderItem.Amount++;
@@ -58,7 +64,7 @@ internal class Cart : BlApi.ICart
                 cart.TotalPrice -= orderItem.TotalPrice;
                 cart.Items.Remove(orderItem);
             }
-            else if(orderItem.Amount > newAmount) //in case the new amount is smaller- remove products from the cart
+            else if (orderItem.Amount > newAmount) //in case the new amount is smaller- remove products from the cart
             {
                 //int amountToRemove = orderItem.Amount - newAmount;
                 orderItem.Amount -= newAmount;
@@ -77,7 +83,7 @@ internal class Cart : BlApi.ICart
                 else
                     doProduct.InStock.negativeNumber();//exception
             }
-            
+
             return cart;
 
         }
@@ -132,6 +138,8 @@ internal class Cart : BlApi.ICart
                  product.InStock -= orderItem.Amount; //delete from the stock
                  _dal.Product.Update(product);
              });
+
+
 
         }
         catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer

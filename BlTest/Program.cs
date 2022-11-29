@@ -1,6 +1,7 @@
 ﻿using BO;
 using BlApi;
 using BlImplementation;
+ 
 using System;
 
 namespace BlTest
@@ -8,13 +9,17 @@ namespace BlTest
     public class Program
     {
         private static IBl _ibl = new Bl();
-        private static Cart cart = new Cart(){ CustomerName = null, CustomerEmail = null, CustomerAddress = null, Items = new List<BO.OrderItem>(), TotalPrice = 0 };
+        private static Cart _cart = new Cart(){ CustomerName = null, CustomerEmail = null, CustomerAddress = null, Items = new List<BO.OrderItem>(), TotalPrice = 0 };
 
         static void Main()
         {
             Console.WriteLine("Hello , we are happy to have you in our store :) ");
 
-            getCartDetails(ref cart);
+            
+            
+                getCartDetails(ref _cart);
+            
+            
             //for the switch loop
             int Choice;
 
@@ -204,7 +209,7 @@ Please choose the topic:
                                 tmpProductId = Console.ReadLine()!;
                                 int.TryParse(tmpProductId, out productId);
 
-                                productItem = _ibl.Product.GetProductDetailsForCustomer(productId, cart);
+                                productItem = _ibl.Product.GetProductDetailsForCustomer(productId, _cart);
                                 Console.WriteLine(productItem);
                                 break;
                             }
@@ -286,7 +291,7 @@ Please choose the topic:
   2: Update Amount Of Product
   3: Delete a product
   4: Commit Order
-  5: Clear the cart
+  5: Clear the _cart
   6: Back");
                 int.TryParse(Console.ReadLine(), out action);
                 try
@@ -298,7 +303,7 @@ Please choose the topic:
                                 Console.WriteLine("Enter product's id");
                                 tempProductsId = Console.ReadLine()!;
                                 int.TryParse(tempProductsId, out productId);
-                                Console.WriteLine(_ibl.Cart.AddProductToCart(cart, productId));
+                                Console.WriteLine(_ibl.Cart.AddProductToCart(_cart, productId));
                                 break;
                             }
                         case 2://Update Amount Of Product
@@ -309,7 +314,7 @@ Please choose the topic:
                                 Console.WriteLine("Enter product's amount");
                                 string tempAmount = Console.ReadLine()!;
                                 int amount; int.TryParse(tempAmount, out amount);
-                                Console.WriteLine(_ibl.Cart.UpdateAmountOfProduct(cart, productId, amount));
+                                Console.WriteLine(_ibl.Cart.UpdateAmountOfProduct(_cart, productId, amount));
 
                                 break;
                             }
@@ -319,25 +324,23 @@ Please choose the topic:
                                 tempProductsId = Console.ReadLine()!;
                                 int.TryParse(tempProductsId, out productId);
                                 
-                                Console.WriteLine(_ibl.Cart.UpdateAmountOfProduct(cart, productId, 0));
+                                Console.WriteLine(_ibl.Cart.UpdateAmountOfProduct(_cart, productId, 0));
                                 break;
                             }
                         case 4://Commit Order
                             {
-                                //getCartDetails(ref cart);
-                                _ibl.Cart.CommitOrder(cart);
-                                cart.Items.Clear(); //Emptying the cart
-                                cart.TotalPrice=0;
+                                //getCartDetails(ref _cart);
+                                _ibl.Cart.CommitOrder(_cart);
+                                Console.WriteLine(_cart);
+                                _cart.Items.Clear(); //Emptying the _cart
+                                _cart.TotalPrice=0;
                                 
                                 break;
                             }
                         case 5:
                             {
-                                cart.Items.Clear(); //Emptying the cart
-                                cart.TotalPrice = 0;
-                                cart.CustomerName = null;
-                                cart.CustomerEmail = null;
-                                cart.CustomerAddress = null;
+                                _cart.Items.Clear(); //Emptying the _cart
+                                _cart.TotalPrice = 0;
                             }
                             break;
                         case 6:
@@ -368,18 +371,30 @@ Please choose the topic:
         }
         static Cart getCartDetails(ref Cart cart)
         {
-            Console.WriteLine("Enter customer's name:");
-            cart.CustomerName = Console.ReadLine()!;
+            try
+            {
+                Console.WriteLine("Enter customer's name:");
+                cart.CustomerName = Console.ReadLine()!;
 
-            Console.WriteLine("Enter customer's email:");
-            cart.CustomerEmail = Console.ReadLine()!;
+                Console.WriteLine("Enter customer's email:");
+                cart.CustomerEmail = Console.ReadLine()!;
 
-            Console.WriteLine("Enter customer's address:");
-            cart.CustomerAddress = Console.ReadLine()!;
-
+                Console.WriteLine("Enter customer's address:");
+                cart.CustomerAddress = Console.ReadLine()!;
+                _ibl.Cart.CheckFormat(cart);
+            }
+            catch (NotValidFormatNameException ex)
+            {
+                Console.WriteLine(ex.Message);
+                getCartDetails(ref _cart);
+            }
+            catch (NotValidEmailException ex)
+            {
+                Console.WriteLine(ex.Message);
+                getCartDetails(ref _cart);
+            }
             return cart;
         }
-
 
         static Product GetProductDetails(ref Product product)
         {
