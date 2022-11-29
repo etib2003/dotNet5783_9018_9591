@@ -1,7 +1,6 @@
 ﻿using BO;
 using BlApi;
 using BlImplementation;
- 
 using System;
 
 namespace BlTest
@@ -291,7 +290,7 @@ Please choose the topic:
   2: Update Amount Of Product
   3: Delete a product
   4: Commit Order
-  5: Clear the _cart
+  5: Clear the cart
   6: Back");
                 int.TryParse(Console.ReadLine(), out action);
                 try
@@ -329,7 +328,6 @@ Please choose the topic:
                             }
                         case 4://Commit Order
                             {
-                                //getCartDetails(ref _cart);
                                 Console.WriteLine(_ibl.Cart.CommitOrder(_cart));
                                 _cart.Items.Clear(); //Emptying the _cart
                                 _cart.TotalPrice=0;
@@ -364,6 +362,18 @@ Please choose the topic:
                 catch (NotValidEmailException ex)
                 {
                     Console.WriteLine(ex.Message);
+                }
+                //catch (NotExistInCartException ex)
+                //{
+                //    Console.WriteLine(ex.Message);
+                //}
+                //catch (NotInStockException ex)
+                //{
+                //    Console.WriteLine(ex.Message);
+                //}
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
                 }
 
             } while (action != 6);

@@ -26,22 +26,27 @@ internal class Cart : BlApi.ICart
                              select OrderItem).FirstOrDefault();
             }
 
-            if (product.InStock > 0) // the stock is not empty
+            if (orderItem is null)
             {
-                if (orderItem is null)
+                if (product.InStock > 0) // the stock is not empty
                 {
                     cart.Items.Add(new BO.OrderItem { Name = product.Name, ProductID = product.ID, Amount = 1, Price = product.Price, TotalPrice = product.Price });
+                    cart.TotalPrice += product.Price;
                 }
-                else //add another one of the product
+                else
+                    product.InStock.notInStock(); //exception
+            }
+            else
+            {
+                if (product.InStock >= orderItem.Amount + 1)
                 {
                     orderItem.Amount++;
                     orderItem.TotalPrice += orderItem.Price;//update the total price
+                    cart.TotalPrice += product.Price;
                 }
+                else
+                    throw new BO.NotInStockException("Not In Stock");//exception
             }
-            else
-                product.InStock.notInStock(); //exception
-
-            cart.TotalPrice += product.Price; // update the total price anyway
 
             return cart;
         }
@@ -59,7 +64,7 @@ internal class Cart : BlApi.ICart
 
             BO.OrderItem orderItem = (from OrderItem in cart.Items
                                       where OrderItem.ProductID == productId
-                                      select OrderItem).First() ?? throw new BO.BoDoesNoExistException("Data exception:");//
+                                      select OrderItem).First() ?? throw new BO.NotExistInCartException("Not exist in cart");
 
             if (newAmount == 0) //remove the product's order from the cart
             {
@@ -68,22 +73,22 @@ internal class Cart : BlApi.ICart
             }
             else if (orderItem.Amount > newAmount) //in case the new amount is smaller- remove products from the cart
             {
-                int amountToRemove = orderItem.Amount - newAmount;
-                orderItem.Amount -= newAmount;
-                orderItem.TotalPrice -= orderItem.Price * newAmount;
-                cart.TotalPrice -= orderItem.Price * newAmount;
+                cart.TotalPrice -= orderItem.Price * (orderItem.Amount - newAmount);
+                orderItem.TotalPrice -= orderItem.Price * (orderItem.Amount - newAmount);
+                orderItem.Amount = newAmount;
             }
             else if (orderItem.Amount < newAmount)//in case the new amount is bigger- add products to the cart
             {
-                if (doProduct.InStock > 0) // the products requested are in stock
+                if (doProduct.InStock >= newAmount) // the products requested are in stock
                 {
-                    int amountToAdd = newAmount - orderItem.Amount;
-                    orderItem.Amount += newAmount;
-                    orderItem.TotalPrice += orderItem.Price * newAmount;
-                    cart.TotalPrice += orderItem.Price * newAmount;
+                    cart.TotalPrice += orderItem.Price * (newAmount - orderItem.Amount);
+                    orderItem.TotalPrice += orderItem.Price * (newAmount - orderItem.Amount);
+                    orderItem.Amount = newAmount;
                 }
                 else
-                    doProduct.InStock.negativeNumber();//exception
+                {
+                    throw new BO.NotInStockException("Not In Stock");
+                }
             }
 
             return cart;

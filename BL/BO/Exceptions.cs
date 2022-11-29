@@ -97,3 +97,12 @@ internal class NotInStockException : Exception
     public NotInStockException(string? message, Exception? innerException) : base(message, innerException) { }
     protected NotInStockException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 }
+
+[Serializable]
+internal class NotExistInCartException : Exception
+{
+    public NotExistInCartException() { }
+    public NotExistInCartException(string? message) : base(message) { }
+    public NotExistInCartException(string? message, Exception? innerException) : base(message, innerException) { }
+    protected NotExistInCartException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+}
