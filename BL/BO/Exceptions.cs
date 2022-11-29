@@ -89,3 +89,11 @@ public class NotValidDeleteException : Exception
     protected NotValidDeleteException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 }
 
+[Serializable]
+internal class NotInStockException : Exception
+{
+    public NotInStockException() { }
+    public NotInStockException(string? message) : base(message) { }
+    public NotInStockException(string? message, Exception? innerException) : base(message, innerException) { }
+    protected NotInStockException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+}

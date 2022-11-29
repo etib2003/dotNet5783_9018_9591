@@ -59,5 +59,17 @@ namespace OtherFunctions
             if (!new EmailAddressAttribute().IsValid(email))
                 throw new BO.NotValidEmailException("Not valid email");
         }
+
+        /// <summary>
+        /// Check if the amount is negative
+        /// </summary>
+        /// <param name="amount">this amount</param>
+        /// <exception cref="Not In Stock"></exception>
+        internal static void notInStock(this int amount)
+        {
+            if (amount <= 0)
+                throw new BO.NotInStockException("Not In Stock");
+
+        }
     }
 }

@@ -28,7 +28,7 @@ public class Cart
     /// <returns>the way the cart's data is printed</returns>
     public override string ToString() {
         return $@"
-            Customer Name  : {CustomerName}
+            Customer Name: {CustomerName}
             Customer Email: {CustomerEmail}
      	    Customer Address: {CustomerAddress}
 

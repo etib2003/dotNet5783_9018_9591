@@ -31,7 +31,7 @@ internal class Cart : BlApi.ICart
                 }
             }
             else
-                product.InStock.negativeNumber(); //exception
+                product.InStock.notInStock(); //exception
 
             cart.TotalPrice += product.Price; // update the total price anyway
 
