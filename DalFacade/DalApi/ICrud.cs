@@ -14,6 +14,4 @@ public interface ICrud <T>
     public T RequestById(int id);
     public void Update(T Or);
     public void Delete(int id);
-
-
 }

@@ -227,7 +227,6 @@ Please choose the topic:
                                 Console.WriteLine($"Product number {productId} deleted");
                                 break;
                             }
-
                         case 7:
                             break;
 
@@ -284,7 +283,8 @@ Please choose the topic:
   1: Add Product To Cart
   2: Update Amount Of Product
   3: Commit Order
-  4: Back");
+  4: Clear the cart
+  5: Back");
                 int.TryParse(Console.ReadLine(), out action);
                 try
                 {
@@ -313,9 +313,21 @@ Please choose the topic:
                             {
                                 getCartDetails(ref cart);
                                 _ibl.Cart.CommitOrder(cart);
+                                cart.Items.Clear(); //Emptying the cart
+                                cart.TotalPrice=0;
+                                
                                 break;
                             }
                         case 4:
+                            {
+                                cart.Items.Clear(); //Emptying the cart
+                                cart.TotalPrice = 0;
+                                cart.CustomerName = null;
+                                cart.CustomerEmail = null;
+                                cart.CustomerAddress = null;
+                            }
+                            break;
+                        case 5:
                             break;
                         default:
                             Console.WriteLine("ERROR");
@@ -339,7 +351,7 @@ Please choose the topic:
                     Console.WriteLine(ex.Message);
                 }
 
-            } while (action != 4);
+            } while (action != 5);
         }
         static Cart getCartDetails(ref Cart cart)
         {

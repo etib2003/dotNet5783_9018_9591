@@ -13,7 +13,8 @@ internal class dalOrder: IOrder
     /// the function adds a new order to the orders' list
     /// </summary>
     /// <param name="Or">the order you want to add</param>
-    /// <returns>the added order id</returnsreturns >
+    /// <returns>the added order id</returns>
+    /// <exception cref="order already exist"></exception>
     public int Create(Order Or)
     {
         Or.seqNum = dataSource.config.SeqNumOr;
@@ -26,7 +27,7 @@ internal class dalOrder: IOrder
     /// <summary>
     /// the function returns the orders' list
     /// </summary>
-    /// <returns> the order already exists </returns x>
+    /// <returns>the order already exists</returns>
     public IEnumerable<Order> RequestAll()
     {
         List<Order> listToReturn = new List<Order>();

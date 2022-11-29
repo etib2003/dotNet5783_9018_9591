@@ -20,7 +20,7 @@ public interface IProduct
     /// </summary>
     /// <param name="productId">the product's id</param>
     /// <returns>product</returns>
-    /// <exception cref="BO.BoDoesNoExistException">the product does not exist</exception>
+    /// <exception cref="the product does not exist"></exception>
     public BO.Product GetProductDetailsForManager(int productId);
 
     /// <summary>
@@ -29,7 +29,7 @@ public interface IProduct
     /// <param name="productId">the product's id</param>
     /// <param name="cart">the customer's cart of products</param>
     /// <returns>product item</returns>
-    /// <exception cref="BO.BoDoesNoExistException">the product does not exist</exception>
+    /// <exception cref="the product does not exist"></exception>
     public BO.ProductItem GetProductDetailsForCustomer(int productId, BO.Cart cart);
 
     /// <summary>
@@ -49,6 +49,6 @@ public interface IProduct
     /// delete a product
     /// </summary>
     /// <param name="productId"> the product's id that you want to delete</param>
-    /// <exception cref="NotValidDeleteException">product Already In Order Prosses</exception>
+    /// <exception cref="product Already In Order Prosses"></exception>
     public void DeleteProduct(int productId);
 }

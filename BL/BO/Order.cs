@@ -26,7 +26,7 @@ public class Order
     /// <summary>
     /// order's status date
     /// </summary>
-    public BO.OrderStatus Status { get; set; } //לראות מה קורה פה
+    public BO.OrderStatus Status { get; set; } 
 
     /// <summary>
     /// order's order date
@@ -43,8 +43,14 @@ public class Order
     /// </summary>
     public DateTime? DeliveryDate { get; set; }
 
+    /// <summary>
+    /// order's list of orders
+    /// </summary>
     public List <BO.OrderItem> OrderItems { get; set; }
 
+    /// <summary>
+    /// order's total price
+    /// </summary>
     public double TotalPrice { get; set; }
 
     /// <summary>

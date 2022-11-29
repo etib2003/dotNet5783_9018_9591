@@ -17,7 +17,7 @@ internal class Product : BlApi.IProduct
                                                              Name = product.Name,
                                                              Price = product.Price,
                                                              Category = (BO.Category)product.Category,
-                                                             Color = (BO.Color)product.Color
+                                                             Color = (BO.Color)product.Color                                                          
                                                          };
         return productForLists;
     }

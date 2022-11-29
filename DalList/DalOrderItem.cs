@@ -40,9 +40,9 @@ internal class dalOrderItem:IOrderItem
     /// <summary>
     /// the function returns the orderItem that matches the given seqNum
     /// </summary>
-    /// <param name="id">the given seqNum</param >
-    /// <returns>the orderItem of the given seqNum</returns >
-    /// <exception cref="the OrderItem does not exist"></exceptionthe  >
+    /// <param name="id">the given seqNum</param>
+    /// <returns>the orderItem of the given seqNum</returns>
+    /// <exception cref="the orderItem does not exist"></exception>
     public OrderItem RequestById(int id)
     {
         if (!dataSource._orderItems.Exists(x => x.seqNum == id))
@@ -102,7 +102,7 @@ internal class dalOrderItem:IOrderItem
     /// the function deletes the orderItem with the given id
     /// </summary>
     /// <param name="id"> the id of the orderItem you want to delete</param>
-    /// <exception cref="Exception">the orderItem already exist</exception>
+    /// <exception cref="the orderItem already exist"></exception>
     public void Delete(int id)
     {
         //if _orderItems does not exist throw exception 

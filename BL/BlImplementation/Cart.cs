@@ -41,7 +41,6 @@ internal class Cart : BlApi.ICart
         {
             throw new BO.BoDoesNoExistException("Data exception:", ex);
         }
-
     }
 
     public BO.Cart UpdateAmountOfProduct(BO.Cart cart, int productId, int newAmount)
@@ -133,9 +132,6 @@ internal class Cart : BlApi.ICart
                  product.InStock -= orderItem.Amount; //delete from the stock
                  _dal.Product.Update(product);
              });
-
-               cart.Items.Clear();//Emptying the cart
-               cart.TotalPrice = 0;
 
         }
         catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer

@@ -28,6 +28,9 @@ public class OrderItem
     /// </summary>
     public int Amount { get; set; }
 
+    /// <summary>
+    /// orderItem's total price
+    /// </summary>
     public double TotalPrice { get; set; }
     /// <summary>
     /// the orderItem's print method

@@ -14,7 +14,7 @@ public interface IOrder
     /// </summary>
     /// <param name="orderID">the order's id of the order that you want to get its details</param>
     /// <returns> order</returns>
-    /// <exception cref="BO.BoDoesNoExistException">order does not exist"</exception>
+    /// <exception cref="order does not exist"></exception>
 
     public BO.Order GetOrderDetails(int orderID);
 
@@ -23,8 +23,8 @@ public interface IOrder
     /// </summary>
     /// <param name="orderID">the order's id that you wants to update its ship date </param>
     /// <returns>ordre</returns>
-    /// <exception cref="BO.DateAlreadyUpdatedException">ship date is already updated</exception>
-    /// <exception cref="BO.BoDoesNoExistException">order does not exist</exception>
+    /// <exception cref="ship date is already updated"></exception>
+    /// <exception cref="order does not exist"></exception>
     public BO.Order UpdateOrderShip(int orderID);
 
     /// <summary>
@@ -32,8 +32,8 @@ public interface IOrder
     /// </summary>
     /// <param name="orderID">the order's id that you wants to update its delivery date</param>
     /// <returns>order</returns>
-    /// <exception cref="BO.DateAlreadyUpdatedException">Delivery date is already updated</exception>
-    /// <exception cref="BO.BoDoesNoExistException">order does not exist</exception>
+    /// <exception cref="Delivery date is already updated"></exception>
+    /// <exception cref="order does not exist"></exception>
     public BO.Order UpdateOrderDelivery(int orderID);
 
     /// <summary>
@@ -41,7 +41,7 @@ public interface IOrder
     /// </summary>
     /// <param name="orderID">the order's id that you wants to track</param>
     /// <returns>order tracking object</returns>
-    /// <exception cref="BO.BoDoesNoExistException">order does not exist</exception>
+    /// <exception cref="order does not exist"></exception>
     public BO.OrderTracking TrackingOrder(int orderID);
  
 }
