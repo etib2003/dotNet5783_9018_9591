@@ -8,20 +8,17 @@ namespace BlTest
     public class Program
     {
         private static IBl _ibl = new Bl();
-        private static Cart _cart = new Cart(){ CustomerName = null, CustomerEmail = null, CustomerAddress = null, Items = new List<BO.OrderItem>(), TotalPrice = 0 };
+        private static Cart _cart = new Cart() { CustomerName = null, CustomerEmail = null, CustomerAddress = null, Items = new List<BO.OrderItem>(), TotalPrice = 0 };
 
         static void Main()
         {
             Console.WriteLine("Hello , we are happy to have you in our store :) ");
 
-            
-            
-                getCartDetails(ref _cart);
-            
-            
+            getCartDetails(ref _cart);
+
+
             //for the switch loop
             int Choice;
-
 
             do
             {
@@ -322,7 +319,7 @@ Please choose the topic:
                                 Console.WriteLine("Enter product's id");
                                 tempProductsId = Console.ReadLine()!;
                                 int.TryParse(tempProductsId, out productId);
-                                
+
                                 Console.WriteLine(_ibl.Cart.UpdateAmountOfProduct(_cart, productId, 0));
                                 break;
                             }
@@ -330,8 +327,8 @@ Please choose the topic:
                             {
                                 Console.WriteLine(_ibl.Cart.CommitOrder(_cart));
                                 _cart.Items.Clear(); //Emptying the _cart
-                                _cart.TotalPrice=0;
-                                
+                                _cart.TotalPrice = 0;
+
                                 break;
                             }
                         case 5:
