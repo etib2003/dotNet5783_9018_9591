@@ -39,7 +39,7 @@ public class Order
     public DateTime? ShipDate { get; set; }
 
     /// <summary>
-    /// order's delivery date
+    /// Order's delivery date
     /// </summary>
     public DateTime? DeliveryDate { get; set; }
 
