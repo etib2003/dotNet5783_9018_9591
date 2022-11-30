@@ -12,12 +12,12 @@ public class OrderForList
     /// <summary>
     /// the customer name
     /// </summary>
-    public string CustomerName { get; set; }
+    public string? CustomerName { get; set; }
 
     /// <summary>
     /// order's status date
     /// </summary>
-    public BO.OrderStatus Status { get; set; }
+    public BO.OrderStatus? Status { get; set; }
 
     /// <summary>
     /// the amount of the items in the order's list

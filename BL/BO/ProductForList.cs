@@ -11,7 +11,7 @@ public class ProductForList
     /// <summary>
     /// the product's name
     /// </summary>
-    public string Name { get; set; }
+    public string? Name { get; set; }
 
     /// <summary>
     /// price of product
@@ -21,12 +21,12 @@ public class ProductForList
     /// <summary>
     /// category of product
     /// </summary>
-    public BO.Category Category { get; set; }
+    public BO.Category? Category { get; set; }
 
     /// <summary>
     /// Product's color
     /// </summary>
-    public BO.Color Color { get; set; }
+    public BO.Color? Color { get; set; }
 
     /// <summary>
     /// the list of products print method

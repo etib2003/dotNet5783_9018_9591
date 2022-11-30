@@ -13,7 +13,7 @@ public interface IProduct
     /// Get a list of products for the manager and the catalog
     /// </summary>
     /// <returns>list of products</returns>
-    public IEnumerable<BO.ProductForList> GetListProductForManagerAndCatalog();
+    public IEnumerable<BO.ProductForList?> GetListProductForManagerAndCatalog();
 
     /// <summary>
     /// Gets a product's details for the manager
