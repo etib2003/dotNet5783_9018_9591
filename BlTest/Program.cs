@@ -333,7 +333,7 @@ Please choose the topic:
                             }
                         case 5:
                             {
-                                _cart.Items.Clear(); //Emptying the _cart
+                                _cart.Items.ToList().Clear(); //Emptying the _cart
                                 _cart.TotalPrice = 0;
                             }
                             break;
@@ -360,17 +360,17 @@ Please choose the topic:
                 {
                     Console.WriteLine(ex.Message);
                 }
-                //catch (NotExistInCartException ex)
-                //{
-                //    Console.WriteLine(ex.Message);
-                //}
-                //catch (NotInStockException ex)
-                //{
-                //    Console.WriteLine(ex.Message);
-                //}
-                catch (Exception e)
+                catch (NotExistInCartException ex)
                 {
-                    Console.WriteLine(e.Message);
+                    Console.WriteLine(ex.Message);
+                }
+                catch (NotInStockException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
                 }
 
             } while (action != 6);

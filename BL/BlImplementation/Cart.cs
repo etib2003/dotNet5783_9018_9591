@@ -1,7 +1,8 @@
 ﻿using BO;
 using DalApi;
-using DO;
 using OtherFunctions;
+using System.ComponentModel.DataAnnotations;
+
 
 internal class Cart : BlApi.ICart
 {
@@ -64,8 +65,9 @@ internal class Cart : BlApi.ICart
 
             BO.OrderItem orderItem = (from OrderItem in cart.Items
                                       where OrderItem.ProductID == productId
-                                      select OrderItem).First() ?? throw new BO.NotExistInCartException("Not exist in cart");
-
+                                      select OrderItem).FirstOrDefault();
+            if(orderItem==null)
+                throw new BO.NotExistInCartException("Not exist in cart");
             if (newAmount == 0) //remove the product's order from the cart
             {
                 cart.TotalPrice -= orderItem.TotalPrice;

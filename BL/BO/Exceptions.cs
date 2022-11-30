@@ -90,7 +90,7 @@ public class NotValidDeleteException : Exception
 }
 
 [Serializable]
-internal class NotInStockException : Exception
+public class NotInStockException : Exception
 {
     public NotInStockException() { }
     public NotInStockException(string? message) : base(message) { }
@@ -99,7 +99,7 @@ internal class NotInStockException : Exception
 }
 
 [Serializable]
-internal class NotExistInCartException : Exception
+public class NotExistInCartException : Exception
 {
     public NotExistInCartException() { }
     public NotExistInCartException(string? message) : base(message) { }
