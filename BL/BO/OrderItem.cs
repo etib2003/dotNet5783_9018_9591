@@ -11,7 +11,7 @@ public class OrderItem
     /// <summary>
     /// product's name
     /// </summary>
-    public string Name{ get; set; }
+    public string? Name{ get; set; }
      
     /// <summary>
     /// orderItem's product barcode

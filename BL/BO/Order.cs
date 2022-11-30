@@ -11,22 +11,22 @@ public class Order
     /// <summary>
     /// the customer name
     /// </summary>
-    public string CustomerName { get; set; }
+    public string? CustomerName { get; set; }
 
     /// <summary>
     /// the customer email
     /// </summary>
-    public string CustomerEmail { get; set; }
+    public string? CustomerEmail { get; set; }
 
     /// <summary>
     /// the customer adress
     /// </summary>
-    public string CustomerAdress { get; set; }
+    public string? CustomerAdress { get; set; }
 
     /// <summary>
     /// order's status date
     /// </summary>
-    public BO.OrderStatus Status { get; set; } 
+    public BO.OrderStatus? Status { get; set; } 
 
     /// <summary>
     /// order's order date
@@ -46,7 +46,7 @@ public class Order
     /// <summary>
     /// order's list of orders
     /// </summary>
-    public List <BO.OrderItem> OrderItems { get; set; }
+    public List <BO.OrderItem?>?  OrderItems { get; set; }
 
     /// <summary>
     /// order's total price

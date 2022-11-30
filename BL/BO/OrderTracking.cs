@@ -10,12 +10,12 @@ public class OrderTracking
     /// <summary>
     /// the order status
     /// </summary>
-    public BO.OrderStatus Status { get; set; }
+    public BO.OrderStatus? Status { get; set; }
 
     /// <summary>
     /// list of pairs
     /// </summary>
-    public List<Tuple<DateTime?, string>> OrderProgress { get; set; }
+    public List<Tuple<DateTime?, string>?>? OrderProgress { get; set; }
 
     /// <summary>
     /// the tracking order's print method

@@ -7,7 +7,7 @@ public interface IOrder
     /// Gets a list of orders
     /// </summary>
     /// <returns>list of orders</returns>
-    public IEnumerable<BO.OrderForList> GetOrderListForManager();
+    public IEnumerable<BO.OrderForList?> GetOrderListForManager();
 
     /// <summary>
     /// get an order's datails

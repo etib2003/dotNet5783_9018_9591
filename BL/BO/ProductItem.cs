@@ -12,7 +12,7 @@ public class ProductItem
     /// <summary>
     /// product's name
     /// </summary>
-    public string Name { get; set; }
+    public string? Name { get; set; }
 
     /// <summary>
     /// product's price
@@ -22,12 +22,12 @@ public class ProductItem
     /// <summary>
     /// product's category
     /// </summary>
-    public BO.Category Category { get; set; }
+    public BO.Category? Category { get; set; }
 
     /// <summary>
     /// Product's color
     /// </summary>
-    public BO.Color Color { get; set; }
+    public BO.Color? Color { get; set; }
 
     /// <summary>
     /// check if the product is in stock

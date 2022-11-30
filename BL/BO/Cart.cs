@@ -4,19 +4,19 @@ public class Cart
     /// <summary>
     /// the customer's name
     /// </summary>
-    public string CustomerName { get; set; }
+    public string? CustomerName { get; set; }
     /// <summary>
     /// the customer's email
     /// </summary>
-    public string CustomerEmail { get; set; }
+    public string? CustomerEmail { get; set; }
     /// <summary>
     /// the customer's address
     /// </summary>
-    public string CustomerAddress { get; set; }
+    public string? CustomerAddress { get; set; }
     /// <summary>
     /// list of order items
     /// </summary>
-    public List <BO.OrderItem> Items { get; set; }
+    public List <BO.OrderItem?>? Items { get; set; }
     /// <summary>
     /// cart's total price
     /// </summary>

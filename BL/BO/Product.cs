@@ -17,7 +17,7 @@ public class Product
     /// <summary>
     /// product's name
     /// </summary>
-    public string Name { get; set; }
+    public string? Name { get; set; }
 
     /// <summary>
     /// product's price
@@ -27,12 +27,12 @@ public class Product
     /// <summary>
     /// product's Category
     /// </summary>
-    public BO.Category Category { get; set; }
+    public BO.Category? Category { get; set; }
 
     /// <summary>
     /// Product's Color
     /// </summary>
-    public BO.Color Color { get; set; }
+    public BO.Color? Color { get; set; }
 
     /// <summary>
     /// product's amount in stock
