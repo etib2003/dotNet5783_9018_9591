@@ -99,7 +99,7 @@ Please choose the topic:
                                 DateTime.TryParse(Console.ReadLine(), out tmpDateTime);
                                 NewOrder.DeliveryDate = tmpDateTime;
 
-                                Console.Write("The order's seqNum is: ");
+                                Console.Write("The order's Id is: ");
                                 Console.WriteLine(dalList.Order.Create(NewOrder));
 
                                 break;
@@ -116,14 +116,14 @@ Please choose the topic:
                             }
                         case 3://return the order that matches the id
                             {
-                                Console.Write("Enter the order's seqNum: ");
+                                Console.Write("Enter the order's Id: ");
                                 int id; int.TryParse(Console.ReadLine(), out id);
                                 Console.WriteLine(dalList.Order.RequestById(id));
                                 break;
                             }
                         case 4://update an order
                             {
-                                Console.Write("Enter a seqNum: ");
+                                Console.Write("Enter a Id: ");
                                 int seqNum_; int.TryParse(Console.ReadLine(), out seqNum_);
 
                                 Console.WriteLine(dalList.Order.RequestById(seqNum_));
@@ -136,7 +136,7 @@ Please choose the topic:
 
                                 Order updatedOrder = new Order();
 
-                                updatedOrder.seqNum = seqNum_;
+                                updatedOrder.Id = seqNum_;
                                 Console.Write("Enter a Full name: ");
                                 updatedOrder.CustomerName = Console.ReadLine();
                                 Console.Write("Enter an Email: ");
@@ -163,7 +163,7 @@ Please choose the topic:
                             }
                         case 5://delete an order
                             {
-                                Console.Write("Enter the order's seqNum: ");
+                                Console.Write("Enter the order's Id: ");
                                 int id; int.TryParse(Console.ReadLine(), out id);
 
                                 dalList.Order.Delete(id);
@@ -349,7 +349,7 @@ Please choose the topic:
                                 int Amount; int.TryParse(Console.ReadLine(), out Amount);
                                 newOrderItem.Amount = Amount;
 
-                                Console.Write("The orderItem's seqNum is: ");
+                                Console.Write("The orderItem's Id is: ");
                                 Console.WriteLine(dalList.OrderItem.Create(newOrderItem));
 
                                 break;
@@ -365,24 +365,24 @@ Please choose the topic:
 
                                 break;
                             }
-                        case 3://returns the orderItem that matches the given seqNum
+                        case 3://returns the orderItem that matches the given Id
                             {
-                                Console.Write("Enter the orderItem's seqNum: ");
+                                Console.Write("Enter the orderItem's Id: ");
                                 int seqNum; int.TryParse(Console.ReadLine(), out seqNum);
                                 Console.Write(dalList.OrderItem.RequestById(seqNum));
                                 break;
                             }
-                        case 4://returns the orderItem that matches the given order's seqNum and  the product's barcode
+                        case 4://returns the orderItem that matches the given order's Id and  the product's barcode
                             {
-                                Console.Write("Enter the order's seqNum: ");
+                                Console.Write("Enter the order's Id: ");
                                 int O_ID; int.TryParse(Console.ReadLine(), out O_ID);
                                 Console.Write("Enter the product's barcode: ");
                                 int P_ID; int.TryParse(Console.ReadLine(), out P_ID); Console.WriteLine(dalList.OrderItem.RequestByOrderIDProductID(O_ID, P_ID));
                                 break;
                             }
-                        case 5://returns the orderItem that matches the given order's seqNum
+                        case 5://returns the orderItem that matches the given order's Id
                             {
-                                Console.Write("Enter the order's seqNum: ");
+                                Console.Write("Enter the order's Id: ");
                                 int O_ID; int.TryParse(Console.ReadLine(), out O_ID);
                                 foreach (OrderItem OI in dalList.OrderItem.RequestByOrderId(O_ID))
                                 {
@@ -392,12 +392,12 @@ Please choose the topic:
                             }
                         case 6://update an orderItem
                             {
-                                Console.Write("Enter a seqNum: ");
+                                Console.Write("Enter a Id: ");
                                 int seqNum_; int.TryParse(Console.ReadLine(), out seqNum_);
                                 Console.WriteLine(dalList.OrderItem.RequestById(seqNum_));
 
                                 OrderItem updatedOrderItem = new OrderItem();
-                                Console.Write("Enter the order's seqNum: ");
+                                Console.Write("Enter the order's Id: ");
                                 int OrderID; int.TryParse(Console.ReadLine(), out OrderID);
                                 updatedOrderItem.OrderID = OrderID;
 
@@ -418,7 +418,7 @@ Please choose the topic:
                             }
                         case 7://delete an orderItem
                             {
-                                Console.Write("Enter the orderItem's seqNum: ");
+                                Console.Write("Enter the orderItem's Id: ");
 
                                 int seqNum; int.TryParse(Console.ReadLine(), out seqNum);
                                 dalList.OrderItem.Delete(seqNum);

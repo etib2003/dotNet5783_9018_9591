@@ -8,7 +8,7 @@ public struct OrderItem
     /// <summary>
     /// orderItem's unique id
     /// </summary>
-    public int seqNum { get; set; }
+    public int Id { get; set; }
 
     /// <summary>
     /// orderItem's order id
@@ -35,7 +35,7 @@ public struct OrderItem
     /// </summary>
     /// <returns>the way the orderItem is printed</returns>
     public override string ToString() => $@"
-        Identification number= {seqNum} 
+        Identification number= {Id} 
         Order ID: {OrderID}
         Product ID: {ProductID}
     	Price: {Price}

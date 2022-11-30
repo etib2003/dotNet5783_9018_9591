@@ -18,18 +18,18 @@ internal class dalOrderItem:IOrderItem
     /// <returns>the added orderItem id</returns >
     public int Create(OrderItem Oi)
     {
-        Oi.seqNum = dataSource.config.SeqNumOi;
-        if (dataSource._orderItems.Exists(x => x.seqNum == Oi.seqNum))
+        Oi.Id = dataSource.config.SeqNumOi;
+        if (dataSource._orderItems.Exists(x => x.seqNum == Oi.Id))
             throw new DalAlreadyExistsException("OrderItem");
         dataSource._orderItems.Add(Oi);
-        return Oi.seqNum;
+        return Oi.Id;
     }
 
     /// <summary>
     /// the function returns the orderItems' list
     /// </summary>
     /// <returns>the orderItems' list</returns >
-    public IEnumerable<OrderItem> RequestAll()
+    public IEnumerable<OrderItem> RequestAll(Func<OrderItem?, bool>? cond)
     {
         List<OrderItem> listToReturn = new List<OrderItem>();
         for (int i = 0; i < dataSource._orderItems.Count; i++)
@@ -38,10 +38,10 @@ internal class dalOrderItem:IOrderItem
     }
 
     /// <summary>
-    /// the function returns the orderItem that matches the given seqNum
+    /// the function returns the orderItem that matches the given Id
     /// </summary>
-    /// <param name="id">the given seqNum</param>
-    /// <returns>the orderItem of the given seqNum</returns>
+    /// <param name="id">the given Id</param>
+    /// <returns>the orderItem of the given Id</returns>
     /// <exception cref="the orderItem does not exist"></exception>
     public OrderItem RequestById(int id)
     {
@@ -90,10 +90,10 @@ internal class dalOrderItem:IOrderItem
     public void Update(OrderItem Oi)
     {
         //if _orderItems does not exist throw exception 
-        if (!dataSource._orderItems.Exists(x => x.seqNum == Oi.seqNum))
+        if (!dataSource._orderItems.Exists(x => x.seqNum == Oi.Id))
             throw new DalDoesNoExistException("OrderItem");
-        OrderItem OiToRemove = dataSource._orderItems.Find(x => x.seqNum == Oi.seqNum);
-        Oi.seqNum = OiToRemove.seqNum;
+        OrderItem OiToRemove = dataSource._orderItems.Find(x => x.seqNum == Oi.Id);
+        Oi.Id = OiToRemove.Id;
         dataSource._orderItems.Remove(OiToRemove);
         dataSource._orderItems.Add(Oi);
     }

@@ -10,8 +10,10 @@ namespace DalApi;
 public interface ICrud <T>
 {
     public int Create(T Or);
-    public IEnumerable<T> RequestAll();
+    public IEnumerable<T?> RequestAll(Func<T?, bool>? cond = null);
+    public T GetByCondition (Func<T?, bool>? cond );
     public T RequestById(int id);
     public void Update(T Or);
     public void Delete(int id);
+
 }

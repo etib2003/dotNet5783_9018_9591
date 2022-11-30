@@ -8,11 +8,11 @@ internal class Order : BlApi.IOrder
     { 
             IEnumerable<DO.Order> orderItemsList = _dal.Order.RequestAll();//gets all the orders from the data layer
             return from order in orderItemsList
-                   let orderItems = _dal.OrderItem.RequestByOrderId(order.seqNum)//gets the right order using its seqnum
+                   let orderItems = _dal.OrderItem.RequestByOrderId(order.Id)//gets the right order using its seqnum
                    //Initializes the data
                    select new BO.OrderForList
                    {
-                       ID = order.seqNum,
+                       ID = order.Id,
                        CustomerName = order.CustomerName,
                        AmountOfItems = orderItems.Count(),
                        Status = getOrderStatus(order),
@@ -45,7 +45,7 @@ internal class Order : BlApi.IOrder
         BO.Order boOrder = new BO.Order //create a new order of the logical layer
         {
             //Initializes the data
-            ID = doOrder.seqNum,
+            ID = doOrder.Id,
             CustomerName = doOrder.CustomerName,
             CustomerEmail = doOrder.CustomerEmail,
             CustomerAdress = doOrder.CustomerAdress,
@@ -55,12 +55,12 @@ internal class Order : BlApi.IOrder
             DeliveryDate = doOrder.DeliveryDate
         };
 
-        IEnumerable<DO.OrderItem> orderItemsList = _dal.OrderItem.RequestByOrderId(doOrder.seqNum);
+        IEnumerable<DO.OrderItem> orderItemsList = _dal.OrderItem.RequestByOrderId(doOrder.Id);
         boOrder.OrderItems = (from orderItem in orderItemsList
                             select new BO.OrderItem
                             {
                                 //Initializes the data for each order item
-                                Id = orderItem.seqNum,
+                                Id = orderItem.Id,
                                 Name = _dal.Product.RequestById(orderItem.ProductID).Name,
                                 ProductID = orderItem.ProductID,
                                 Price = orderItem.Price,

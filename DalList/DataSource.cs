@@ -11,17 +11,17 @@ internal static class dataSource
     /// <summary>
     /// List of _products
     /// </summary>
-    internal static List<Product> _products = new List<Product>();
+    internal static List<Product?> _products = new List<Product?>();
 
     /// <summary>
     /// List of _orders
     /// </summary>
-    internal static List<Order> _orders = new List<Order>();
+    internal static List<Order?> _orders = new List<Order?>();
 
     /// <summary>
     /// List of _orderItems
     /// </summary>
-    internal static List<OrderItem> _orderItems = new List<OrderItem>();
+    internal static List<OrderItem?> _orderItems = new List<OrderItem?>();
 
 
     /// <summary>
@@ -63,11 +63,11 @@ internal static class dataSource
         {
 
             Order order = new Order();//create a new object
-            order.seqNum = config.SeqNumOr;//adds to the seqNum 1
+            order.Id = config.SeqNumOr;//adds to the Id 1
             string customerFirstName = CustomerFirstName[random.Next(0, 14)];
             string customerLastName = CustomerLastName[random.Next(0, 14)];
             order.CustomerName = customerFirstName + " " + customerLastName;
-            order.CustomerEmail = customerFirstName + customerLastName + order.seqNum + "@gmail.com";
+            order.CustomerEmail = customerFirstName + customerLastName + order.Id + "@gmail.com";
             order.CustomerAdress = Customer_Adress[random.Next(0, 11)];
             order.OrderDate = DateTime.Now.AddMonths(random.Next(-4, -1));
             if (i <= AmountOfOrders * 0.8)
@@ -97,7 +97,7 @@ internal static class dataSource
             {
                 product.ID = random.Next(100000, 999999);
             }
-            while (_products.Exists(x => x.ID == product.ID));
+            while (_products.Exists(x => x?.ID == product.ID));
             product.Name = "product" + i;
             product.Price = random.Next(200, 2000);
             product.Category = (Category)(i % 5);
@@ -115,21 +115,22 @@ internal static class dataSource
     /// </summary>
     static void orderItemInitialize()//initializing orderItems 
     {
-        int _amountOfOrderItem = 40;
-
-        for (int i = 1; i <= _amountOfOrderItem; i++)
+        foreach (var order in _orders)
         {
-            OrderItem orderItem = new OrderItem();//create a new object
-            orderItem.seqNum = config.SeqNumOi;//adds to the seqNum 1;
-            orderItem.OrderID = _orders[i % 25].seqNum;
-            Product p = _products[random.Next(0, 9)];
-            orderItem.ProductID = p.ID;
-            orderItem.Price = p.Price;
-            orderItem.Amount = random.Next(1, 4);
-            _orderItems.Add(orderItem);
+            int number = random.Next(1, 4);
+            for (int i = 0; i < number; i++)
+            { 
+                OrderItem orderItem = new OrderItem();//create a new object
+                orderItem.Id = config.SeqNumOi;//adds to the Id 1;
+                orderItem.OrderID =  order.Value.Id;
+                Product p = (Product)_products[random.Next(0, 9)];
+                orderItem.ProductID = p.ID;
+                orderItem.Price = p.Price;
+                orderItem.Amount = random.Next(1, 4);
+                _orderItems.Add(orderItem);
+            }
         }
     }
-
     /// <summary>
     /// class for a running number
     /// </summary>

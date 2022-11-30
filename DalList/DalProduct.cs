@@ -29,7 +29,7 @@ internal class dalProduct : IProduct
     /// the function returns the products' list
     /// </summary>
     /// <returns>the products' list</returns >
-    public IEnumerable<Product> RequestAll()
+    public IEnumerable<Product> RequestAll(Func<Product?, bool>? cond)
     {
         List<Product> listToReturn = new List<Product>();
         for (int i = 0; i < dataSource._products.Count; i++)
