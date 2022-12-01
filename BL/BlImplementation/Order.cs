@@ -36,7 +36,7 @@ internal class Order : BlApi.IOrder
     }
 
     /// <summary>
-    /// help function that gets an order from the data layer
+    /// Help function that gets an order from the data layer
     /// </summary>
     /// <param name="doOrder">an order from the data layer</param>
     /// <returns></returns>
