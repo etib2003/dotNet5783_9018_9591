@@ -333,7 +333,7 @@ Please choose the topic:
                             }
                         case 5:
                             {
-                                _cart.Items.ToList().Clear(); //Emptying the _cart
+                                _cart.Items.Clear(); //Emptying the _cart
                                 _cart.TotalPrice = 0;
                             }
                             break;

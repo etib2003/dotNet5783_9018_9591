@@ -1,7 +1,7 @@
 ﻿using DO;
 
 namespace Dal;
-internal static class dataSource
+internal static class DataSource
 {
     /// <summary>
     /// internal static readonly object Order_vec
@@ -27,7 +27,7 @@ internal static class dataSource
     /// <summary>
     /// constructor
     /// </summary>
-    static dataSource()
+    static DataSource()
     {
         s_Initialize();
     }
@@ -122,8 +122,8 @@ internal static class dataSource
             { 
                 OrderItem orderItem = new OrderItem();//create a new object
                 orderItem.Id = config.SeqNumOi;//adds to the Id 1;
-                orderItem.OrderID =  order.Value.Id;
-                Product p = (Product)_products[random.Next(0, 9)];
+                orderItem.OrderID =  order!.Value.Id;
+                Product p = _products[random.Next(0, 9)]!.Value;
                 orderItem.ProductID = p.ID;
                 orderItem.Price = p.Price;
                 orderItem.Amount = random.Next(1, 4);

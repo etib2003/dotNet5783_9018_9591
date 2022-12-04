@@ -1,4 +1,5 @@
 ﻿using BO;
+using DO;
 using OtherFunctions;
 using System.Runtime.Serialization;
 
@@ -8,20 +9,21 @@ internal class Product : BlApi.IProduct
 
     public IEnumerable<BO.ProductForList> GetListProductForManagerAndCatalog()
     {
-        IEnumerable<DO.Product> doProductList = _dal.Product.RequestAll();//gets the products from the data layer
+        IEnumerable<DO.Product?> doProductList = _dal.Product.RequestAll();//gets the products from the data layer
+
         IEnumerable<BO.ProductForList> productForLists = from product in doProductList
+                                                         let pdct = product.Value
                                                          select new BO.ProductForList
                                                          {
                                                              //Initializes the data for each product
-                                                             ID = product.ID,
-                                                             Name = product.Name,
-                                                             Price = product.Price,
-                                                             Category = (BO.Category)product.Category,
-                                                             Color = (BO.Color)product.Color                                                          
+                                                             ID = pdct.ID,
+                                                             Name = pdct.Name,
+                                                             Price = pdct.Price,
+                                                             Category = (BO.Category)pdct.Category!,
+                                                             Color = (BO.Color)pdct.Color!                                                        
                                                          };
         return productForLists;
     }
-
 
     public BO.Product GetProductDetailsForManager(int productId)
     {
@@ -51,7 +53,6 @@ internal class Product : BlApi.IProduct
             throw new BO.BoDoesNoExistException("Data exception:", ex);
         }
     }
-
 
     public BO.ProductItem GetProductDetailsForCustomer(int productId, BO.Cart cart)
     {
@@ -84,14 +85,13 @@ internal class Product : BlApi.IProduct
         }
     }
 
-
     public int AddProduct(BO.Product product)
     {
 
         //exceptions
         product.ID.negativeNumber();
         product.ID.wrongLengthNumber(6);
-        product.Name.notValidName();
+        product.Name!.notValidName();
         product.Price.negativeDoubleNumber();
         product.InStock.negativeNumber();
 
@@ -101,20 +101,19 @@ internal class Product : BlApi.IProduct
             ID = product.ID,
             Name = product.Name,
             Price = product.Price,
-            Category = (DO.Category)product.Category,
-            Color = (DO.Color)product.Color,
+            Category = (DO.Category)product.Category!,
+            Color = (DO.Color)product.Color!,
             InStock = product.InStock
         };
         return _dal.Product.Create(doProduct);
     }
-
 
     public void UpdateProduct(BO.Product product)
     {
         //exceptions
         product.ID.negativeNumber();
         product.ID.wrongLengthNumber(6);
-        product.Name.notValidName();
+        product.Name!.notValidName();
         product.Price.negativeDoubleNumber();
         product.InStock.negativeNumber();
 
@@ -134,11 +133,9 @@ internal class Product : BlApi.IProduct
     public void DeleteProduct(int productId)
     {
         //find the product to delete
-        IEnumerable<DO.OrderItem> doOrderItemList = _dal.OrderItem.RequestAll();//gets the products from the data layer
-        IEnumerable<DO.OrderItem> orderItemList = from orderItem in doOrderItemList
-                                                  where orderItem.ProductID == productId
-                                                  select orderItem;
-        if (!orderItemList.Any())
+        IEnumerable<DO.OrderItem?> doOrderItemList = _dal.OrderItem.RequestAll(orderItem => orderItem?.ProductID == productId);//gets the products from the data layer
+
+        if (!doOrderItemList.Any())
             _dal.Product.Delete(productId);
         else
             throw new NotValidDeleteException("product Already In Order Prosses");//exception

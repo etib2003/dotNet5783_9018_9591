@@ -2,7 +2,8 @@
 using DalApi;
 using System.Runtime.CompilerServices;
 using DocumentFormat.OpenXml.Office2010.Excel;
-//using static Dal.dataSource;
+using System.Linq;
+//using static Dal.DataSource;
 
 namespace Dal;
 /// <summary>
@@ -18,10 +19,10 @@ internal class dalOrder : IOrder
     /// <exception cref="order already exist"></exception>
     public int Create(Order Or)
     {
-        Or.Id = dataSource.config.SeqNumOr;
-        if (dataSource._orders.Exists(x => x?.Id == Or.Id))
+        Or.Id = DataSource.config.SeqNumOr;
+        if (DataSource._orders.Exists(x => x?.Id == Or.Id))
             throw new DalAlreadyExistsException("Order");
-        dataSource._orders.Add(Or);
+        DataSource._orders.Add(Or);
         return Or.Id;
     }
 
@@ -33,10 +34,7 @@ internal class dalOrder : IOrder
     /// <exception cref="the order isn't exist"></exception >
     public Order RequestById(int id)
     {
-
-        return dataSource._orders.Find(x => x?.Id == id) ??
-              throw new DalDoesNoExistException("Order");
-
+        return GetByCondition(order => order?.Id == id);
     }
 
     /// <summary>
@@ -48,8 +46,8 @@ internal class dalOrder : IOrder
     {
         if(RequestById(Or.Id) is Order order)
         {
-            dataSource._orders.Remove(order);
-            dataSource._orders.Add(Or);
+            DataSource._orders.Remove(order);
+            DataSource._orders.Add(Or);
         }
     }
 
@@ -60,17 +58,16 @@ internal class dalOrder : IOrder
     /// <exception cref="if the order does not exist"></exception >
     public void Delete(int id)
     {
-        dataSource._orders.Remove(RequestById(id));
+        DataSource._orders.Remove(RequestById(id));
     }
 
-    public IEnumerable<Order> RequestAll(Func<Order?, bool>? cond = null)
+    public Order GetByCondition(Func<Order?, bool>? cond)
     {
-        bool check = cond is null;
-        return dataSource._orders.Where(order => check ? check : cond(order)).Select(order => order.Value);
+        return DataSource._orders.FirstOrDefault(cond!) ?? throw new DalDoesNoExistException("Order");
     }
 
-    public Order GetByCondition(Func<Order, bool>? cond)
+    IEnumerable<Order?> ICrud<Order>.RequestAll(Func<Order?, bool>? cond)
     {
-        throw new NotImplementedException();
+        return DataSource._orders.Where(order => cond is null ? true : cond!(order));
     }
 }

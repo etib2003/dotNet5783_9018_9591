@@ -1,6 +1,4 @@
-﻿using BO;
-using DalApi;
-using OtherFunctions;
+﻿using OtherFunctions;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -10,22 +8,18 @@ internal class Cart : BlApi.ICart
 
     public void CheckFormat(BO.Cart cart)
     {
-        cart.CustomerName.notValidName();
-        cart.CustomerEmail.notValidEmail();
-        cart.CustomerAddress.notValidName();
+        cart.CustomerName!.notValidName();
+        cart.CustomerEmail!.notValidEmail();
+        cart.CustomerAddress!.notValidName();
     }
     public BO.Cart AddProductToCart(BO.Cart cart, int productId)
     {
         try
         {
             DO.Product product = _dal.Product.RequestById(productId); //get the right product using its id
-            BO.OrderItem orderItem = new BO.OrderItem();
-            if (cart.Items != null)
-            {
-                orderItem = (from OrderItem in cart.Items
-                             where OrderItem.ProductID == productId
-                             select OrderItem).FirstOrDefault();
-            }
+            BO.OrderItem? orderItem = (from OrderItem in cart.Items
+                                       where OrderItem.ProductID == productId
+                                       select OrderItem).FirstOrDefault(); //            if (cart.Items != null)
 
             if (orderItem is null)
             {
@@ -63,11 +57,10 @@ internal class Cart : BlApi.ICart
         {
             DO.Product doProduct = _dal.Product.RequestById(productId);//get the right product using its id
 
-            BO.OrderItem orderItem = (from OrderItem in cart.Items
+            BO.OrderItem? orderItem = (from OrderItem in cart.Items
                                       where OrderItem.ProductID == productId
-                                      select OrderItem).FirstOrDefault();
-            if(orderItem==null)
-                throw new BO.NotExistInCartException("Not exist in cart");
+                                      select OrderItem).First() ?? throw new BO.NotExistInCartException("Not exist in cart");
+
             if (newAmount == 0) //remove the product's order from the cart
             {
                 cart.TotalPrice -= orderItem.TotalPrice;
@@ -107,18 +100,18 @@ internal class Cart : BlApi.ICart
         try
         {
             //exceptions
-            cart.CustomerEmail.notValidEmail();
-            cart.CustomerName.notValidName();
-            cart.CustomerAddress.notValidName();
+            cart.CustomerEmail!.notValidEmail();
+            cart.CustomerName!.notValidName();
+            cart.CustomerAddress!.notValidName();
 
-            foreach (BO.OrderItem orderItem in cart.Items)
+            foreach (BO.OrderItem? orderItem in cart.Items!)
             {
-                orderItem.Amount.negativeNumber();//exception
+                orderItem!.Amount.negativeNumber();//exception
 
                 DO.Product doProduct = _dal.Product.RequestById(orderItem.ProductID);//get the right product using its id
 
                 if (orderItem.Amount > doProduct.InStock)
-                    throw new NotValidAmountException("not Valid Amount");//exception
+                    throw new BO.NotValidAmountException("not Valid Amount");//exception
 
             }
 
@@ -133,12 +126,12 @@ internal class Cart : BlApi.ICart
                 DeliveryDate = null
             });
 
-            foreach (BO.OrderItem boOrderItem in cart.Items)
+            foreach (BO.OrderItem? boOrderItem in cart.Items)
             {
                 DO.OrderItem doOrderItem = new DO.OrderItem()
                 {
                     OrderID = orderId,
-                    ProductID = boOrderItem.ProductID,
+                    ProductID = boOrderItem!.ProductID,
                     Amount = boOrderItem.Amount,
                     Price = boOrderItem.Price
                 };

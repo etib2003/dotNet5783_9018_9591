@@ -106,3 +106,12 @@ public class NotExistInCartException : Exception
     public NotExistInCartException(string? message, Exception? innerException) : base(message, innerException) { }
     protected NotExistInCartException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 }
+
+[Serializable]
+internal class DateHasNotUpdatedYetException : Exception
+{
+    public DateHasNotUpdatedYetException() { }
+    public DateHasNotUpdatedYetException(string? message) : base(message) { }
+    public DateHasNotUpdatedYetException(string? message, Exception? innerException) : base(message, innerException) { }
+    protected DateHasNotUpdatedYetException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+}
