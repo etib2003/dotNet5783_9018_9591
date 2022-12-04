@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlApi;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,16 +13,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PL
+namespace PL.productsWindows
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for ProductForListWindow.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class ProductForListWindow : Window
     {
-        public Window1()
+        private IBl bl;
+
+        public ProductForListWindow(IBl bl)
         {
             InitializeComponent();
+            this.bl = bl;
+            PLV.ItemsSource = bl.Product.GetListProductForManagerAndCatalog();
         }
     }
 }

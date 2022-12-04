@@ -1,5 +1,6 @@
 ﻿
 
+using OtherFunctionDal;
 using OtherFunctions;
 
 namespace BO;

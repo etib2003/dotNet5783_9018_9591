@@ -1,4 +1,5 @@
-﻿using OtherFunctions;
+﻿using OtherFunctionDal;
+using OtherFunctions;
 
 namespace BO;
 public class Cart

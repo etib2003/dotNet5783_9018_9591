@@ -1,4 +1,6 @@
-﻿namespace DO;
+﻿using OtherFunctionDal;
+
+namespace DO;
 /// <summary>
 /// a struct for the orders that contains all of the order's parameters
 /// </summary>
@@ -44,16 +46,18 @@ public struct Order
     /// </summary>
     /// <returns>the way the order is printed</returns>
     public override string ToString()
-    
-        //return this.ToStringProperty();
-    
-    => $@"
-        Customer Id= {Id}: {CustomerName}, 
-        Email: {CustomerEmail}
-        Adress: {CustomerAdress}
-        Order date: {OrderDate}
-        Ship date: {ShipDate}    	
-        Delivery date: {DeliveryDate} 
-"; 
+    {
+        return this.ToStringProperty();
+    }
+
+
+    //    => $@"
+    //        Customer Id= {Id}: {CustomerName}, 
+    //        Email: {CustomerEmail}
+    //        Adress: {CustomerAdress}
+    //        Order date: {OrderDate}
+    //        Ship date: {ShipDate}    	
+    //        Delivery date: {DeliveryDate} 
+    //"; 
 }
  
