@@ -1,5 +1,7 @@
 ﻿
 
+using OtherFunctions;
+
 namespace BO;
 
 public class ProductItem
@@ -43,12 +45,16 @@ public class ProductItem
     /// the product item print method
     /// </summary>
     /// <returns>the way the product item is printed</returns>
-    public override string ToString() => $@"
-        Product barcode: {ID}, {Name}
-        Price: {Price}
-        Category: {Category}
-        Color: {Color}
-        Amount: {Amount}   	
-    	In stock? {InStock}";
+    public override string ToString()
+    {
+        return this.ToStringProperty();
+    }
+    //=> $@"
+    //    Product barcode: {ID}, {Name}
+    //    Price: {Price}
+    //    Category: {Category}
+    //    Color: {Color}
+    //    Amount: {Amount}   	
+    //	In stock? {InStock}";
 
 }

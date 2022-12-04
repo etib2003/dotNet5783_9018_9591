@@ -1,4 +1,6 @@
 ﻿
+using OtherFunctions;
+
 namespace BO;
 
 public class Order
@@ -58,17 +60,18 @@ public class Order
     /// </summary>
     /// <returns>the way the order is printed</returns>
     public override string ToString() {
-        return $@"
-            Customer Id= {ID}: {CustomerName}, 
-            Email: {CustomerEmail}
-            Adress: {CustomerAdress}
-            Status: {Status}
-            Order date: {OrderDate}
-            Ship date: {ShipDate}    	
-            Delivery date: {DeliveryDate} 
+        return this.ToStringProperty();
+        //return $@"
+        //    Customer Id= {ID}: {CustomerName}, 
+        //    Email: {CustomerEmail}
+        //    Adress: {CustomerAdress}
+        //    Status: {Status}
+        //    Order date: {OrderDate}
+        //    Ship date: {ShipDate}    	
+        //    Delivery date: {DeliveryDate} 
 
-            Items: {string.Join("\n", OrderItems)}
+        //    Items: {string.Join("\n", OrderItems)}
 
-            Order's total price: {TotalPrice}";
+        //    Order's total price: {TotalPrice}";
     }
 }

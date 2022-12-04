@@ -43,13 +43,17 @@ public struct Order
     /// the order's print method
     /// </summary>
     /// <returns>the way the order is printed</returns>
-    public override string ToString() => $@"
+    public override string ToString()
+    
+        //return this.ToStringProperty();
+    
+    => $@"
         Customer Id= {Id}: {CustomerName}, 
         Email: {CustomerEmail}
         Adress: {CustomerAdress}
         Order date: {OrderDate}
         Ship date: {ShipDate}    	
         Delivery date: {DeliveryDate} 
-";
+"; 
 }
  

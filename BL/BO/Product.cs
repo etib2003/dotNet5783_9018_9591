@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OtherFunctions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -44,11 +45,15 @@ public class Product
     /// the product's print method
     /// </summary>
     /// <returns>the way the product is printed</returns>
-    public override string ToString() => $@"
-        Product barcode: {ID}, {Name}
-        Category: {Category}
-        Color: {Color}
-    	Price: {Price}
-    	Amount in stock: {InStock}";
+    public override string ToString()
+    {
+        return this.ToStringProperty();
+    }
+    //=> $@"
+    //    Product barcode: {ID}, {Name}
+    //    Category: {Category}
+    //    Color: {Color}
+    //	Price: {Price}
+    //	Amount in stock: {InStock}";
 
 }

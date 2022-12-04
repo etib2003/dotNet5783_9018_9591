@@ -1,4 +1,6 @@
-﻿namespace BO;
+﻿using OtherFunctions;
+
+namespace BO;
 public class Cart
 {
     /// <summary>
@@ -26,14 +28,17 @@ public class Cart
     /// the cart's print method
     /// </summary>
     /// <returns>the way the cart's data is printed</returns>
-    public override string ToString() {
-        return $@"
-            Customer Name: {CustomerName}
-            Customer Email: {CustomerEmail}
-     	    Customer Address: {CustomerAddress}
+    public override string ToString()
+    {
+        return this.ToStringProperty();
 
-            Items: {string.Join("\n", Items)}
+        //return $@"
+        //    Customer Name: {CustomerName}
+        //    Customer Email: {CustomerEmail}
+        //  Customer Address: {CustomerAddress}
 
-     	    Cart's Total Price: {TotalPrice}";
+        //    Items: {string.Join("\n", Items)}
+
+        //  Cart's Total Price: {TotalPrice}";
     }
 }

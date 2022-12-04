@@ -1,4 +1,6 @@
-﻿namespace BO;
+﻿using OtherFunctions;
+
+namespace BO;
 
 public class OrderTracking
 {
@@ -21,10 +23,14 @@ public class OrderTracking
     /// the tracking order's print method
     /// </summary>
     /// <returns>the way the tracking order is printed</returns>
-    public override string ToString() => $@"
-            Id: {ID}
-            Status: {Status}
-            OrderProgress: 
-            {string.Join("\n            ", OrderProgress)}";
+    public override string ToString()
+    {
+        return this.ToStringProperty();
+    }
+    //=> $@"
+    //        Id: {ID}
+    //        Status: {Status}
+    //        OrderProgress: 
+    //        {string.Join("\n            ", OrderProgress)}";
 
 }

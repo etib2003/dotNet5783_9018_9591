@@ -1,4 +1,5 @@
 ﻿using DO;
+using OtherFunctions;
 
 namespace BO;
 
@@ -33,9 +34,13 @@ public class OrderForList
     /// the list of orders print method
     /// </summary>
     /// <returns>the way the order's list data is printed</returns>
-    public override string ToString() => $@"
-            Customer Id= {ID}: {CustomerName}, 
-            Status: {Status}
-            Amount of items: {AmountOfItems}
-            Total price: {TotalPrice}";
+    public override string ToString()
+    {
+        return this.ToStringProperty();
+    }
+    //=> $@"
+    //        Customer Id= {ID}: {CustomerName}, 
+    //        Status: {Status}
+    //        Amount of items: {AmountOfItems}
+    //        Total price: {TotalPrice}";
 }
