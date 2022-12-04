@@ -76,9 +76,17 @@ namespace OtherFunctions
         public static string ToStringProperty<T>(this T t)
         {
             string str = "";
-            foreach (PropertyInfo item in t!.GetType().GetProperties())
-                str += "\n" + item.Name +
-                ": " + item.GetValue(t, null);
+            foreach (PropertyInfo item in typeof(T).GetProperties())
+            {
+                str += "\n" + item.Name + ": ";
+                if (item.GetValue(t, null) is IEnumerable<object>)
+                {                   
+                    IEnumerable<object> listOfObjects = (IEnumerable<object>)item.GetValue(obj: t, null);
+                    str += String.Join(" ", listOfObjects);
+                }
+                else
+                    str += item.GetValue(t, null);
+            }
             return str;
         }
 
