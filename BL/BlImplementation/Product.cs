@@ -10,19 +10,25 @@ internal class Product : BlApi.IProduct
     public IEnumerable<BO.ProductForList> GetListProductForManagerAndCatalog()
     {
         IEnumerable<DO.Product?> doProductList = _dal.Product.RequestAll();//gets the products from the data layer
+        //return DataSource._products.Where(product => cond is null ? true : cond!(product));
 
         IEnumerable<BO.ProductForList> productForLists = from product in doProductList
                                                          let pdct = product.Value
                                                          select new BO.ProductForList
                                                          {
                                                              //Initializes the data for each product
-                                                             ID = pdct.ID,
+                                                             Id = pdct.Id,
                                                              Name = pdct.Name,
                                                              Price = pdct.Price,
                                                              Category = (BO.Category)pdct.Category!,
                                                              Color = (BO.Color)pdct.Color!                                                        
                                                          };
         return productForLists;
+    }
+
+    public IEnumerable<BO.ProductForList> GetListProductForManagerAndCatalogByCond(Func<ProductForList?, bool>? cond)
+    {
+        return GetListProductForManagerAndCatalog().Where(cond!);
     }
 
     public BO.Product GetProductDetailsForManager(int productId)
@@ -38,7 +44,7 @@ internal class Product : BlApi.IProduct
             BO.Product boProduct = new BO.Product//create a new logical layer product
             {
                 //Initializes the data of the product
-                ID = doProduct.ID,
+                Id = doProduct.Id,
                 Name = doProduct.Name,
                 Price = doProduct.Price,
                 Category = (BO.Category)doProduct.Category,
@@ -67,7 +73,7 @@ internal class Product : BlApi.IProduct
             return new BO.ProductItem
             {
                 //Initializes the data  
-                ID = doProduct.ID,
+                Id = doProduct.Id,
                 Name = doProduct.Name,
                 Price = doProduct.Price,
                 Category = (BO.Category)doProduct.Category,
@@ -89,8 +95,8 @@ internal class Product : BlApi.IProduct
     {
 
         //exceptions
-        product.ID.negativeNumber();
-        product.ID.wrongLengthNumber(6);
+        product.Id.negativeNumber();
+        product.Id.wrongLengthNumber(6);
         product.Name!.notValidName();
         product.Price.negativeDoubleNumber();
         product.InStock.negativeNumber();
@@ -98,7 +104,7 @@ internal class Product : BlApi.IProduct
         DO.Product doProduct = new DO.Product//create a new data layer product
         {
             //Initializes the data of the product
-            ID = product.ID,
+            Id = product.Id,
             Name = product.Name,
             Price = product.Price,
             Category = (DO.Category)product.Category!,
@@ -111,8 +117,8 @@ internal class Product : BlApi.IProduct
     public void UpdateProduct(BO.Product product)
     {
         //exceptions
-        product.ID.negativeNumber();
-        product.ID.wrongLengthNumber(6);
+        product.Id.negativeNumber();
+        product.Id.wrongLengthNumber(6);
         product.Name!.notValidName();
         product.Price.negativeDoubleNumber();
         product.InStock.negativeNumber();
@@ -120,7 +126,7 @@ internal class Product : BlApi.IProduct
         DO.Product doProduct = new DO.Product//create a new data layer product object
         {
             //Initializes the data of the product
-            ID = product.ID,
+            Id = product.Id,
             Name = product.Name,
             Price = product.Price,
             Category = (DO.Category)product.Category,

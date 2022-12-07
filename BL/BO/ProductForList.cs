@@ -9,7 +9,7 @@ public class ProductForList
     /// <summary>
     ///  product's unique id
     /// </summary>
-    public int ID { get; set; }
+    public int Id { get; set; }
 
     /// <summary>
     /// the product's name
@@ -40,7 +40,7 @@ public class ProductForList
         return this.ToStringProperty();
     }
     //=> $@"
-    //    Product barcode: {ID}, {Name}
+    //    Product barcode: {Id}, {Name}
     //    Category: {Category}
     //    Color: {Color}
     // 	Price: {Price}";

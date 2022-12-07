@@ -9,7 +9,7 @@ public class Order
     /// <summary>
     /// order's unique id
     /// </summary>
-    public int ID { get; set; }
+    public int Id { get; set; }
 
     /// <summary>
     /// the customer name
@@ -63,7 +63,7 @@ public class Order
     public override string ToString() {
         return this.ToStringProperty();
         //return $@"
-        //    Customer Id= {ID}: {CustomerName}, 
+        //    Customer Id= {Id}: {CustomerName}, 
         //    Email: {CustomerEmail}
         //    Adress: {CustomerAdress}
         //    Status: {Status}

@@ -11,10 +11,4 @@
     <ProjectReference Include="..\BL\BL.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Page Update="productsWindows\ProductForListWindow.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-    </Page>
-  </ItemGroup>
-
 </Project>

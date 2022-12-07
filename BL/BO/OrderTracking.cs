@@ -8,7 +8,7 @@ public class OrderTracking
     /// <summary>
     /// order tracking id in order to track your order
     /// </summary>
-    public int ID { get; set; }
+    public int Id { get; set; }
 
     /// <summary>
     /// the order status
@@ -29,7 +29,7 @@ public class OrderTracking
         return this.ToStringProperty();
     }
     //=> $@"
-    //        Id: {ID}
+    //        Id: {Id}
     //        Status: {Status}
     //        OrderProgress: 
     //        {string.Join("\n            ", OrderProgress)}";

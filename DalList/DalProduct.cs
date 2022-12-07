@@ -20,11 +20,11 @@ internal class dalProduct : IProduct
     /// <exception cref="cannot create a product,that already exists"></exception>
     public int Create(Product product)
     {
-        if (DataSource._products.Exists(x => x?.ID == product.ID))
+        if (DataSource._products.Exists(x => x?.Id == product.Id))
             throw new DalAlreadyExistsException("Product");
 
         DataSource._products.Add(product);
-        return product.ID;  
+        return product.Id;  
     }
 
     /// <summary>
@@ -35,7 +35,7 @@ internal class dalProduct : IProduct
     /// <exception cref="the product does not exist"></exception >
     public Product RequestById(int id)
     {
-        return GetByCondition(product => product?.ID == id);
+        return GetByCondition(product => product?.Id == id);
     }
 
     /// <summary>
@@ -46,7 +46,7 @@ internal class dalProduct : IProduct
     public void Update(Product product)
     {
         //if product does not exist throw exception 
-        if(RequestById(product.ID) is Product pdct)
+        if(RequestById(product.Id) is Product pdct)
         {
             DataSource._products.Remove(pdct);
             DataSource._products.Add(product);

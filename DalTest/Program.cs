@@ -211,7 +211,7 @@ Please choose the topic:
                                 Product newProduct = new Product();
                                 Console.Write("Enter a barcode: ");
                                 int ID; int.TryParse(Console.ReadLine(), out ID);
-                                newProduct.ID = ID;
+                                newProduct.Id = ID;
 
                                 Console.Write("Enter a Category: 0- Percussions , 1- StringInstrument , 2- WindInstrument , 3- KeyBoard , 4- BowInstrument: ");
                                 string input = Console.ReadLine();
@@ -261,7 +261,7 @@ Please choose the topic:
                                 Console.WriteLine(dalList.Product.RequestById(barcode));
 
                                 Product newProduct = new Product();
-                                newProduct.ID = barcode;
+                                newProduct.Id = barcode;
 
                                 Console.Write("Enter a Category: 0- Percussions , 1- StringInstrument , 2- WindInstrument , 3- KeyBoard , 4- BowInstrument: ");
                                 string input = Console.ReadLine();
@@ -333,7 +333,7 @@ Please choose the topic:
                         case 1://adds an orderItem
                             {
                                 OrderItem newOrderItem = new OrderItem();
-                                Console.Write("Enter the order's ID: ");
+                                Console.Write("Enter the order's Id: ");
                                 int OrderID; int.TryParse(Console.ReadLine(), out OrderID);
                                 newOrderItem.OrderID = OrderID;
 
@@ -377,14 +377,14 @@ Please choose the topic:
                                 Console.Write("Enter the order's Id: ");
                                 int O_ID; int.TryParse(Console.ReadLine(), out O_ID);
                                 Console.Write("Enter the product's barcode: ");
-                                int P_ID; int.TryParse(Console.ReadLine(), out P_ID); Console.WriteLine(dalList.OrderItem.RequestByOrderIDProductID(O_ID, P_ID));
+                                int P_ID; int.TryParse(Console.ReadLine(), out P_ID); Console.WriteLine(dalList.OrderItem.RequestAll(x => x?.OrderID == O_ID && x?.ProductID == P_ID));
                                 break;
                             }
                         case 5://returns the orderItem that matches the given order's Id
                             {
                                 Console.Write("Enter the order's Id: ");
                                 int O_ID; int.TryParse(Console.ReadLine(), out O_ID);
-                                foreach (OrderItem OI in dalList.OrderItem.RequestByOrderId(O_ID))
+                                foreach (OrderItem OI in dalList.OrderItem.RequestAll(x => x?.OrderID == O_ID))
                                 {
                                     Console.Write(OI);
                                 }

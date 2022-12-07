@@ -9,7 +9,7 @@ public class OrderForList
     /// <summary>
     /// order's unique id
     /// </summary>
-    public int ID { get; set; }
+    public int Id { get; set; }
 
     /// <summary>
     /// the customer name
@@ -40,7 +40,7 @@ public class OrderForList
         return this.ToStringProperty();
     }
     //=> $@"
-    //        Customer Id= {ID}: {CustomerName}, 
+    //        Customer Id= {Id}: {CustomerName}, 
     //        Status: {Status}
     //        Amount of items: {AmountOfItems}
     //        Total price: {TotalPrice}";

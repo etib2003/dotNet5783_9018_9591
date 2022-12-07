@@ -407,7 +407,7 @@ Please choose the topic:
 
             Console.WriteLine("Enter product's barcode:");
             int barcode; int.TryParse(Console.ReadLine(), out barcode);
-            product.ID = barcode;
+            product.Id = barcode;
 
             Console.WriteLine("Enter product's name:");
             product.Name = Console.ReadLine()!;

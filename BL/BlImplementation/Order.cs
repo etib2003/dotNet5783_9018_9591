@@ -12,11 +12,11 @@ internal class Order : BlApi.IOrder
                    //Initializes the data
                    select new BO.OrderForList
                    {
-                       ID = order.Value.Id,
-                       CustomerName = order.Value.CustomerName,
+                       Id = order?.Id??0,
+                       CustomerName = order?.CustomerName,
                        AmountOfItems = orderItems.Count(),
-                       Status = getOrderStatus(order.Value),
-                       TotalPrice = orderItems.Sum(orderItem => orderItem!.Value.Price * orderItem.Value.Amount),//calculate the total price
+                       Status = getOrderStatus(order),
+                       TotalPrice = orderItems.Sum(orderItem => orderItem?.Price * orderItem?.Amount)??0,//calculate the total price
                    };   
     }
 
@@ -25,7 +25,7 @@ internal class Order : BlApi.IOrder
     /// </summary>
     /// <param name="order">the order you wants to update its status</param>
     /// <returns></returns>
-    private BO.OrderStatus getOrderStatus(DO.Order order)
+    private BO.OrderStatus getOrderStatus(DO.Order? order)
     {
         return order switch
         {
@@ -45,7 +45,7 @@ internal class Order : BlApi.IOrder
         BO.Order boOrder = new BO.Order //create a new order of the logical layer
         {
             //Initializes the data
-            ID = doOrder.Id,
+            Id = doOrder.Id,
             CustomerName = doOrder.CustomerName,
             CustomerEmail = doOrder.CustomerEmail,
             CustomerAdress = doOrder.CustomerAdress,
@@ -175,7 +175,7 @@ internal class Order : BlApi.IOrder
             }
             //Initializes the data  
             orderTracking.OrderProgress = tupleList;
-            orderTracking.ID = orderID;
+            orderTracking.Id = orderID;
             orderTracking.Status = getOrderStatus(doOrder);//call the help function
             
             return orderTracking;

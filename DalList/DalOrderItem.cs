@@ -19,7 +19,7 @@ internal class dalOrderItem :IOrderItem
     public int Create(OrderItem Oi)
     {
         Oi.Id = DataSource.config.SeqNumOi;
-        if (DataSource._orderItems.Exists(x => x!.Value.Id == Oi.Id))
+        if (DataSource._orderItems.Exists(x => x?.Id == Oi.Id))
             throw new DalAlreadyExistsException("OrderItem");
 
         DataSource._orderItems.Add(Oi);

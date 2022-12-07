@@ -36,8 +36,8 @@ public struct OrderItem
     /// <returns>the way the orderItem is printed</returns>
     public override string ToString() => $@"
         Identification number= {Id} 
-        Order ID: {OrderID}
-        Product ID: {ProductID}
+        Order Id: {OrderID}
+        Product Id: {ProductID}
     	Price: {Price}
     	Amount: {Amount}
 ";

@@ -1,0 +1,39 @@
+﻿<Window x:Class="PL.productsWindows.ProductListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL.productsWindows"
+        mc:Ignorable="d"
+        Title="ProductListWindow" Height="450" Width="800">
+    <Grid Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="500*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions >
+            <ComboBox x:Name ="selectCategory" Grid.Column="1" RenderTransformOrigin="-0.297,0.143" SelectionChanged="ComboBox_SelectionChanged" Margin="58,5,80,-6" FontFamily="Candara">
+                <ComboBox.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ComboBox.RenderTransform>
+            </ComboBox>
+            <Label Content="Category" Grid.Column="0" RenderTransformOrigin="4.721,1.674" Margin="163,10,97,-37" FontSize="24" FontFamily="Candara" FontWeight="Bold" HorizontalContentAlignment="Center" />
+
+        </Grid>
+        <ListView x:Name="ProductForListView" Grid.Row="1" FontFamily="Arial" Foreground="#FF4B0606" Margin="0,45,0,0" MouseDoubleClick="ProductForListView_MouseDoubleClick" ></ListView>
+        <Button x:Name="ShowAllCategories" Content="Show All" HorizontalAlignment="Right" Margin="0,15,80,0" Grid.Row="1" VerticalAlignment="Top" FontFamily="Candara" FontSize="18" Width="256" Click="ShowAllCategories_Click" FontWeight="Bold"/>
+        <Button x:Name="AddButton" Content="Add new Product" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="AddButton_Click" FontFamily="Candara" FontSize="16"/>
+
+    </Grid>
+
+</Window>

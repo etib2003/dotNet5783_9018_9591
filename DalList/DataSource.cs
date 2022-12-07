@@ -95,9 +95,9 @@ internal static class DataSource
             Product product = new Product();//create a new object
             do
             {
-                product.ID = random.Next(100000, 999999);
+                product.Id = random.Next(100000, 999999);
             }
-            while (_products.Exists(x => x?.ID == product.ID));
+            while (_products.Exists(x => x?.Id == product.Id));
             product.Name = "product" + i;
             product.Price = random.Next(200, 2000);
             product.Category = (Category)(i % 5);
@@ -122,9 +122,9 @@ internal static class DataSource
             { 
                 OrderItem orderItem = new OrderItem();//create a new object
                 orderItem.Id = config.SeqNumOi;//adds to the Id 1;
-                orderItem.OrderID =  order!.Value.Id;
-                Product p = _products[random.Next(0, 9)]!.Value;
-                orderItem.ProductID = p.ID;
+                orderItem.OrderID = (int)(order?.Id)!;
+                Product p = (Product)_products[random.Next(0, 9)]!;
+                orderItem.ProductID = p.Id;
                 orderItem.Price = p.Price;
                 orderItem.Amount = random.Next(1, 4);
                 _orderItems.Add(orderItem);

@@ -25,7 +25,7 @@ internal class Cart : BlApi.ICart
             {
                 if (product.InStock > 0) // the stock is not empty
                 {
-                    cart.Items.Add(new BO.OrderItem { Name = product.Name, ProductID = product.ID, Amount = 1, Price = product.Price, TotalPrice = product.Price });
+                    cart.Items.Add(new BO.OrderItem { Name = product.Name, ProductID = product.Id, Amount = 1, Price = product.Price, TotalPrice = product.Price });
                     cart.TotalPrice += product.Price;
                 }
                 else
@@ -143,7 +143,7 @@ internal class Cart : BlApi.ICart
 
             BO.Order boOrder = new BO.Order()
             {
-                ID = orderId,
+                Id = orderId,
                 CustomerName = cart.CustomerName,
                 CustomerEmail = cart.CustomerEmail,
                 CustomerAdress = cart.CustomerAddress,
