@@ -13,15 +13,14 @@ internal class Product : BlApi.IProduct
         //return DataSource._products.Where(product => cond is null ? true : cond!(product));
 
         IEnumerable<BO.ProductForList> productForLists = from product in doProductList
-                                                         let pdct = product.Value
                                                          select new BO.ProductForList
                                                          {
                                                              //Initializes the data for each product
-                                                             Id = pdct.Id,
-                                                             Name = pdct.Name,
-                                                             Price = pdct.Price,
-                                                             Category = (BO.Category)pdct.Category!,
-                                                             Color = (BO.Color)pdct.Color!                                                        
+                                                             Id = product?.Id??0,
+                                                             Name = product?.Name,
+                                                             Price = product?.Price??0,
+                                                             Category = (BO.Category)product?.Category!,
+                                                             Color = (BO.Color)product?.Color!                                                        
                                                          };
         return productForLists;
     }

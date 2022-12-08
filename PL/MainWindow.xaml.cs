@@ -22,6 +22,11 @@ namespace PL
         private void ProductButton_Click(object sender, RoutedEventArgs e)
         {
             new ProductListWindow().ShowDialog();
-        }        
+        }
+
+        private void MWcloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

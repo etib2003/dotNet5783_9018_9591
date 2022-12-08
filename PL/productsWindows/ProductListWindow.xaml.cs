@@ -48,13 +48,20 @@ namespace PL.productsWindows
         { 
             int pflId = ((ProductForList)ProductForListView.SelectedItem).Id;
             new ProductWindow(pflId).ShowDialog();
+            ShowAllCategories_Click(sender, e);
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             new ProductWindow().ShowDialog();
+            ShowAllCategories_Click(sender,e);
         }
 
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
 
+    
     }
 }

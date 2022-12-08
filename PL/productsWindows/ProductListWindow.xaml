@@ -7,17 +7,21 @@
         mc:Ignorable="d"
         Title="ProductListWindow" Height="450" Width="800">
     <Grid Name="MainGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="399*"/>
+            <ColumnDefinition Width="401*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40*"/>
-            <RowDefinition Height="500*"/>
+            <RowDefinition Height="27*"/>
+            <RowDefinition Height="104*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
+        <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Grid.ColumnSpan="2" Margin="0,0,0,2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <ComboBox x:Name ="selectCategory" Grid.Column="1" RenderTransformOrigin="-0.297,0.143" SelectionChanged="ComboBox_SelectionChanged" Margin="58,5,80,-6" FontFamily="Candara">
+            <ComboBox x:Name ="selectCategory" Grid.Column="1" RenderTransformOrigin="-0.297,0.143" SelectionChanged="ComboBox_SelectionChanged" Margin="92,24,46,30" FontFamily="Candara">
                 <ComboBox.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="1"/>
@@ -27,12 +31,13 @@
                     </TransformGroup>
                 </ComboBox.RenderTransform>
             </ComboBox>
-            <Label Content="Category" Grid.Column="0" RenderTransformOrigin="4.721,1.674" Margin="163,10,97,-37" FontSize="24" FontFamily="Candara" FontWeight="Bold" HorizontalContentAlignment="Center" />
+            <Label Content="Category" Grid.Column="0" RenderTransformOrigin="4.721,1.674" Margin="130,5,130,-14" FontSize="24" FontFamily="Candara" FontWeight="Bold" HorizontalContentAlignment="Center" />
 
         </Grid>
-        <ListView x:Name="ProductForListView" Grid.Row="1" FontFamily="Arial" Foreground="#FF4B0606" Margin="0,45,0,0" MouseDoubleClick="ProductForListView_MouseDoubleClick" ></ListView>
-        <Button x:Name="ShowAllCategories" HorizontalAlignment="Right" Margin="0,7,38,0" VerticalAlignment="Top" FontFamily="Candara" FontSize="18" Width="32" Click="ShowAllCategories_Click" FontWeight="Bold" Height="22"/>
-        <Button x:Name="AddButton" Content="Add new Product" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="AddButton_Click" FontFamily="Candara" FontSize="16"/>
+        <ListView x:Name="ProductForListView" FontFamily="Arial" Foreground="#FF4B0606" Margin="0,68,0,41" MouseDoubleClick="ProductForListView_MouseDoubleClick" Grid.ColumnSpan="2" Grid.RowSpan="3" />
+        <Button x:Name="ShowAllCategories" HorizontalAlignment="Left" Margin="361,23,0,0" VerticalAlignment="Top" FontFamily="Candara" FontSize="18" Width="24" Click="ShowAllCategories_Click" FontWeight="Bold" Height="24" Content="↻" Grid.Column="1" RenderTransformOrigin="1.333,0.416" Background="White" BorderThickness="0,0,0,0"/>
+        <Button x:Name="AddButton" Content="Add new Product" Grid.Row="2" HorizontalAlignment="Left" Margin="174,5,0,5" Padding="5" Click="AddButton_Click" FontFamily="Candara" FontSize="16" Width="129" Grid.Column="1"/>
+        <Button x:Name="CloseButton" Content="Close" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Height="32" Width="74" FontFamily="Candara" FontSize="16" Click="CloseButton_Click" Grid.Column="1" Margin="312,0,0,0"/>
 
     </Grid>
 

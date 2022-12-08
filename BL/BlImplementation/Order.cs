@@ -60,12 +60,12 @@ internal class Order : BlApi.IOrder
                             select new BO.OrderItem
                             {
                                 //Initializes the data for each order item
-                                Id = orderItem.Value.Id,
+                                Id = orderItem?.Id??0,
                                 Name = _dal.Product.RequestById(orderItem.Value.ProductID).Name,
-                                ProductID = orderItem.Value.ProductID,
-                                Price = orderItem.Value.Price,
-                                Amount = orderItem.Value.Amount,
-                                TotalPrice = orderItem.Value.Price * orderItem.Value.Amount
+                                ProductID = orderItem?.ProductID??0,
+                                Price = orderItem?.Price??0,
+                                Amount = orderItem?.Amount??0,
+                                TotalPrice = orderItem?.Price??0 * orderItem?.Amount??0
 
                             }).ToList();
 

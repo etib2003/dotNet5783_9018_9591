@@ -69,5 +69,9 @@ namespace PL.productsWindows
             }
         }
 
+        private void PWcloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
