@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="tempraryMain" Height="450" Width="800">
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/magnus-lunay-LHR6tUw8N34-unsplash.jpg"/>
+        </Grid.Background>
         <Button x:Name="ProductForListButton" Content="Products" Margin="0,54,0,0" VerticalAlignment="Top" FontSize="48" FontFamily="Maiandra GD" Click="ProductButton_Click" FontWeight="Bold" Foreground="#FFFFFBFB" Background="Black" HorizontalAlignment="Center" BorderThickness="0,0,0,0" BorderBrush="#FFEEEEEE" Width="225">
             <Button.Resources>
                 <Style TargetType="Border">
