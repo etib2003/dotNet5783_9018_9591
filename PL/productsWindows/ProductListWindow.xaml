@@ -31,7 +31,7 @@
 
         </Grid>
         <ListView x:Name="ProductForListView" Grid.Row="1" FontFamily="Arial" Foreground="#FF4B0606" Margin="0,45,0,0" MouseDoubleClick="ProductForListView_MouseDoubleClick" ></ListView>
-        <Button x:Name="ShowAllCategories" Content="Show All" HorizontalAlignment="Right" Margin="0,15,80,0" Grid.Row="1" VerticalAlignment="Top" FontFamily="Candara" FontSize="18" Width="256" Click="ShowAllCategories_Click" FontWeight="Bold"/>
+        <Button x:Name="ShowAllCategories" HorizontalAlignment="Right" Margin="0,7,38,0" VerticalAlignment="Top" FontFamily="Candara" FontSize="18" Width="32" Click="ShowAllCategories_Click" FontWeight="Bold" Height="22"/>
         <Button x:Name="AddButton" Content="Add new Product" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="AddButton_Click" FontFamily="Candara" FontSize="16"/>
 
     </Grid>
