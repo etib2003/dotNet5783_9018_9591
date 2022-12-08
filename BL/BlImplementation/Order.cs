@@ -55,13 +55,13 @@ internal class Order : BlApi.IOrder
             DeliveryDate = doOrder.DeliveryDate
         };
 
-        IEnumerable<DO.OrderItem?> orderItemsList = _dal.OrderItem.RequestAll(x => x!.Value.OrderID == doOrder.Id);
+        IEnumerable<DO.OrderItem?> orderItemsList = _dal.OrderItem.RequestAll(x => x?.OrderID == doOrder.Id);
         boOrder.OrderItems = (from orderItem in orderItemsList
                             select new BO.OrderItem
                             {
                                 //Initializes the data for each order item
                                 Id = orderItem?.Id??0,
-                                Name = _dal.Product.RequestById(orderItem.Value.ProductID).Name,
+                                Name = _dal.Product.RequestById(orderItem?.ProductID??0).Name,
                                 ProductID = orderItem?.ProductID??0,
                                 Price = orderItem?.Price??0,
                                 Amount = orderItem?.Amount??0,
@@ -69,7 +69,7 @@ internal class Order : BlApi.IOrder
 
                             }).ToList();
 
-        boOrder.TotalPrice = orderItemsList.Sum(orderItem => orderItem!.Value.Price * orderItem.Value.Amount);//calculate the order's total price
+        boOrder.TotalPrice = orderItemsList.Sum(orderItem => orderItem?.Price??0 * orderItem?.Amount??0);//calculate the order's total price
         return boOrder;
     }
 

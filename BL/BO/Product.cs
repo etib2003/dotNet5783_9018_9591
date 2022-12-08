@@ -32,11 +32,6 @@ public class Product
     public BO.Category? Category { get; set; }
 
     /// <summary>
-    /// Product's Color
-    /// </summary>
-    public BO.Color? Color { get; set; }
-
-    /// <summary>
     /// product's amount in stock
     /// </summary>
     public int InStock { get; set; }
@@ -53,7 +48,6 @@ public class Product
     //=> $@"
     //    Product barcode: {Id}, {Name}
     //    Category: {Category}
-    //    Color: {Color}
     //	Price: {Price}
     //	Amount in stock: {InStock}";
 

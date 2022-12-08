@@ -1,4 +1,6 @@
-﻿namespace DO;
+﻿using OtherFunctionDal;
+
+namespace DO;
 
 /// <summary>
 /// a struct that links between the order and the product
@@ -34,11 +36,15 @@ public struct OrderItem
     /// the orderItem's print method
     /// </summary>
     /// <returns>the way the orderItem is printed</returns>
-    public override string ToString() => $@"
-        Identification number= {Id} 
-        Order Id: {OrderID}
-        Product Id: {ProductID}
-    	Price: {Price}
-    	Amount: {Amount}
-";
+    public override string ToString()
+    {
+        return this.ToStringProperty();
+    }
+//    => $@"
+//        Identification number= {Id} 
+//        Order Id: {OrderID}
+//        Product Id: {ProductID}
+//    	Price: {Price}
+//    	Amount: {Amount}
+//";
 }

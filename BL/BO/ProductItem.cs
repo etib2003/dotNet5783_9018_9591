@@ -28,11 +28,6 @@ public class ProductItem
     public BO.Category? Category { get; set; }
 
     /// <summary>
-    /// Product's color
-    /// </summary>
-    public BO.Color? Color { get; set; }
-
-    /// <summary>
     /// check if the product is in stock
     /// </summary>
     public bool InStock { get; set; }
@@ -54,7 +49,6 @@ public class ProductItem
     //    Product barcode: {Id}, {Name}
     //    Price: {Price}
     //    Category: {Category}
-    //    Color: {Color}
     //    Amount: {Amount}   	
     //	In stock? {InStock}";
 

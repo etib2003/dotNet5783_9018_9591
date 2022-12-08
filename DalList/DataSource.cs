@@ -101,7 +101,6 @@ internal static class DataSource
             product.Name = "product" + i;
             product.Price = random.Next(200, 2000);
             product.Category = (Category)(i % 5);
-            product.Color = (Color)(i % 4);
             if (i <= AmountOfProducts * 0.05 + 1)
                 product.InStock = 0;
             else

@@ -27,11 +27,6 @@ public class ProductForList
     public BO.Category? Category { get; set; }
 
     /// <summary>
-    /// Product's color
-    /// </summary>
-    public BO.Color? Color { get; set; }
-
-    /// <summary>
     /// the list of products print method
     /// </summary>
     /// <returns>the way the product's list data is printed</returns>
@@ -42,6 +37,5 @@ public class ProductForList
     //=> $@"
     //    Product barcode: {Id}, {Name}
     //    Category: {Category}
-    //    Color: {Color}
     // 	Price: {Price}";
 }

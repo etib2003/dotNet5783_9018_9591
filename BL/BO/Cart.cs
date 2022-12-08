@@ -32,7 +32,7 @@ public class Cart
     public override string ToString()
     {
         return this.ToStringProperty();
-
+    }
         //return $@"
         //    Customer Name: {CustomerName}
         //    Customer Email: {CustomerEmail}
@@ -41,5 +41,5 @@ public class Cart
         //    Items: {string.Join("\n", Items)}
 
         //  Cart's Total Price: {TotalPrice}";
-    }
+    
 }

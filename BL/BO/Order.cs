@@ -49,7 +49,7 @@ public class Order
     /// <summary>
     /// order's list of orders
     /// </summary>
-    public List <BO.OrderItem?>?  OrderItems { get; set; }
+    public List <BO.OrderItem>  OrderItems { get; set; }
 
     /// <summary>
     /// order's total price
@@ -60,8 +60,10 @@ public class Order
     /// the order's print method
     /// </summary>
     /// <returns>the way the order is printed</returns>
-    public override string ToString() {
+    public override string ToString()
+    {
         return this.ToStringProperty();
+    }
         //return $@"
         //    Customer Id= {Id}: {CustomerName}, 
         //    Email: {CustomerEmail}
@@ -74,5 +76,5 @@ public class Order
         //    Items: {string.Join("\n", OrderItems)}
 
         //    Order's total price: {TotalPrice}";
-    }
+
 }

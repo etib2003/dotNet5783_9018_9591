@@ -49,7 +49,7 @@ namespace PL.productsWindows
         {
             try
             {
-                BO.Product newPdct = new BO.Product() { Id = int.Parse(IdBox.Text), Name = NameBox.Text, Price = double.Parse(PriceBox.Text), Category = (BO.Category)Enum.Parse(typeof(BO.Category), CategoryCB.Text), Color = (BO.Color)Enum.Parse(typeof(BO.Color), "white"), InStock = int.Parse(InStockBox.Text) };
+                BO.Product newPdct = new BO.Product() { Id = int.Parse(IdBox.Text), Name = NameBox.Text, Price = double.Parse(PriceBox.Text), Category = (BO.Category)Enum.Parse(typeof(BO.Category), CategoryCB.Text), InStock = int.Parse(InStockBox.Text) };
                 if (Complete.Content == "Add")
                 {
                     bl.Product.AddProduct(newPdct);

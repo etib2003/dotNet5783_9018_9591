@@ -20,7 +20,6 @@ internal class Product : BlApi.IProduct
                                                              Name = product?.Name,
                                                              Price = product?.Price??0,
                                                              Category = (BO.Category)product?.Category!,
-                                                             Color = (BO.Color)product?.Color!                                                        
                                                          };
         return productForLists;
     }
@@ -47,7 +46,6 @@ internal class Product : BlApi.IProduct
                 Name = doProduct.Name,
                 Price = doProduct.Price,
                 Category = (BO.Category)doProduct.Category,
-                Color = (BO.Color)doProduct.Color,
                 InStock = doProduct.InStock
             };
 
@@ -76,7 +74,6 @@ internal class Product : BlApi.IProduct
                 Name = doProduct.Name,
                 Price = doProduct.Price,
                 Category = (BO.Category)doProduct.Category,
-                Color = (BO.Color)doProduct.Color,
                 InStock = doProduct.InStock > 0,
                 //gets the amount of the product
                 Amount = (from orderItem in cart.Items
@@ -107,7 +104,6 @@ internal class Product : BlApi.IProduct
             Name = product.Name,
             Price = product.Price,
             Category = (DO.Category)product.Category!,
-            Color = (DO.Color)product.Color!,
             InStock = product.InStock
         };
         return _dal.Product.Create(doProduct);
@@ -129,7 +125,6 @@ internal class Product : BlApi.IProduct
             Name = product.Name,
             Price = product.Price,
             Category = (DO.Category)product.Category,
-            Color = (DO.Color)product.Color,
             InStock = product.InStock
         };
         _dal.Product.Update(doProduct);//send the product to the data layer function that updates it

@@ -214,22 +214,17 @@ Please choose the topic:
                                 newProduct.Id = ID;
 
                                 Console.Write("Enter a Category: 0- Percussions , 1- StringInstrument , 2- WindInstrument , 3- KeyBoard , 4- BowInstrument: ");
-                                string input = Console.ReadLine();
-                                newProduct.Category = (Category)int.Parse(input);
+                                newProduct.Category = (Category)int.Parse(Console.ReadLine());
 
                                 Console.Write("Enter a Product name: ");
                                 newProduct.Name = Console.ReadLine();
 
-                                Console.Write("Enter a Color: 0- Black , 1- Red , 2- White , 3- Brown: ");
-                                input = Console.ReadLine();
-                                newProduct.Color = (Color)int.Parse(input);
-
                                 Console.Write("Enter a Price: ");
-                                double price; double.TryParse(Console.ReadLine(), out price);
+                                double.TryParse(Console.ReadLine(), out double price);
                                 newProduct.Price = price;
 
                                 Console.Write("Enter an Amount: ");
-                                int InStock; int.TryParse(Console.ReadLine(), out InStock);
+                                int.TryParse(Console.ReadLine(), out int InStock);
                                 newProduct.InStock = InStock;
 
                                 Console.Write("The product's barcode is: ");
@@ -264,15 +259,10 @@ Please choose the topic:
                                 newProduct.Id = barcode;
 
                                 Console.Write("Enter a Category: 0- Percussions , 1- StringInstrument , 2- WindInstrument , 3- KeyBoard , 4- BowInstrument: ");
-                                string input = Console.ReadLine();
-                                newProduct.Category = (Category)int.Parse(input);
+                                newProduct.Category = (Category)int.Parse(Console.ReadLine());
 
                                 Console.Write("Enter a Product name: ");
-                                newProduct.Name = Console.ReadLine();
-
-                                Console.Write("Enter a Color: 0- Black , 1- Red , 2- White , 3- Brown: ");
-                                input = Console.ReadLine();
-                                newProduct.Color = (Color)int.Parse(input);
+                                newProduct.Name = Console.ReadLine(); 
 
                                 Console.Write("Enter a Price: ");
                                 int Price; int.TryParse(Console.ReadLine(), out Price);

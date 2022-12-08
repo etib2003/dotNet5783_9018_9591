@@ -1,4 +1,6 @@
-﻿namespace DO;
+﻿using OtherFunctionDal;
+
+namespace DO;
 /// <summary>
 /// a struct for products
 /// </summary>
@@ -25,12 +27,6 @@ public struct Product
     public Category? Category { get; set; }
 
     /// <summary>
-    /// Product's color
-    /// </summary>
-    public Color? Color { get; set; }
-
-
-    /// <summary>
     /// product's amount in stock
     /// </summary>
     public int InStock { get; set; }
@@ -40,11 +36,14 @@ public struct Product
     /// the product's print method
     /// </summary>
     /// <returns>the way the product is printed</returns>
-    public override string ToString() => $@"
-        Product barcode: {Id}, {Name}
-        Category: {Category}
-        Color: {Color}
-    	Price: {Price}
-    	Amount in stock: {InStock}";
+    public override string ToString()
+    {
+        return this.ToStringProperty();
+    }
+    //=> $@"
+    //    Product barcode: {Id}, {Name}
+    //    Category: {Category}
+    //	Price: {Price}
+    //	Amount in stock: {InStock}";
 
 }

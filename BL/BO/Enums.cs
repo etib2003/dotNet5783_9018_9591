@@ -8,5 +8,4 @@ namespace BO;
 
 public enum OrderStatus { confirmed, shipped, provided };
 public enum Category { Percussions, StringInstrument, WindInstrument, KeyBoard, BowInstrument };
-public enum Color { black, red, white, brown };
 

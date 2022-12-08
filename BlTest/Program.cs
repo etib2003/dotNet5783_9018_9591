@@ -413,18 +413,10 @@ Please choose the topic:
             product.Name = Console.ReadLine()!;
 
             Console.Write("Enter product's category: 0- Percussions , 1- StringInstrument , 2- WindInstrument , 3- KeyBoard , 4- BowInstrument: ");
-            string sinput = Console.ReadLine()!;
-            int.TryParse(sinput, out int input);
+            int.TryParse(Console.ReadLine(), out int input);
             if (input <= 4)
                 product.Category = (Category)input;
             else throw new Exception("Not valid category exception");
-
-            Console.Write("Enter product's color: 0- Black , 1- Red , 2- White , 3- Brown: ");
-            sinput = Console.ReadLine()!;
-            int.TryParse(sinput, out input);
-            if (input <= 3)
-                product.Color = (Color)input;
-            else throw new Exception("Not valid color exception");
 
             Console.WriteLine("Enter product's price:");
             double price; double.TryParse(Console.ReadLine(), out price);
