@@ -34,7 +34,7 @@
             <Label Content="Category" Grid.Column="0" RenderTransformOrigin="4.721,1.674" Margin="130,5,130,-14" FontSize="24" FontFamily="Candara" FontWeight="Bold" HorizontalContentAlignment="Center" />
 
         </Grid>
-        <ListView x:Name="ProductForListView" FontFamily="Arial" Foreground="#FF4B0606" Margin="0,68,0,41" MouseDoubleClick="ProductForListView_MouseDoubleClick" Grid.ColumnSpan="2" Grid.RowSpan="3" />
+        <ListView x:Name="ProductForListView" FontFamily="Candara" Foreground="#FF4B0606" Margin="0,68,0,41" MouseDoubleClick="ProductForListView_MouseDoubleClick" Grid.ColumnSpan="2" Grid.RowSpan="3" FontSize="14" />
         <Button x:Name="ShowAllCategories" HorizontalAlignment="Left" Margin="361,23,0,0" VerticalAlignment="Top" FontFamily="Candara" FontSize="18" Width="24" Click="ShowAllCategories_Click" FontWeight="Bold" Height="24" Content="↻" Grid.Column="1" RenderTransformOrigin="1.333,0.416" Background="White" BorderThickness="0,0,0,0"/>
         <Button x:Name="AddButton" Content="Add new Product" Grid.Row="2" HorizontalAlignment="Left" Margin="174,5,0,5" Padding="5" Click="AddButton_Click" FontFamily="Candara" FontSize="16" Width="129" Grid.Column="1"/>
         <Button x:Name="CloseButton" Content="Close" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Height="32" Width="74" FontFamily="Candara" FontSize="16" Click="CloseButton_Click" Grid.Column="1" Margin="312,0,0,0"/>
