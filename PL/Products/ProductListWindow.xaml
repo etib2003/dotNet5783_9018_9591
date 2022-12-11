@@ -21,7 +21,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <ComboBox x:Name ="selectCategory" Grid.Column="1" RenderTransformOrigin="-0.297,0.143" SelectionChanged="ComboBox_SelectionChanged" Margin="92,24,46,30" FontFamily="Candara">
+            <ComboBox x:Name ="selectCategory" Grid.Column="1" RenderTransformOrigin="-0.297,0.143" SelectionChanged="ComboBox_SelectionChanged" Margin="112,26,54,23" FontFamily="Candara" FontSize="14">
                 <ComboBox.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="1"/>
@@ -31,11 +31,20 @@
                     </TransformGroup>
                 </ComboBox.RenderTransform>
             </ComboBox>
-            <Label Content="Category" Grid.Column="0" RenderTransformOrigin="4.721,1.674" Margin="130,5,130,-14" FontSize="24" FontFamily="Candara" FontWeight="Bold" HorizontalContentAlignment="Center" />
+            <Label Content="Our products" Grid.Column="0" RenderTransformOrigin="4.721,1.674" Margin="110,18,110,10" FontSize="26" FontFamily="Candara" FontWeight="Bold" HorizontalContentAlignment="Center" />
 
         </Grid>
-        <ListView x:Name="ProductForListView" FontFamily="Candara" Foreground="#FF4B0606" Margin="0,68,0,41" MouseDoubleClick="ProductForListView_MouseDoubleClick" Grid.ColumnSpan="2" Grid.RowSpan="3" FontSize="14" />
-        <Button x:Name="ShowAllCategories" HorizontalAlignment="Left" Margin="361,23,0,0" VerticalAlignment="Top" FontFamily="Candara" FontSize="18" Width="24" Click="ShowAllCategories_Click" FontWeight="Bold" Height="24" Content="↻" Grid.Column="1" RenderTransformOrigin="1.333,0.416" Background="White" BorderThickness="0,0,0,0"/>
+        <ListView x:Name="ProductForListView" FontFamily="Candara" Foreground="#FF4B0606" Margin="0,68,0,41" MouseDoubleClick="Update_MouseDoubleClick" Grid.ColumnSpan="2" Grid.RowSpan="3" FontSize="16" />
+        <Button x:Name="ShowAllCategories" HorizontalAlignment="Left" Margin="349,41,0,0" VerticalAlignment="Top" FontFamily="Candara" FontSize="24" Width="29" Click="ShowAllCategories_Click" FontWeight="Bold" Height="28" Content="↻" Grid.Column="1" RenderTransformOrigin="1.333,0.416" Background="White" BorderThickness="0,0,0,0">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="40.786"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
         <Button x:Name="AddButton" Content="Add new Product" Grid.Row="2" HorizontalAlignment="Left" Margin="174,5,0,5" Padding="5" Click="AddButton_Click" FontFamily="Candara" FontSize="16" Width="129" Grid.Column="1"/>
         <Button x:Name="CloseButton" Content="Close" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Height="32" Width="74" FontFamily="Candara" FontSize="16" Click="CloseButton_Click" Grid.Column="1" Margin="312,0,0,0"/>
 

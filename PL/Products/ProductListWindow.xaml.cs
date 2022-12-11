@@ -44,7 +44,7 @@ namespace PL.productsWindows
             selectCategory.ItemsSource = Enum.GetValues(typeof(BO.Category));
         }
 
-        private void ProductForListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void Update_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         { 
             int pflId = ((ProductForList)ProductForListView.SelectedItem).Id;
             new ProductWindow(pflId).ShowDialog();

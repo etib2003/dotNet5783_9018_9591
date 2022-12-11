@@ -7,21 +7,27 @@
         mc:Ignorable="d"
         Title="tempraryMain" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="91*"/>
+            <ColumnDefinition Width="709*"/>
+        </Grid.ColumnDefinitions>
         <Grid.Background>
             <ImageBrush ImageSource="/magnus-lunay-LHR6tUw8N34-unsplash.jpg"/>
         </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="55*"/>
-            <RowDefinition Height="7*"/>
+            <RowDefinition Height="64*"/>
+            <RowDefinition Height="321*"/>
+            <RowDefinition Height="49*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="ProductForListButton" Content="Products" Margin="0,54,0,0" VerticalAlignment="Top" FontSize="48" FontFamily="Maiandra GD" Click="ProductButton_Click" FontWeight="Bold" Foreground="#FFFFFBFB" Background="Black" HorizontalAlignment="Center" BorderThickness="0,0,0,0" BorderBrush="#FFEEEEEE" Width="224" Height="60">
+        <Button x:Name="ProductForListButton" Content="Products" Margin="197,54,0,0" VerticalAlignment="Top" FontSize="48" FontFamily="Maiandra GD" Click="ProductButton_Click" FontWeight="Bold" Foreground="#FFFFFBFB" Background="Black" HorizontalAlignment="Left" BorderThickness="0,0,0,0" BorderBrush="#FFEEEEEE" Width="224" Height="60" Grid.RowSpan="2" Grid.Column="1">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="20"></Setter>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="MWcloseButton" Content="Close" HorizontalAlignment="Right" Margin="0,5,10,0" VerticalAlignment="Top" Width="74" Height="32" FontFamily="Candara" FontSize="16" Click="MWcloseButton_Click" Grid.Row="1"/>
+        <Button x:Name="MWcloseButton" Content="Close" HorizontalAlignment="Right" Margin="0,5,10,0" VerticalAlignment="Top" Width="74" Height="32" FontFamily="Candara" FontSize="16" Click="MWcloseButton_Click" Grid.Row="2" Grid.Column="1"/>
+
 
     </Grid>
 </Window>
