@@ -12,6 +12,11 @@ public class ProductForList
     public int Id { get; set; }
 
     /// <summary>
+    /// category of product
+    /// </summary>
+    public BO.Category? Category { get; set; }
+
+    /// <summary>
     /// the product's name
     /// </summary>
     public string? Name { get; set; }
@@ -20,11 +25,6 @@ public class ProductForList
     /// price of product
     /// </summary>
     public double Price { get; set; }
-
-    /// <summary>
-    /// category of product
-    /// </summary>
-    public BO.Category? Category { get; set; }
 
     /// <summary>
     /// the list of products print method

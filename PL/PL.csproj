@@ -8,16 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="electric violin.jpg" />
-    <None Remove="magnus-lunay-LHR6tUw8N34-unsplash.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\BL\BL.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="electric violin.jpg" />
     <Resource Include="magnus-lunay-LHR6tUw8N34-unsplash.jpg" />
   </ItemGroup>
 

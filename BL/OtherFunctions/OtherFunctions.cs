@@ -13,10 +13,10 @@ namespace OtherFunctions
         /// <exception cref="Negative number"></exception>
         public static void negativeNumber(this int number)
         {
-            if (number <= 0)
+            if (number < 0)
                 throw new BO.NegativeNumberException("Negative number");
-
         }
+
         /// <summary>
         /// Check if the number's length is shorter than the allowed length
         /// </summary>
@@ -25,7 +25,7 @@ namespace OtherFunctions
         /// <exception cref="Wrong length number"></exception>
         public static void wrongLengthNumber(this int number, int length)
         {
-            if (number.ToString().Length < length)
+            if (number.ToString().Length < length || (length == 6 && number.ToString().Length != 6))
                 throw new BO.WrongLengthException("Wrong length number");
 
 
