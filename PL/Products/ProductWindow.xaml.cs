@@ -66,17 +66,25 @@ namespace PL.productsWindows
             }
         }
 
-        //private void IdBox_LostFocus(object sender, RoutedEventArgs e)
-        //{
-        //    if (string.IsNullOrEmpty(IdBox.Text))
-        //        idEmptyLabel.Visibility = Visibility.Visible;
-        //}
 
-        //private void IdBox_GotFocus(object sender, RoutedEventArgs e)
+        //private void IdBox_KeyDown(object sender, KeyEventArgs e)
         //{
-        //    if (!string.IsNullOrEmpty(IdBox.Text))
+        //    if (e.Key==Key.Enter)
+        //    {
         //        idEmptyLabel.Visibility = Visibility.Hidden;
+        //        return;
+        //    }
         //}
+        private void IdBox_LostFocus(object sender, RoutedEventArgs e)
+        {          
+            idEmptyLabel.Visibility = Visibility.Visible;
+
+        }
+
+        private void IdBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            idEmptyLabel.Visibility = Visibility.Hidden;
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

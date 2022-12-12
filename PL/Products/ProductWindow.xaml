@@ -21,7 +21,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBox x:Name="IdBox" PreviewTextInput="PreviewTextInputDecimal" HorizontalAlignment="Left" Margin="8,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="129" FontFamily="Candara" FontSize="16" Grid.Row="1" Grid.Column="1" Height="26" Padding="1,0,1,0" Grid.IsSharedSizeScope="False"/>
+        <TextBox x:Name="IdBox" LostFocus="IdBox_LostFocus" GotFocus="IdBox_GotFocus" PreviewTextInput="PreviewTextInputDecimal" HorizontalAlignment="Left" Margin="8,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="129" FontFamily="Candara" FontSize="16" Grid.Row="1" Grid.Column="1" Height="26" Padding="1,0,1,0" Grid.IsSharedSizeScope="False"/>
         <TextBox x:Name="NameBox" HorizontalAlignment="Left" Margin="8,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="129" FontFamily="Candara" FontSize="16" Grid.Row="3" Grid.Column="1" Height="26" Padding="1,0,1,0" Grid.IsSharedSizeScope="False"/>
         <TextBox x:Name="PriceBox" PreviewTextInput="PreviewTextInputDouble" HorizontalAlignment="Left" Margin="8,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="129" FontFamily="Candara" FontSize="16" Grid.Row="4" Grid.Column="1" Height="26" Padding="1,0,1,0" Grid.IsSharedSizeScope="False"/>
         <TextBox x:Name="InStockBox" PreviewTextInput="PreviewTextInputDecimal" HorizontalAlignment="Left" Margin="8,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="129" FontFamily="Candara" FontSize="16" Grid.Row="5" Grid.Column="1" Height="26" Padding="1,0,1,0" Grid.IsSharedSizeScope="False"/>
