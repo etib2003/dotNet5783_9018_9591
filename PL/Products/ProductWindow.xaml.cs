@@ -52,6 +52,12 @@ namespace PL.productsWindows
 
         private void PreviewTextInputDecimal(object sender, TextCompositionEventArgs e)
         {
+            if (e.Source == IdBox)
+                if (IdBox.Text.Length == 6)
+                {
+                    e.Handled = true;
+                    return;
+                }
             Regex regex = new("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
@@ -77,18 +83,14 @@ namespace PL.productsWindows
         //}
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (e.Source==IdBox)
-                if(string.IsNullOrEmpty(IdBox.Text))
-                    idEmptyLabel.Visibility = Visibility.Visible;
-            if(e.Source==NameBox)
-                if (string.IsNullOrEmpty(NameBox.Text))
-                    nameEmptyLabel.Visibility = Visibility.Visible;
-            if(e.Source== PriceBox)
-                if (string.IsNullOrEmpty(PriceBox.Text))
-                    priceEmptyLabel.Visibility= Visibility.Visible;
-            if(e.Source==InStockBox)
-                if (string.IsNullOrEmpty(InStockBox.Text))
-                    inStockEmptyLabel.Visibility= Visibility.Visible;   
+            if (e.Source == IdBox && string.IsNullOrEmpty(IdBox.Text))
+                idEmptyLabel.Visibility = Visibility.Visible;
+            if (e.Source == NameBox && string.IsNullOrEmpty(NameBox.Text))
+                nameEmptyLabel.Visibility = Visibility.Visible;
+            if (e.Source == PriceBox && string.IsNullOrEmpty(PriceBox.Text))
+                priceEmptyLabel.Visibility = Visibility.Visible;
+            if (e.Source == InStockBox && string.IsNullOrEmpty(InStockBox.Text))
+                inStockEmptyLabel.Visibility = Visibility.Visible;
         }
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -102,7 +104,7 @@ namespace PL.productsWindows
             if (e.Source == InStockBox)
                 inStockEmptyLabel.Visibility = Visibility.Hidden;
         }
-        
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

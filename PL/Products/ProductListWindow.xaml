@@ -39,13 +39,13 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="Id" Width="80" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Category" Width="130"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Name" Width="100"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Price}" Header="Price" Width="60"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Category" Width="132"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Name" Width="110"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Price}" Header="Price" Width="65"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="ShowAllCategories" HorizontalAlignment="Left" Margin="349,41,0,0" VerticalAlignment="Top" FontFamily="Candara" FontSize="24" Width="29" Click="ShowAllCategories_Click" FontWeight="Bold" Height="28" Content="↻" Grid.Column="1" RenderTransformOrigin="1.333,0.416" Background="White" BorderThickness="0,0,0,0">
+        <Button x:Name="ShowAllCategories" HorizontalAlignment="Left" Margin="349,41,0,0" VerticalAlignment="Top" FontFamily="Candara" FontSize="24" Width="29" Click="ShowAllCategories_Click" FontWeight="Bold" Height="28" Content="↻" Grid.Column="1" RenderTransformOrigin="1.333,0.416" BorderThickness="0,0,0,0" Background="{x:Null}">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
