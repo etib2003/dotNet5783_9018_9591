@@ -63,13 +63,23 @@ internal class dalProduct : IProduct
         DataSource._products.Remove(GetById(id));
     }
 
-    IEnumerable<Product?> ICrud<Product>.RequestAll(Func<Product?, bool>? cond)
-    {
-        return DataSource._products.Where(product => cond is null ? true : cond!(product));
-    }
-
+    /// <summary>
+    /// the function returns the product according to the given condition
+    /// </summary>
+    /// <param name="cond">the given condition</param>
+    /// <returns>product according to the given condition</returns>
+    /// <exception cref="the product you want to get does not exist"></exception>
     public Product Get(Func<Product?, bool>? cond)
     {
         return DataSource._products.FirstOrDefault(cond!) ?? throw new DalDoesNoExistException("Product");
+    }
+    /// <summary>
+    /// the function returns a list of product according to the given condition
+    /// </summary>
+    /// <param name="cond">the given condition</param>
+    /// <returns>a list of products according to the given condition</returns>
+    IEnumerable<Product?> ICrud<Product>.RequestAll(Func<Product?, bool>? cond)
+    {
+        return DataSource._products.Where(product => cond is null ? true : cond!(product));
     }
 }

@@ -28,10 +28,4 @@ public class OrderTracking
     {
         return this.ToStringProperty();
     }
-    //=> $@"
-    //        Id: {Id}
-    //        Status: {Status}
-    //        OrderProgress: 
-    //        {string.Join("\n            ", OrderProgress)}";
-
 }

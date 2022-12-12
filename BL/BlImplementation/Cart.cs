@@ -12,6 +12,7 @@ internal class Cart : BlApi.ICart
         cart.CustomerEmail!.notValidEmail();
         cart.CustomerAddress!.notValidName();
     }
+
     public BO.Cart AddProductToCart(BO.Cart cart, int productId)
     {
         try

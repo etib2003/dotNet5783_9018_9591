@@ -35,5 +35,11 @@ public interface ICart
     /// <exception cref="not Valid Amount"></exception>
     /// <exception cref="product does not exist"></exception>
     BO.Order CommitOrder(BO.Cart cart);
+
+
+    /// <summary>
+    /// check if the details are valid
+    /// </summary>
+    /// <param name="cart">the cart</param>
     void CheckFormat(BO.Cart cart);
 }

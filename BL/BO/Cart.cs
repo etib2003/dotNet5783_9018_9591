@@ -33,13 +33,4 @@ public class Cart
     {
         return this.ToStringProperty();
     }
-        //return $@"
-        //    Customer Name: {CustomerName}
-        //    Customer Email: {CustomerEmail}
-        //  Customer Address: {CustomerAddress}
-
-        //    Items: {string.Join("\n", Items)}
-
-        //  Cart's Total Price: {TotalPrice}";
-    
 }

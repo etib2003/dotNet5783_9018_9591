@@ -34,8 +34,4 @@ public class ProductForList
     {
         return this.ToStringProperty();
     }
-    //=> $@"
-    //    Product barcode: {Id}, {Name}
-    //    Category: {Category}
-    // 	Price: {Price}";
 }

@@ -62,13 +62,24 @@ internal class dalOrderItem :IOrderItem
         DataSource._orderItems.Remove(GetById(id));
     }
 
-    IEnumerable<OrderItem?> ICrud<OrderItem>.RequestAll(Func<OrderItem?, bool>? cond)
-    {
-        return DataSource._orderItems.Where(orderItem => cond is null ? true : cond!(orderItem));
-    }
-
+    /// <summary>
+    /// the function returns the order item according to the given condition
+    /// </summary>
+    /// <param name="cond">the given condition</param>
+    /// <returns>order item according to the given condition</returns>
+    /// <exception cref="the order item you want to get does not exist"></exception>
     public OrderItem Get(Func<OrderItem?, bool>? cond)
     {
         return DataSource._orderItems.FirstOrDefault(cond!) ?? throw new DalDoesNoExistException("Order Item");
     }
+
+    /// <summary>
+    /// the function returns a list of order items according to the given condition
+    /// </summary>
+    /// <param name="cond">the given condition</param>
+    /// <returns>a list of order items according to the given condition</returns>
+    IEnumerable<OrderItem?> ICrud<OrderItem>.RequestAll(Func<OrderItem?, bool>? cond)
+    {
+        return DataSource._orderItems.Where(orderItem => cond is null ? true : cond!(orderItem));
+    } 
 }

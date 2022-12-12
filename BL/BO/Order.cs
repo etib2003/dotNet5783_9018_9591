@@ -64,17 +64,4 @@ public class Order
     {
         return this.ToStringProperty();
     }
-        //return $@"
-        //    Customer Id= {Id}: {CustomerName}, 
-        //    Email: {CustomerEmail}
-        //    Adress: {CustomerAdress}
-        //    Status: {Status}
-        //    Order date: {OrderDate}
-        //    Ship date: {ShipDate}    	
-        //    Delivery date: {DeliveryDate} 
-
-        //    Items: {string.Join("\n", OrderItems)}
-
-        //    Order's total price: {TotalPrice}";
-
 }

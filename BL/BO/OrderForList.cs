@@ -39,9 +39,4 @@ public class OrderForList
     {
         return this.ToStringProperty();
     }
-    //=> $@"
-    //        Customer Id= {Id}: {CustomerName}, 
-    //        Status: {Status}
-    //        Amount of items: {AmountOfItems}
-    //        Total price: {TotalPrice}";
 }

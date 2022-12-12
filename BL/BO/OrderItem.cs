@@ -43,11 +43,4 @@ public class OrderItem
     {
         return this.ToStringProperty();
     }
-    //=> $@" 
-    //        Identification number= {Id}, {Name}
-    //        Product Id: {ProductID}
-    //	    Price: {Price}
-    //	    Amount: {Amount}
-    //        Total price: {TotalPrice}";
-
 }

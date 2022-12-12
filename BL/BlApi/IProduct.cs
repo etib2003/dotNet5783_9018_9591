@@ -15,6 +15,11 @@ public interface IProduct
     /// <returns>list of products</returns>
     public IEnumerable<BO.ProductForList?> GetListProductForManagerAndCatalog();
 
+    /// <summary>
+    /// Get a list of products for the manager and the catalog by condition
+    /// </summary>
+    /// <param name="cond">the condition according to which a list is returned</param>
+    /// <returns>a list by condition</returns>
     public IEnumerable<BO.ProductForList> GetListProductForManagerAndCatalogByCond(Func<ProductForList?, bool>? cond);
 
 

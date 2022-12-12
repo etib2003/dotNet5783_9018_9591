@@ -61,11 +61,22 @@ internal class dalOrder : IOrder
         DataSource._orders.Remove(GetById(id));
     }
 
+    /// <summary>
+    /// the function returns the order according to the given condition
+    /// </summary>
+    /// <param name="cond">the given condition</param>
+    /// <returns>order according to the given condition</returns>
+    /// <exception cref="the order you want to get does not exist"></exception>
     public Order Get(Func<Order?, bool>? cond)
     {
         return DataSource._orders.FirstOrDefault(cond!) ?? throw new DalDoesNoExistException("Order");
     }
 
+    /// <summary>
+    /// the function returns a list of orders according to the given condition
+    /// </summary>
+    /// <param name="cond">the given condition</param>
+    /// <returns>a list of orders according to the given condition</returns>
     IEnumerable<Order?> ICrud<Order>.RequestAll(Func<Order?, bool>? cond)
     {
         return DataSource._orders.Where(order => cond is null ? true : cond!(order));

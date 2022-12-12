@@ -45,11 +45,4 @@ public class ProductItem
     {
         return this.ToStringProperty();
     }
-    //=> $@"
-    //    Product barcode: {Id}, {Name}
-    //    Price: {Price}
-    //    Category: {Category}
-    //    Amount: {Amount}   	
-    //	In stock? {InStock}";
-
 }
