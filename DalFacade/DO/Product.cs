@@ -40,10 +40,5 @@ public struct Product
     {
         return this.ToStringProperty();
     }
-    //=> $@"
-    //    Product barcode: {Id}, {Name}
-    //    Category: {Category}
-    //	Price: {Price}
-    //	Amount in stock: {InStock}";
 
 }

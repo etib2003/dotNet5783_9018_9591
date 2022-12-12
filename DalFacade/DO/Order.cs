@@ -49,15 +49,5 @@ public struct Order
     {
         return this.ToStringProperty();
     }
-
-
-    //    => $@"
-    //        Customer Id= {Id}: {CustomerName}, 
-    //        Email: {CustomerEmail}
-    //        Adress: {CustomerAdress}
-    //        Order date: {OrderDate}
-    //        Ship date: {ShipDate}    	
-    //        Delivery date: {DeliveryDate} 
-    //"; 
 }
  

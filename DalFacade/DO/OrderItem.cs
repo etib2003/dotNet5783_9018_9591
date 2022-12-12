@@ -40,11 +40,5 @@ public struct OrderItem
     {
         return this.ToStringProperty();
     }
-//    => $@"
-//        Identification number= {Id} 
-//        Order Id: {OrderID}
-//        Product Id: {ProductID}
-//    	Price: {Price}
-//    	Amount: {Amount}
-//";
+
 }
