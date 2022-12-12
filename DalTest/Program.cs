@@ -118,7 +118,7 @@ Please choose the topic:
                             {
                                 Console.Write("Enter the order's Id: ");
                                 int id; int.TryParse(Console.ReadLine(), out id);
-                                Console.WriteLine(dalList.Order.RequestById(id));
+                                Console.WriteLine(dalList.Order.GetById(id));
                                 break;
                             }
                         case 4://update an order
@@ -126,7 +126,7 @@ Please choose the topic:
                                 Console.Write("Enter a Id: ");
                                 int seqNum_; int.TryParse(Console.ReadLine(), out seqNum_);
 
-                                Console.WriteLine(dalList.Order.RequestById(seqNum_));
+                                Console.WriteLine(dalList.Order.GetById(seqNum_));
 
                                 //Console.Write("If you still want to update, press 1, else press 0 ");
                                 //int.TryParse(Console.ReadLine(), out int yes);
@@ -246,14 +246,14 @@ Please choose the topic:
                             {
                                 Console.Write("Enter the product's barcode: ");
                                 int id; int.TryParse(Console.ReadLine(), out id);
-                                Console.Write(dalList.Product.RequestById(id));
+                                Console.Write(dalList.Product.GetById(id));
                                 break;
                             }
                         case 4://update a product
                             {
                                 Console.Write("Enter a barcode: ");
                                 int barcode; int.TryParse(Console.ReadLine(), out barcode);
-                                Console.WriteLine(dalList.Product.RequestById(barcode));
+                                Console.WriteLine(dalList.Product.GetById(barcode));
 
                                 Product newProduct = new Product();
                                 newProduct.Id = barcode;
@@ -359,7 +359,7 @@ Please choose the topic:
                             {
                                 Console.Write("Enter the orderItem's Id: ");
                                 int seqNum; int.TryParse(Console.ReadLine(), out seqNum);
-                                Console.Write(dalList.OrderItem.RequestById(seqNum));
+                                Console.Write(dalList.OrderItem.GetById(seqNum));
                                 break;
                             }
                         case 4://returns the orderItem that matches the given order's Id and  the product's barcode
@@ -384,7 +384,7 @@ Please choose the topic:
                             {
                                 Console.Write("Enter a Id: ");
                                 int seqNum_; int.TryParse(Console.ReadLine(), out seqNum_);
-                                Console.WriteLine(dalList.OrderItem.RequestById(seqNum_));
+                                Console.WriteLine(dalList.OrderItem.GetById(seqNum_));
 
                                 OrderItem updatedOrderItem = new OrderItem();
                                 Console.Write("Enter the order's Id: ");

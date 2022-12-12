@@ -32,9 +32,9 @@ internal class dalOrderItem :IOrderItem
     /// <param name="id">the given Id</param>
     /// <returns>the orderItem of the given Id</returns>
     /// <exception cref="the orderItem does not exist"></exception>
-    public OrderItem RequestById(int id)
+    public OrderItem GetById(int id)
     {
-        return GetByCondition(orderItem => orderItem?.Id == id);
+        return Get(orderItem => orderItem?.Id == id);
     }
 
     /// <summary>
@@ -45,7 +45,7 @@ internal class dalOrderItem :IOrderItem
     public void Update(OrderItem Oi)
     {
         //if _orderItems does not exist throw exception 
-        if (RequestById(Oi.Id) is OrderItem orderItem)
+        if (GetById(Oi.Id) is OrderItem orderItem)
         {
             DataSource._orderItems.Remove(orderItem);
             DataSource._orderItems.Add(Oi);
@@ -59,7 +59,7 @@ internal class dalOrderItem :IOrderItem
     /// <exception cref="the orderItem already exist"></exception>
     public void Delete(int id)
     {
-        DataSource._orderItems.Remove(RequestById(id));
+        DataSource._orderItems.Remove(GetById(id));
     }
 
     IEnumerable<OrderItem?> ICrud<OrderItem>.RequestAll(Func<OrderItem?, bool>? cond)
@@ -67,11 +67,8 @@ internal class dalOrderItem :IOrderItem
         return DataSource._orderItems.Where(orderItem => cond is null ? true : cond!(orderItem));
     }
 
-    public OrderItem GetByCondition(Func<OrderItem?, bool>? cond)
+    public OrderItem Get(Func<OrderItem?, bool>? cond)
     {
         return DataSource._orderItems.FirstOrDefault(cond!) ?? throw new DalDoesNoExistException("Order Item");
     }
-
-    //byOrderId : x => x.OrderID == orderId
-    //byOrder&ProductId : x => x.OrderID == orderId && x.ProductID == productId
 }

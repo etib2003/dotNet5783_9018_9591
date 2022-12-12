@@ -33,9 +33,9 @@ internal class dalProduct : IProduct
     /// <param name="id"> the produc's id</param>
     /// <returns> a list of all the products with the given id</returns>
     /// <exception cref="the product does not exist"></exception >
-    public Product RequestById(int id)
+    public Product GetById(int id)
     {
-        return GetByCondition(product => product?.Id == id);
+        return Get(product => product?.Id == id);
     }
 
     /// <summary>
@@ -46,7 +46,7 @@ internal class dalProduct : IProduct
     public void Update(Product product)
     {
         //if product does not exist throw exception 
-        if(RequestById(product.Id) is Product pdct)
+        if(GetById(product.Id) is Product pdct)
         {
             DataSource._products.Remove(pdct);
             DataSource._products.Add(product);
@@ -60,7 +60,7 @@ internal class dalProduct : IProduct
     /// <exception cref="the product does not exist"></exception  >
     public void Delete(int id)
     {
-        DataSource._products.Remove(RequestById(id));
+        DataSource._products.Remove(GetById(id));
     }
 
     IEnumerable<Product?> ICrud<Product>.RequestAll(Func<Product?, bool>? cond)
@@ -68,7 +68,7 @@ internal class dalProduct : IProduct
         return DataSource._products.Where(product => cond is null ? true : cond!(product));
     }
 
-    public Product GetByCondition(Func<Product?, bool>? cond)
+    public Product Get(Func<Product?, bool>? cond)
     {
         return DataSource._products.FirstOrDefault(cond!) ?? throw new DalDoesNoExistException("Product");
     }

@@ -11,8 +11,8 @@ public interface ICrud <T> where T : struct
 {
     public int Create(T Or);
     public IEnumerable<T?> RequestAll(Func<T?, bool>? cond = null);
-    public T GetByCondition (Func<T?, bool>? cond );
-    public T RequestById(int id);
+    public T Get (Func<T?, bool>? cond );
+    public T GetById(int id);
     public void Update(T Or);
     public void Delete(int id);
 

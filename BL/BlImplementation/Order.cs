@@ -61,7 +61,7 @@ internal class Order : BlApi.IOrder
                             {
                                 //Initializes the data for each order item
                                 Id = orderItem?.Id??0,
-                                Name = _dal.Product.RequestById(orderItem?.ProductID??0).Name,
+                                Name = _dal.Product.GetById(orderItem?.ProductID??0).Name,
                                 ProductID = orderItem?.ProductID??0,
                                 Price = orderItem?.Price??0,
                                 Amount = orderItem?.Amount??0,
@@ -79,7 +79,7 @@ internal class Order : BlApi.IOrder
         {
             orderID.negativeNumber();//exception
     
-            return getBoOrder(_dal.Order.RequestById(orderID)); //gets the right order using its id,call the help function
+            return getBoOrder(_dal.Order.GetById(orderID)); //gets the right order using its id,call the help function
         }
         catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
         {
@@ -94,7 +94,7 @@ internal class Order : BlApi.IOrder
         {
             orderID.negativeNumber();//exception
 
-            DO.Order doOrder = _dal.Order.RequestById(orderID);//gets the order by using its id
+            DO.Order doOrder = _dal.Order.GetById(orderID);//gets the order by using its id
 
             BO.Order order = new BO.Order();//create a new order of the logical layer
             if (doOrder.OrderDate != null && doOrder.ShipDate == null)
@@ -121,7 +121,7 @@ internal class Order : BlApi.IOrder
         {
             orderID.negativeNumber();//exception
 
-            DO.Order doOrder = _dal.Order.RequestById(orderID);//gets the order by using its id
+            DO.Order doOrder = _dal.Order.GetById(orderID);//gets the order by using its id
 
             BO.Order order = new BO.Order();//create a new order of the logical layer
             if (doOrder.ShipDate != null && doOrder.DeliveryDate == null)
@@ -152,7 +152,7 @@ internal class Order : BlApi.IOrder
         {
             orderID.negativeNumber();//exception
 
-            DO.Order doOrder = _dal.Order.RequestById(orderID);//gets the right order by using its id
+            DO.Order doOrder = _dal.Order.GetById(orderID);//gets the right order by using its id
             List<Tuple<DateTime?, string>> tupleList = new List<Tuple<DateTime?, string>>();
             Tuple<DateTime?, string> tuple;
             BO.OrderTracking orderTracking = new BO.OrderTracking();//create a new OrderTracking object

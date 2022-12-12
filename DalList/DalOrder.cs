@@ -32,9 +32,9 @@ internal class dalOrder : IOrder
     /// <param name="id">the order's id </param >
     /// <returns>the order of the given id</returns >
     /// <exception cref="the order isn't exist"></exception >
-    public Order RequestById(int id)
+    public Order GetById(int id)
     {
-        return GetByCondition(order => order?.Id == id);
+        return Get(order => order?.Id == id);
     }
 
     /// <summary>
@@ -44,7 +44,7 @@ internal class dalOrder : IOrder
     /// <exception cref="the order you want to update does not exist"></exception >
     public void Update(Order Or)
     {
-        if(RequestById(Or.Id) is Order order)
+        if(GetById(Or.Id) is Order order)
         {
             DataSource._orders.Remove(order);
             DataSource._orders.Add(Or);
@@ -58,10 +58,10 @@ internal class dalOrder : IOrder
     /// <exception cref="if the order does not exist"></exception >
     public void Delete(int id)
     {
-        DataSource._orders.Remove(RequestById(id));
+        DataSource._orders.Remove(GetById(id));
     }
 
-    public Order GetByCondition(Func<Order?, bool>? cond)
+    public Order Get(Func<Order?, bool>? cond)
     {
         return DataSource._orders.FirstOrDefault(cond!) ?? throw new DalDoesNoExistException("Order");
     }

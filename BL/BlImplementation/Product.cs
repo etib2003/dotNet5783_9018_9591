@@ -37,7 +37,7 @@ internal class Product : BlApi.IProduct
             productId.negativeNumber();
             productId.wrongLengthNumber(6);
 
-            DO.Product doProduct = _dal.Product.RequestById(productId);//gets a product using its id
+            DO.Product doProduct = _dal.Product.GetById(productId);//gets a product using its id
 
             BO.Product boProduct = new BO.Product//create a new logical layer product
             {
@@ -65,7 +65,7 @@ internal class Product : BlApi.IProduct
             productId.negativeNumber();
             productId.wrongLengthNumber(6);
 
-            DO.Product doProduct = _dal.Product.RequestById(productId);//gets the right product using its id
+            DO.Product doProduct = _dal.Product.GetById(productId);//gets the right product using its id
 
             return new BO.ProductItem
             {

@@ -16,7 +16,7 @@ internal class Cart : BlApi.ICart
     {
         try
         {
-            DO.Product product = _dal.Product.RequestById(productId); //get the right product using its id
+            DO.Product product = _dal.Product.GetById(productId); //get the right product using its id
             BO.OrderItem? orderItem = (from OrderItem in cart.Items
                                        where OrderItem.ProductID == productId
                                        select OrderItem).FirstOrDefault(); //            if (cart.Items != null)
@@ -55,7 +55,7 @@ internal class Cart : BlApi.ICart
     {
         try
         {
-            DO.Product doProduct = _dal.Product.RequestById(productId);//get the right product using its id
+            DO.Product doProduct = _dal.Product.GetById(productId);//get the right product using its id
 
             BO.OrderItem? orderItem = (from OrderItem in cart.Items
                                       where OrderItem.ProductID == productId
@@ -108,7 +108,7 @@ internal class Cart : BlApi.ICart
             {
                 orderItem!.Amount.negativeNumber();//exception
 
-                DO.Product doProduct = _dal.Product.RequestById(orderItem.ProductID);//get the right product using its id
+                DO.Product doProduct = _dal.Product.GetById(orderItem.ProductID);//get the right product using its id
 
                 if (orderItem.Amount > doProduct.InStock)
                     throw new BO.NotValidAmountException("not Valid Amount");//exception
@@ -136,7 +136,7 @@ internal class Cart : BlApi.ICart
                     Price = boOrderItem.Price
                 };
                 boOrderItem.Id = _dal.OrderItem.Create(doOrderItem);
-                DO.Product product = _dal.Product.RequestById(doOrderItem.ProductID);//get the right product using its id
+                DO.Product product = _dal.Product.GetById(doOrderItem.ProductID);//get the right product using its id
                 product.InStock -= doOrderItem.Amount; //delete from the stock
                 _dal.Product.Update(product);
             }
