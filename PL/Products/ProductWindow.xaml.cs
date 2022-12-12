@@ -66,20 +66,32 @@ namespace PL.productsWindows
             }
         }
 
+        //private void IdBox_LostFocus(object sender, RoutedEventArgs e)
+        //{
+        //    if (string.IsNullOrEmpty(IdBox.Text))
+        //        idEmptyLabel.Visibility = Visibility.Visible;
+        //}
+
+        //private void IdBox_GotFocus(object sender, RoutedEventArgs e)
+        //{
+        //    if (!string.IsNullOrEmpty(IdBox.Text))
+        //        idEmptyLabel.Visibility = Visibility.Hidden;
+        //}
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                if(IdBox.Text.Length == 0 ||
+                if (IdBox.Text.Length == 0 ||
                    CategoryCB.Text.Length == 0 ||
-                   NameBox.Text.Length ==0 ||
+                   NameBox.Text.Length == 0 ||
                    PriceBox.Text.Length == 0 ||
                    InStockBox.Text.Length == 0)
                 {
                     if (IdBox.Text.Length == 0)
                         idEmptyLabel.Visibility = Visibility.Visible;
                     else
-                       idEmptyLabel.Visibility = Visibility.Hidden;
+                        idEmptyLabel.Visibility = Visibility.Hidden;
 
                     if (CategoryCB.Text.Length == 0)
                         categoryEmptyLabel.Visibility = Visibility.Visible;
@@ -122,11 +134,11 @@ namespace PL.productsWindows
                 }
                 this.Close();
             }
-            catch(BO.NegativeNumberException ex)
+            catch (BO.NegativeNumberException ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            catch(BO.NegativeDoubleNumberException ex)
+            catch (BO.NegativeDoubleNumberException ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -140,7 +152,7 @@ namespace PL.productsWindows
             }
             catch (Exception ex)
             {
-                if(Complete.Content=="Add")
+                if (Complete.Content == "Add")
                     MessageBox.Show("Error, you cant add the product!");
                 if (Complete.Content == "Update")
                     MessageBox.Show("Error, you cant update the product!");

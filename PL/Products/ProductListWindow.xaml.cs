@@ -45,10 +45,13 @@ namespace PL.productsWindows
         }
 
         private void Update_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        { 
-            int pflId = ((ProductForList)ProductForListView.SelectedItem).Id;
-            new ProductWindow(pflId).ShowDialog();
-            ShowAllCategories_Click(sender, e);
+        {
+            if (ProductForListView.SelectedItem is ProductForList productForList)
+            {
+                int pflId = ((ProductForList)ProductForListView.SelectedItem).Id;
+                new ProductWindow(pflId).ShowDialog();
+                ShowAllCategories_Click(sender, e);
+            }           
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
