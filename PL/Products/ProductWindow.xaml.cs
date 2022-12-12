@@ -75,16 +75,34 @@ namespace PL.productsWindows
         //        return;
         //    }
         //}
-        private void IdBox_LostFocus(object sender, RoutedEventArgs e)
-        {          
-            idEmptyLabel.Visibility = Visibility.Visible;
-
-        }
-
-        private void IdBox_GotFocus(object sender, RoutedEventArgs e)
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            idEmptyLabel.Visibility = Visibility.Hidden;
+            if (e.Source==IdBox)
+                if(string.IsNullOrEmpty(IdBox.Text))
+                    idEmptyLabel.Visibility = Visibility.Visible;
+            if(e.Source==NameBox)
+                if (string.IsNullOrEmpty(NameBox.Text))
+                    nameEmptyLabel.Visibility = Visibility.Visible;
+            if(e.Source== PriceBox)
+                if (string.IsNullOrEmpty(PriceBox.Text))
+                    priceEmptyLabel.Visibility= Visibility.Visible;
+            if(e.Source==InStockBox)
+                if (string.IsNullOrEmpty(InStockBox.Text))
+                    inStockEmptyLabel.Visibility= Visibility.Visible;   
         }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (e.Source == IdBox)
+                idEmptyLabel.Visibility = Visibility.Hidden;
+            if (e.Source == NameBox)
+                nameEmptyLabel.Visibility = Visibility.Hidden;
+            if (e.Source == PriceBox)
+                priceEmptyLabel.Visibility = Visibility.Hidden;
+            if (e.Source == InStockBox)
+                inStockEmptyLabel.Visibility = Visibility.Hidden;
+        }
+        
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
