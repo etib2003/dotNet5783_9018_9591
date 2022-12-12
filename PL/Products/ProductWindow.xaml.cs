@@ -13,7 +13,14 @@ namespace PL.productsWindows
     /// </summary>
     public partial class ProductWindow : Window
     {
+        /// <summary>
+        ///Object to access the logical layer
+        /// </summary>
         private IBl bl = new Bl();
+
+        /// <summary>
+        /// constructor, bruild the labels
+        /// </summary>
         public ProductWindow()
         {
             InitializeComponent();
@@ -25,6 +32,11 @@ namespace PL.productsWindows
             priceEmptyLabel.Visibility = Visibility.Hidden;
             inStockEmptyLabel.Visibility = Visibility.Hidden;
         }
+
+        /// <summary>
+        /// get the wanted product from the logical layer and put its detailes in the boxes
+        /// </summary>
+        /// <param name="prtrLId">id of a product</param>
         public ProductWindow(int prtrLId)
         {
             InitializeComponent();
@@ -44,12 +56,12 @@ namespace PL.productsWindows
             inStockEmptyLabel.Visibility = Visibility.Hidden;
 
         }
-
-        //private void CategoryCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-
-        //}
-
+ 
+        /// <summary>
+        /// makes sure the id is valid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">the event</param>
         private void PreviewTextInputDecimal(object sender, TextCompositionEventArgs e)
         {
             if (e.Source == IdBox)
@@ -62,6 +74,11 @@ namespace PL.productsWindows
             e.Handled = regex.IsMatch(e.Text);
         }
 
+        /// <summary>
+        /// makes sure the price is valid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">the event</param>
         private void PreviewTextInputDouble(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new("[^0-9.]+");
@@ -72,15 +89,11 @@ namespace PL.productsWindows
             }
         }
 
-
-        //private void IdBox_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    if (e.Key==Key.Enter)
-        //    {
-        //        idEmptyLabel.Visibility = Visibility.Hidden;
-        //        return;
-        //    }
-        //}
+        /// <summary>
+        /// Makes sure that when the user stands on the box the warning disappears
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">the event</param>
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
             if (e.Source == IdBox && string.IsNullOrEmpty(IdBox.Text))
@@ -92,7 +105,11 @@ namespace PL.productsWindows
             if (e.Source == InStockBox && string.IsNullOrEmpty(InStockBox.Text))
                 inStockEmptyLabel.Visibility = Visibility.Visible;
         }
-
+        /// <summary>
+        /// Makes sure that when the user doesnt stands on the box the warning shows if needed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             if (e.Source == IdBox)
@@ -105,7 +122,11 @@ namespace PL.productsWindows
                 inStockEmptyLabel.Visibility = Visibility.Hidden;
         }
 
-
+        /// <summary>
+        /// Shows warnings if needed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">the event</param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -187,7 +208,11 @@ namespace PL.productsWindows
                 this.Close();
             }
         }
-
+        /// <summary>
+        /// close the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">the event</param>
         private void PWcloseButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
