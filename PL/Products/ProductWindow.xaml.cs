@@ -26,11 +26,11 @@ namespace PL.productsWindows
             InitializeComponent();
             CategoryCB.ItemsSource = Enum.GetValues(typeof(BO.Category));
             Complete.Content = "Add";
-            idEmptyLabel.Visibility = Visibility.Hidden;
-            categoryEmptyLabel.Visibility = Visibility.Hidden;
-            nameEmptyLabel.Visibility = Visibility.Hidden;
-            priceEmptyLabel.Visibility = Visibility.Hidden;
-            inStockEmptyLabel.Visibility = Visibility.Hidden;
+            //idEmptyLabel.Visibility = Visibility.Hidden;
+            //categoryEmptyLabel.Visibility = Visibility.Hidden;
+            //nameEmptyLabel.Visibility = Visibility.Hidden;
+            //priceEmptyLabel.Visibility = Visibility.Hidden;
+            //inStockEmptyLabel.Visibility = Visibility.Hidden;
         }
 
         /// <summary>
@@ -42,21 +42,24 @@ namespace PL.productsWindows
             InitializeComponent();
             CategoryCB.ItemsSource = Enum.GetValues(typeof(BO.Category));
             Complete.Content = "Update";
-            BO.Product product = bl.Product.GetProductDetailsForManager(prtrLId);
-            IdBox.Text = product.Id.ToString();
+            ProductGrid.DataContext = bl.Product.GetProductDetailsForManager(prtrLId);
             IdBox.IsReadOnly = true;
-            CategoryCB.Text = product.Category.ToString();
-            NameBox.Text = product.Name;
-            PriceBox.Text = product.Price.ToString();
-            InStockBox.Text = product.InStock.ToString();
-            idEmptyLabel.Visibility = Visibility.Hidden;
-            categoryEmptyLabel.Visibility = Visibility.Hidden;
-            nameEmptyLabel.Visibility = Visibility.Hidden;
-            priceEmptyLabel.Visibility = Visibility.Hidden;
-            inStockEmptyLabel.Visibility = Visibility.Hidden;
+
+            //BO.Product product = bl.Product.GetProductDetailsForManager(prtrLId);
+
+            //IdBox.Text = product.Id.ToString();
+            //CategoryCB.Text = product.Category.ToString();
+            //NameBox.Text = product.Name;
+            //PriceBox.Text = product.Price.ToString();
+            //InStockBox.Text = product.InStock.ToString();
+            //idEmptyLabel.Visibility = Visibility.Hidden;
+            //categoryEmptyLabel.Visibility = Visibility.Hidden;
+            //nameEmptyLabel.Visibility = Visibility.Hidden;
+            //priceEmptyLabel.Visibility = Visibility.Hidden;
+            //inStockEmptyLabel.Visibility = Visibility.Hidden;
 
         }
- 
+
         /// <summary>
         /// makes sure the id is valid
         /// </summary>

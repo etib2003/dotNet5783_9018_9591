@@ -14,6 +14,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="/magnus-lunay-LHR6tUw8N34-unsplash.jpg"/>
         </Grid.Background>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="64*"/>
             <RowDefinition Height="321*"/>
@@ -27,6 +28,7 @@
             </Button.Resources>
         </Button>
         <Button x:Name="MWcloseButton" Content="Close" HorizontalAlignment="Right" Margin="0,5,10,0" VerticalAlignment="Top" Width="74" Height="32" FontFamily="Candara" FontSize="16" Click="MWcloseButton_Click" Grid.Row="2" Grid.Column="1"/>
+        <Image x:Name="Logo" Visibility="Visible" HorizontalAlignment="Left" Height="52" Margin="2,3,0,0" VerticalAlignment="Top" Width="93" Source="/magnus-lunay-LHR6tUw8N34-unsplash.jpg" Grid.Column="0" Grid.Row="0"/>
     </Grid>
 </Window>
 
