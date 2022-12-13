@@ -196,7 +196,7 @@ namespace PL.productsWindows
             }
             catch (BO.WrongLengthException ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Too short id, please try again!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (BO.NotValidFormatNameException ex)
             {
