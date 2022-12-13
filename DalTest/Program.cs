@@ -6,7 +6,7 @@ namespace DalTest
 {
     public class Program
     {
-        static IDal dalList = new DalList();
+        static IDal? dalList = DalApi.Factory.Get();
          static void Main()
         {
             //for the switch loop

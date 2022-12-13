@@ -15,7 +15,7 @@ namespace PL
         /// <summary>
         ///Object to access the logical layer
         /// </summary>
-        private IBl bl = new Bl();
+         BlApi.IBl? _bl= BlApi.Factory.Get();
 
         /// <summary>
         /// constructor

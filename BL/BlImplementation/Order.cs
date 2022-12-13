@@ -2,11 +2,11 @@
 
 internal class Order : BlApi.IOrder
 {
-    private DalApi.IDal _dal = new Dal.DalList();
+    private DalApi.IDal? _dal = DalApi.Factory.Get();
 
     public IEnumerable<BO.OrderForList> GetOrderListForManager()
     { 
-            IEnumerable<DO.Order?> orderList = _dal.Order.RequestAll();//gets all the orders from the data layer
+            IEnumerable<DO.Order?> orderList = _dal?.Order.RequestAll();//gets all the orders from the data layer
             return from order in orderList
                    let orderItems = _dal.OrderItem.RequestAll(x => x?.OrderID == order?.Id)//gets the right order using its seqnum
                    //Initializes the data

@@ -1,11 +1,12 @@
-﻿using BO;
+﻿using BL.BlApi;
+using BO;
 using DO;
 using OtherFunctions;
 using System.Runtime.Serialization;
 
 internal class Product : BlApi.IProduct
 {
-    private DalApi.IDal _dal = new Dal.DalList();
+    private DalApi.IDal? _dal =DalApi.Factory.Get();
 
     public IEnumerable<BO.ProductForList> GetListProductForManagerAndCatalog()
     {

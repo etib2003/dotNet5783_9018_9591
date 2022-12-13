@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 internal class Cart : BlApi.ICart
 {
-    private DalApi.IDal _dal = new Dal.DalList();
+    private DalApi.IDal? _dal = DalApi.Factory.Get();
 
     public void CheckFormat(BO.Cart cart)
     {

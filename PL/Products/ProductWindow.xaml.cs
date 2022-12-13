@@ -1,5 +1,4 @@
-﻿using BlApi;
-using BlImplementation;
+﻿
 using System;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -16,7 +15,7 @@ namespace PL.productsWindows
         /// <summary>
         ///Object to access the logical layer
         /// </summary>
-        private IBl bl = new Bl();
+        BlApi.IBl? bl = BlApi.Factory.Get();
 
         /// <summary>
         /// constructor, bruild the labels
@@ -26,11 +25,7 @@ namespace PL.productsWindows
             InitializeComponent();
             CategoryCB.ItemsSource = Enum.GetValues(typeof(BO.Category));
             Complete.Content = "Add";
-            //idEmptyLabel.Visibility = Visibility.Hidden;
-            //categoryEmptyLabel.Visibility = Visibility.Hidden;
-            //nameEmptyLabel.Visibility = Visibility.Hidden;
-            //priceEmptyLabel.Visibility = Visibility.Hidden;
-            //inStockEmptyLabel.Visibility = Visibility.Hidden;
+  
         }
 
         /// <summary>
