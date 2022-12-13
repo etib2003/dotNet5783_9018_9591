@@ -7,7 +7,7 @@ namespace BlTest
 {
     public class Program
     {
-        private static IBl _ibl = new Bl();
+        private static IBl? _ibl = BlApi.Factory.Get();
         private static Cart _cart = new Cart() { CustomerName = null, CustomerEmail = null, CustomerAddress = null, Items = new List<BO.OrderItem>(), TotalPrice = 0 };
 
         static void Main()
