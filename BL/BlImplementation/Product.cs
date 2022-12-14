@@ -1,6 +1,4 @@
-﻿using BL.BlApi;
-using BO;
-using DO;
+﻿using BO;
 using OtherFunctions;
 using System.Runtime.Serialization;
 

@@ -21,3 +21,10 @@ public class DalAlreadyExistsException : Exception
 {
     public DalAlreadyExistsException(string type) : base($"{type} already exists") { }
 }
+
+[Serializable]
+public class DalConfigException : Exception
+{
+    public DalConfigException(string msg) : base(msg) { }
+    public DalConfigException(string msg, Exception ex) : base(msg, ex) { }
+}
