@@ -15,8 +15,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="beth-rufener-OgqntOgPUP4-unsplash.jpg" />
     <None Remove="LOGO.png" />
     <None Remove="LOGO.png.jpg" />
+    <None Remove="Products\beth-rufener-OgqntOgPUP4-unsplash.jpg" />
+    <None Remove="Products\depositphotos_77706562-stock-photo-musical-instruments-on-wooden-planks.jpg" />
+    <None Remove="Products\sarah-dao-2zHGVCrdxHw-unsplash.jpg" />
+    <None Remove="Products\WhatsApp Image 2022-12-14 at 13.09.14 %281%29.jpeg" />
+    <None Remove="Products\WhatsApp Image 2022-12-14 at 13.09.14.jpeg" />
+    <None Remove="WhatsApp Image 2022-12-14 at 13.09.14.jpeg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,9 +31,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="beth-rufener-OgqntOgPUP4-unsplash.jpg" />
     <Resource Include="LOGO.png" />
     <Resource Include="LOGO.png.jpg" />
     <Resource Include="magnus-lunay-LHR6tUw8N34-unsplash.jpg" />
+    <Resource Include="Products\beth-rufener-OgqntOgPUP4-unsplash.jpg" />
+    <Resource Include="Products\depositphotos_77706562-stock-photo-musical-instruments-on-wooden-planks.jpg" />
+    <Resource Include="Products\sarah-dao-2zHGVCrdxHw-unsplash.jpg" />
+    <Resource Include="Products\WhatsApp Image 2022-12-14 at 13.09.14 (1).jpeg" />
+    <Resource Include="Products\WhatsApp Image 2022-12-14 at 13.09.14.jpeg" />
+    <Resource Include="WhatsApp Image 2022-12-14 at 13.09.14.jpeg" />
   </ItemGroup>
 
 </Project>

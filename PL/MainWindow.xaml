@@ -11,7 +11,7 @@
             <ColumnDefinition Width="357*"/>
         </Grid.ColumnDefinitions>
         <Grid.Background>
-            <ImageBrush ImageSource="/magnus-lunay-LHR6tUw8N34-unsplash.jpg"/>
+            <ImageBrush ImageSource="/beth-rufener-OgqntOgPUP4-unsplash.jpg" Opacity="0.8" Stretch="Fill" TileMode="None"/>
         </Grid.Background>
 
         <Grid.RowDefinitions>
