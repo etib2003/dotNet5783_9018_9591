@@ -46,5 +46,6 @@
         <Label x:Name="nameEmptyLabel" Visibility="Hidden" Grid.Column="1" Content="× Please enter details" HorizontalAlignment="Left" Height="26" Margin="10,40,0,0" Grid.Row="3" VerticalAlignment="Top" Width="127" Foreground="Red" FontFamily="Candara" FontSize="11" Grid.RowSpan="2" HorizontalContentAlignment="Right"/>
         <Label x:Name="priceEmptyLabel" Visibility="Hidden" Grid.Column="1" Content="× Please enter details" HorizontalAlignment="Left" Height="26" Margin="10,38,0,0" Grid.Row="4" VerticalAlignment="Top" Width="127" Foreground="Red" FontFamily="Candara" FontSize="11" Grid.RowSpan="2" HorizontalContentAlignment="Right"/>
         <Label x:Name="inStockEmptyLabel" Visibility="Hidden" Grid.Column="1" Content="× Please enter details" HorizontalAlignment="Left" Height="26" Margin="10,38,0,0" Grid.Row="5" VerticalAlignment="Top" Width="127" Foreground="Red" FontFamily="Candara" FontSize="11" Grid.RowSpan="2" HorizontalContentAlignment="Right"/>
+        <Image HorizontalAlignment="Left" Height="64" VerticalAlignment="Center" Width="118" Source="/LOGO.png" Grid.Row="6"/>
     </Grid>
 </Window>
