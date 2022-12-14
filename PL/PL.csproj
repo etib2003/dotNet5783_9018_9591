@@ -15,10 +15,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="LOGO.png" />
+    <None Remove="LOGO.png.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BL\BL.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="LOGO.png" />
+    <Resource Include="LOGO.png.jpg" />
     <Resource Include="magnus-lunay-LHR6tUw8N34-unsplash.jpg" />
   </ItemGroup>
 
