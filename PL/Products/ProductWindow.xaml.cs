@@ -1,4 +1,5 @@
 ﻿
+using BO;
 using System;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -39,19 +40,6 @@ namespace PL.productsWindows
             Complete.Content = "Update";
             ProductGrid.DataContext = bl.Product.GetProductDetailsForManager(prtrLId);
             IdBox.IsReadOnly = true;
-
-            //BO.Product product = bl.Product.GetProductDetailsForManager(prtrLId);
-
-            //IdBox.Text = product.Id.ToString();
-            //CategoryCB.Text = product.Category.ToString();
-            //NameBox.Text = product.Name;
-            //PriceBox.Text = product.Price.ToString();
-            //InStockBox.Text = product.InStock.ToString();
-            //idEmptyLabel.Visibility = Visibility.Hidden;
-            //categoryEmptyLabel.Visibility = Visibility.Hidden;
-            //nameEmptyLabel.Visibility = Visibility.Hidden;
-            //priceEmptyLabel.Visibility = Visibility.Hidden;
-            //inStockEmptyLabel.Visibility = Visibility.Hidden;
 
         }
 
@@ -180,6 +168,10 @@ namespace PL.productsWindows
                     MessageBox.Show("Updating is done!");
                 }
                 this.Close();
+            }
+            catch (BoAlreadyExistsException ex)
+            {
+                MessageBox.Show("Product with this barcode already exists!\nPlease try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (BO.NegativeNumberException ex)
             {

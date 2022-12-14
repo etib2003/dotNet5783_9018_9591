@@ -19,7 +19,7 @@
             <RowDefinition Height="302*"/>
             <RowDefinition Height="49*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="ProductForListButton" Content="View Our Products" Margin="0,10,0,0" VerticalAlignment="Top" FontSize="48" Click="ProductButton_Click" FontWeight="Bold" Foreground="#FFFFFBFB" Background="{x:Null}" HorizontalAlignment="Center" BorderThickness="0,0,0,0" BorderBrush="#FFEEEEEE" Width="500" Height="60" FontFamily="MV Boli" Grid.Row="1">
+        <Button x:Name="ProductForListButton" Content="View Our Products" Margin="0,10,0,0" VerticalAlignment="Top" FontSize="48" Click="ProductButton_Click" FontWeight="Bold" Foreground="#FFFFFBFB" Background="{x:Null}" HorizontalAlignment="Center" BorderThickness="0,0,0,0" BorderBrush="#FFEEEEEE" FontFamily="MV Boli" Grid.Row="1">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="20"></Setter>

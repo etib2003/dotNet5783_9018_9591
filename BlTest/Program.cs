@@ -242,6 +242,10 @@ Please choose the topic:
                 {
                     Console.WriteLine(ex.Message + " " + ex.InnerException.Message);
                 }
+                catch (BoAlreadyExistsException ex)
+                {
+                    Console.WriteLine(ex.Message + " " + ex.InnerException.Message);
+                }
                 catch (NegativeNumberException ex)
                 {
                     Console.WriteLine(ex.Message);

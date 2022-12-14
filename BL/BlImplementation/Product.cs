@@ -88,51 +88,64 @@ internal class Product : BlApi.IProduct
 
     public int AddProduct(BO.Product product)
     {
-
-        //exceptions
-        product.Id.negativeNumber();
-        product.Id.wrongLengthNumber(6);
-        product.Name!.notValidName();
-        product.Price.negativeDoubleNumber();
-        product.InStock.negativeNumber();
-
-        DO.Product doProduct = new DO.Product//create a new data layer product
+        try
         {
-            //Initializes the data of the product
-            Id = product.Id,
-            Name = product.Name,
-            Price = product.Price,
-            Category = (DO.Category)product.Category!,
-            InStock = product.InStock
-        };
-        return _dal.Product.Create(doProduct);
+            //exceptions
+            product.Id.negativeNumber();
+            product.Id.wrongLengthNumber(6);
+            product.Name!.notValidName();
+            product.Price.negativeDoubleNumber();
+            product.InStock.negativeNumber();
+
+            DO.Product doProduct = new DO.Product//create a new data layer product
+            {
+                //Initializes the data of the product
+                Id = product.Id,
+                Name = product.Name,
+                Price = product.Price,
+                Category = (DO.Category)product.Category!,
+                InStock = product.InStock
+            };
+            return _dal.Product.Create(doProduct);
+        }
+        catch (DalApi.DalAlreadyExistsException ex)//catches the exception from the data layer
+        {
+            throw new BO.BoAlreadyExistsException("Data exception:", ex);
+        }
     }
 
     public void UpdateProduct(BO.Product product)
     {
-        //exceptions
-        product.Id.negativeNumber();
-        product.Id.wrongLengthNumber(6);
-        product.Name!.notValidName();
-        product.Price.negativeDoubleNumber();
-        product.InStock.negativeNumber();
-
-        DO.Product doProduct = new DO.Product//create a new data layer product object
+        try
         {
-            //Initializes the data of the product
-            Id = product.Id,
-            Name = product.Name,
-            Price = product.Price,
-            Category = (DO.Category)product.Category,
-            InStock = product.InStock
-        };
-        _dal.Product.Update(doProduct);//send the product to the data layer function that updates it
+            //exceptions
+            product.Id.negativeNumber();
+            product.Id.wrongLengthNumber(6);
+            product.Name!.notValidName();
+            product.Price.negativeDoubleNumber();
+            product.InStock.negativeNumber();
+
+            DO.Product doProduct = new DO.Product//create a new data layer product object
+            {
+                //Initializes the data of the product
+                Id = product.Id,
+                Name = product.Name,
+                Price = product.Price,
+                Category = (DO.Category)product.Category,
+                InStock = product.InStock
+            };
+            _dal?.Product.Update(doProduct);//send the product to the data layer function that updates it
+        }
+        catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
+        {
+            throw new BO.BoDoesNoExistException("Data exception:", ex);
+        }
     }
 
     public void DeleteProduct(int productId)
     {
         //find the product to delete
-        IEnumerable<DO.OrderItem?> doOrderItemList = _dal.OrderItem.RequestAll(orderItem => orderItem?.ProductID == productId);//gets the products from the data layer
+        IEnumerable<DO.OrderItem?> doOrderItemList = _dal?.OrderItem.RequestAll(orderItem => orderItem?.ProductID == productId);//gets the products from the data layer
 
         if (!doOrderItemList.Any())
             _dal.Product.Delete(productId);

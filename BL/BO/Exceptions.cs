@@ -32,8 +32,14 @@ public class BoDoesNoExistException : Exception
     protected BoDoesNoExistException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 }
 
-
-
+[Serializable]
+public class BoAlreadyExistsException : Exception
+{
+    public BoAlreadyExistsException() { }
+    public BoAlreadyExistsException(string? message) : base(message) { }
+    public BoAlreadyExistsException(string? message, Exception? innerException) : base(message, innerException) { }
+    protected BoAlreadyExistsException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+}
 
 [Serializable]
 public class NotValidFormatNameException : Exception
