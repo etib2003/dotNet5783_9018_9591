@@ -159,12 +159,14 @@ namespace PL.productsWindows
                 BO.Product newPdct = new BO.Product() { Id = int.Parse(IdBox.Text), Name = NameBox.Text, Price = double.Parse(PriceBox.Text), Category = (BO.Category)Enum.Parse(typeof(BO.Category), CategoryCB.Text), InStock = int.Parse(InStockBox.Text) };
                 if (Complete.Content == "Add")
                 {
-                    bl.Product.AddProduct(newPdct);
+                    bl?.Product.AddProduct(newPdct);
+                    Console.Beep(1500, 100);
                     MessageBox.Show("Adding is done!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else if (Complete.Content == "Update")
                 {
-                    bl.Product.UpdateProduct(newPdct);
+                    bl?.Product.UpdateProduct(newPdct);
+                    Console.Beep(1500, 100);
                     MessageBox.Show("Updating is done!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 this.Close();
