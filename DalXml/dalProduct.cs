@@ -33,11 +33,13 @@ internal class dalProduct : IProduct
 
     public Product Get(Func<Product?, bool>? cond)
     {
-        return DataSource._products.FirstOrDefault(cond!) ?? throw new DalDoesNoExistException("Product");
+        return XmlTools.LoadListFromXMLSerializer<DO.Product?>(path).FirstOrDefault(cond!)
+             ?? throw new DalDoesNoExistException("Product");
     }
 
     public Product GetById(int id)
     {
+
         throw new NotImplementedException();
     }
 

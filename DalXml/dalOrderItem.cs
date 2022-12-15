@@ -43,7 +43,7 @@ internal class dalOrderItem : IOrderItem
 
     public OrderItem Get(Func<OrderItem?, bool>? cond)
     {
-        throw new NotImplementedException();
+        return RequestAll(cond).Single() ?? throw new Exception();
     }
 
     public OrderItem GetById(int id)
@@ -53,7 +53,18 @@ internal class dalOrderItem : IOrderItem
 
     public IEnumerable<OrderItem?> RequestAll(Func<OrderItem?, bool>? cond = null)
     {
-        throw new NotImplementedException();
+        return (IEnumerable<OrderItem?>)(from orderItem in ordersItemsRoot.Elements()
+                                         select new OrderItem
+                                         {
+                                             Id = int.Parse(orderItem.Element("Id").Value),
+                                             OrderID = int.Parse(orderItem.Element("OrderID").Value),
+                                             ProductID = int.Parse(orderItem.Element("ProductID").Value),
+                                             Price = int.Parse(orderItem.Element("Price").Value),
+                                             Amount = int.Parse(orderItem.Element("Amount").Value),
+
+
+                                         }).Where(orderItem => cond is null ? true : cond(orderItem));
+
     }
 
     public void Update(OrderItem Or)
