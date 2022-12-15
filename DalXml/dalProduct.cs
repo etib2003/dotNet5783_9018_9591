@@ -46,9 +46,9 @@ internal class dalProduct : IProduct
         List<DO.Product?> prodList = XmlTools.LoadListFromXMLSerializer<DO.Product?>(path);
 
         if (cond == null)
-            return prodList.AsEnumerable().OrderByDescending(p => p?.Id);
+            return prodList.AsEnumerable();
 
-        return prodList.Where(cond).OrderByDescending(p => p?.Id);
+        return prodList.Where(cond);
     }
 
     public void Update(Product Or)
