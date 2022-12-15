@@ -33,7 +33,7 @@ internal class dalProduct : IProduct
 
     public Product Get(Func<Product?, bool>? cond)
     {
-        throw new NotImplementedException();
+        return DataSource._products.FirstOrDefault(cond!) ?? throw new DalDoesNoExistException("Product");
     }
 
     public Product GetById(int id)
