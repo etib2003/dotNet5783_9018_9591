@@ -160,12 +160,12 @@ namespace PL.productsWindows
                 if (Complete.Content == "Add")
                 {
                     bl.Product.AddProduct(newPdct);
-                    MessageBox.Show("Adding is done!");
+                    MessageBox.Show("Adding is done!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else if (Complete.Content == "Update")
                 {
                     bl.Product.UpdateProduct(newPdct);
-                    MessageBox.Show("Updating is done!");
+                    MessageBox.Show("Updating is done!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 this.Close();
             }
