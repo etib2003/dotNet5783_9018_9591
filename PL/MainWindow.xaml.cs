@@ -44,5 +44,15 @@ namespace PL
         {
             this.Close();
         }
+
+        private void MWcloseButton_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+
+        }
+
+        private void Image_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+
+        }
     }
 }
