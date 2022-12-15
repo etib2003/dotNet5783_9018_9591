@@ -43,8 +43,7 @@ internal class dalOrder : IOrder
 
         //Read config file
         XElement configRoot = XElement.Load(configPath);
-
-        int nextSeqNum = Convert.ToInt32(configRoot.Element("orderSeq").Value);
+        int.TryParse(configRoot.Element("orderSeq").Value, out int nextSeqNum);
         nextSeqNum++;
         Or.Id = nextSeqNum;
         //update config file
@@ -61,19 +60,18 @@ internal class dalOrder : IOrder
 
         ordersRoot.Add(new XElement("Order", Id, CustomerName, CustomerEmail, CustomerAdress, OrderDate, ShipDate, DeliveryDate));
         ordersRoot.Save(path);
-
         return Or.Id;
     }
 
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+
     }
 
     public Order Get(Func<Order?, bool>? cond)
     {
-        throw new NotImplementedException();
-    }
+
+     }
 
     public Order GetById(int id)
     {
