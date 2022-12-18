@@ -4,15 +4,10 @@ namespace Dal;
 
 sealed internal class DalXml : IDal
 {
-    public IProduct Product { get; }
-    public IOrder Order { get; }
-    public IOrderItem OrderItem { get; }
+    public IProduct Product { get; } =new dalProduct();
+    public IOrder Order { get; } = new dalOrder();
+    public IOrderItem OrderItem { get; } = new dalOrderItem();
     public static IDal Instance { get; } = new DalXml();
-    private DalXml() 
-    {
-        Product= new dalProduct();
-        Order = new dalOrder();
-        OrderItem = new dalOrderItem();
-    }
+    private DalXml() { }
 
 }

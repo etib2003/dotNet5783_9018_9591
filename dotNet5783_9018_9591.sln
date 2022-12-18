@@ -5,6 +5,10 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7F31E1D6-3241-4D6D-8414-DB1D14771EAC}"
 	ProjectSection(SolutionItems) = preProject
+		DalXml\xml\config.xml = DalXml\xml\config.xml
+		DalXml\xml\orderItems.xml = DalXml\xml\orderItems.xml
+		DalXml\xml\orders.xml = DalXml\xml\orders.xml
+		DalXml\xml\products.xml = DalXml\xml\products.xml
 		README.md = README.md
 	EndProjectSection
 EndProject
