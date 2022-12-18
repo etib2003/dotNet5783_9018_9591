@@ -1,23 +1,25 @@
-﻿ using OtherFunctions;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+using OtherFunctions;
+using System.Linq;
 
 internal class Order : BlApi.IOrder
 {
     private DalApi.IDal? _dal = DalApi.Factory.Get();
 
     public IEnumerable<BO.OrderForList> GetOrderListForManager()
-    { 
-            IEnumerable<DO.Order?> orderList = _dal?.Order.RequestAll();//gets all the orders from the data layer
-            return from order in orderList
-                   let orderItems = _dal.OrderItem.RequestAll(x => x?.OrderID == order?.Id)//gets the right order using its seqnum
-                   //Initializes the data
-                   select new BO.OrderForList
-                   {
-                       Id = order?.Id??0,
-                       CustomerName = order?.CustomerName,
-                       AmountOfItems = orderItems.Count(),
-                       Status = getOrderStatus(order),
-                       TotalPrice = orderItems.Sum(orderItem => orderItem?.Price * orderItem?.Amount)??0,//calculate the total price
-                   };   
+    {
+        IEnumerable<DO.Order?> orderList = _dal!.Order.RequestAll();//gets all the orders from the data layer
+        return from order in orderList
+               let orderItems = _dal.OrderItem.RequestAll(x => x?.OrderID == order?.Id)//gets the right order using its seqnum
+                                                                                       //Initializes the data
+               select new BO.OrderForList
+               {
+                   Id = order?.Id ?? 0,
+                   CustomerName = order?.CustomerName,
+                   AmountOfItems = orderItems.Count(),
+                   Status = getOrderStatus(order),
+                   TotalPrice = orderItems.Sum(orderItem => orderItem?.Price * orderItem?.Amount) ?? 0,//calculate the total price
+               };
     }
 
     /// <summary>
@@ -40,17 +42,20 @@ internal class Order : BlApi.IOrder
     /// </summary>
     /// <param name="doOrder">an order from the data layer</param>
     /// <returns></returns>
-    private BO.Order getBoOrder(DO.Order doOrder)  
-    {     
-         BO.Order boOrder = doOrder.CopyPropTo(new BO.Order());
+    private BO.Order getBoOrder(DO.Order doOrder)
+    {
+        BO.Order boOrder = doOrder.CopyPropTo(new BO.Order());
         boOrder.Status = getOrderStatus(doOrder);
 
         IEnumerable<DO.OrderItem?> orderItemsList = _dal.OrderItem.RequestAll(x => x?.OrderID == doOrder.Id);
         boOrder.OrderItems = (from orderItem in orderItemsList
                               select orderItem.CopyPropTo(new BO.OrderItem()
-                              { TotalPrice = orderItem?.Price ?? 0 * orderItem?.Amount ?? 0, 
-                                  Name = _dal.Product.GetById(orderItem?.ProductID ?? 0).Name, })
+                              {
+                                  TotalPrice = (orderItem?.Price ?? 0) * (orderItem?.Amount ?? 0),
+                                  Name = _dal.Product.GetById(orderItem?.ProductID ?? 0).Name,
+                              })
                               ).ToList();
+        boOrder.TotalPrice = boOrder.OrderItems.Sum(OrderItem=> OrderItem.TotalPrice);
         return boOrder;
     }
 
@@ -59,7 +64,6 @@ internal class Order : BlApi.IOrder
         try
         {
             orderID.negativeNumber();//exception
-    
             return getBoOrder(_dal.Order.GetById(orderID)); //gets the right order using its id,call the help function
         }
         catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
@@ -68,7 +72,7 @@ internal class Order : BlApi.IOrder
         }
     }
 
-    
+
     public BO.Order UpdateOrderShip(int orderID)
     {
         try
@@ -85,7 +89,7 @@ internal class Order : BlApi.IOrder
                 order = getBoOrder(doOrder);//call the help function
             }
             else
-            {            
+            {
                 throw new BO.DateAlreadyUpdatedException("ship date is already updated");//exception
             }
             return order;
@@ -111,7 +115,7 @@ internal class Order : BlApi.IOrder
                 _dal.Order.Update(doOrder);
                 order = getBoOrder(doOrder);//call the help function
             }
-            else if (doOrder.OrderDate!= null && doOrder.ShipDate == null)
+            else if (doOrder.OrderDate != null && doOrder.ShipDate == null)
             {
                 throw new BO.DateHasNotUpdatedYetException("Ship date has not updated yet");//exception
             }
@@ -126,7 +130,7 @@ internal class Order : BlApi.IOrder
             throw new BO.BoDoesNoExistException("Data exception:", ex);
         }
     }
-   
+
     public BO.OrderTracking TrackingOrder(int orderID)
     {
         try
@@ -158,10 +162,10 @@ internal class Order : BlApi.IOrder
             orderTracking.OrderProgress = tupleList;
             orderTracking.Id = orderID;
             orderTracking.Status = getOrderStatus(doOrder);//call the help function
-            
+
             return orderTracking;
 
-         }
+        }
         catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
         {
             throw new BO.BoDoesNoExistException("Data exception:", ex);
