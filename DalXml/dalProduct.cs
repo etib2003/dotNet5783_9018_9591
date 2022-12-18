@@ -55,9 +55,9 @@ internal class dalProduct : IProduct
     }
 
     public void Update(Product product)
-    {
-        List<Product> prodLst = XmlTools.LoadListFromXMLSerializer<Product>(path);
+    { 
         Delete(product.Id);
+        List<Product> prodLst = XmlTools.LoadListFromXMLSerializer<Product>(path);
         prodLst.Add(product);
         XmlTools.SaveListToXMLSerializer(prodLst, path);
 
