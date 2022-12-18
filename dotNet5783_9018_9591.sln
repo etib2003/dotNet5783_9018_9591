@@ -37,14 +37,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalXml", "DalXml\DalXml.csp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DalXml", "DalXml", "{829B2825-BDFC-445A-BD9D-70C5E5295E6C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{C3A483CE-942E-472C-BAD2-F38AF1A5BDD6}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\..\..\Downloads\3-Tier-Hadar-Example (1)\3-Tier-Hadar-Example\Three-Tier\DalXml\xml\config.xml = ..\..\..\..\Downloads\3-Tier-Hadar-Example (1)\3-Tier-Hadar-Example\Three-Tier\DalXml\xml\config.xml
-		..\..\..\..\Downloads\3-Tier-Hadar-Example (1)\3-Tier-Hadar-Example\Three-Tier\DalXml\xml\orderItems.xml = ..\..\..\..\Downloads\3-Tier-Hadar-Example (1)\3-Tier-Hadar-Example\Three-Tier\DalXml\xml\orderItems.xml
-		..\..\..\..\Downloads\3-Tier-Hadar-Example (1)\3-Tier-Hadar-Example\Three-Tier\DalXml\xml\orders.xml = ..\..\..\..\Downloads\3-Tier-Hadar-Example (1)\3-Tier-Hadar-Example\Three-Tier\DalXml\xml\orders.xml
-		..\..\..\..\Downloads\3-Tier-Hadar-Example (1)\3-Tier-Hadar-Example\Three-Tier\DalXml\xml\products.xml = ..\..\..\..\Downloads\3-Tier-Hadar-Example (1)\3-Tier-Hadar-Example\Three-Tier\DalXml\xml\products.xml
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -89,7 +81,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{0C6BE3BB-0E1E-432C-88D8-EDA175046FF1} = {829B2825-BDFC-445A-BD9D-70C5E5295E6C}
-		{C3A483CE-942E-472C-BAD2-F38AF1A5BDD6} = {829B2825-BDFC-445A-BD9D-70C5E5295E6C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9B6D4D04-F718-4450-BCB2-678DC72BE59A}

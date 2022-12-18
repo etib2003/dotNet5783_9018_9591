@@ -13,7 +13,7 @@ namespace PL.productsWindows
     {
         //Object to access the logical layer
         BlApi.IBl? _bl = BlApi.Factory.Get();
-/// <summary>
+        /// <summary>
         /// get the list of products from the logical layer:
         /// </summary>
         public ProductListWindow()

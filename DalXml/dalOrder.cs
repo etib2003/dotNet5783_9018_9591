@@ -61,7 +61,6 @@ internal class dalOrder : IOrder
     {
         return XmlTools.LoadListFromXMLSerializer<DO.Order?>(path).FirstOrDefault(cond!)
             ?? throw new DalDoesNoExistException("Order");
-
     }
 
     public Order GetById(int id)

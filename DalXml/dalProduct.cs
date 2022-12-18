@@ -22,9 +22,7 @@ internal class dalProduct : IProduct
             throw new DalAlreadyExistsException("Product");
 
         prodLst.Add(product);
-
         XmlTools.SaveListToXMLSerializer(prodLst, path);
-
         return product.Id;
     }
 

@@ -10,8 +10,6 @@ internal class dalOrderItem : IOrderItem
     string path = XmlTools.dir + "ordersItems.xml";
     string configPath = "config.xml";
     XElement ordersItemsRoot;
-
-
     public dalOrderItem()
     {
         LoadData();
