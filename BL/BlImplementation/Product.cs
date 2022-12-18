@@ -20,7 +20,7 @@ internal class Product : BlApi.IProduct
                                                              Price = product?.Price??0,
                                                              Category = (BO.Category)product?.Category!,
                                                          };
-        return productForLists;
+        return doProductList.copy
     }
 
     public IEnumerable<BO.ProductForList> GetListProductForManagerAndCatalogByCond(Func<ProductForList?, bool>? cond)

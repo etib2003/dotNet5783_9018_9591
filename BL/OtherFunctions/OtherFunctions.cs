@@ -1,4 +1,5 @@
-﻿using DocumentFormat.OpenXml.Spreadsheet;
+﻿using DocumentFormat.OpenXml.Bibliography;
+using DocumentFormat.OpenXml.Spreadsheet;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
@@ -94,7 +95,7 @@ namespace OtherFunctions
 
                     if (sourceValue is not null)
                     {
-                        if (s is not null && t is not null)
+                        if (s is not null && t is not null && t.IsEnum)
                             propertyInfoTarget[sourcePropertyInfo.Name].SetValue(target, Enum.ToObject(t, sourceValue));
                         else
                             propertyInfoTarget[sourcePropertyInfo.Name].SetValue(target, sourceValue);
@@ -113,5 +114,13 @@ namespace OtherFunctions
             return (Target)obj;
         }
 
+        internal static IEnumerable<Target> CopyPropToList<Source, Target>(this IEnumerable<Source> sources) where Target : new()
+       => from source in sources
+          select source.CopyPropTo(new Target());
+
+
+        internal static IEnumerable<Target> CopyPropToListStruct<Source, Target>(this IEnumerable<Source> sources) where Target : struct
+ => from source in sources
+    select source.CopyPropToStruct(new Target());
     }
 }
