@@ -41,35 +41,36 @@ internal class Order : BlApi.IOrder
     /// <param name="doOrder">an order from the data layer</param>
     /// <returns></returns>
     private BO.Order getBoOrder(DO.Order doOrder)  
-    {
-        BO.Order boOrder = new BO.Order //create a new order of the logical layer
-        {
-            //Initializes the data
-            Id = doOrder.Id,
-            CustomerName = doOrder.CustomerName,
-            CustomerEmail = doOrder.CustomerEmail,
-            CustomerAdress = doOrder.CustomerAdress,
-            Status = getOrderStatus(doOrder),
-            OrderDate = doOrder.OrderDate,
-            ShipDate = doOrder.ShipDate,
-            DeliveryDate = doOrder.DeliveryDate
-        };
+    {     
+         BO.Order boOrder = new BO.Order(); //create a new order of the logical layer
+        doOrder.CopyPropTo(boOrder);
+        //{
+        //    Initializes the data
+        //    Id = doOrder.Id,
+        //    CustomerName = doOrder.CustomerName,
+        //    CustomerEmail = doOrder.CustomerEmail,
+        //    CustomerAdress = doOrder.CustomerAdress,
+        //    Status = getOrderStatus(doOrder),
+        //    OrderDate = doOrder.OrderDate,
+        //    ShipDate = doOrder.ShipDate,
+        //    DeliveryDate = doOrder.DeliveryDate
+        //};
 
-        IEnumerable<DO.OrderItem?> orderItemsList = _dal.OrderItem.RequestAll(x => x?.OrderID == doOrder.Id);
-        boOrder.OrderItems = (from orderItem in orderItemsList
-                            select new BO.OrderItem
-                            {
-                                //Initializes the data for each order item
-                                Id = orderItem?.Id??0,
-                                Name = _dal.Product.GetById(orderItem?.ProductID??0).Name,
-                                ProductID = orderItem?.ProductID??0,
-                                Price = orderItem?.Price??0,
-                                Amount = orderItem?.Amount??0,
-                                TotalPrice = orderItem?.Price??0 * orderItem?.Amount??0
+        //IEnumerable<DO.OrderItem?> orderItemsList = _dal.OrderItem.RequestAll(x => x?.OrderID == doOrder.Id);
+        //boOrder.OrderItems = (from orderItem in orderItemsList
+        //                    select new BO.OrderItem
+        //                    {
+        //                        //Initializes the data for each order item
+        //                        Id = orderItem?.Id??0,
+        //                        Name = _dal.Product.GetById(orderItem?.ProductID??0).Name,
+        //                        ProductID = orderItem?.ProductID??0,
+        //                        Price = orderItem?.Price??0,
+        //                        Amount = orderItem?.Amount??0,
+        //                        TotalPrice = orderItem?.Price??0 * orderItem?.Amount??0
 
-                            }).ToList();
+        //                    }).ToList();
 
-        boOrder.TotalPrice = orderItemsList.Sum(orderItem => orderItem?.Price??0 * orderItem?.Amount??0);//calculate the order's total price
+        ;
         return boOrder;
     }
 

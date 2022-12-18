@@ -73,5 +73,45 @@ namespace OtherFunctions
 
         }
 
+        internal static Target CopyPropTo<Source, Target>(this Source source, Target target)
+        {
+            ///getting the target properties
+            Dictionary<string, PropertyInfo> propertyInfoTarget = target!.GetType().GetProperties().ToDictionary(p => p.Name, p => p);
+            ///getting the source properties
+            IEnumerable<PropertyInfo> propertyInfoSource = source!.GetType().GetProperties();
+
+            /// for every property that is in the source
+            foreach (var sourcePropertyInfo in propertyInfoSource)
+            {
+                ///checks if the target contains the property info to reset the property
+                if (propertyInfoTarget.ContainsKey(sourcePropertyInfo.Name)
+                    && (sourcePropertyInfo.PropertyType == propertyInfoTarget[sourcePropertyInfo.Name].PropertyType
+                    && (sourcePropertyInfo.PropertyType == typeof(string)) || !sourcePropertyInfo.PropertyType.IsClass))
+                {
+                    Type s = Nullable.GetUnderlyingType(sourcePropertyInfo.PropertyType)!;
+                    Type t = Nullable.GetUnderlyingType(propertyInfoTarget[sourcePropertyInfo.Name].PropertyType)!;
+                    var sourceValue = sourcePropertyInfo.GetValue(source);
+
+                    if (sourceValue is not null)
+                    {
+                        if (s is not null && t is not null)
+                            propertyInfoTarget[sourcePropertyInfo.Name].SetValue(target, Enum.ToObject(t, sourceValue));
+                        else
+                            propertyInfoTarget[sourcePropertyInfo.Name].SetValue(target, sourceValue);
+                    }
+                }
+            }
+            return target;
+        }
+
+        internal static Target CopyPropToStruct<Source, Target>(this Source source, Target target) where Target : struct
+        {
+            object obj = target;
+
+            source.CopyPropTo(obj);
+
+            return (Target)obj;
+        }
+
     }
 }
