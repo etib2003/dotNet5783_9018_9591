@@ -13,7 +13,7 @@ namespace PL
     public partial class MainWindow : Window
     {
         /// <summary>
-        ///Object to access the logical layer
+        ///Object to access the logical layer.
         /// </summary>
          BlApi.IBl? _bl= BlApi.Factory.Get();
 
