@@ -6,29 +6,33 @@ using System.Threading.Tasks;
 
 using DalApi;
 using DO;
+using DocumentFormat.OpenXml.Drawing.Charts;
+
 namespace Dal;
 
 internal class dalProduct : IProduct
 {
     string path = "products.xml";
 
-    public int Create(Product Or)
+    public int Create(Product product)
     {
         List<Product> prodLst = XmlTools.LoadListFromXMLSerializer<Product>(path);
 
-        if (prodLst.Exists(x => x.Id == Or.Id))
+        if (prodLst.Exists(x => x.Id == product.Id))
             throw new DalAlreadyExistsException("Product");
 
-        prodLst.Add(Or);
+        prodLst.Add(product);
 
         XmlTools.SaveListToXMLSerializer(prodLst, path);
 
-        return Or.Id;
+        return product.Id;
     }
 
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        List<Product> prodLst = XmlTools.LoadListFromXMLSerializer<Product>(path);
+        prodLst.Remove(GetById(id));
+        XmlTools.SaveListToXMLSerializer(prodLst, path);
     }
 
     public Product Get(Func<Product?, bool>? cond)
@@ -39,8 +43,7 @@ internal class dalProduct : IProduct
 
     public Product GetById(int id)
     {
-
-        throw new NotImplementedException();
+        return Get(x => x?.Id == id);
     }
 
     public IEnumerable<Product?> RequestAll(Func<Product?, bool>? cond = null)
@@ -53,9 +56,13 @@ internal class dalProduct : IProduct
         return prodList.Where(cond);
     }
 
-    public void Update(Product Or)
+    public void Update(Product product)
     {
-        throw new NotImplementedException();
+        List<Product> prodLst = XmlTools.LoadListFromXMLSerializer<Product>(path);
+        Delete(product.Id);
+        prodLst.Add(product);
+        XmlTools.SaveListToXMLSerializer(prodLst, path);
+
     }
 }
 

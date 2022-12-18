@@ -1,4 +1,5 @@
-﻿using DalApi;
+﻿using Dal;
+using DalApi;
 using DO;
 using System;
 using System.Collections.Generic;
@@ -41,51 +42,49 @@ internal class dalOrder : IOrder
     public int Create(Order Or)
     {
 
-        //Read config file
-        XElement configRoot = XElement.Load(configPath);
-        int.TryParse(configRoot.Element("orderSeq").Value, out int nextSeqNum);
-        nextSeqNum++;
-        Or.Id = nextSeqNum;
-        //update config file
-        configRoot.Element("orderSeq").SetValue(nextSeqNum);
-        configRoot.Save(configPath);
-
-        XElement Id = new XElement("Id", Or.Id);
-        XElement CustomerName = new XElement("CustomerName", Or.CustomerName);
-        XElement CustomerEmail = new XElement("CustomerEmail", Or.CustomerEmail);
-        XElement CustomerAdress = new XElement("CustomerAdress", Or.CustomerAdress);
-        XElement OrderDate = new XElement("OrderDate", Or.OrderDate);
-        XElement ShipDate = new XElement("ShipDate", Or.ShipDate);
-        XElement DeliveryDate = new XElement("DeliveryDate", Or.DeliveryDate);
-
-        ordersRoot.Add(new XElement("Order", Id, CustomerName, CustomerEmail, CustomerAdress, OrderDate, ShipDate, DeliveryDate));
-        ordersRoot.Save(path);
+        List<Order> OrLst = XmlTools.LoadListFromXMLSerializer<Order>(path);
+        if (OrLst.Exists(x => x.Id == Or.Id))
+            throw new DalAlreadyExistsException("Order");
+        OrLst.Add(Or);
+        XmlTools.SaveListToXMLSerializer(OrLst, path);
         return Or.Id;
     }
 
     public void Delete(int id)
     {
-
+        List<Order> OrLst = XmlTools.LoadListFromXMLSerializer<Order>(path);
+        OrLst.Remove(GetById(id));
+        XmlTools.SaveListToXMLSerializer(OrLst, path);
     }
 
     public Order Get(Func<Order?, bool>? cond)
     {
+        return XmlTools.LoadListFromXMLSerializer<DO.Order?>(path).FirstOrDefault(cond!)
+            ?? throw new DalDoesNoExistException("Order");
 
-     }
+    }
 
     public Order GetById(int id)
     {
-        throw new NotImplementedException();
+        return Get(x => x?.Id == id);
     }
 
     public IEnumerable<Order?> RequestAll(Func<Order?, bool>? cond = null)
     {
-        throw new NotImplementedException();
+        List<DO.Order?> OrLst = XmlTools.LoadListFromXMLSerializer<DO.Order?>(path);
+
+        if (cond == null)
+            return OrLst.AsEnumerable();
+
+        return OrLst.Where(cond);
     }
 
     public void Update(Order Or)
     {
-        throw new NotImplementedException();
+        List<Order> OrLst = XmlTools.LoadListFromXMLSerializer<Order>(path);
+        Delete(Or.Id);
+        OrLst.Add(Or);
+        XmlTools.SaveListToXMLSerializer(OrLst, path);
     }
 }
 

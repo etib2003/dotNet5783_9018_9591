@@ -80,11 +80,11 @@ internal class dalOrderItem : IOrderItem
         return (IEnumerable<OrderItem?>)(from orderItem in ordersItemsRoot.Elements()
                                          select new OrderItem
                                          {
-                                             Id = int.Parse(orderItem.Element("Id").Value),
-                                             OrderID = int.Parse(orderItem.Element("OrderID").Value),
-                                             ProductID = int.Parse(orderItem.Element("ProductID").Value),
-                                             Price = int.Parse(orderItem.Element("Price").Value),
-                                             Amount = int.Parse(orderItem.Element("Amount").Value),
+                                             Id = int.Parse(orderItem.Element("Id")!.Value),
+                                             OrderID = int.Parse(orderItem.Element("OrderID")!.Value),
+                                             ProductID = int.Parse(orderItem.Element("ProductID")!.Value),
+                                             Price = int.Parse(orderItem.Element("Price")!.Value),
+                                             Amount = int.Parse(orderItem.Element("Amount")!.Value),
 
                                          }).Where(orderItem => cond is null ? true : cond(orderItem));
 
