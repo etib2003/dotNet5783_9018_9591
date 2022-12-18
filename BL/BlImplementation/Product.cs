@@ -8,19 +8,8 @@ internal class Product : BlApi.IProduct
 
     public IEnumerable<BO.ProductForList> GetListProductForManagerAndCatalog()
     {
-        IEnumerable<DO.Product?> doProductList = _dal.Product.RequestAll();//gets the products from the data layer
-        //return DataSource._products.Where(product => cond is null ? true : cond!(product));
-
-        IEnumerable<BO.ProductForList> productForLists = from product in doProductList
-                                                         select new BO.ProductForList
-                                                         {
-                                                             //Initializes the data for each product
-                                                             Id = product?.Id??0,
-                                                             Name = product?.Name,
-                                                             Price = product?.Price??0,
-                                                             Category = (BO.Category)product?.Category!,
-                                                         };
-        return doProductList.copy
+        IEnumerable<DO.Product?> doProductList = _dal?.Product.RequestAll()!;//gets the products from the data layer
+        return doProductList.CopyPropToList<DO.Product?, BO.ProductForList>();
     }
 
     public IEnumerable<BO.ProductForList> GetListProductForManagerAndCatalogByCond(Func<ProductForList?, bool>? cond)

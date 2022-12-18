@@ -5,10 +5,6 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7F31E1D6-3241-4D6D-8414-DB1D14771EAC}"
 	ProjectSection(SolutionItems) = preProject
-		DalXml\xml\config.xml = DalXml\xml\config.xml
-		DalXml\xml\orderItems.xml = DalXml\xml\orderItems.xml
-		DalXml\xml\orders.xml = DalXml\xml\orders.xml
-		DalXml\xml\products.xml = DalXml\xml\products.xml
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -30,16 +26,22 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlTest", "BlTest\BlTest.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PL", "PL\PL.csproj", "{6870E96F-525E-4E82-A2B8-595B94BDD593}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{611A7303-B051-4B7F-8729-1EDDC4615936}"
-	ProjectSection(SolutionItems) = preProject
-		xml\dal-config.xml = xml\dal-config.xml
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "stage0", "stage0\stage0.csproj", "{63C4D7EF-6C79-4B33-B935-9346B091B6EC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalXml", "DalXml\DalXml.csproj", "{0C6BE3BB-0E1E-432C-88D8-EDA175046FF1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DalXml", "DalXml", "{829B2825-BDFC-445A-BD9D-70C5E5295E6C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{76A0FE33-4411-4481-BD30-D0A88D528427}"
+	ProjectSection(SolutionItems) = preProject
+		DalXml\xml\config.xml = DalXml\xml\config.xml
+		bin\xml\orderItems.xml = bin\xml\orderItems.xml
+		bin\xml\orders.xml = bin\xml\orders.xml
+		bin\xml\products.xml = bin\xml\products.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dal_config_xml", "dal_config_xml", "{34E2C9AF-5AE4-47FD-BFFE-C41B40CF867B}"
+	ProjectSection(SolutionItems) = preProject
+		dal_config_xml\dal-config.xml = dal_config_xml\dal-config.xml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -82,9 +84,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{0C6BE3BB-0E1E-432C-88D8-EDA175046FF1} = {829B2825-BDFC-445A-BD9D-70C5E5295E6C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9B6D4D04-F718-4450-BCB2-678DC72BE59A}
