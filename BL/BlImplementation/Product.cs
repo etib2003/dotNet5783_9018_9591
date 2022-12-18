@@ -25,18 +25,9 @@ internal class Product : BlApi.IProduct
             productId.negativeNumber();
             productId.wrongLengthNumber(6);
 
-            DO.Product doProduct = _dal.Product.GetById(productId);//gets a product using its id
-
-            BO.Product boProduct = new BO.Product//create a new logical layer product
-            {
-                //Initializes the data of the product
-                Id = doProduct.Id,
-                Name = doProduct.Name,
-                Price = doProduct.Price,
-                Category = (BO.Category)doProduct.Category,
-                InStock = doProduct.InStock
-            };
-
+          
+            DO.Product? doProduct = _dal?.Product.GetById(productId);//gets a product using its id
+            BO.Product boProduct = doProduct.CopyPropTo(new BO.Product());//create a new logical layer product           
             return boProduct;
         }
         catch (DalApi.DalDoesNoExistException ex) //catches the exception from the data layer
@@ -55,16 +46,14 @@ internal class Product : BlApi.IProduct
 
             DO.Product doProduct = _dal.Product.GetById(productId);//gets the right product using its id
 
-            return new BO.ProductItem
-            {
-                //Initializes the data  
-                Id = doProduct.Id,
-                Name = doProduct.Name,
-                Price = doProduct.Price,
-                Category = (BO.Category)doProduct.Category,
-                InStock = doProduct.InStock > 0,
+
+             
+                BO.Product boProduct = doProduct.CopyPropTo(new BO.Product());
+            //Initializes the data  
+
+            boProduct. InStock = doProduct.InStock > 0,
                 //gets the amount of the product
-                Amount = (from orderItem in cart.Items
+               boProduct. Amount = (from orderItem in cart.Items
                           where orderItem.ProductID == productId
                           select orderItem.Amount).FirstOrDefault(0)
             };
