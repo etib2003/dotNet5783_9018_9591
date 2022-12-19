@@ -8,18 +8,16 @@ internal class Order : BlApi.IOrder
 
     public IEnumerable<BO.OrderForList> GetOrderListForManager()
     {
-        IEnumerable<DO.Order?> orderList = _dal!.Order.RequestAll();//gets all the orders from the data layer
-        return from order in orderList
-               let orderItems = _dal.OrderItem.RequestAll(x => x?.OrderID == order?.Id)//gets the right order using its seqnum
-                                                                                       //Initializes the data
-               select new BO.OrderForList
-               {
-                   Id = order?.Id ?? 0,
-                   CustomerName = order?.CustomerName,
-                   AmountOfItems = orderItems.Count(),
-                   Status = getOrderStatus(order),
-                   TotalPrice = orderItems.Sum(orderItem => orderItem?.Price * orderItem?.Amount) ?? 0,//calculate the total price
-               };
+        IEnumerable<DO.Order?> doOrderList = _dal!.Order.RequestAll();//gets all the orders from the data layer
+        return doOrderList.Select(order =>
+        {
+            BO.OrderForList boOrderForList = order.CopyPropTo(new BO.OrderForList());
+            boOrderForList.Status = getOrderStatus(order);
+            var oiOfOrder = _dal.OrderItem.RequestAll(x => x?.OrderID == boOrderForList.Id);
+            boOrderForList.AmountOfItems = oiOfOrder.Count();
+            boOrderForList.TotalPrice = oiOfOrder.Sum(orderItem => orderItem?.Price * orderItem?.Amount) ?? 0;//calculate the total price
+            return boOrderForList;
+        });
     }
 
     /// <summary>
@@ -47,15 +45,15 @@ internal class Order : BlApi.IOrder
         BO.Order boOrder = doOrder.CopyPropTo(new BO.Order());
         boOrder.Status = getOrderStatus(doOrder);
 
-        IEnumerable<DO.OrderItem?> orderItemsList = _dal.OrderItem.RequestAll(x => x?.OrderID == doOrder.Id);
+        IEnumerable<DO.OrderItem?> orderItemsList = _dal?.OrderItem.RequestAll(x => x?.OrderID == doOrder.Id)!;
         boOrder.OrderItems = (from orderItem in orderItemsList
                               select orderItem.CopyPropTo(new BO.OrderItem()
                               {
                                   TotalPrice = (orderItem?.Price ?? 0) * (orderItem?.Amount ?? 0),
-                                  Name = _dal.Product.GetById(orderItem?.ProductID ?? 0).Name,
+                                  Name = _dal?.Product.GetById(orderItem?.ProductID ?? 0).Name,
                               })
                               ).ToList();
-        boOrder.TotalPrice = boOrder.OrderItems.Sum(OrderItem=> OrderItem.TotalPrice);
+        boOrder.TotalPrice = boOrder.OrderItems.Sum(OrderItem => OrderItem.TotalPrice);
         return boOrder;
     }
 
