@@ -33,9 +33,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{76A0FE33-4411-4481-BD30-D0A88D528427}"
 	ProjectSection(SolutionItems) = preProject
 		DalXml\xml\config.xml = DalXml\xml\config.xml
-		bin\xml\orderItems.xml = bin\xml\orderItems.xml
-		bin\xml\orders.xml = bin\xml\orders.xml
-		bin\xml\products.xml = bin\xml\products.xml
+		DalXml\xml\orderItems.xml = DalXml\xml\orderItems.xml
+		DalXml\xml\orders.xml = DalXml\xml\orders.xml
+		DalXml\xml\products.xml = DalXml\xml\products.xml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dal_config_xml", "dal_config_xml", "{34E2C9AF-5AE4-47FD-BFFE-C41B40CF867B}"
