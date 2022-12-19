@@ -129,13 +129,8 @@ internal class Cart : BlApi.ICart
 
             foreach (BO.OrderItem? boOrderItem in cart.Items)
             {
-                DO.OrderItem doOrderItem = new DO.OrderItem()
-                {
-                    OrderID = orderId,
-                    ProductID = boOrderItem!.ProductID,
-                    Amount = boOrderItem.Amount,
-                    Price = boOrderItem.Price
-                };
+                DO.OrderItem doOrderItem = boOrderItem.CopyPropToStruct(new DO.OrderItem());
+                doOrderItem.OrderID = orderId;
                 boOrderItem.Id = _dal.OrderItem.Create(doOrderItem);
                 DO.Product product = _dal.Product.GetById(doOrderItem.ProductID);//get the right product using its id
                 product.InStock -= doOrderItem.Amount; //delete from the stock
