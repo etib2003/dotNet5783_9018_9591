@@ -41,7 +41,14 @@ internal class dalOrder : IOrder
 
     public int Create(Order Or)
     {
-
+        //Read config file
+        XElement configRoot = XElement.Load(configPath);
+        int.TryParse(configRoot.Element("orderSeq").Value, out int nextSeqNum);
+        nextSeqNum++;
+        Or.Id = nextSeqNum;
+        //update config file
+        configRoot.Element("orderSeq").SetValue(nextSeqNum);
+        configRoot.Save(configPath);
         List<Order> OrLst = XmlTools.LoadListFromXMLSerializer<Order>(path);
         if (OrLst.Exists(x => x.Id == Or.Id))
             throw new DalAlreadyExistsException("Order");
