@@ -26,7 +26,7 @@ internal class Product : BlApi.IProduct
             productId.wrongLengthNumber(6);
 
 
-            DO.Product? doProduct = _dal?.Product.GetById(productId);//gets a product using its id
+            DO.Product? doProduct = _dal?.Product.GetById(productId);//gets a product using it's id
             BO.Product boProduct = doProduct.CopyPropTo(new BO.Product());//create a new logical layer product           
             return boProduct;
         }
