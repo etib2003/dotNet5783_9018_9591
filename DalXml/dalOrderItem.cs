@@ -7,7 +7,7 @@ namespace Dal;
 
 internal class dalOrderItem : IOrderItem
 {
-    string path = XmlTools.dir + "ordersItems.xml";
+    string path = @"xml\orderItems.xml";
     string configPath = "config.xml";
     XElement ordersItemsRoot;
     public dalOrderItem()
@@ -23,13 +23,13 @@ internal class dalOrderItem : IOrderItem
                 ordersItemsRoot = XElement.Load(path);
             else
             {
-                ordersItemsRoot = new XElement("ordersItems");
+                ordersItemsRoot = new XElement("orderItems");
                 ordersItemsRoot.Save(path);
             }
         }
         catch (Exception ex)
         {
-            throw new Exception("product File upload problem" + ex.Message);
+            throw new Exception("order Item File upload problem" + ex.Message);
         }
     }
     public int Create(OrderItem Oi)
@@ -75,16 +75,16 @@ internal class dalOrderItem : IOrderItem
 
     public IEnumerable<OrderItem?> RequestAll(Func<OrderItem?, bool>? cond = null)
     {
-        return (IEnumerable<OrderItem?>)(from orderItem in ordersItemsRoot.Elements()
-                                         select new OrderItem
+        return (from orderItem in ordersItemsRoot.Elements()
+                                         select (OrderItem?) new OrderItem
                                          {
                                              Id = int.Parse(orderItem.Element("Id")!.Value),
                                              OrderID = int.Parse(orderItem.Element("OrderID")!.Value),
                                              ProductID = int.Parse(orderItem.Element("ProductID")!.Value),
-                                             Price = int.Parse(orderItem.Element("Price")!.Value),
+                                             Price = double.Parse(orderItem.Element("Price")!.Value),
                                              Amount = int.Parse(orderItem.Element("Amount")!.Value),
 
-                                         }).Where(orderItem => cond is null ? true : cond(orderItem));
+                                         }).Where(o => cond is null ? true : cond(o));
 
     }
 

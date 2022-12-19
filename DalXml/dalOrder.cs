@@ -30,7 +30,7 @@ internal class dalOrder : IOrder
         }
         catch (Exception ex)
         {
-            throw new Exception("product File upload problem" + ex.Message);
+            throw new Exception("order File upload problem" + ex.Message);
         }
     }
 

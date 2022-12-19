@@ -10,7 +10,7 @@ namespace Dal;
 
 internal class dalOrderItem :IOrderItem
 {
-    //CRUD for Student
+
     /// <summary>
     /// the function adds a new orderItem to the orderItems' list
     /// </summary>
