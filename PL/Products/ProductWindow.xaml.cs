@@ -38,7 +38,7 @@ namespace PL.productsWindows
             InitializeComponent();
             CategoryCB.ItemsSource = Enum.GetValues(typeof(BO.Category));
             Complete.Content = "Update";
-            ProductGrid.DataContext = bl.Product.GetProductDetailsForManager(prtrLId);
+            ProductGrid.DataContext = bl?.Product.GetProductDetailsForManager(prtrLId);
             IdBox.IsReadOnly = true;
 
         }

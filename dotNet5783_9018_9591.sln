@@ -30,17 +30,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "stage0", "stage0\stage0.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalXml", "DalXml\DalXml.csproj", "{0C6BE3BB-0E1E-432C-88D8-EDA175046FF1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{76A0FE33-4411-4481-BD30-D0A88D528427}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{DB11D613-63BF-4092-AF4F-9751E336B89B}"
 	ProjectSection(SolutionItems) = preProject
-		DalXml\xml\config.xml = DalXml\xml\config.xml
-		DalXml\xml\orderItems.xml = DalXml\xml\orderItems.xml
-		DalXml\xml\orders.xml = DalXml\xml\orders.xml
-		DalXml\xml\products.xml = DalXml\xml\products.xml
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dal_config_xml", "dal_config_xml", "{34E2C9AF-5AE4-47FD-BFFE-C41B40CF867B}"
-	ProjectSection(SolutionItems) = preProject
-		dal_config_xml\dal-config.xml = dal_config_xml\dal-config.xml
+		xml\config.xml = xml\config.xml
+		xml\dal-config.xml = xml\dal-config.xml
+		xml\orderItems.xml = xml\orderItems.xml
+		xml\orders.xml = xml\orders.xml
+		xml\products.xml = xml\products.xml
 	EndProjectSection
 EndProject
 Global

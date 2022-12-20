@@ -12,7 +12,7 @@ namespace Dal;
 
 internal class dalProduct : IProduct
 {
-    string path = "products.xml";
+    string path = @"../xml/products.xml";
 
     public int Create(Product product)
     {

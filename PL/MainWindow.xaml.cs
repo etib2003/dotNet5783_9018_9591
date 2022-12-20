@@ -1,7 +1,4 @@
-﻿using BlApi;
-using BlImplementation;
-using BO;
-using PL.productsWindows;
+﻿using PL.productsWindows;
 using System.Windows;
 
 
@@ -15,7 +12,7 @@ namespace PL
         /// <summary>
         ///Object to access the logical layer.
         /// </summary>
-         BlApi.IBl? _bl= BlApi.Factory.Get();
+         BlApi.IBl? bl= BlApi.Factory.Get();
 
         /// <summary>
         /// constructor

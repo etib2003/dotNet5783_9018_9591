@@ -1,19 +1,14 @@
 ﻿using Dal;
 using DalApi;
 using DO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 using static System.Net.Mime.MediaTypeNames;
 
 internal class dalOrder : IOrder
 {
 
-    string path = "orders.xml";
-    string configPath = "config.xml";
+    string path = @"../xml/orders.xml";
+    string configPath = @"../xml/config.xml";
     XElement ordersRoot;
 
     private void LoadData()

@@ -4,11 +4,11 @@ using System.Runtime.Serialization;
 
 internal class Product : BlApi.IProduct
 {
-    private DalApi.IDal? _dal = DalApi.Factory.Get();
+    private DalApi.IDal? dal = DalApi.Factory.Get();
 
     public IEnumerable<BO.ProductForList> GetListProductForManagerAndCatalog()
     {
-        IEnumerable<DO.Product?> doProductList = _dal?.Product.RequestAll()!;//gets the products from the data layer
+        IEnumerable<DO.Product?> doProductList = dal?.Product.RequestAll()!;//gets the products from the data layer
         return doProductList.CopyPropToList<DO.Product?, BO.ProductForList>();
     }
 
@@ -25,7 +25,7 @@ internal class Product : BlApi.IProduct
             productId.negativeNumber();
             productId.wrongLengthNumber(6);
 
-            DO.Product? doProduct = _dal?.Product.GetById(productId);//gets a product using it's id
+            DO.Product? doProduct = dal?.Product.GetById(productId);//gets a product using it's id
             BO.Product boProduct = doProduct.CopyPropTo(new BO.Product());//create a new logical layer product
             boProduct.Category = (Category?)(doProduct?.Category);
             return boProduct;
@@ -44,7 +44,7 @@ internal class Product : BlApi.IProduct
             productId.negativeNumber();
             productId.wrongLengthNumber(6);
 
-            DO.Product doProduct = _dal.Product.GetById(productId);//gets the right product using its id
+            DO.Product doProduct = dal.Product.GetById(productId);//gets the right product using its id
 
             BO.ProductItem boProductItem = doProduct.CopyPropTo(new BO.ProductItem());
             boProductItem.Category = (Category?)doProduct.Category;
@@ -74,7 +74,7 @@ internal class Product : BlApi.IProduct
 
             DO.Product doProduct = product.CopyPropToStruct(new DO.Product());//create a new logical layer product
             doProduct.Category = (DO.Category?)product.Category;
-            return _dal.Product.Create(doProduct);
+            return dal.Product.Create(doProduct);
         }
         catch (DalApi.DalAlreadyExistsException ex)//catches the exception from the data layer
         {
@@ -95,7 +95,7 @@ internal class Product : BlApi.IProduct
 
             DO.Product doProduct = product.CopyPropToStruct(new DO.Product());//create a new logical layer product          
 
-            _dal?.Product.Update(doProduct);//send the product to the data layer function that updates it
+            dal?.Product.Update(doProduct);//send the product to the data layer function that updates it
         }
         catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
         {
@@ -106,10 +106,10 @@ internal class Product : BlApi.IProduct
     public void DeleteProduct(int productId)
     {
         //find the product to delete
-        IEnumerable<DO.OrderItem?> doOrderItemList = _dal?.OrderItem.RequestAll(orderItem => orderItem?.ProductID == productId);//gets the products from the data layer
+        IEnumerable<DO.OrderItem?> doOrderItemList = dal?.OrderItem.RequestAll(orderItem => orderItem?.ProductID == productId);//gets the products from the data layer
 
         if (!doOrderItemList.Any())
-            _dal.Product.Delete(productId);
+            dal.Product.Delete(productId);
         else
             throw new NotValidDeleteException("product Already In Order Prosses");//exception
     }

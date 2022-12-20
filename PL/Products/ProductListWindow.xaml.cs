@@ -12,14 +12,14 @@ namespace PL.productsWindows
     public partial class ProductListWindow : Window
     {
         //Object to access the logical layer
-        BlApi.IBl? _bl = BlApi.Factory.Get();
+        BlApi.IBl? bl = BlApi.Factory.Get();
         /// <summary>
         /// get the list of products from the logical layer:
         /// </summary>
         public ProductListWindow()
         {
             InitializeComponent();        
-            ProductForListView.ItemsSource = _bl?.Product.GetListProductForManagerAndCatalog();
+            ProductForListView.ItemsSource = bl?.Product.GetListProductForManagerAndCatalog();
             selectCategory.ItemsSource = Enum.GetValues(typeof(BO.Category));
 
         }
@@ -31,7 +31,7 @@ namespace PL.productsWindows
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             BO.Category category = (BO.Category)selectCategory.SelectedItem;
-            ProductForListView.ItemsSource = _bl?.Product.GetListProductForManagerAndCatalogByCond(x => x.Category == category);
+            ProductForListView.ItemsSource = bl?.Product.GetListProductForManagerAndCatalogByCond(x => x.Category == category);
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace PL.productsWindows
         /// <param name="e">the event</param>
         private void ShowAllCategories_Click(object sender, RoutedEventArgs e)
         {
-            ProductForListView.ItemsSource = _bl?.Product.GetListProductForManagerAndCatalog();
+            ProductForListView.ItemsSource = bl?.Product.GetListProductForManagerAndCatalog();
             selectCategory.ItemsSource = Enum.GetValues(typeof(BO.Category));
         }
 

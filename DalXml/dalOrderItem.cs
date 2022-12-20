@@ -7,8 +7,8 @@ namespace Dal;
 
 internal class dalOrderItem : IOrderItem
 {
-    string path = @"xml\orderItems.xml";
-    string configPath = "config.xml";
+    string path =@"../xml/orderItems.xml";
+    string configPath = @"../xml/config.xml";
     XElement ordersItemsRoot;
     public dalOrderItem()
     {

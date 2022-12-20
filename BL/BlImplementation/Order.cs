@@ -4,16 +4,16 @@ using System.Linq;
 
 internal class Order : BlApi.IOrder
 {
-    private DalApi.IDal? _dal = DalApi.Factory.Get();
+    private DalApi.IDal? dal = DalApi.Factory.Get();
 
     public IEnumerable<BO.OrderForList> GetOrderListForManager()
     {
-        IEnumerable<DO.Order?> doOrderList = _dal!.Order.RequestAll();//gets all the orders from the data layer
+        IEnumerable<DO.Order?> doOrderList = dal!.Order.RequestAll();//gets all the orders from the data layer
         return doOrderList.Select(order =>
         {
             BO.OrderForList boOrderForList = order.CopyPropTo(new BO.OrderForList());
             boOrderForList.Status = getOrderStatus(order);
-            var oiOfOrder = _dal.OrderItem.RequestAll(x => x?.OrderID == boOrderForList.Id);
+            var oiOfOrder = dal.OrderItem.RequestAll(x => x?.OrderID == boOrderForList.Id);
             boOrderForList.AmountOfItems = oiOfOrder.Count();
             boOrderForList.TotalPrice = oiOfOrder.Sum(orderItem => orderItem?.Price * orderItem?.Amount) ?? 0;//calculate the total price
             return boOrderForList;
@@ -45,12 +45,12 @@ internal class Order : BlApi.IOrder
         BO.Order boOrder = doOrder.CopyPropTo(new BO.Order());
         boOrder.Status = getOrderStatus(doOrder);
 
-        IEnumerable<DO.OrderItem?> orderItemsList = _dal?.OrderItem.RequestAll(x => x?.OrderID == doOrder.Id)!;
+        IEnumerable<DO.OrderItem?> orderItemsList = dal?.OrderItem.RequestAll(x => x?.OrderID == doOrder.Id)!;
         boOrder.OrderItems = (from orderItem in orderItemsList
                               select orderItem.CopyPropTo(new BO.OrderItem()
                               {
                                   TotalPrice = (orderItem?.Price ?? 0) * (orderItem?.Amount ?? 0),
-                                  Name = _dal?.Product.GetById(orderItem?.ProductID ?? 0).Name,
+                                  Name = dal?.Product.GetById(orderItem?.ProductID ?? 0).Name,
                               })
                               ).ToList();
         boOrder.TotalPrice = boOrder.OrderItems.Sum(OrderItem => OrderItem.TotalPrice);
@@ -62,7 +62,7 @@ internal class Order : BlApi.IOrder
         try
         {
             orderID.negativeNumber();//exception
-            return getBoOrder(_dal.Order.GetById(orderID)); //gets the right order using its id,call the help function
+            return getBoOrder(dal.Order.GetById(orderID)); //gets the right order using its id,call the help function
         }
         catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
         {
@@ -77,13 +77,13 @@ internal class Order : BlApi.IOrder
         {
             orderID.negativeNumber();//exception
 
-            DO.Order doOrder = _dal.Order.GetById(orderID);//gets the order by using its id
+            DO.Order doOrder = dal.Order.GetById(orderID);//gets the order by using its id
 
             BO.Order order = new BO.Order();//create a new order of the logical layer
             if (doOrder.OrderDate != null && doOrder.ShipDate == null)
             {
                 doOrder.ShipDate = DateTime.Now;
-                _dal.Order.Update(doOrder);
+                dal.Order.Update(doOrder);
                 order = getBoOrder(doOrder);//call the help function
             }
             else
@@ -104,13 +104,13 @@ internal class Order : BlApi.IOrder
         {
             orderID.negativeNumber();//exception
 
-            DO.Order doOrder = _dal.Order.GetById(orderID);//gets the order by using its id
+            DO.Order doOrder = dal.Order.GetById(orderID);//gets the order by using its id
 
             BO.Order order = new BO.Order();//create a new order of the logical layer
             if (doOrder.ShipDate != null && doOrder.DeliveryDate == null)
             {
                 doOrder.DeliveryDate = DateTime.Now;
-                _dal.Order.Update(doOrder);
+                dal.Order.Update(doOrder);
                 order = getBoOrder(doOrder);//call the help function
             }
             else if (doOrder.OrderDate != null && doOrder.ShipDate == null)
@@ -135,7 +135,7 @@ internal class Order : BlApi.IOrder
         {
             orderID.negativeNumber();//exception
 
-            DO.Order doOrder = _dal.Order.GetById(orderID);//gets the right order by using its id
+            DO.Order doOrder = dal.Order.GetById(orderID);//gets the right order by using its id
             List<Tuple<DateTime?, string>> tupleList = new List<Tuple<DateTime?, string>>();
             Tuple<DateTime?, string> tuple;
             BO.OrderTracking orderTracking = new BO.OrderTracking();//create a new OrderTracking object
