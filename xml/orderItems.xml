@@ -406,4 +406,11 @@
     <Price>100</Price>
     <Amount>1</Amount>
   </OrderItem>
+  <OrderItem>
+    <Id>60</Id>
+    <OrderID>28</OrderID>
+    <ProductID>111114</ProductID>
+    <Price>141</Price>
+    <Amount>1</Amount>
+  </OrderItem>
 </ArrayOfOrderItem>
