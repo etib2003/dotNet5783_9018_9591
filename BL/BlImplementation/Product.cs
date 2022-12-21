@@ -44,7 +44,7 @@ internal class Product : BlApi.IProduct
             productId.negativeNumber();
             productId.wrongLengthNumber(6);
 
-            DO.Product doProduct = dal.Product.GetById(productId);//gets the right product using its id
+            DO.Product doProduct = dal?.Product.GetById(productId) ?? default;//gets the right product using its id
 
             BO.ProductItem boProductItem = doProduct.CopyPropTo(new BO.ProductItem());
             boProductItem.Category = (Category?)doProduct.Category;
@@ -74,7 +74,7 @@ internal class Product : BlApi.IProduct
 
             DO.Product doProduct = product.CopyPropToStruct(new DO.Product());//create a new logical layer product
             doProduct.Category = (DO.Category?)product.Category;
-            return dal.Product.Create(doProduct);
+            return dal?.Product.Create(doProduct)??default;
         }
         catch (DalApi.DalAlreadyExistsException ex)//catches the exception from the data layer
         {
@@ -109,7 +109,7 @@ internal class Product : BlApi.IProduct
         IEnumerable<DO.OrderItem?> doOrderItemList = dal?.OrderItem.RequestAll(orderItem => orderItem?.ProductID == productId);//gets the products from the data layer
 
         if (!doOrderItemList.Any())
-            dal.Product.Delete(productId);
+            dal?.Product.Delete(productId);
         else
             throw new NotValidDeleteException("product Already In Order Prosses");//exception
     }

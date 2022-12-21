@@ -17,7 +17,7 @@ internal class Cart : BlApi.ICart
     {
         try
         {
-            DO.Product product = dal.Product.GetById(productId); //get the right product using its id
+            DO.Product product = dal?.Product.GetById(productId)??default; //get the right product using its id
             BO.OrderItem? orderItem = (from OrderItem in cart.Items
                                        where OrderItem.ProductID == productId
                                        select OrderItem).FirstOrDefault(); //            if (cart.Items != null)
@@ -56,7 +56,7 @@ internal class Cart : BlApi.ICart
     {
         try
         {
-            DO.Product doProduct = dal.Product.GetById(productId);//get the right product using its id
+            DO.Product doProduct = dal?.Product.GetById(productId)??default;//get the right product using its id
 
             BO.OrderItem? orderItem = (from OrderItem in cart.Items
                                       where OrderItem.ProductID == productId
@@ -109,7 +109,7 @@ internal class Cart : BlApi.ICart
             {
                 orderItem!.Amount.negativeNumber();//exception
 
-                DO.Product doProduct = dal.Product.GetById(orderItem.ProductID);//get the right product using its id
+                DO.Product doProduct = dal?.Product.GetById(orderItem.ProductID)??default;//get the right product using its id
 
                 if (orderItem.Amount > doProduct.InStock)
                     throw new BO.NotValidAmountException("not Valid Amount");//exception
@@ -117,7 +117,7 @@ internal class Cart : BlApi.ICart
             }
 
             //if everything is ok
-            int orderId = dal.Order.Create(new DO.Order()  //create a new order
+            int orderId = dal?.Order.Create(new DO.Order()  //create a new order
             {
                 CustomerName = cart.CustomerName,
                 CustomerEmail = cart.CustomerEmail,
@@ -125,16 +125,16 @@ internal class Cart : BlApi.ICart
                 OrderDate = DateTime.Now,
                 ShipDate = null,
                 DeliveryDate = null
-            });
+            })??default;
 
             foreach (BO.OrderItem? boOrderItem in cart.Items)
             {
                 DO.OrderItem doOrderItem = boOrderItem.CopyPropToStruct(new DO.OrderItem());
                 doOrderItem.OrderID = orderId;
-                boOrderItem.Id = dal.OrderItem.Create(doOrderItem);
-                DO.Product product = dal.Product.GetById(doOrderItem.ProductID);//get the right product using its id
+                boOrderItem.Id = dal?.OrderItem.Create(doOrderItem)??default;
+                DO.Product product = dal?.Product.GetById(doOrderItem.ProductID)??default;//get the right product using its id
                 product.InStock -= doOrderItem.Amount; //delete from the stock
-                dal.Product.Update(product);
+                dal?.Product.Update(product);
             }
 
             BO.Order boOrder = new BO.Order()
