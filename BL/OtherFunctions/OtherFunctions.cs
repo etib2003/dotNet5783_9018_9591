@@ -1,7 +1,5 @@
-﻿using DocumentFormat.OpenXml.Bibliography;
-using DocumentFormat.OpenXml.Spreadsheet;
+﻿
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
 using System.Reflection;
 
 namespace OtherFunctions
@@ -74,10 +72,17 @@ namespace OtherFunctions
                 throw new BO.NotInStockException("Not In Stock");
 
         }
-
+        /// <summary>
+        /// A function that uses a dictionary to copy values of a variable from one layer to a variable from another layer
+        /// </summary>
+        /// <typeparam name="Source"></typeparam>
+        /// <typeparam name="Target"></typeparam>
+        /// <param name="source">the object you want to copy the data from</param>
+        /// <param name="target">the object you want to copy the data to</param>
+        /// <returns>the object with the new data</returns>
         internal static Target CopyPropTo<Source, Target>(this Source source, Target target)
         {
-            ///getting the target properties2
+            ///getting the target properties
             Dictionary<string, PropertyInfo> propertyInfoTarget = target!.GetType().GetProperties().ToDictionary(p => p.Name, p => p);
             ///getting the source properties
             IEnumerable<PropertyInfo> propertyInfoSource = source!.GetType().GetProperties();
@@ -96,9 +101,10 @@ namespace OtherFunctions
 
                     if (sourceValue is not null)
                     {
+                        //if we need to copy enum
                         if (s is not null && t is not null && t.IsEnum && s.IsEnum)
                             propertyInfoTarget[sourcePropertyInfo.Name].SetValue(target, Enum.ToObject(t, sourceValue));
-
+                        //copy the value if the type is the same
                         else if(sourcePropertyInfo.PropertyType == propertyInfoTarget[sourcePropertyInfo.Name].PropertyType)
                             propertyInfoTarget[sourcePropertyInfo.Name].SetValue(target, sourceValue);
                     }
@@ -107,20 +113,42 @@ namespace OtherFunctions
             return target;
         }
 
+        /// <summary>
+        /// A function that uses a dictionary to copy values of a variable from one layer to a variable from another layer
+        /// in this case, the target is struct and not class
+        /// </summary>
+        /// <typeparam name="Source">the object you want to copy the data from</typeparam>
+        /// <typeparam name="Target">the object you want to copy the data to</typeparam>
+        /// <param name="source"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
         internal static Target CopyPropToStruct<Source, Target>(this Source source, Target target) where Target : struct
         {
             object obj = target;
 
             source.CopyPropTo(obj);
 
-            return (Target)obj;
+            return (Target)obj;//cast to struct
         }
-
+        /// <summary>
+        ///  A function that uses a dictionary to copy list of values of a variable from one layer to a list of variables from another layer
+        /// </summary>
+        /// <typeparam name="Source"></typeparam>
+        /// <typeparam name="Target"></typeparam>
+        /// <param name="sources"></param>
+        /// <returns></returns>
         internal static IEnumerable<Target> CopyPropToList<Source, Target>(this IEnumerable<Source> sources) where Target : new()
        => from source in sources
           select source.CopyPropTo(new Target());
 
-
+        /// <summary>
+        ///  A function that uses a dictionary to copy list of values of a variable from one layer to a list of variables from another layer
+        ///  in this case, the target is struct and not class
+        /// </summary>
+        /// <typeparam name="Source"></typeparam>
+        /// <typeparam name="Target"></typeparam>
+        /// <param name="sources"></param>
+        /// <returns></returns>
         internal static IEnumerable<Target> CopyPropToListStruct<Source, Target>(this IEnumerable<Source> sources) where Target : struct
  => from source in sources
     select source.CopyPropToStruct(new Target());
