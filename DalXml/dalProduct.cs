@@ -84,7 +84,6 @@ internal class dalProduct : IProduct
         List<Product> prodLst = XmlTools.LoadListFromXMLSerializer<Product>(path);
         prodLst.Add(product);
         XmlTools.SaveListToXMLSerializer(prodLst, path);//save the changes
-
     }
 }
 
