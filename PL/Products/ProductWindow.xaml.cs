@@ -1,6 +1,8 @@
 ﻿
 using BO;
+using DocumentFormat.OpenXml.Vml;
 using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,6 +19,8 @@ namespace PL.productsWindows
         ///Object to access the logical layer
         /// </summary>
         BlApi.IBl? bl = BlApi.Factory.Get();
+        private static BO.Cart _cart = new BO.Cart() { CustomerName = null, CustomerEmail = null, CustomerAddress = null, Items = new List<BO.OrderItem>(), TotalPrice = 0 };
+
 
         /// <summary>
         /// constructor, bruild the labels
@@ -38,9 +42,26 @@ namespace PL.productsWindows
             InitializeComponent();
             CategoryCB.ItemsSource = Enum.GetValues(typeof(BO.Category));
             Complete.Content = "Update";
+            deleteButton.Visibility = Visibility.Visible;
             ProductGrid.DataContext = bl?.Product.GetProductDetailsForManager(prtrLId);
             IdBox.IsReadOnly = true;
 
+        }
+
+        public ProductWindow(int prtrLId, int different)
+        {
+            InitializeComponent();
+            Complete.Content = "Add to cart";
+            var product= bl?.Product.GetProductDetailsForManager(prtrLId);
+            ProductGrid.DataContext = product;
+            CategoryCB.Visibility = Visibility.Collapsed;
+            CategoryBox.Visibility = Visibility.Visible;
+            CategoryBox.Text = product!.Category.ToString();
+            IdBox.IsReadOnly = true;
+            NameBox.IsReadOnly = true;
+            PriceBox.IsReadOnly = true;
+            InStockBox.IsReadOnly = true;
+            AmountAddBox.Visibility = Visibility.Visible;
         }
 
         /// <summary>
@@ -169,6 +190,18 @@ namespace PL.productsWindows
                     Console.Beep(1500, 100);
                     MessageBox.Show("Updating is done!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
+                else if (Complete.Content == "Add to cart")
+                {
+                    if (AmountAddBox.Text != "0") //מומלץ לעשות שלא יוכל להכניס 0
+                    {
+                        bl?.Cart.AddProductToCart(_cart, newPdct.Id);
+                        if (AmountAddBox.Text != "Enter amount")
+                            bl?.Cart.UpdateAmountOfProduct(_cart, newPdct.Id, int.Parse(AmountAddBox.Text));
+
+                        Console.Beep(1500, 100);
+                        MessageBox.Show("Adding to cart is done!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
                 this.Close();
             }
             catch (BoAlreadyExistsException ex)
@@ -208,6 +241,16 @@ namespace PL.productsWindows
         private void PWcloseButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void OnTextBoxGotFocus(object sender, RoutedEventArgs e)
+        {
+            //AmountAddBox.Text = "";
+        }
+
+        private void OnTextBoxLostFocus(object sender, RoutedEventArgs e)
+        {
+            //AmountAddBox.Text = "Enter amount";
         }
     }
 }

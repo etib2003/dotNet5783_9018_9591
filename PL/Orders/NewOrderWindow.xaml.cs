@@ -36,7 +36,7 @@ namespace Products
             if (CatalogListView.SelectedItem is ProductItem productItem)
             {
                 int pflId = ((ProductItem)CatalogListView.SelectedItem).Id;
-                new ProductWindow(pflId).ShowDialog();
+                new ProductWindow(pflId, 1).ShowDialog();
             }
         }
     }
