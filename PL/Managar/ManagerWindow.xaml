@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="ManagerWindow" Height="450" Width="800">
     <Grid>
-        <Button x:Name="OrderButton" Content="view orders" HorizontalAlignment="Center" Height="46" Margin="0,143,0,0" VerticalAlignment="Top" Width="192" FontSize="16" FontFamily="Candara" FontWeight="Bold" Click="OrderButton_Click"/>
-        <Button x:Name="ProductButton" Content="view products" HorizontalAlignment="Center" Height="46" VerticalAlignment="Top" Width="192" FontSize="16" FontFamily="Candara" FontWeight="Bold" Margin="0,224,0,0" Click="ProductButton_Click"/>
+        <Button x:Name="OrderButton" Content="view orders" HorizontalAlignment="Center" Height="52" Margin="0,143,0,0" VerticalAlignment="Top" Width="224" FontSize="20" FontFamily="Candara" FontWeight="Bold" Click="OrderButton_Click"/>
+        <Button x:Name="ProductButton" Content="view products" HorizontalAlignment="Center" Height="52" VerticalAlignment="Top" Width="224" FontSize="20" FontFamily="Candara" FontWeight="Bold" Margin="0,234,0,0" Click="ProductButton_Click"/>
 
     </Grid>
 </Window>

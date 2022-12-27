@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BO;
+using PL.productsWindows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,22 @@ namespace Orders
     /// </summary>
     public partial class OrderListWindow : Window
     {
+        BlApi.IBl? bl = BlApi.Factory.Get();
+
         public OrderListWindow()
         {
             InitializeComponent();
+            OrderForListView.ItemsSource = bl?.Order.GetOrderListForManager();
+        }
+     
+            private void Update_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (OrderForListView.SelectedItem is OrderForList orderForList)
+            {
+                int oflId = ((OrderForList)OrderForListView.SelectedItem).Id;
+                new OrderWindow(oflId).ShowDialog();
+                //רענון המסך
+            }
         }
     }
 }

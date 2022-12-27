@@ -19,9 +19,12 @@ namespace Orders
     /// </summary>
     public partial class OrderWindow : Window
     {
-        public OrderWindow()
+        BlApi.IBl? bl = BlApi.Factory.Get();
+
+        public OrderWindow(int ordLId)
         {
             InitializeComponent();
+            OrderGrid.DataContext = bl?.Order.GetOrderDetails(ordLId);
         }
     }
 }

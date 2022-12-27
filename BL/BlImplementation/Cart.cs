@@ -121,7 +121,7 @@ internal class Cart : BlApi.ICart
             {
                 CustomerName = cart.CustomerName,
                 CustomerEmail = cart.CustomerEmail,
-                CustomerAdress = cart.CustomerAddress,
+                CustomerAddress = cart.CustomerAddress,
                 OrderDate = DateTime.Now,
                 ShipDate = null,
                 DeliveryDate = null
@@ -142,7 +142,7 @@ internal class Cart : BlApi.ICart
                 Id = orderId,
                 CustomerName = cart.CustomerName,
                 CustomerEmail = cart.CustomerEmail,
-                CustomerAdress = cart.CustomerAddress,
+                CustomerAddress = cart.CustomerAddress,
                 OrderDate = DateTime.Now,
                 ShipDate = null,
                 DeliveryDate = null,

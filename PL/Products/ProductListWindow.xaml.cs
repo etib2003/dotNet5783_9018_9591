@@ -81,9 +81,5 @@ namespace PL.productsWindows
             this.Close();
         }
 
-        private void ProductForListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
     }
 }

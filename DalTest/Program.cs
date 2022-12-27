@@ -83,7 +83,7 @@ Please choose the topic:
                                 Console.Write("Enter an Email: ");
                                 NewOrder.CustomerEmail = Console.ReadLine();
                                 Console.Write("Enter an Adress: ");
-                                NewOrder.CustomerAdress = Console.ReadLine();
+                                NewOrder.CustomerAddress = Console.ReadLine();
 
                                 DateTime tmpDateTime;
 
@@ -142,7 +142,7 @@ Please choose the topic:
                                 Console.Write("Enter an Email: ");
                                 updatedOrder.CustomerEmail = Console.ReadLine();
                                 Console.Write("Enter an Adress: ");
-                                updatedOrder.CustomerAdress = Console.ReadLine();
+                                updatedOrder.CustomerAddress = Console.ReadLine();
 
                                 DateTime tmpDateTime;
 

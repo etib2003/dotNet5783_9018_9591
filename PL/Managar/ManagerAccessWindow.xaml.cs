@@ -33,13 +33,11 @@ namespace Managar
             if (e.Key == Key.Enter)
             {
                 if (PasswordBox.Text == password)
+                {
                     new ManagerWindow().Show();
-               
-
-
+                    this.Close();
+                }
             }
-
-
 
         }
     }

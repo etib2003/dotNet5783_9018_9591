@@ -68,7 +68,7 @@ internal static class DataSource
             string customerLastName = CustomerLastName[random.Next(0, 14)];
             order.CustomerName = customerFirstName + " " + customerLastName;
             order.CustomerEmail = customerFirstName + customerLastName + order.Id + "@gmail.com";
-            order.CustomerAdress = Customer_Adress[random.Next(0, 11)];
+            order.CustomerAddress = Customer_Adress[random.Next(0, 11)];
             order.OrderDate = DateTime.Now.AddMonths(random.Next(-4, -1));
             if (i <= AmountOfOrders * 0.8)
                 order.ShipDate = order.OrderDate + new TimeSpan (random.Next(24), random.Next(60), random.Next(60));

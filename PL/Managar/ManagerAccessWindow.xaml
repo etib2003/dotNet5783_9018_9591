@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="ManagerAccessWindow" Height="200" Width="250">
     <Grid>
-        <TextBox x:Name="PasswordBox" HorizontalAlignment="Center" Margin="0,92,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="106" Height="22" FontFamily="Candara" KeyDown="Enter"/>
-        <Label x:Name="PasswordLabel" Content="Enter password:" HorizontalAlignment="Center" Margin="0,62,0,0" VerticalAlignment="Top" Height="25" Width="106" HorizontalContentAlignment="Center" FontSize="8"/>
+        <TextBox x:Name="PasswordBox" HorizontalAlignment="Center" Margin="0,92,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="106" Height="22" FontFamily="Candara" KeyDown="Enter" FontSize="14"/>
+        <Label x:Name="PasswordLabel" Content="Enter password:" HorizontalAlignment="Center" Margin="0,62,0,0" VerticalAlignment="Top" Height="25" Width="106" HorizontalContentAlignment="Center"/>
 
     </Grid>
 </Window>

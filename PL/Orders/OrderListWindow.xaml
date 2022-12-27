@@ -7,6 +7,17 @@
         mc:Ignorable="d"
         Title="OrderListWindow" Height="450" Width="800">
     <Grid>
-        
+        <ListView x:Name="OrderForListView" ItemsSource="{Binding}"  FontFamily="Candara" Foreground="Black" Margin="0,68,0,0" MouseDoubleClick="Update_MouseDoubleClick" FontSize="16">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="Id" Width="125"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=CustomerName}" Header="Customer Name" Width="200"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Status}" Header="Status" Width="140"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=AmountOfItems}" Header="Amount Of Items" Width="180"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=TotalPrice}" Header="Total Price" Width="140"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label x:Name="OrderLabel" Content="Our Orders" HorizontalAlignment="Center" Height="35" Margin="0,18,0,0" VerticalAlignment="Top" Width="232" HorizontalContentAlignment="Center" FontFamily="Candara" FontSize="26" FontWeight="Bold"/>
     </Grid>
 </Window>

@@ -24,7 +24,7 @@ public struct Order
     /// <summary>
     /// the customer adress
     /// </summary>
-    public string? CustomerAdress { get; set; }
+    public string? CustomerAddress { get; set; }
 
     /// <summary>
     /// order's order date
