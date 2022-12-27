@@ -9,7 +9,8 @@
     <Grid>
         <Label x:Name="IdLabel" Content="Enter order id for tracking:" HorizontalAlignment="Left" Height="47" Margin="194,44,0,0" VerticalAlignment="Top" Width="324" FontSize="22" FontWeight="Bold" FontFamily="Candara"/>
         <TextBox x:Name="IdTextBox" HorizontalAlignment="Left" Height="33" Margin="465,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" KeyDown="Enter" Width="134" FontSize="22"/>
-        <TextBlock x:Name="OrderTrackingBox" Text="{Binding}" HorizontalAlignment="Left" Height="149" TextWrapping="Wrap" VerticalAlignment="Center" Width="436" FontSize="18" Grid.ColumnSpan="2" Margin="182,0,0,0"/>
+        <TextBlock x:Name="OrderTrackingBox" Text="{Binding}" HorizontalAlignment="Center" Height="197" TextWrapping="Wrap" VerticalAlignment="Top" Width="436" FontSize="17" Margin="0,125,0,0"/>
+        <Button x:Name="ViewOrderButton" Content="View order details" HorizontalAlignment="Center" Height="43" Margin="0,350,0,0" VerticalAlignment="Top" Width="164" FontSize="18"/>
 
     </Grid>
 </Window>

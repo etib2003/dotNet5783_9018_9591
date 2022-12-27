@@ -6,7 +6,21 @@
         xmlns:local="clr-namespace:Products"
         mc:Ignorable="d"
         Title="NewOrderWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid x:Name="CatalogGrid">
+        <ListView x:Name="CatalogListView" ItemsSource="{Binding}"  FontFamily="Candara" Foreground="Black" Margin="0,68,0,0" MouseDoubleClick="view_MouseDoubleClick" Grid.ColumnSpan="2" Grid.RowSpan="2" FontSize="16" >
+            <ListView.Background>
+                <ImageBrush/>
+            </ListView.Background>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="Id" Width="85"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Name" Width="110"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Price}" Header="Price" Width="65"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Category" Width="132"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=InStock}" Header="Is In Stock" Width="132"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Amount}" Header="Amount" Width="132"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>

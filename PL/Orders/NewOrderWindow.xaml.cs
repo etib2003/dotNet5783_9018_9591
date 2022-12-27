@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BO;
+using PL.productsWindows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,23 @@ namespace Products
     /// </summary>
     public partial class NewOrderWindow : Window
     {
+        BlApi.IBl? bl = BlApi.Factory.Get();
+        private static BO.Cart _cart = new BO.Cart() { CustomerName = null, CustomerEmail = null, CustomerAddress = null, Items = new List<BO.OrderItem>(), TotalPrice = 0 };
+
         public NewOrderWindow()
         {
             InitializeComponent();
+            CatalogListView.ItemsSource = bl?.Product.GetListProductForCatalog(_cart);
+            //selectCategory.ItemsSource = Enum.GetValues(typeof(BO.Category));
+        }
+
+        private void view_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (CatalogListView.SelectedItem is ProductItem productItem)
+            {
+                int pflId = ((ProductItem)CatalogListView.SelectedItem).Id;
+                new ProductWindow(pflId).ShowDialog();
+            }
         }
     }
 }

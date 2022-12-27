@@ -16,7 +16,8 @@ namespace OtherFunctionDal
                 if (item.GetValue(t, null) is IEnumerable<object>)
                 {
                     IEnumerable<object> listOfObjects = (IEnumerable<object>)item.GetValue(obj: t, null);
-                    str += String.Join(" ", listOfObjects);
+                    str += "\n";
+                    str += String.Join("\n", listOfObjects);
                 }
                 else
                     str += item.GetValue(t, null);
