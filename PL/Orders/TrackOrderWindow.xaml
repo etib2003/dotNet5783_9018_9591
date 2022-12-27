@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="TrackOrderWindow" Height="450" Width="800">
     <Grid>
-        
+        <Label x:Name="IdLabel" Content="Enter order id for tracking:" HorizontalAlignment="Left" Height="47" Margin="194,44,0,0" VerticalAlignment="Top" Width="324" FontSize="22" FontWeight="Bold" FontFamily="Candara"/>
+        <TextBox x:Name="IdTextBox" HorizontalAlignment="Left" Height="33" Margin="465,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" KeyDown="Enter" Width="134" FontSize="22"/>
+        <TextBlock x:Name="OrderTrackingBox" Text="{Binding}" HorizontalAlignment="Left" Height="149" TextWrapping="Wrap" VerticalAlignment="Center" Width="436" FontSize="18" Grid.ColumnSpan="2" Margin="182,0,0,0"/>
+
     </Grid>
 </Window>
