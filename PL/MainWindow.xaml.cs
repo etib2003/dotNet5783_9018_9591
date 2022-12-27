@@ -1,5 +1,7 @@
 ﻿using Managar;
+using Orders;
 using PL.productsWindows;
+using Products;
 using System.Windows;
 
 
@@ -58,6 +60,14 @@ namespace PL
             new ManagerAccessWindow().ShowDialog();
         }
 
-        
+        private void TrackingOrderButton_Click(object sender, RoutedEventArgs e)
+        {
+            new TrackOrderWindow().Show();
+        }
+
+        private void NewOrderButton_click(object sender, RoutedEventArgs e)
+        {
+            new  NewOrderWindow().Show();
+        }
     }
 }

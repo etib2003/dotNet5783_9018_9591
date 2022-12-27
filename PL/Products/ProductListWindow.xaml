@@ -38,7 +38,7 @@
             <Label x:Name="CategoryLabel" Grid.Column="1" Content="Category:" HorizontalAlignment="Left" Height="38" Margin="33,26,0,0" VerticalAlignment="Top" Width="97" FontFamily="Candara" FontSize="16"/>
         </Grid>
 
-        <ListView x:Name="ProductForListView" ItemsSource="{Binding}"  FontFamily="Candara" Foreground="Black" Margin="0,68,0,0" MouseDoubleClick="Update_MouseDoubleClick" Grid.ColumnSpan="2" Grid.RowSpan="2" FontSize="16">
+        <ListView x:Name="ProductForListView" ItemsSource="{Binding}"  FontFamily="Candara" Foreground="Black" Margin="0,68,0,0" MouseDoubleClick="Update_MouseDoubleClick" Grid.ColumnSpan="2" Grid.RowSpan="2" FontSize="16" SelectionChanged="ProductForListView_SelectionChanged">
             <ListView.Background>
                 <ImageBrush/>
             </ListView.Background>

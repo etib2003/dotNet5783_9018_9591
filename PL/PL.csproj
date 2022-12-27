@@ -24,6 +24,7 @@
     <None Remove="Products\WhatsApp Image 2022-12-14 at 13.09.14 %281%29.jpeg" />
     <None Remove="Products\WhatsApp Image 2022-12-14 at 13.09.14.jpeg" />
     <None Remove="WhatsApp Image 2022-12-14 at 13.09.14.jpeg" />
+    <None Remove="רקע בצבע עץ.jpeg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,6 +42,7 @@
     <Resource Include="Products\WhatsApp Image 2022-12-14 at 13.09.14 (1).jpeg" />
     <Resource Include="Products\WhatsApp Image 2022-12-14 at 13.09.14.jpeg" />
     <Resource Include="WhatsApp Image 2022-12-14 at 13.09.14.jpeg" />
+    <Resource Include="רקע בצבע עץ.jpeg" />
   </ItemGroup>
 
 </Project>
