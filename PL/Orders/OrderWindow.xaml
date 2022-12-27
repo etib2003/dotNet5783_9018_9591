@@ -54,7 +54,8 @@
                 </ListView.View>
             </ListView>
         </Grid>
-        <CheckBox x:Name="ShipCheck" Content="Update ship date" HorizontalAlignment="Left" Height="15" Margin="164,10,0,0" Grid.Row="7" VerticalAlignment="Top" Width="140" RenderTransformOrigin="-0.357,0.393" FontSize="10"/>
-        <CheckBox x:Name="DeliveryCheck" Content="Update delivery date" HorizontalAlignment="Left" Height="15" Margin="164,0,0,0" Grid.Row="8" VerticalAlignment="Center" Width="140" RenderTransformOrigin="-0.357,0.393" FontSize="10"/>
+        <CheckBox x:Name="ShipCheck" Content="Update ship date" IsChecked="False" Visibility="Collapsed" HorizontalAlignment="Left" Height="15" Margin="164,10,0,0" Grid.Row="7" VerticalAlignment="Top" Width="140" RenderTransformOrigin="-0.357,0.393" FontSize="10"/>
+        <CheckBox x:Name="DeliveryCheck" Content="Update delivery date" IsChecked="False" Visibility="Collapsed" HorizontalAlignment="Left" Height="15" Margin="164,0,0,0" Grid.Row="8" VerticalAlignment="Center" Width="140" RenderTransformOrigin="-0.357,0.393" FontSize="10"/>
+        <Button x:Name="o_OkButton" Content="OK" HorizontalAlignment="Left" Height="26" Margin="16,33,0,0" Grid.Row="9" VerticalAlignment="Top" Width="54" FontFamily="Candara" Grid.Column="1" FontWeight="Bold" Click="o_OkButton_Click"/>
     </Grid>
 </Window>

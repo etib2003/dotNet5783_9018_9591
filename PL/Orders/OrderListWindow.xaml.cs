@@ -35,7 +35,7 @@ namespace Orders
             {
                 int oflId = ((OrderForList)OrderForListView.SelectedItem).Id;
                 new OrderWindow(oflId).ShowDialog();
-                //רענון המסך
+                OrderForListView.ItemsSource = bl?.Order.GetOrderListForManager();//רענון המסך
             }
         }
     }

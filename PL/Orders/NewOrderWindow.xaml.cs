@@ -37,6 +37,7 @@ namespace Products
             {
                 int pflId = ((ProductItem)CatalogListView.SelectedItem).Id;
                 new ProductWindow(pflId, 1).ShowDialog();
+                //CatalogListView.ItemsSource = bl?.Product.GetListProductForCatalog(_cart);//
             }
         }
     }

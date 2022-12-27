@@ -114,7 +114,7 @@ public class NotExistInCartException : Exception
 }
 
 [Serializable]
-internal class DateHasNotUpdatedYetException : Exception
+public class DateHasNotUpdatedYetException : Exception
 {
     public DateHasNotUpdatedYetException() { }
     public DateHasNotUpdatedYetException(string? message) : base(message) { }

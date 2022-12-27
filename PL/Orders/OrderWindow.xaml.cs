@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using DocumentFormat.OpenXml.Vml.Spreadsheet;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,10 +26,30 @@ namespace Orders
         public OrderWindow(int ordLId)
         {
             InitializeComponent();
-            OrderGrid.DataContext = bl?.Order.GetOrderDetails(ordLId);
-            OrderItemGrid.DataContext = bl?.Order.GetOrderDetails(ordLId).OrderItems;
-
+            var order = bl?.Order.GetOrderDetails(ordLId);
+            OrderGrid.DataContext = order;
+            OrderItemGrid.DataContext = order.OrderItems;
+            if (order.ShipDate == null)
+                ShipCheck.Visibility = Visibility.Visible;
+            if (order.DeliveryDate == null)
+                DeliveryCheck.Visibility = Visibility.Visible;
         }
 
+        private void o_OkButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (ShipCheck.IsChecked == true)
+                    bl?.Order.UpdateOrderShip(int.Parse(IdTextBlock.Text));
+
+                if (DeliveryCheck.IsChecked == true)
+                    bl?.Order.UpdateOrderDelivery(int.Parse(IdTextBlock.Text));
+            }
+            catch(BO.DateHasNotUpdatedYetException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            this.Close();
+        }
     }
 }
