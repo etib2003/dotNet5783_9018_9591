@@ -8,7 +8,7 @@
         Title="tempraryMain" Height="450" Width="800" >
     
     <Grid>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="357*"/>
         </Grid.ColumnDefinitions>
@@ -29,8 +29,8 @@
             </Button.Resources>
         </Button>
         <Button x:Name="MWcloseButton" Content="Close" DockPanel.Dock="Top" HorizontalAlignment="Right" Margin="0,5,10,0" VerticalAlignment="Top" Width="74" Height="32" FontFamily="Candara" FontSize="16" Click="MWcloseButton_Click" Grid.Row="2"/>
-        <Image HorizontalAlignment="Left" Height="83" Margin="6,0,0,0" VerticalAlignment="Center" Width="118" Source="/LOGO.png"/>
         <Image HorizontalAlignment="Left" Height="68" Stretch="Uniform" VerticalAlignment="Top" Width="118" Source="/LOGO.png" Grid.Row="1" Margin="2,283,0,0" Grid.RowSpan="2" />
+        <Button x:Name="managerButton" Content="Log in as manager" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="32" Width="143" FontFamily="Candara" FontSize="16" Click="managerButton_Click"/>
 
     </Grid>
 </Window>

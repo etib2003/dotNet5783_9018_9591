@@ -1,0 +1,14 @@
+﻿<Window x:Class="Managar.ManagerAccessWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Managar"
+        mc:Ignorable="d"
+        Title="ManagerAccessWindow" Height="200" Width="250">
+    <Grid>
+        <TextBox x:Name="PasswordBox" HorizontalAlignment="Center" Margin="0,92,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="106" Height="22" FontFamily="Candara" KeyDown="Enter"/>
+        <Label x:Name="PasswordLabel" Content="Enter password:" HorizontalAlignment="Center" Margin="0,62,0,0" VerticalAlignment="Top" Height="25" Width="106" HorizontalContentAlignment="Center" FontSize="8"/>
+
+    </Grid>
+</Window>

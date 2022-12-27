@@ -1,4 +1,5 @@
-﻿using PL.productsWindows;
+﻿using Managar;
+using PL.productsWindows;
 using System.Windows;
 
 
@@ -51,5 +52,12 @@ namespace PL
         {
 
         }
+
+        private void managerButton_Click(object sender, RoutedEventArgs e)
+        {
+            new ManagerAccessWindow().ShowDialog();
+        }
+
+        
     }
 }
