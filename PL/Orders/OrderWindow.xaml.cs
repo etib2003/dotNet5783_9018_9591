@@ -25,6 +25,9 @@ namespace Orders
         {
             InitializeComponent();
             OrderGrid.DataContext = bl?.Order.GetOrderDetails(ordLId);
+            OrderItemGrid.DataContext = bl?.Order.GetOrderDetails(ordLId).OrderItems;
+
         }
+
     }
 }

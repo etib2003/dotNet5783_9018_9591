@@ -24,33 +24,37 @@
             <RowDefinition Height="118*"/>
         </Grid.RowDefinitions>
         <Label x:Name="OrderLabel" Content="Order Details" HorizontalAlignment="Left" Height="39" Margin="265,18,0,0" VerticalAlignment="Top" Width="270" HorizontalContentAlignment="Center" FontSize="24" FontWeight="Bold" FontFamily="Candara" Grid.ColumnSpan="2"/>
-        <Label x:Name="IdLabel" Content="Id:" HorizontalAlignment="Left" Height="30" Margin="47,0,0,0" VerticalAlignment="Center" Width="46" FontFamily="Candara" FontSize="14" Grid.Row="1" Grid.Column="0"  VerticalContentAlignment="Stretch"/>
-        <Label x:Name="CusNameLabel" Content="Customer Name:" HorizontalAlignment="Left" Height="30" Margin="47,0,0,0" VerticalAlignment="Center" Width="140" FontFamily="Candara" FontSize="14" Grid.Row="2" Grid.Column="0"  VerticalContentAlignment="Stretch"/>
-        <Label x:Name="CusEmailLabel" Content="Customer Email:" HorizontalAlignment="Left" Height="30" Margin="47,0,0,0" VerticalAlignment="Center" Width="140" FontFamily="Candara" FontSize="14" Grid.Row="3" Grid.Column="0"  VerticalContentAlignment="Stretch"/>
-        <Label x:Name="CusAddrLabel" Content="Customer Address:" HorizontalAlignment="Left" Height="30" Margin="47,0,0,0" VerticalAlignment="Center" Width="140" FontFamily="Candara" FontSize="14" Grid.Row="4" Grid.Column="0"  VerticalContentAlignment="Stretch"/>
-        <Label x:Name="StatusLabel" Content="Status:" HorizontalAlignment="Left" Height="30" Margin="47,0,0,0" VerticalAlignment="Center" Width="140" FontFamily="Candara" FontSize="14" Grid.Row="5" Grid.Column="0"  VerticalContentAlignment="Stretch"/>
-        <Label x:Name="OrderDateLabel" Content="Order Date:" HorizontalAlignment="Left" Height="30" Margin="47,32,0,0" VerticalAlignment="Top" Width="140" FontFamily="Candara" FontSize="14" Grid.Row="5" Grid.Column="0"  VerticalContentAlignment="Stretch" Grid.RowSpan="2"/>
-        <Label x:Name="OrderShipLabel" Content="Ship Date:" HorizontalAlignment="Left" Height="30" Margin="47,31,0,0" VerticalAlignment="Top" Width="140" FontFamily="Candara" FontSize="14" Grid.Row="6" Grid.Column="0"  VerticalContentAlignment="Stretch" Grid.RowSpan="2"/>
-        <Label x:Name="OrderDeliLabel" Content="Delivery Date:" HorizontalAlignment="Left" Height="30" Margin="47,31,0,0" VerticalAlignment="Top" Width="140" FontFamily="Candara" FontSize="14" Grid.Row="7" Grid.Column="0"  VerticalContentAlignment="Stretch" Grid.RowSpan="2"/>
-        <TextBlock x:Name="IdTextBlock" Text="{Binding Path=Id}" HorizontalAlignment="Left" Margin="196,0,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="150" FontFamily="Candara" Height="15"/>
-        <TextBlock x:Name="NameTextBlock" Text="{Binding Path=CustomerName}" HorizontalAlignment="Left" Margin="196,0,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="150" Height="16"/>
-        <TextBlock x:Name="EmailTextBlock" Text="{Binding Path=CustomerEmail}" HorizontalAlignment="Left" Margin="196,7,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Height="16"/>
-        <TextBlock x:Name="AddressTextBlock" Text="{Binding Path=CustomerAddress}" HorizontalAlignment="Left" Margin="196,0,0,0" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Center" Width="150" Height="16"/>
-        <TextBlock x:Name="StatusTextBlock" Text="{Binding Path=Status}" HorizontalAlignment="Left" Margin="196,7,0,0" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Height="16"/>
-        <TextBlock x:Name="OrderDateTextBlock" Text="{Binding Path=OrderDate}" HorizontalAlignment="Left" Margin="196,6,0,0" Grid.Row="6" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Height="15"/>
-        <TextBlock x:Name="ShipDateTextBlock" Text="{Binding Path=ShipDate}" HorizontalAlignment="Left" Margin="196,0,0,0" Grid.Row="7" TextWrapping="Wrap" VerticalAlignment="Center" Width="150" Height="16"/>
-        <TextBlock x:Name="DeliveryDateTextBlock" Text="{Binding Path=DeliveryDate}" HorizontalAlignment="Left" Margin="196,0,0,0" Grid.Row="8" TextWrapping="Wrap" VerticalAlignment="Center" Width="150" Height="16"/>
-        <ListView x:Name="OrderItemView" ItemsSource="{Binding}" Grid.Column="1" Grid.RowSpan="4"  FontFamily="Candara" Foreground="Black" Margin="8,9,42,8" FontSize="16" Grid.Row="1">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="Id" Width="40"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Name" Width="55"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=ProductID}" Header="Product ID" Width="80"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Price}" Header="Price" Width="55"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Amount}" Header="Amount" Width="65"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=TotalPrice}" Header="Total Price" Width="90"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <Label x:Name="IdLabel" Content="Id:" HorizontalAlignment="Left" Height="30" Margin="32,0,0,0" VerticalAlignment="Center" Width="140" FontFamily="Candara" FontSize="14" Grid.Row="1" Grid.Column="0"  VerticalContentAlignment="Stretch" FontWeight="Bold"/>
+        <Label x:Name="CusNameLabel" Content="Customer Name:" HorizontalAlignment="Left" Height="30" Margin="32,0,0,0" VerticalAlignment="Center" Width="140" FontFamily="Candara" FontSize="14" Grid.Row="2" Grid.Column="0"  VerticalContentAlignment="Stretch" FontWeight="Bold"/>
+        <Label x:Name="CusEmailLabel" Content="Customer Email:" HorizontalAlignment="Left" Height="30" Margin="32,0,0,0" VerticalAlignment="Center" Width="140" FontFamily="Candara" FontSize="14" Grid.Row="3" Grid.Column="0"  VerticalContentAlignment="Stretch" FontWeight="Bold"/>
+        <Label x:Name="CusAddrLabel" Content="Customer Address:" HorizontalAlignment="Left" Height="30" Margin="32,0,0,0" VerticalAlignment="Center" Width="140" FontFamily="Candara" FontSize="14" Grid.Row="4" Grid.Column="0"  VerticalContentAlignment="Stretch" FontWeight="Bold"/>
+        <Label x:Name="StatusLabel" Content="Status:" HorizontalAlignment="Left" Height="30" Margin="32,0,0,0" VerticalAlignment="Center" Width="140" FontFamily="Candara" FontSize="14" Grid.Row="5" Grid.Column="0" VerticalContentAlignment="Stretch" FontWeight="Bold"/>
+        <Label x:Name="OrderDateLabel" Content="Order Date:" HorizontalAlignment="Left" Height="30" Margin="32,32,0,0" VerticalAlignment="Top" Width="140" FontFamily="Candara" FontSize="14" Grid.Row="5" Grid.Column="0" VerticalContentAlignment="Stretch" Grid.RowSpan="2" FontWeight="Bold"/>
+        <Label x:Name="OrderShipLabel" Content="Ship Date:" HorizontalAlignment="Left" Height="30" Margin="32,31,0,0" VerticalAlignment="Top" Width="140" FontFamily="Candara" FontSize="14" Grid.Row="6" Grid.Column="0" VerticalContentAlignment="Stretch" Grid.RowSpan="2" FontWeight="Bold"/>
+        <Label x:Name="OrderDeliLabel" Content="Delivery Date:" HorizontalAlignment="Left" Height="30" Margin="32,31,0,0" VerticalAlignment="Top" Width="140" FontFamily="Candara" FontSize="14" Grid.Row="7" Grid.Column="0" VerticalContentAlignment="Stretch" Grid.RowSpan="2" FontWeight="Bold"/>
+        <TextBlock x:Name="IdTextBlock" Text="{Binding Path=Id}" HorizontalAlignment="Left" Margin="165,0,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="186" FontFamily="Candara" FontSize="14" Height="16"/>
+        <TextBlock x:Name="NameTextBlock" Text="{Binding Path=CustomerName}" HorizontalAlignment="Left" Margin="165,0,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
+        <TextBlock x:Name="EmailTextBlock" Text="{Binding Path=CustomerEmail}" HorizontalAlignment="Left" Margin="165,7,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
+        <TextBlock x:Name="AddressTextBlock" Text="{Binding Path=CustomerAddress}" HorizontalAlignment="Left" Margin="165,0,0,0" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Center" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
+        <TextBlock x:Name="StatusTextBlock" Text="{Binding Path=Status}" HorizontalAlignment="Left" Margin="165,7,0,0" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
+        <TextBlock x:Name="OrderDateTextBlock" Text="{Binding Path=OrderDate}" HorizontalAlignment="Left" Margin="165,6,0,0" Grid.Row="6" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
+        <TextBlock x:Name="ShipDateTextBlock" Text="{Binding Path=ShipDate}" HorizontalAlignment="Left" Margin="165,0,0,0" Grid.Row="7" TextWrapping="Wrap" VerticalAlignment="Center" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
+        <TextBlock x:Name="DeliveryDateTextBlock" Text="{Binding Path=DeliveryDate}" HorizontalAlignment="Left" Margin="165,0,0,0" Grid.Row="8" TextWrapping="Wrap" VerticalAlignment="Center" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
+        <Grid x:Name="OrderItemGrid" Grid.RowSpan="8" Grid.Column="1" Margin="10,5,10,8" Grid.Row="1">
+            <ListView x:Name="OrderItemView" ItemsSource="{Binding}"  FontFamily="Candara" Foreground="Black" Margin="10,9,22,0" FontSize="12">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="Id" Width="40"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Name" Width="70"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=ProductID}" Header="Product ID" Width="80"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Price}" Header="Price" Width="55"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Amount}" Header="Amount" Width="65"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=TotalPrice}" Header="Total Price" Width="70"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <CheckBox x:Name="ShipCheck" Content="Update ship date" HorizontalAlignment="Left" Height="15" Margin="164,10,0,0" Grid.Row="7" VerticalAlignment="Top" Width="140" RenderTransformOrigin="-0.357,0.393" FontSize="10"/>
+        <CheckBox x:Name="DeliveryCheck" Content="Update delivery date" HorizontalAlignment="Left" Height="15" Margin="164,0,0,0" Grid.Row="8" VerticalAlignment="Center" Width="140" RenderTransformOrigin="-0.357,0.393" FontSize="10"/>
     </Grid>
 </Window>
