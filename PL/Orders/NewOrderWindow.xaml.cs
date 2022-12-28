@@ -28,8 +28,7 @@ namespace Products
             InitializeComponent();
             cart= _cart;
             CatalogListView.ItemsSource = bl?.Product.GetListProductForCatalog(cart);
-
-            //selectCategory.ItemsSource = Enum.GetValues(typeof(BO.Category));
+            CategoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Category));
         }
 
         private void view_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -41,5 +40,12 @@ namespace Products
                 //CatalogListView.ItemsSource = bl?.Product.GetListProductForCatalog(_cart);//
             }
         }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            BO.Category category = (BO.Category)CategoryComboBox.SelectedItem;
+            CatalogListView.ItemsSource = bl?.Product.GetListProductForCatalog(cart,x => (BO.Category)x?.Category! == category);
+        }
+
     }
 }

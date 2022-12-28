@@ -12,10 +12,10 @@ internal class Product : BlApi.IProduct
         return doProductList.CopyPropToList<DO.Product?, BO.ProductForList>();
     }
 
-    public IEnumerable<BO.ProductItem> GetListProductForCatalog(BO.Cart cart)
+    public IEnumerable<BO.ProductItem> GetListProductForCatalog(BO.Cart cart, Func<DO.Product?, bool>? cond)
     {
         IEnumerable<DO.Product?> doProductList = dal?.Product.RequestAll()!;//gets the products from the data layer
-        IEnumerable<BO.ProductItem> doProductItemList = from product in doProductList
+        IEnumerable<BO.ProductItem> doProductItemList = from product in doProductList.Where(p => cond is null ? true : cond!(p))
                                                         let id = (int)product?.Id!
                                                         select GetProductDetailsForCustomer(id, cart);
         return doProductItemList;

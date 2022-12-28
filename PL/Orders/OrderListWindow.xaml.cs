@@ -38,5 +38,7 @@ namespace Orders
                 OrderForListView.ItemsSource = bl?.Order.GetOrderListForManager();//רענון המסך
             }
         }
+
+         
     }
 }

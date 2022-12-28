@@ -35,6 +35,14 @@ namespace Orders
                 DeliveryCheck.Visibility = Visibility.Visible;
         }
 
+        public OrderWindow(int ordLId, int different)
+        {
+            InitializeComponent();
+            var order = bl?.Order.GetOrderDetails(ordLId);
+            OrderGrid.DataContext = order;
+            OrderItemGrid.DataContext = order.OrderItems;
+        }
+
         private void o_OkButton_Click(object sender, RoutedEventArgs e)
         {
             try

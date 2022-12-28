@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -42,7 +43,22 @@ namespace Orders
             catch(BoDoesNoExistException ex)
             {
                 MessageBox.Show("No order exists with this ID!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                IdTextBox.Text = "";
             }
+        }
+
+        private void ViewOrderButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(IdTextBox.Text!="")
+            {
+                new OrderWindow(int.Parse(IdTextBox.Text), 1).Show();
+            }
+        }
+
+        private void myTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {              
+            Regex regex = new("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }
