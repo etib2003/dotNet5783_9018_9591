@@ -15,9 +15,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="background.jpg" />
     <None Remove="beth-rufener-OgqntOgPUP4-unsplash.jpg" />
     <None Remove="LOGO.png" />
     <None Remove="LOGO.png.jpg" />
+    <None Remove="Products\background.jpg" />
     <None Remove="Products\beth-rufener-OgqntOgPUP4-unsplash.jpg" />
     <None Remove="Products\depositphotos_77706562-stock-photo-musical-instruments-on-wooden-planks.jpg" />
     <None Remove="Products\sarah-dao-2zHGVCrdxHw-unsplash.jpg" />
@@ -32,10 +34,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="background.jpg" />
     <Resource Include="beth-rufener-OgqntOgPUP4-unsplash.jpg" />
     <Resource Include="LOGO.png" />
     <Resource Include="LOGO.png.jpg" />
     <Resource Include="magnus-lunay-LHR6tUw8N34-unsplash.jpg" />
+    <Resource Include="Products\background.jpg" />
     <Resource Include="Products\beth-rufener-OgqntOgPUP4-unsplash.jpg" />
     <Resource Include="Products\depositphotos_77706562-stock-photo-musical-instruments-on-wooden-planks.jpg" />
     <Resource Include="Products\sarah-dao-2zHGVCrdxHw-unsplash.jpg" />

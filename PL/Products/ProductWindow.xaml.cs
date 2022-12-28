@@ -1,5 +1,4 @@
 ﻿
-using BO;
 using DocumentFormat.OpenXml.Vml;
 using System;
 using System.Collections.Generic;
@@ -19,8 +18,7 @@ namespace PL.productsWindows
         ///Object to access the logical layer
         /// </summary>
         BlApi.IBl? bl = BlApi.Factory.Get();
-        private static BO.Cart _cart = new BO.Cart() { CustomerName = null, CustomerEmail = null, CustomerAddress = null, Items = new List<BO.OrderItem>(), TotalPrice = 0 };
-
+        BO.Cart cart;
 
         /// <summary>
         /// constructor, bruild the labels
@@ -48,9 +46,10 @@ namespace PL.productsWindows
 
         }
 
-        public ProductWindow(int prtrLId, int different)
+        public ProductWindow(int prtrLId, BO.Cart _cart)
         {
             InitializeComponent();
+            cart=_cart;
             Complete.Content = "Add to cart";
             var product= bl?.Product.GetProductDetailsForManager(prtrLId);
             ProductGrid.DataContext = product;
@@ -192,21 +191,19 @@ namespace PL.productsWindows
                 }
                 else if (Complete.Content == "Add to cart")
                 {
-                    if (AmountAddBox.Text != "0") //מומלץ לעשות שלא יוכל להכניס 0
-                    {
-                        MessageBox.Show("Adding to cart is done!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                        bl?.Cart.AddProductToCart(_cart, newPdct.Id);
+                    //if (AmountAddBox.Text != "0") //מומלץ לעשות שלא יוכל להכניס 0
+                    //{
+                        bl?.Cart.AddProductToCart(cart, newPdct.Id);
                         if (AmountAddBox.Text != "Enter amount")
-                            bl?.Cart.UpdateAmountOfProduct(_cart, newPdct.Id, int.Parse(AmountAddBox.Text));
+                            bl?.Cart.UpdateAmountOfProduct(cart, newPdct.Id, int.Parse(AmountAddBox.Text));
 
                         Console.Beep(1500, 100);
                         MessageBox.Show("Adding to cart is done!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
+                    //}
                 }
                 this.Close();
             }
-            catch (BoAlreadyExistsException ex)
+            catch (BO.BoAlreadyExistsException ex)
             {
                 MessageBox.Show("Product with this barcode already exists!\nPlease try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -253,7 +250,7 @@ namespace PL.productsWindows
 
         private void OnTextBoxLostFocus(object sender, RoutedEventArgs e)
         {
-            if(AmountAddBox.Text== "")
+            if(AmountAddBox.Text== "" || AmountAddBox.Text =="0")
                 AmountAddBox.Text = "Enter amount";
         }
     }

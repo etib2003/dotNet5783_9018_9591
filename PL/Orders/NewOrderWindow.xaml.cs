@@ -22,12 +22,13 @@ namespace Products
     public partial class NewOrderWindow : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
-        private static BO.Cart _cart = new BO.Cart() { CustomerName = null, CustomerEmail = null, CustomerAddress = null, Items = new List<BO.OrderItem>(), TotalPrice = 0 };
-
-        public NewOrderWindow()
+        BO.Cart cart;
+        public NewOrderWindow(BO.Cart _cart)
         {
             InitializeComponent();
-            CatalogListView.ItemsSource = bl?.Product.GetListProductForCatalog(_cart);
+            cart= _cart;
+            CatalogListView.ItemsSource = bl?.Product.GetListProductForCatalog(cart);
+
             //selectCategory.ItemsSource = Enum.GetValues(typeof(BO.Category));
         }
 
@@ -36,7 +37,7 @@ namespace Products
             if (CatalogListView.SelectedItem is ProductItem productItem)
             {
                 int pflId = ((ProductItem)CatalogListView.SelectedItem).Id;
-                new ProductWindow(pflId, 1).ShowDialog();
+                new ProductWindow(pflId, cart).ShowDialog();
                 //CatalogListView.ItemsSource = bl?.Product.GetListProductForCatalog(_cart);//
             }
         }

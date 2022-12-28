@@ -17,6 +17,8 @@ namespace PL
         ///Object to access the logical layer.
         /// </summary>
          BlApi.IBl? bl= BlApi.Factory.Get();
+        private static BO.Cart cart = new BO.Cart() { CustomerName = null, CustomerEmail = null, CustomerAddress = null, Items = new List<BO.OrderItem>(), TotalPrice = 0 };
+
 
         /// <summary>
         /// constructor
@@ -24,16 +26,6 @@ namespace PL
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        /// <summary>
-        /// a button to the new window-productList
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ProductButton_Click(object sender, RoutedEventArgs e)
-        {
-            new ProductListWindow().ShowDialog();
         }
 
         /// <summary>
@@ -68,7 +60,7 @@ namespace PL
 
         private void NewOrderButton_click(object sender, RoutedEventArgs e)
         {
-            new  NewOrderWindow().Show();
+            new  NewOrderWindow(cart).Show();
         }
     }
 }

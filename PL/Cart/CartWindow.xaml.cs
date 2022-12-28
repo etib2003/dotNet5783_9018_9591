@@ -19,9 +19,11 @@ namespace Cart
     /// </summary>
     public partial class CartWindow : Window
     {
-        public CartWindow()
+        BO.Cart cart;
+        public CartWindow(BO.Cart _cart)
         {
             InitializeComponent();
+            cart=_cart;
         }
     }
 }
