@@ -19,11 +19,14 @@ namespace Cart
     /// </summary>
     public partial class CartWindow : Window
     {
+        BlApi.IBl? bl = BlApi.Factory.Get();
         BO.Cart cart;
         public CartWindow(BO.Cart _cart)
         {
             InitializeComponent();
             cart=_cart;
+            CartGrid.DataContext = cart;
+            CartItemsView.ItemsSource = cart.Items;
         }
     }
 }

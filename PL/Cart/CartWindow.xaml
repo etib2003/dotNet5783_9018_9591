@@ -6,7 +6,23 @@
         xmlns:local="clr-namespace:Cart"
         mc:Ignorable="d"
         Title="CartWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid x:Name="CartGrid">
+
+        <ListView x:Name="CartItemsView" ItemsSource="{Binding}"  FontFamily="Candara" Foreground="Black" Margin="0,63,0,54" FontSize="16" >
+            <ListView.Background>
+                <ImageBrush/>
+            </ListView.Background>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=ProductID}" Header="Product ID" Width="120"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Name" Width="100"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Price}" Header="Price" Width="70"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Amount}" Header="Amount" Width="90"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=TotalPrice}" Header="Total Price" Width="100"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label x:Name="CartLabel" Content="Your Shopping Cart" HorizontalAlignment="Center" Margin="0,7,0,0" VerticalAlignment="Top" Height="51" Width="288" FontFamily="Candara" FontWeight="Bold" FontSize="30" HorizontalContentAlignment="Center"/>
+        <Label x:Name="TotalPriceLabel" Content="Total Price:" HorizontalAlignment="Left" Margin="10,389,0,0" VerticalAlignment="Top" FontFamily="Candara" FontWeight="Bold" FontSize="20" RenderTransformOrigin="0.109,0.061"/>
     </Grid>
 </Window>

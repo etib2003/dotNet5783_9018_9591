@@ -193,8 +193,8 @@ namespace PL.productsWindows
                 {
                     //if (AmountAddBox.Text != "0") //מומלץ לעשות שלא יוכל להכניס 0
                     //{
-                        bl?.Cart.AddProductToCart(cart, newPdct.Id);
-                        if (AmountAddBox.Text != "Enter amount")
+                        bl?.Cart.AddProductToCart(cart, newPdct.Id); 
+                        if (AmountAddBox.Text != "Enter amount") //יש בעיה כי אם אין מספיק במלאי הוא עדיין יעשה הוספה של אחד ותכלס זה בעיה
                             bl?.Cart.UpdateAmountOfProduct(cart, newPdct.Id, int.Parse(AmountAddBox.Text));
 
                         Console.Beep(1500, 100);

@@ -1,4 +1,5 @@
 ﻿using BO;
+using Cart;
 using PL.productsWindows;
 using System;
 using System.Collections.Generic;
@@ -37,7 +38,7 @@ namespace Products
             {
                 int pflId = ((ProductItem)CatalogListView.SelectedItem).Id;
                 new ProductWindow(pflId, cart).ShowDialog();
-                //CatalogListView.ItemsSource = bl?.Product.GetListProductForCatalog(_cart);//
+                CatalogListView.ItemsSource = bl?.Product.GetListProductForCatalog(cart);
             }
         }
 
@@ -47,5 +48,20 @@ namespace Products
             CatalogListView.ItemsSource = bl?.Product.GetListProductForCatalog(cart,x => (BO.Category)x?.Category! == category);
         }
 
+        /// <summary>
+        /// button that shows all the categories
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">the event</param>
+        private void ShowAllCategories_Click(object sender, RoutedEventArgs e)
+        {
+            CatalogListView.ItemsSource = bl?.Product.GetListProductForCatalog(cart);
+            CategoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Category));
+        }
+
+        private void CartButton_Click(object sender, RoutedEventArgs e)
+        {
+            new CartWindow(cart).Show();
+        }
     }
 }
