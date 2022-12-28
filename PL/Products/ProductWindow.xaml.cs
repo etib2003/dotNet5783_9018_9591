@@ -194,6 +194,8 @@ namespace PL.productsWindows
                 {
                     if (AmountAddBox.Text != "0") //מומלץ לעשות שלא יוכל להכניס 0
                     {
+                        MessageBox.Show("Adding to cart is done!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+
                         bl?.Cart.AddProductToCart(_cart, newPdct.Id);
                         if (AmountAddBox.Text != "Enter amount")
                             bl?.Cart.UpdateAmountOfProduct(_cart, newPdct.Id, int.Parse(AmountAddBox.Text));
@@ -245,12 +247,14 @@ namespace PL.productsWindows
 
         private void OnTextBoxGotFocus(object sender, RoutedEventArgs e)
         {
-            //AmountAddBox.Text = "";
+            if (AmountAddBox.Text == "Enter amount")
+                AmountAddBox.Text = "";
         }
 
         private void OnTextBoxLostFocus(object sender, RoutedEventArgs e)
         {
-            //AmountAddBox.Text = "Enter amount";
+            if(AmountAddBox.Text== "")
+                AmountAddBox.Text = "Enter amount";
         }
     }
 }
