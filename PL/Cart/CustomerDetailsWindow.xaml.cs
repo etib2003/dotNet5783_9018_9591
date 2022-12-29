@@ -30,7 +30,7 @@ namespace Cart
 
         private void endOrderbutton_Click(object sender, RoutedEventArgs e)
         {
-            
+            new CompleteWindow(cart).Show();
         }
         private void  GotFocus(object sender, RoutedEventArgs e)
         {

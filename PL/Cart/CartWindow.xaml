@@ -1,4 +1,4 @@
-﻿<Window x:Class="Cart.CartWindow"
+﻿<Window x:Class="Cart.CartWindow" Style="{StaticResource {x:Type Window}}"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,8 +7,12 @@
         mc:Ignorable="d"
         Title="CartWindow" Height="450" Width="800">
     <Grid x:Name="CartGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="361*"/>
+            <RowDefinition Height="73*"/>
+        </Grid.RowDefinitions>
 
-        <ListView x:Name="CartItemsView" ItemsSource="{Binding}"  FontFamily="Candara" Foreground="Black" Margin="0,63,0,54" FontSize="16" >
+        <ListView x:Name="CartItemsView" ItemsSource="{Binding}"  FontFamily="Candara" Foreground="Black" Margin="0,63,0,2" FontSize="16" >
             <ListView.Background>
                 <ImageBrush/>
             </ListView.Background>
@@ -23,7 +27,7 @@
             </ListView.View>
         </ListView>
         <Label x:Name="CartLabel" Content="Your Shopping Cart" HorizontalAlignment="Center" Margin="0,7,0,0" VerticalAlignment="Top" Height="51" Width="288" FontFamily="Candara" FontWeight="Bold" FontSize="30" HorizontalContentAlignment="Center"/>
-        <Label x:Name="TotalPriceLabel" Content="Total Price:" HorizontalAlignment="Left" Margin="10,389,0,0" VerticalAlignment="Top" FontFamily="Candara" FontWeight="Bold" FontSize="20" RenderTransformOrigin="0.109,0.061"/>
-        <Button x:Name="ContToPayButton" Content="Proceed to Payment" HorizontalAlignment="Center" Margin="0,395,0,0" VerticalAlignment="Top" Click="ContToPayButton_Click" FontFamily="Candara" FontWeight="Bold" FontSize="20"/>
+        <Label x:Name="TotalPriceLabel" Content="Total Price:" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" FontFamily="Candara" FontWeight="Bold" FontSize="20" RenderTransformOrigin="0.109,0.061" Grid.Row="1" Height="34" Width="105"/>
+        <Button x:Name="ContToPayButton" Content="Proceed to Payment" HorizontalAlignment="Center" Margin="0,13,0,0" VerticalAlignment="Top" Click="ContToPayButton_Click" FontFamily="Candara" FontWeight="Bold" FontSize="20" Grid.Row="1" Height="28" Width="178"/>
     </Grid>
 </Window>

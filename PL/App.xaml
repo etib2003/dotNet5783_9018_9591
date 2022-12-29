@@ -4,5 +4,32 @@
              xmlns:local="clr-namespace:PL"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <ResourceDictionary>
+            <ImageBrush x:Key="WindowBackgroundImage" ImageSource="/background.jpg" />
+            <Style TargetType="Window">
+                <Setter Property="Background" Value="{StaticResource WindowBackgroundImage}"/>
+                <Setter Property="FontFamily" Value="Candara"/>
+            </Style>
+            <!--<SolidColorBrush x:Key="TextBlockForegroundBrush" Color="White"/>
+            <Style TargetType="TextBlock">
+                <Setter Property="Foreground" Value="{StaticResource TextBlockForegroundBrush}"/>
+            </Style>-->
+            <SolidColorBrush x:Key="ButtonForegroundBrush" Color="Black"/>
+            <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="White"/>
+            <Style TargetType="Button">
+                <Setter Property="Foreground" Value="{StaticResource ButtonForegroundBrush}"/>
+                <Setter Property="Background" Value="{StaticResource ButtonBackgroundBrush}"/>
+            </Style>
+            <SolidColorBrush x:Key="LabelForegroundBrush" Color="White"/>
+            <Style TargetType="Label">
+                <Setter Property="Foreground" Value="{StaticResource LabelForegroundBrush}"/>
+            </Style>
+            <SolidColorBrush x:Key="ListViewForegroundBrush" Color="White"/>
+            <Style TargetType="ListView">
+                <Setter Property="Foreground" Value="{StaticResource ListViewForegroundBrush}"/>
+            </Style>
+            
+        </ResourceDictionary>
+        
     </Application.Resources>
 </Application>

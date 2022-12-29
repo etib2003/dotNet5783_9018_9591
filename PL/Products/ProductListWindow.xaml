@@ -1,4 +1,4 @@
-﻿<Window x:Class="PL.productsWindows.ProductListWindow"
+﻿<Window x:Class="PL.productsWindows.ProductListWindow" Style="{StaticResource {x:Type Window}}"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="ProductListWindow" Height="450" Width="800">
     <Grid Name="MainGrid">
-        <Grid.Background>
+        <!--<Grid.Background>
             <ImageBrush ImageSource="/Products/depositphotos_77706562-stock-photo-musical-instruments-on-wooden-planks.jpg" Opacity="0.8"/>
-        </Grid.Background>
+        </Grid.Background>-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="399*"/>
             <ColumnDefinition Width="401*"/>
