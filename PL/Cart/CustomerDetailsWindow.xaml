@@ -1,0 +1,39 @@
+﻿<Window x:Class="Cart.CustomerDetailsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cart"
+        mc:Ignorable="d"
+        Title="CustomerDetailsWindow" Height="300" Width="450">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250*"/>
+            <ColumnDefinition Width="250*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="57*"/>
+            <RowDefinition Height="26*"/>
+            <RowDefinition Height="26*"/>
+            <RowDefinition Height="26*"/>
+            <RowDefinition Height="26*"/>
+            <RowDefinition Height="26*"/>
+            <RowDefinition Height="26*"/>
+            <RowDefinition Height="69*"/>
+        </Grid.RowDefinitions>
+        <Label x:Name="NameLabel" Content="Name:" HorizontalAlignment="Left" Height="27" Grid.Row="1" Width="117" FontFamily="Candara" VerticalAlignment="Center" Margin="72,0,0,0"/>
+        <Label x:Name="EmailLabel" Content="Email:" HorizontalAlignment="Left" Height="27" Grid.Row="2" VerticalAlignment="Center" Width="117" FontFamily="Candara" Margin="72,0,0,0"/>
+        <Label x:Name="AddressLabel" Content="Address:" HorizontalAlignment="Left" Height="27" Grid.Row="3" VerticalAlignment="Center" Width="117" FontFamily="Candara" Margin="72,0,0,0"/>
+        <Label x:Name="CardNumLabel" Content="Credit card number:" HorizontalAlignment="Left" Height="27" Grid.Row="4" VerticalAlignment="Center" Width="117" FontFamily="Candara" Margin="72,0,0,0"/>
+        <Label x:Name="CvvLabel" Content="CVV:" HorizontalAlignment="Left" Height="27" Grid.Row="5" VerticalAlignment="Center" Width="117" FontFamily="Candara" Margin="72,0,0,0"/>
+        <Label x:Name="ValidityLabel" Content="Card validity:" HorizontalAlignment="Left" Height="27" Grid.Row="6" VerticalAlignment="Center" Width="117" FontFamily="Candara" Margin="72,0,0,0"/>
+        <TextBox x:Name="NameTB" Grid.Column="1" HorizontalAlignment="Left" Height="20" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="133" Margin="11,0,0,0" FontFamily="Candara"/>
+        <TextBox x:Name="EmailTB" Grid.Column="1" HorizontalAlignment="Left" Height="20" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="133" Margin="11,0,0,0" FontFamily="Candara"/>
+        <TextBox x:Name="AddressTB" Grid.Column="1" HorizontalAlignment="Left" Height="20" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Center" Width="133" Margin="11,0,0,0" FontFamily="Candara"/>
+        <TextBox x:Name="CardNumberTB" Grid.Column="1" HorizontalAlignment="Left" Height="20" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Center" Width="133" Margin="11,0,0,0" FontFamily="Candara"/>
+        <TextBox x:Name="CvvTB" Grid.Column="1" HorizontalAlignment="Left" Height="20" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Center" Width="133" Margin="11,0,0,0" FontFamily="Candara"/>
+        <TextBox x:Name="ValidityTB" Grid.Column="1" HorizontalAlignment="Left" Height="20" Grid.Row="6" TextWrapping="Wrap" VerticalAlignment="Center" Width="133" Margin="11,0,0,0" FontFamily="Candara"/>
+        <Label x:Name="DetailLabel" Content="Customer Details" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="26" Margin="161,21,0,0" VerticalAlignment="Top" Width="128" HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="14" FontFamily="Candara"/>
+
+    </Grid>
+</Window>

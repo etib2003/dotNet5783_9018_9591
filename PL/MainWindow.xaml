@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="tempraryMain" Height="450" Width="800" >
 
-    <Grid Margin="1,0,-1,0">
+    <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/background.jpg"/>
         </Grid.Background>
