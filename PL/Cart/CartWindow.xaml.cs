@@ -28,5 +28,10 @@ namespace Cart
             CartGrid.DataContext = cart;
             CartItemsView.ItemsSource = cart.Items;
         }
+
+        private void ContToPayButton_Click(object sender, RoutedEventArgs e)
+        {
+            new CustomerDetailsWindow(cart).Show();
+        }
     }
 }
