@@ -253,5 +253,6 @@ namespace PL.productsWindows
             if(AmountAddBox.Text== "" || AmountAddBox.Text =="0")
                 AmountAddBox.Text = "Enter amount";
         }
+ 
     }
 }

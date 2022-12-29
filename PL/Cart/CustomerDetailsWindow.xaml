@@ -34,6 +34,14 @@
         <TextBox x:Name="CvvTB" Grid.Column="1" HorizontalAlignment="Left" Height="20" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Center" Width="133" Margin="11,0,0,0" FontFamily="Candara"/>
         <TextBox x:Name="ValidityTB" Grid.Column="1" HorizontalAlignment="Left" Height="20" Grid.Row="6" TextWrapping="Wrap" VerticalAlignment="Center" Width="133" Margin="11,0,0,0" FontFamily="Candara"/>
         <Label x:Name="DetailLabel" Content="Customer Details" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="26" Margin="161,21,0,0" VerticalAlignment="Top" Width="128" HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="14" FontFamily="Candara"/>
+        <Button x:Name="endOrderbutton" Content="Press to complete order payment" HorizontalAlignment="Left" Margin="140,0,0,0" Grid.Row="7" VerticalAlignment="Center" Grid.ColumnSpan="2" FontFamily="Candara" FontWeight="Bold" FontSize="14" Click="endOrderbutton_Click"/>
+        <Label x:Name="OptionalLabel" Content="*Optional" HorizontalAlignment="Left" Margin="19,0,0,0" VerticalAlignment="Center" Grid.Row="2" Foreground="Red" FontFamily="Candara" FontSize="8"/>
+        <Label x:Name="NoName" Grid.Column="1" Content="*Please enter details" HorizontalAlignment="Left" Margin="144,6,0,0" VerticalAlignment="Top" Height="24" Width="88" FontFamily="Candara" Foreground="Red" FontSize="7" Grid.Row="1" Grid.RowSpan="2" LostFocus="LoseFocus"/>
+        <Label x:Name="NoAddress" Grid.Column="1" Content="*Please enter details" HorizontalAlignment="Left" Margin="144,0,0,0" VerticalAlignment="Center" Height="24" Width="88" FontFamily="Candara" Foreground="Red" FontSize="7" Grid.Row="3"/>
+        <Label x:Name="NoCardNumber" Grid.Column="1" Content="*Please enter details" HorizontalAlignment="Left" Margin="144,3,0,0" VerticalAlignment="Top" Height="24" Width="88" FontFamily="Candara" Foreground="Red" FontSize="7" Grid.Row="4" Grid.RowSpan="2"/>
+        <Label x:Name="NoCvv" Grid.Column="1" Content="*Please enter details" HorizontalAlignment="Left" Margin="144,0,0,0" VerticalAlignment="Center" Height="24" Width="88" FontFamily="Candara" Foreground="Red" FontSize="7" Grid.Row="5"/>
+        <Label x:Name="NoValidity" Grid.Column="1" Content="*Please enter details" HorizontalAlignment="Left" Margin="144,4,0,0" VerticalAlignment="Top" Height="24" Width="88" FontFamily="Candara" Foreground="Red" FontSize="7" Grid.Row="6" Grid.RowSpan="2" RenderTransformOrigin="0.542,5.679"/>
+
 
     </Grid>
 </Window>
