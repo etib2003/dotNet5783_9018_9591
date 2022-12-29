@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="tempraryMain" Height="450" Width="800" >
 
-    <Grid>
+    <Grid RenderTransformOrigin="0.419,0.483">
         <Grid.Background>
             <ImageBrush ImageSource="/background.jpg"/>
         </Grid.Background>
@@ -26,6 +26,22 @@
         <Button x:Name="managerButton" Content="Log in as manager" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="32" Width="143" FontFamily="Candara" FontSize="16" Click="managerButton_Click" Background="White" FontWeight="Bold"/>
         <Button x:Name="TrackingOrderButton" Content="Track your order" HorizontalAlignment="Left" Margin="143,237,0,0" Grid.Row="1" VerticalAlignment="Top" FontFamily="Candara" Height="56" Width="192" Click="TrackingOrderButton_Click" FontSize="20" Background="White" FontWeight="Bold"/>
         <Button x:Name="NewOrderButton" Content="Create a new order" HorizontalAlignment="Left" Margin="463,237,0,0" Grid.Row="1" VerticalAlignment="Top" Click="NewOrderButton_click" FontSize="20" FontFamily="Candara" Height="56" Width="192" FontWeight="Bold" Background="White"/>
+        <TextBlock x:Name="AboutusBox" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="MV Boli" Foreground="#FFFCF6F6" FontWeight="Bold" FontSize="22" Height="224" Width="706" RenderTransformOrigin="0.5,0.5" Margin="0,1,0,0" TextWrapping="Wrap" Grid.Row="1">
+          About Us:
+                            
+            
+            
+            harmony is a boutique store since 2203
+            
+  offering a variety of quality musical instruments.
+On the website you can see the selection and purchase the right musical instrument for you.
+You can contact us at harmony@gmail.com
+  Have a pleasant shopping experience."
+
+
+        </TextBlock>
+
+
 
     </Grid>
 </Window>
