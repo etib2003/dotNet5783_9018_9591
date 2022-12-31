@@ -1,6 +1,10 @@
 ﻿
  using BO;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -13,16 +17,38 @@ namespace PL.productsWindows
     {
         //Object to access the logical layer
         BlApi.IBl? bl = BlApi.Factory.Get();
+
+       public ObservableCollection<ProductForList> ProductsForList { set; get; }
+        public Array Categories { set; get; }
+
+        private int selectedIndex;
+
+
         /// <summary>
         /// get the list of products from the logical layer:
         /// </summary>
         public ProductListWindow()
         {
-            InitializeComponent();        
-            ProductForListView.ItemsSource = bl?.Product.GetListProductForManagerAndCatalog();
-            selectCategory.ItemsSource = Enum.GetValues(typeof(BO.Category));
+            ProductsForList = new ObservableCollection<ProductForList>(bl?.Product.GetListProductForManagerAndCatalog());
+            Categories = Enum.GetValues(typeof(BO.Category));
 
+            DataContext = this; 
+            InitializeComponent();           
         }
+
+        private void addProductForList(int productId)
+        {
+            try
+            {
+                ProductsForList.Add(bl.Product.GetProductForList(productId));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            
+        }
+
         /// <summary>
         ///  comboBox for choosing the wanted category of a product
         /// </summary>
@@ -31,7 +57,17 @@ namespace PL.productsWindows
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             BO.Category category = (BO.Category)selectCategory.SelectedItem;
-            ProductForListView.ItemsSource = bl?.Product.GetListProductForManagerAndCatalogByCond(x => x.Category == category);
+            IEnumerable<ProductForList> objects = bl?.Product.GetProductForListByCond(ProductsForList, product => product.Category == category);
+            if (objects.Any())
+            {
+                ProductsForList.Clear();
+                foreach (var item in objects)
+                {
+                    ProductsForList.Add(item);
+                }
+            }
+           
+
         }
 
         /// <summary>
@@ -41,8 +77,8 @@ namespace PL.productsWindows
         /// <param name="e">the event</param>
         private void ShowAllCategories_Click(object sender, RoutedEventArgs e)
         {
-            ProductForListView.ItemsSource = bl?.Product.GetListProductForManagerAndCatalog();
-            selectCategory.ItemsSource = Enum.GetValues(typeof(BO.Category));
+            ProductsForList = new ObservableCollection<ProductForList>(bl?.Product.GetListProductForManagerAndCatalog());
+
         }
 
         /// <summary>
@@ -54,9 +90,10 @@ namespace PL.productsWindows
         {
             if (ProductForListView.SelectedItem is ProductForList productForList)
             {
+                selectedIndex = ProductForListView.SelectedIndex;
                 int pflId = ((ProductForList)ProductForListView.SelectedItem).Id;
-                new ProductWindow(pflId).ShowDialog();
-                ShowAllCategories_Click(sender, e);
+                new ProductWindow(pflId, (productId) => ProductsForList[selectedIndex] = bl.Product.GetProductForList(productId)).Show();
+                //ShowAllCategories_Click(sender, e);
             }           
         }
 
@@ -67,8 +104,8 @@ namespace PL.productsWindows
         /// <param name="e">the event</param>
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            new ProductWindow().ShowDialog();
-            ShowAllCategories_Click(sender,e);
+            new ProductWindow(addProductForList).Show();
+            //ShowAllCategories_Click(sender,e);
         }
 
         /// <summary>

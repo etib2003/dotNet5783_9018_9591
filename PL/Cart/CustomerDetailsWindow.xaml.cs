@@ -28,11 +28,16 @@ namespace Cart
             InitializeComponent();
         }
 
-        private void endOrderbutton_Click(object sender, RoutedEventArgs e)
+        private void endOrderbutton_Click(object sender, RoutedEventArgs e) //להוסיף בדיקות שנכנס משהו!
         {
+            cart.CustomerName = NameTB.Text;
+            cart.CustomerAddress = AddressTB.Text;
+            if (EmailTB.Text != null || EmailTB.Text != "")
+                cart.CustomerEmail = EmailTB.Text;
+            bl?.Cart.CommitOrder(cart);
             new CompleteWindow(cart).Show();
         }
-        private void  GotFocus(object sender, RoutedEventArgs e)
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             if (e.Source == NameTB)
                 NoName.Visibility = Visibility.Hidden;
@@ -46,10 +51,8 @@ namespace Cart
                 NoValidity.Visibility = Visibility.Hidden;
         }
 
-        private void LoseFocus(object sender, RoutedEventArgs e)
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-
-
             if (e.Source ==  NameTB && string.IsNullOrEmpty(NameTB.Text))
                 NoName.Visibility = Visibility.Visible;
             if (e.Source == AddressTB && string.IsNullOrEmpty(AddressTB.Text))

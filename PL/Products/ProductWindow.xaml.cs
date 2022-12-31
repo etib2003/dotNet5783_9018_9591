@@ -19,43 +19,50 @@ namespace PL.productsWindows
         /// </summary>
         BlApi.IBl? bl = BlApi.Factory.Get();
         BO.Cart cart;
+        public BO.Product NewPdct { get; set; }
 
+        private Action<int> action;
         /// <summary>
         /// constructor, bruild the labels
         /// </summary>
-        public ProductWindow()
+        public ProductWindow(Action<int> action) 
         {
+            this.action = action;
+            NewPdct = new BO.Product();
+            DataContext = this;
             InitializeComponent();
             CategoryCB.ItemsSource = Enum.GetValues(typeof(BO.Category));
             Complete.Content = "Add";
-  
         }
 
         /// <summary>
         /// get the wanted product from the logical layer and put its detailes in the boxes
         /// </summary>
         /// <param name="prtrLId">id of a product</param>
-        public ProductWindow(int prtrLId)
+        public ProductWindow(int prtrLId, Action<int> action) 
         {
+            this.action = action;
+            NewPdct = bl?.Product.GetProductDetailsForManager(prtrLId);
+            DataContext = this;
             InitializeComponent();
             CategoryCB.ItemsSource = Enum.GetValues(typeof(BO.Category));
             Complete.Content = "Update";
             deleteButton.Visibility = Visibility.Visible;
-            ProductGrid.DataContext = bl?.Product.GetProductDetailsForManager(prtrLId);
             IdBox.IsReadOnly = true;
 
         }
 
         public ProductWindow(int prtrLId, BO.Cart _cart)
         {
+           
+            NewPdct = bl?.Product.GetProductDetailsForManager(prtrLId);
+            DataContext = this;
             InitializeComponent();
-            cart=_cart;
             Complete.Content = "Add to cart";
-            var product= bl?.Product.GetProductDetailsForManager(prtrLId);
-            ProductGrid.DataContext = product;
+            cart = _cart;
             CategoryCB.Visibility = Visibility.Collapsed;
             CategoryBox.Visibility = Visibility.Visible;
-            CategoryBox.Text = product!.Category.ToString();
+            CategoryBox.Text = NewPdct!.Category.ToString();
             IdBox.IsReadOnly = true;
             NameBox.IsReadOnly = true;
             PriceBox.IsReadOnly = true;
@@ -176,28 +183,29 @@ namespace PL.productsWindows
                 priceEmptyLabel.Visibility = Visibility.Hidden;
                 inStockEmptyLabel.Visibility = Visibility.Hidden;
 
-                BO.Product newPdct = new BO.Product() { Id = int.Parse(IdBox.Text), Name = NameBox.Text, Price = double.Parse(PriceBox.Text), Category = (BO.Category)Enum.Parse(typeof(BO.Category), CategoryCB.Text), InStock = int.Parse(InStockBox.Text) };
+                //BO.Product newPdct = new BO.Product() { Id = int.Parse(IdBox.Text), Name = NameBox.Text, Price = double.Parse(PriceBox.Text), Category = (BO.Category)Enum.Parse(typeof(BO.Category), CategoryCB.Text), InStock = int.Parse(InStockBox.Text) };
                 if (Complete.Content == "Add")
                 {
-                    bl?.Product.AddProduct(newPdct);
-                    Console.Beep(1500, 100);
+                    bl?.Product.AddProduct(NewPdct);
+                    action(NewPdct.Id);
                     MessageBox.Show("Adding is done!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else if (Complete.Content == "Update")
                 {
-                    bl?.Product.UpdateProduct(newPdct);
-                    Console.Beep(1500, 100);
+                    bl?.Product.UpdateProduct(NewPdct);
+                    action(NewPdct.Id);
+                    
                     MessageBox.Show("Updating is done!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else if (Complete.Content == "Add to cart")
                 {
                     //if (AmountAddBox.Text != "0") //מומלץ לעשות שלא יוכל להכניס 0
                     //{
-                        bl?.Cart.AddProductToCart(cart, newPdct.Id); 
+                        bl?.Cart.AddProductToCart(cart, NewPdct.Id); 
                         if (AmountAddBox.Text != "Enter amount") //יש בעיה כי אם אין מספיק במלאי הוא עדיין יעשה הוספה של אחד ותכלס זה בעיה
-                            bl?.Cart.UpdateAmountOfProduct(cart, newPdct.Id, int.Parse(AmountAddBox.Text));
+                            bl?.Cart.UpdateAmountOfProduct(cart, NewPdct.Id, int.Parse(AmountAddBox.Text));
 
-                        Console.Beep(1500, 100);
+                       
                         MessageBox.Show("Adding to cart is done!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                     //}
                 }

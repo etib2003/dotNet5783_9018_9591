@@ -28,7 +28,7 @@
         <Button x:Name="NewOrderButton" Content="Create a new order" HorizontalAlignment="Left" Margin="463,245,0,0" Grid.Row="1" VerticalAlignment="Top" Click="NewOrderButton_click" FontSize="20" FontFamily="Candara" Height="45" Width="192" FontWeight="Bold" Background="White"/>
         <TextBlock x:Name="AboutusBox" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="MV Boli" Foreground="#FFFCF6F6" FontWeight="Bold" FontSize="20" Height="224" Width="706" TextWrapping="Wrap" Grid.Row="1">
         About Us: <LineBreak />
-        harmony is a boutique store since 2203           
+        harmony is a boutique store since 2022           
         offering a variety of quality musical instruments.<LineBreak />
         On the website you can see the selection and purchase the right musical instrument for you.<LineBreak />
         You can contact us at harmony@gmail.com <LineBreak />

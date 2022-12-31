@@ -6,7 +6,14 @@
         xmlns:local="clr-namespace:Cart"
         mc:Ignorable="d"
         Title="CompleteWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid x:Name="completeGrid">
+        <Label Content="Thank you for buying HARMONY" HorizontalAlignment="Center" Height="38" Margin="0,55,0,0" VerticalAlignment="Top" Width="332" FontFamily="Eras ITC" HorizontalContentAlignment="Center" FontSize="20" FontWeight="Bold"/>
+        <Label Content="Your Order Details:" HorizontalAlignment="Center" Height="32" Margin="0,95,0,0" VerticalAlignment="Top" Width="176" HorizontalContentAlignment="Center" FontFamily="Segoe UI Variable Display Semibold" FontSize="20" FontWeight="Bold"/>
+        <Label Content="{Binding Path=CustomerName}" HorizontalAlignment="Center" Height="30" Margin="0,140,0,0" VerticalAlignment="Top" Width="158" HorizontalContentAlignment="Center" FontFamily="Candara" FontSize="18"/>
+        <Label Content="{Binding Path=CustomerEmail}" HorizontalAlignment="Center" Height="30" VerticalAlignment="Top" Width="158" HorizontalContentAlignment="Center" FontFamily="Candara" FontSize="18" Margin="0,175,0,0"/>
+        <Label Content="{Binding Path=CustomerAddress}" HorizontalAlignment="Center" Height="30" VerticalAlignment="Top" Width="158" HorizontalContentAlignment="Center" FontFamily="Candara" FontSize="18" Margin="0,210,0,0"/>
+        <Label Content="{Binding Path=TotalPrice}" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="79" FontFamily="Candara" FontSize="18" Margin="408,245,0,0"/>
+        <Label Content="Total price:" HorizontalAlignment="Left" Height="30" Margin="312,245,0,0" VerticalAlignment="Top" Width="96" FontSize="18" FontFamily="Candara"/>
+
     </Grid>
 </Window>

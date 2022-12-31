@@ -24,21 +24,14 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <ComboBox x:Name ="selectCategory" Grid.Column="1" RenderTransformOrigin="-0.297,0.143" SelectionChanged="ComboBox_SelectionChanged" Margin="112,26,54,23" FontFamily="Candara" FontSize="14">
-                <ComboBox.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleY="1"/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </ComboBox.RenderTransform>
+            <ComboBox x:Name ="selectCategory" ItemsSource="{Binding Categories}" Grid.Column="1" RenderTransformOrigin="-0.297,0.143" SelectionChanged="ComboBox_SelectionChanged" Margin="112,26,54,23" FontFamily="Candara" FontSize="14">
+               
             </ComboBox>
             <Label x:Name="ProuctsLabel" Content="Our products" Grid.Column="0" RenderTransformOrigin="4.721,1.674" Margin="110,18,110,10" FontSize="26" FontFamily="Candara" FontWeight="Bold" HorizontalContentAlignment="Center" />
             <Label x:Name="CategoryLabel" Grid.Column="1" Content="Category:" HorizontalAlignment="Left" Height="38" Margin="33,26,0,0" VerticalAlignment="Top" Width="97" FontFamily="Candara" FontSize="16"/>
         </Grid>
 
-        <ListView x:Name="ProductForListView" ItemsSource="{Binding}"  FontFamily="Candara" Foreground="Black" Margin="0,68,0,0" MouseDoubleClick="Update_MouseDoubleClick" Grid.ColumnSpan="2" Grid.RowSpan="2" FontSize="16" >
+        <ListView x:Name="ProductForListView" ItemsSource="{Binding ProductsForList}"  FontFamily="Candara" Foreground="Black" Margin="0,68,0,0" MouseDoubleClick="Update_MouseDoubleClick" Grid.ColumnSpan="2" Grid.RowSpan="2" FontSize="16" >
             <ListView.Background>
                 <ImageBrush/>
             </ListView.Background>
@@ -51,6 +44,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        
         <Button x:Name="ShowAllCategories" HorizontalAlignment="Left" Margin="349,41,0,0" VerticalAlignment="Top" FontFamily="Candara" FontSize="24" Width="29" Click="ShowAllCategories_Click" FontWeight="Bold" Height="28" Content="↻" Grid.Column="1" RenderTransformOrigin="1.333,0.416" BorderThickness="0,0,0,0" Background="{x:Null}">
             <Button.RenderTransform>
                 <TransformGroup>

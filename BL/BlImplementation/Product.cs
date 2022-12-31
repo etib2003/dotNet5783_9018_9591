@@ -21,10 +21,6 @@ internal class Product : BlApi.IProduct
         return doProductItemList;
     }
 
-    public IEnumerable<BO.ProductForList> GetListProductForManagerAndCatalogByCond(Func<ProductForList?, bool>? cond)
-    {
-        return GetListProductForManagerAndCatalog().Where(cond!);
-    }
 
     public BO.Product GetProductDetailsForManager(int productId)
     {
@@ -122,5 +118,11 @@ internal class Product : BlApi.IProduct
         else
             throw new NotValidDeleteException("product Already In Order Prosses");//exception
     }
+
+    public IEnumerable<ProductForList> GetProductForListByCond(IEnumerable<ProductForList> productForLists, Func<ProductForList?, bool>? cond)
+       => productForLists.Where(cond);
+
+    public ProductForList GetProductForList(int productId)
+    => dal.Product.GetById(productId).CopyPropTo(new ProductForList());
 }
 

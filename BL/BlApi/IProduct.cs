@@ -15,6 +15,8 @@ public interface IProduct
     /// <returns>list of products</returns>
     public IEnumerable<BO.ProductForList?> GetListProductForManagerAndCatalog();
 
+    public ProductForList GetProductForList(int productId);
+
     public IEnumerable<BO.ProductItem> GetListProductForCatalog(BO.Cart cart, Func<DO.Product?, bool>? cond=null);
 
     /// <summary>
@@ -22,9 +24,8 @@ public interface IProduct
     /// </summary>
     /// <param name="cond">the condition according to which a list is returned</param>
     /// <returns>a list by condition</returns>
-    public IEnumerable<BO.ProductForList> GetListProductForManagerAndCatalogByCond(Func<ProductForList?, bool>? cond);
 
-
+    public IEnumerable<BO.ProductForList> GetProductForListByCond(IEnumerable<BO.ProductForList> productForLists, Func<ProductForList?, bool>? cond);
     /// <summary>
     /// Gets a product's details for the manager
     /// </summary>

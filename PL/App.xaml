@@ -5,15 +5,20 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
+            <!--<ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>-->
+
+
+
             <ImageBrush x:Key="WindowBackgroundImage" ImageSource="/background.jpg" />
             <Style TargetType="Window">
                 <Setter Property="Background" Value="{StaticResource WindowBackgroundImage}"/>
                 <Setter Property="FontFamily" Value="Candara"/>
             </Style>
-            <!--<SolidColorBrush x:Key="TextBlockForegroundBrush" Color="White"/>
-            <Style TargetType="TextBlock">
-                <Setter Property="Foreground" Value="{StaticResource TextBlockForegroundBrush}"/>
-            </Style>-->
             <SolidColorBrush x:Key="ButtonForegroundBrush" Color="Black"/>
             <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="White"/>
             <Style TargetType="Button">
@@ -27,6 +32,9 @@
             <SolidColorBrush x:Key="ListViewForegroundBrush" Color="White"/>
             <Style TargetType="ListView">
                 <Setter Property="Foreground" Value="{StaticResource ListViewForegroundBrush}"/>
+            </Style>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="4"/>
             </Style>
             
         </ResourceDictionary>
