@@ -29,7 +29,7 @@ namespace PL.productsWindows
         {
             this.action = action;
             NewPdct = new BO.Product();
-            DataContext = this;
+            //DataContext = this;
             InitializeComponent();
             CategoryCB.ItemsSource = Enum.GetValues(typeof(BO.Category));
             Complete.Content = "Add";
@@ -43,7 +43,7 @@ namespace PL.productsWindows
         {
             this.action = action;
             NewPdct = bl?.Product.GetProductDetailsForManager(prtrLId);
-            DataContext = this;
+            //DataContext = this;
             InitializeComponent();
             CategoryCB.ItemsSource = Enum.GetValues(typeof(BO.Category));
             Complete.Content = "Update";
@@ -52,11 +52,11 @@ namespace PL.productsWindows
 
         }
 
-        public ProductWindow(int prtrLId, BO.Cart _cart)
+        public ProductWindow(int prtrLId, BO.Cart _cart, Action<int> action)
         {
-           
+            this.action = action;
             NewPdct = bl?.Product.GetProductDetailsForManager(prtrLId);
-            DataContext = this;
+           // DataContext = this;
             InitializeComponent();
             Complete.Content = "Add to cart";
             cart = _cart;
@@ -205,8 +205,8 @@ namespace PL.productsWindows
                         if (AmountAddBox.Text != "Enter amount") //יש בעיה כי אם אין מספיק במלאי הוא עדיין יעשה הוספה של אחד ותכלס זה בעיה
                             bl?.Cart.UpdateAmountOfProduct(cart, NewPdct.Id, int.Parse(AmountAddBox.Text));
 
-                       
-                        MessageBox.Show("Adding to cart is done!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                    action(NewPdct.Id);
+                    MessageBox.Show("Adding to cart is done!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                     //}
                 }
                 this.Close();

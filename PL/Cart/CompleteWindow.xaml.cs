@@ -22,7 +22,7 @@ namespace Cart
         public CompleteWindow(BO.Cart cart)
         {
             InitializeComponent();
-            completeGrid.DataContext = cart;
+           // completeGrid.DataContext = cart;
         }
     }
 }

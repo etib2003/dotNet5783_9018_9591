@@ -1,4 +1,8 @@
 ﻿
+using BO;
+using System.Numerics;
+using static Order;
+
 namespace BlApi;
 
 public interface IOrder
@@ -9,12 +13,16 @@ public interface IOrder
     /// <returns>list of orders</returns>
     public IEnumerable<BO.OrderForList?> GetOrderListForManager();
 
+    public IEnumerable<OrderStatistics> GroupByStatistics();
+
     /// <summary>
     /// get an order's datails
     /// </summary>
     /// <param name="orderID">the order's id of the order that you want to get its details</param>
     /// <returns> order</returns>
     /// <exception cref="order does not exist"></exception>
+
+    public OrderForList GetOrderForList(int orderId);
 
     public BO.Order GetOrderDetails(int orderID);
 

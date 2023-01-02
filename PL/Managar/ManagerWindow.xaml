@@ -7,8 +7,16 @@
         mc:Ignorable="d"
         Title="ManagerWindow" Height="450" Width="800">
     <Grid>
-        <Button x:Name="OrderButton" Content="view orders" HorizontalAlignment="Center" Height="52" Margin="0,143,0,0" VerticalAlignment="Top" Width="224" FontSize="20" FontFamily="Candara" FontWeight="Bold" Click="OrderButton_Click"/>
-        <Button x:Name="ProductButton" Content="view products" HorizontalAlignment="Center" Height="52" VerticalAlignment="Top" Width="224" FontSize="20" FontFamily="Candara" FontWeight="Bold" Margin="0,234,0,0" Click="ProductButton_Click"/>
+        <Button x:Name="OrderButton" Content="view orders" HorizontalAlignment="Left" Height="52" Margin="517,144,0,0" VerticalAlignment="Top" Width="224" FontSize="20" FontFamily="Candara" FontWeight="Bold" Click="OrderButton_Click"/>
+        <Button x:Name="ProductButton" Content="view products" HorizontalAlignment="Left" Height="52" VerticalAlignment="Top" Width="224" FontSize="20" FontFamily="Candara" FontWeight="Bold" Margin="517,217,0,0" Click="ProductButton_Click"/>
+        <Grid HorizontalAlignment="Left" Height="305" Margin="83,58,0,0" VerticalAlignment="Top" Width="317">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="39*"/>
+                <RowDefinition Height="266*"/>
+            </Grid.RowDefinitions>
+
+            <Label x:Name="statisticLabel" Content="Orders Statistics" HorizontalAlignment="Center" Height="39" Margin="0,10,0,0" VerticalAlignment="Top" Width="184" HorizontalContentAlignment="Center" VerticalContentAlignment="Stretch" FontFamily="Candara" FontSize="16" FontWeight="Bold" Grid.Column="1" Grid.RowSpan="2"/>
+        </Grid>
 
     </Grid>
 </Window>

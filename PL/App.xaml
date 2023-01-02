@@ -25,7 +25,7 @@
                 <Setter Property="Foreground" Value="{StaticResource ButtonForegroundBrush}"/>
                 <Setter Property="Background" Value="{StaticResource ButtonBackgroundBrush}"/>
             </Style>
-            <SolidColorBrush x:Key="LabelForegroundBrush" Color="White"/>
+            <SolidColorBrush x:Key="LabelForegroundBrush" Color="Black"/>
             <Style TargetType="Label">
                 <Setter Property="Foreground" Value="{StaticResource LabelForegroundBrush}"/>
             </Style>

@@ -1,6 +1,9 @@
-﻿using DocumentFormat.OpenXml.Wordprocessing;
+﻿using BO;
+using DocumentFormat.OpenXml.Office2013.Word;
+using DocumentFormat.OpenXml.Wordprocessing;
 using OtherFunctions;
 using System.Linq;
+using System.Numerics;
 
 internal class Order : BlApi.IOrder
 {
@@ -62,7 +65,7 @@ internal class Order : BlApi.IOrder
         try
         {
             orderID.negativeNumber();//exception
-            return getBoOrder(dal?.Order.GetById(orderID)??default); //gets the right order using its id,call the help function
+            return getBoOrder(dal?.Order.GetById(orderID) ?? default); //gets the right order using its id,call the help function
         }
         catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
         {
@@ -77,7 +80,7 @@ internal class Order : BlApi.IOrder
         {
             orderID.negativeNumber();//exception
 
-            DO.Order doOrder = dal?.Order.GetById(orderID)??default;//gets the order by using its id
+            DO.Order doOrder = dal?.Order.GetById(orderID) ?? default;//gets the order by using its id
 
             BO.Order order = new BO.Order();//create a new order of the logical layer
             if (doOrder.OrderDate != null && doOrder.ShipDate == null)
@@ -104,7 +107,7 @@ internal class Order : BlApi.IOrder
         {
             orderID.negativeNumber();//exception
 
-            DO.Order doOrder = dal?.Order.GetById(orderID)??default;//gets the order by using its id
+            DO.Order doOrder = dal?.Order.GetById(orderID) ?? default;//gets the order by using its id
 
             BO.Order order = new BO.Order();//create a new order of the logical layer
             if (doOrder.ShipDate != null && doOrder.DeliveryDate == null)
@@ -135,7 +138,7 @@ internal class Order : BlApi.IOrder
         {
             orderID.negativeNumber();//exception
 
-            DO.Order doOrder = dal?.Order.GetById(orderID)??default;//gets the right order by using its id
+            DO.Order doOrder = dal?.Order.GetById(orderID) ?? default;//gets the right order by using its id
             List<Tuple<DateTime?, string>> tupleList = new List<Tuple<DateTime?, string>>();
             Tuple<DateTime?, string> tuple;
             BO.OrderTracking orderTracking = new BO.OrderTracking();//create a new OrderTracking object
@@ -169,5 +172,27 @@ internal class Order : BlApi.IOrder
             throw new BO.BoDoesNoExistException("Data exception:", ex);
         }
     }
+
+    public OrderForList GetOrderForList(int orderId)
+    => dal?.Order.GetById(orderId).CopyPropTo(new OrderForList());
+
+    public IEnumerable<OrderStatistics> GroupByStatistics()
+    {
+
+        return from order in dal?.Order.RequestAll()
+               group order by getOrderStatus(order) into newGroup
+               select new OrderStatistics
+               {
+                   OrderStatus = newGroup.Key,
+                   CountPerStatus = newGroup.Count()
+               };              
+    }
+
+   
 }
 
+public class OrderStatistics
+{
+    public OrderStatus OrderStatus { get; set; }
+    public int CountPerStatus { get; set; }
+}

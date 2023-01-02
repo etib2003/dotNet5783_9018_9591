@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Orders"
         mc:Ignorable="d"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="OrderListWindow" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ListView x:Name="OrderForListView" ItemsSource="{Binding}"  FontFamily="Candara" Foreground="Black" Margin="0,102,0,0" MouseDoubleClick="Update_MouseDoubleClick" FontSize="16" Grid.ColumnSpan="2">
+        <ListView x:Name="OrderForListView" ItemsSource="{Binding OrderForList}"  FontFamily="Candara" Foreground="Black" Margin="0,102,0,0" MouseDoubleClick="Update_MouseDoubleClick" FontSize="16" Grid.ColumnSpan="2">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="Id" Width="125"/>

@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Products"
         mc:Ignorable="d"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="NewOrderWindow" Height="450" Width="800">
     <Grid x:Name="CatalogGrid" Height="434" VerticalAlignment="Bottom">
-        <ListView x:Name="CatalogListView" ItemsSource="{Binding}" FontFamily="Candara" Margin="0,93,0,0" MouseDoubleClick="view_MouseDoubleClick" FontSize="16" >
+        <ListView x:Name="CatalogListView" ItemsSource="{Binding ProductsItems}" FontFamily="Candara" Margin="0,93,0,0" MouseDoubleClick="viewProduct_MouseDoubleClick" FontSize="16" >
             <ListView.Background>
                 <ImageBrush/>
             </ListView.Background>
@@ -19,6 +20,14 @@
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Category" Width="132"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=InStock}" Header="Is In Stock" Width="132"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Amount}" Header="Amount" Width="132"/>
+                    <GridViewColumn Header="Add To Cart">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Click="AddToCart" Height="20" Width="30">
+                                </Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -32,7 +41,7 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-        <ComboBox x:Name="CategoryComboBox" HorizontalAlignment="Left" Height="25" Margin="581,47,0,0" VerticalAlignment="Top" Width="150" SelectionChanged="ComboBox_SelectionChanged"/>
+        <ComboBox x:Name="CategoryComboBox" ItemsSource="{Binding Categories}" HorizontalAlignment="Left" Height="25" Margin="581,47,0,0" VerticalAlignment="Top" Width="150" SelectionChanged="ComboBox_SelectionChanged"/>
         <Button x:Name="CartButton" Content="🛒" HorizontalAlignment="Left" Height="38" Margin="33,22,0,0" VerticalAlignment="Top" Width="52" Click="CartButton_Click" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White"/>
     </Grid>
 </Window>

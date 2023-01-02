@@ -18,21 +18,21 @@ namespace PL.productsWindows
         //Object to access the logical layer
         BlApi.IBl? bl = BlApi.Factory.Get();
 
-       public ObservableCollection<ProductForList> ProductsForList { set; get; }
+ 
+        public ObservableCollection<ProductForList> ProductsForList { set; get; }
         public Array Categories { set; get; }
 
         private int selectedIndex;
-
-
+   
         /// <summary>
         /// get the list of products from the logical layer:
         /// </summary>
         public ProductListWindow()
         {
             ProductsForList = new ObservableCollection<ProductForList>(bl?.Product.GetListProductForManagerAndCatalog());
+            
             Categories = Enum.GetValues(typeof(BO.Category));
-
-            DataContext = this; 
+           // DataContext = this; 
             InitializeComponent();           
         }
 
@@ -40,7 +40,7 @@ namespace PL.productsWindows
         {
             try
             {
-                ProductsForList.Add(bl.Product.GetProductForList(productId));
+                ProductsForList.Add(bl?.Product.GetProductForList(productId));
             }
             catch (Exception)
             {
@@ -57,17 +57,21 @@ namespace PL.productsWindows
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             BO.Category category = (BO.Category)selectCategory.SelectedItem;
-            IEnumerable<ProductForList> objects = bl?.Product.GetProductForListByCond(ProductsForList, product => product.Category == category);
+            List<ProductForList> objects = bl?.Product.GetProductForListByCond(ProductsForList, product => product.Category == category).ToList();
             if (objects.Any())
             {
-                ProductsForList.Clear();
-                foreach (var item in objects)
-                {
-                    ProductsForList.Add(item);
-                }
+                restartAndAdd(objects);
             }
-           
+        }
 
+        private void restartAndAdd(IEnumerable<ProductForList> objects)
+        {
+            ProductsForList.Clear();
+
+            foreach (var item in objects)
+            {
+                ProductsForList.Add(item);
+            }
         }
 
         /// <summary>
@@ -77,8 +81,7 @@ namespace PL.productsWindows
         /// <param name="e">the event</param>
         private void ShowAllCategories_Click(object sender, RoutedEventArgs e)
         {
-            ProductsForList = new ObservableCollection<ProductForList>(bl?.Product.GetListProductForManagerAndCatalog());
-
+            restartAndAdd(bl?.Product.GetListProductForManagerAndCatalog());
         }
 
         /// <summary>
@@ -92,7 +95,7 @@ namespace PL.productsWindows
             {
                 selectedIndex = ProductForListView.SelectedIndex;
                 int pflId = ((ProductForList)ProductForListView.SelectedItem).Id;
-                new ProductWindow(pflId, (productId) => ProductsForList[selectedIndex] = bl.Product.GetProductForList(productId)).Show();
+                new ProductWindow(pflId, (productId) => ProductsForList[selectedIndex] = bl?.Product.GetProductForList(productId)).Show();
                 //ShowAllCategories_Click(sender, e);
             }           
         }
@@ -118,5 +121,9 @@ namespace PL.productsWindows
             this.Close();
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

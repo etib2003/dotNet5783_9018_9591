@@ -22,9 +22,13 @@ namespace Orders
     public partial class OrderWindow : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
+        private Action<int> action;
 
-        public OrderWindow(int ordLId)
+
+        public OrderWindow(int ordLId, Action<int> action)
         {
+            this.action = action;
+
             InitializeComponent();
             var order = bl?.Order.GetOrderDetails(ordLId);
             OrderGrid.DataContext = order;

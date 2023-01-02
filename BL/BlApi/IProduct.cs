@@ -17,7 +17,9 @@ public interface IProduct
 
     public ProductForList GetProductForList(int productId);
 
-    public IEnumerable<BO.ProductItem> GetListProductForCatalog(BO.Cart cart, Func<DO.Product?, bool>? cond=null);
+    public IEnumerable<BO.ProductItem> GetListProductForCatalog(BO.Cart cart, Func<DO.Product?, bool>? cond = null);
+
+    public IEnumerable<BO.ProductItem> GetListProductForCatalogView(BO.Cart cart, IEnumerable<ProductItem> productItems, Func<BO.ProductItem?, bool>? cond = null);
 
     /// <summary>
     /// Get a list of products for the manager and the catalog by condition

@@ -12,6 +12,14 @@ internal class Product : BlApi.IProduct
         return doProductList.CopyPropToList<DO.Product?, BO.ProductForList>();
     }
 
+    public IEnumerable<BO.ProductItem> GetListProductForCatalogView(BO.Cart cart, IEnumerable<ProductItem> productItems, Func<BO.ProductItem?, bool>? cond)
+    {
+        IEnumerable<BO.ProductItem> ProductItemList = from productItem in productItems.Where(p => cond is null ? true : cond!(p))
+                                                        let id = (int)productItem?.Id!
+                                                        select GetProductDetailsForCustomer(id, cart);
+        return ProductItemList;
+    }
+
     public IEnumerable<BO.ProductItem> GetListProductForCatalog(BO.Cart cart, Func<DO.Product?, bool>? cond)
     {
         IEnumerable<DO.Product?> doProductList = dal?.Product.RequestAll()!;//gets the products from the data layer
@@ -20,7 +28,6 @@ internal class Product : BlApi.IProduct
                                                         select GetProductDetailsForCustomer(id, cart);
         return doProductItemList;
     }
-
 
     public BO.Product GetProductDetailsForManager(int productId)
     {
@@ -119,10 +126,14 @@ internal class Product : BlApi.IProduct
             throw new NotValidDeleteException("product Already In Order Prosses");//exception
     }
 
-    public IEnumerable<ProductForList> GetProductForListByCond(IEnumerable<ProductForList> productForLists, Func<ProductForList?, bool>? cond)
-       => productForLists.Where(cond);
+    public IEnumerable<ProductForList> GetProductForListByCond(IEnumerable<ProductForList> productForLists, Func<BO.ProductForList, bool>? cond)
+    {
+        IEnumerable<ProductForList> ProductForList = from productForList in productForLists.Where(p => cond is null ? true : cond!(p))
+                                                     select productForList;
+        return ProductForList;
+    }
 
-    public ProductForList GetProductForList(int productId)
-    => dal.Product.GetById(productId).CopyPropTo(new ProductForList());
+        public ProductForList GetProductForList(int productId)
+    => dal?.Product.GetById(productId).CopyPropTo(new ProductForList());
 }
 

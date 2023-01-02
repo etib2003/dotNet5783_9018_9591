@@ -2,6 +2,7 @@
 using PL.productsWindows;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,20 +23,24 @@ namespace Orders
     public partial class OrderListWindow : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
+        public ObservableCollection<OrderForList> OrderForList { set; get; }
+        private int selectedIndex;
+
 
         public OrderListWindow()
         {
+            OrderForList = new ObservableCollection<OrderForList>(bl?.Order.GetOrderListForManager());
             InitializeComponent();
-            OrderForListView.ItemsSource = bl?.Order.GetOrderListForManager();
         }
      
             private void Update_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (OrderForListView.SelectedItem is OrderForList orderForList)
             {
+                selectedIndex = OrderForListView.SelectedIndex;
                 int oflId = ((OrderForList)OrderForListView.SelectedItem).Id;
-                new OrderWindow(oflId).ShowDialog();
-                OrderForListView.ItemsSource = bl?.Order.GetOrderListForManager();//רענון המסך
+                new OrderWindow(oflId, (orderId) => OrderForList[selectedIndex] = bl?.Order.GetOrderForList(orderId)).Show();
+                //OrderForListView.ItemsSource = bl?.Order.GetOrderListForManager();//רענון המסך
             }
         }
 

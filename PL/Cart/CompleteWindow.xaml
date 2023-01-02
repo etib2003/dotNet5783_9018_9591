@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cart"
         mc:Ignorable="d"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="CompleteWindow" Height="450" Width="800">
     <Grid x:Name="completeGrid">
         <Label Content="Thank you for buying HARMONY" HorizontalAlignment="Center" Height="38" Margin="0,55,0,0" VerticalAlignment="Top" Width="332" FontFamily="Eras ITC" HorizontalContentAlignment="Center" FontSize="20" FontWeight="Bold"/>
