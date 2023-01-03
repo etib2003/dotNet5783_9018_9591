@@ -30,12 +30,21 @@ namespace Cart
 
         private void endOrderbutton_Click(object sender, RoutedEventArgs e) //להוסיף בדיקות שנכנס משהו!
         {
-            cart.CustomerName = NameTB.Text;
-            cart.CustomerAddress = AddressTB.Text;
-            if (EmailTB.Text != null || EmailTB.Text != "")
-                cart.CustomerEmail = EmailTB.Text;
-            bl?.Cart.CommitOrder(cart);
-            new CompleteWindow(cart).Show();
+            try
+            {
+                cart.CustomerName = NameTB.Text;
+                cart.CustomerAddress = AddressTB.Text;
+                if (EmailTB.Text != null || EmailTB.Text != "")
+                    cart.CustomerEmail = EmailTB.Text;             
+                bl?.Cart.CommitOrder(cart);
+                new CompleteWindow(cart).Show();
+            }
+            catch (BO.NotValidEmailException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+          
+
         }
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
