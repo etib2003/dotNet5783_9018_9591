@@ -5,12 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Orders"
         mc:Ignorable="d"
+        DataContext="{Binding orderTracking}"
         Title="TrackOrderWindow" Height="450" Width="800">
     <Grid>
         <Label x:Name="IdLabel" Content="Enter order id for tracking:" HorizontalAlignment="Left" Height="47" Margin="194,44,0,0" VerticalAlignment="Top" Width="324" FontSize="22" FontWeight="Bold" FontFamily="Candara"/>
         <TextBox x:Name="IdTextBox" HorizontalAlignment="Left" PreviewTextInput="myTextBox_PreviewTextInput" Height="33" Margin="465,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" KeyDown="Enter" Width="134" FontSize="22"/>
-        <TextBlock x:Name="OrderTrackingBox" Text="{Binding}" HorizontalAlignment="Center" Height="197" TextWrapping="Wrap" VerticalAlignment="Top" Width="436" FontSize="17" Margin="0,125,0,0" Foreground="White"/>
+        <TextBlock x:Name="OrderTrackingBox" Text="{Binding orderTracking}" HorizontalAlignment="Left" Height="197" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="17" Foreground="White" Margin="553,121,0,0"/>
         <Button x:Name="ViewOrderButton" Content="View order details" HorizontalAlignment="Center" Height="43" Margin="0,350,0,0" VerticalAlignment="Top" Width="164" FontSize="18" Click="ViewOrderButton_Click"/>
+        <Label x:Name="IdLabel1" Content="Order ID:" HorizontalAlignment="Left" Height="29" Margin="241,110,0,0" VerticalAlignment="Top" Width="98" FontFamily="Candara" FontSize="18" FontWeight="Bold"/>
+        <Label Content="Status:" HorizontalAlignment="Left" Height="28" Margin="241,144,0,0" VerticalAlignment="Top" Width="82" FontWeight="Bold" FontSize="18" FontFamily="Candara"/>
+        <Label Content="{Binding Path=Status}" HorizontalAlignment="Left" Height="28" Margin="356,144,0,0" VerticalAlignment="Top" Width="126"/>
+
 
     </Grid>
 </Window>

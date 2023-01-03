@@ -17,11 +17,8 @@ namespace PL.productsWindows
     {
         //Object to access the logical layer
         BlApi.IBl? bl = BlApi.Factory.Get();
-
- 
         public ObservableCollection<ProductForList> ProductsForList { set; get; }
         public Array Categories { set; get; }
-
         private int selectedIndex;
    
         /// <summary>
@@ -29,10 +26,8 @@ namespace PL.productsWindows
         /// </summary>
         public ProductListWindow()
         {
-            ProductsForList = new ObservableCollection<ProductForList>(bl?.Product.GetListProductForManagerAndCatalog());
-            
+            ProductsForList = new ObservableCollection<ProductForList>(bl?.Product.GetListProductForManagerAndCatalog()); 
             Categories = Enum.GetValues(typeof(BO.Category));
-           // DataContext = this; 
             InitializeComponent();           
         }
 
@@ -57,10 +52,15 @@ namespace PL.productsWindows
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             BO.Category category = (BO.Category)selectCategory.SelectedItem;
-            List<ProductForList> objects = bl?.Product.GetProductForListByCond(ProductsForList, product => product.Category == category).ToList();
-            if (objects.Any())
+            if (ProductsForList.Any(p => p.Category == category) == false)
+                restartAndAdd(bl?.Product.GetListProductForManagerAndCatalog(x => (BO.Category)x?.Category == category));
+            else
             {
-                restartAndAdd(objects);
+                List<ProductForList> objects = bl?.Product.GetProductForListByCond(ProductsForList, product => product.Category == category).ToList();
+                if (objects.Any())
+                {
+                    restartAndAdd(objects);
+                }
             }
         }
 
@@ -82,6 +82,8 @@ namespace PL.productsWindows
         private void ShowAllCategories_Click(object sender, RoutedEventArgs e)
         {
             restartAndAdd(bl?.Product.GetListProductForManagerAndCatalog());
+            //selectCategory = null;
+
         }
 
         /// <summary>
@@ -108,7 +110,6 @@ namespace PL.productsWindows
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             new ProductWindow(addProductForList).Show();
-            //ShowAllCategories_Click(sender,e);
         }
 
         /// <summary>
@@ -119,11 +120,6 @@ namespace PL.productsWindows
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

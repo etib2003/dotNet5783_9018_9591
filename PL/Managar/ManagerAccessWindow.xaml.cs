@@ -20,7 +20,7 @@ namespace Managar
     /// </summary>
     public partial class ManagerAccessWindow : Window
     {
-        string password = "123";
+        string password = "1";
         public ManagerAccessWindow()
         {
             InitializeComponent();
@@ -28,8 +28,6 @@ namespace Managar
 
         private void Enter(object sender, KeyEventArgs e)
         {
-
-
             if (e.Key == Key.Enter)
             {
                 if (PasswordBox.Text == password)

@@ -13,7 +13,7 @@ public interface IProduct
     /// Get a list of products for the manager and the catalog
     /// </summary>
     /// <returns>list of products</returns>
-    public IEnumerable<BO.ProductForList?> GetListProductForManagerAndCatalog();
+    public IEnumerable<BO.ProductForList?> GetListProductForManagerAndCatalog(Func<DO.Product?, bool>? cond = null);
 
     public ProductForList GetProductForList(int productId);
 

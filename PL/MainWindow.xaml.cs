@@ -38,19 +38,9 @@ namespace PL
             this.Close();
         }
 
-        private void MWcloseButton_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-
-        }
-
-        private void Image_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-
-        }
-
         private void managerButton_Click(object sender, RoutedEventArgs e)
         {
-            new ManagerAccessWindow().ShowDialog();
+            new ManagerAccessWindow().Show();
         }
 
         private void TrackingOrderButton_Click(object sender, RoutedEventArgs e)

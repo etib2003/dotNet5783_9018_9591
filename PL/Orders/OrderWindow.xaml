@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Orders"
         mc:Ignorable="d"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="OrderWindow" Height="450" Width="800">
-    <Grid x:Name="OrderGrid">
+    <Grid x:Name="OrderGrid" DataContext="{Binding order}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="357*"/>
             <ColumnDefinition Width="443*"/>
@@ -40,11 +41,11 @@
         <TextBlock x:Name="OrderDateTextBlock" Text="{Binding Path=OrderDate}" HorizontalAlignment="Left" Margin="165,6,0,0" Grid.Row="6" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
         <TextBlock x:Name="ShipDateTextBlock" Text="{Binding Path=ShipDate}" HorizontalAlignment="Left" Margin="165,0,0,0" Grid.Row="7" TextWrapping="Wrap" VerticalAlignment="Center" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
         <TextBlock x:Name="DeliveryDateTextBlock" Text="{Binding Path=DeliveryDate}" HorizontalAlignment="Left" Margin="165,0,0,0" Grid.Row="8" TextWrapping="Wrap" VerticalAlignment="Center" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
-        <Grid x:Name="OrderItemGrid" Grid.RowSpan="8" Grid.Column="1" Margin="10,5,10,8" Grid.Row="1">
-            <ListView x:Name="OrderItemView" ItemsSource="{Binding}"  FontFamily="Candara" Foreground="Black" Margin="10,9,22,0" FontSize="12">
+        <Grid x:Name="OrderItemGrid" DataContext="{Binding OrderItems}" Grid.RowSpan="8" Grid.Column="1" Margin="10,5,10,8" Grid.Row="1">
+            <ListView x:Name="OrderItemView" ItemsSource="{Binding orderItems}"  FontFamily="Candara" Foreground="Black" Margin="10,9,22,0" FontSize="12">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="Id" Width="40"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=orderItems.Id}" Header="Id" Width="40"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Name" Width="70"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=ProductID}" Header="Product ID" Width="80"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=Price}" Header="Price" Width="55"/>

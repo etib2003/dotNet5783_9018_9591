@@ -19,9 +19,10 @@ namespace PL.productsWindows
         /// </summary>
         BlApi.IBl? bl = BlApi.Factory.Get();
         BO.Cart cart;
+        public Array Categories { set; get; }
         public BO.Product NewPdct { get; set; }
-
         private Action<int> action;
+
         /// <summary>
         /// constructor, bruild the labels
         /// </summary>
@@ -29,9 +30,8 @@ namespace PL.productsWindows
         {
             this.action = action;
             NewPdct = new BO.Product();
-            //DataContext = this;
+            Categories = Enum.GetValues(typeof(BO.Category));
             InitializeComponent();
-            CategoryCB.ItemsSource = Enum.GetValues(typeof(BO.Category));
             Complete.Content = "Add";
         }
 
@@ -43,13 +43,11 @@ namespace PL.productsWindows
         {
             this.action = action;
             NewPdct = bl?.Product.GetProductDetailsForManager(prtrLId);
-            //DataContext = this;
+            Categories = Enum.GetValues(typeof(BO.Category));
             InitializeComponent();
-            CategoryCB.ItemsSource = Enum.GetValues(typeof(BO.Category));
             Complete.Content = "Update";
             deleteButton.Visibility = Visibility.Visible;
             IdBox.IsReadOnly = true;
-
         }
 
         public ProductWindow(int prtrLId, BO.Cart _cart, Action<int> action)
@@ -77,12 +75,12 @@ namespace PL.productsWindows
         /// <param name="e">the event</param>
         private void PreviewTextInputDecimal(object sender, TextCompositionEventArgs e)
         {
-            if (e.Source == IdBox)
-                if (IdBox.Text.Length == 6)
-                {
-                    e.Handled = true;
-                    return;
-                }
+            //if (e.Source == IdBox)
+            //    if (IdBox.Text.Length == 6)
+            //    {
+            //        e.Handled = true;
+            //        return;
+            //    }  // אמור להוות תחליף בזמל MaxLength="6"
             Regex regex = new("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
@@ -144,13 +142,13 @@ namespace PL.productsWindows
         {
             try
             {
-                if (IdBox.Text.Length == 0 ||
+                if (IdBox.Text.Length == 0 || IdBox.Text == "0" ||
                    CategoryCB.Text.Length == 0 ||
                    NameBox.Text.Length == 0 ||
-                   PriceBox.Text.Length == 0 ||
+                   PriceBox.Text.Length == 0 || PriceBox.Text == "0" ||
                    InStockBox.Text.Length == 0)
                 {
-                    if (IdBox.Text.Length == 0)
+                    if (IdBox.Text.Length == 0 || IdBox.Text=="0")
                         idEmptyLabel.Visibility = Visibility.Visible;
                     else
                         idEmptyLabel.Visibility = Visibility.Hidden;
@@ -165,7 +163,7 @@ namespace PL.productsWindows
                     else
                         nameEmptyLabel.Visibility = Visibility.Hidden;
 
-                    if (PriceBox.Text.Length == 0)
+                    if (PriceBox.Text.Length == 0 || PriceBox.Text=="0")
                         priceEmptyLabel.Visibility = Visibility.Visible;
                     else
                         priceEmptyLabel.Visibility = Visibility.Hidden;
@@ -176,12 +174,13 @@ namespace PL.productsWindows
                         inStockEmptyLabel.Visibility = Visibility.Hidden;
                     return;
                 }
-
-                idEmptyLabel.Visibility = Visibility.Hidden;
-                categoryEmptyLabel.Visibility = Visibility.Hidden;
-                nameEmptyLabel.Visibility = Visibility.Hidden;
-                priceEmptyLabel.Visibility = Visibility.Hidden;
-                inStockEmptyLabel.Visibility = Visibility.Hidden;
+                
+                //יש מצב שלא צריך את זה
+                //idEmptyLabel.Visibility = Visibility.Hidden; 
+                //categoryEmptyLabel.Visibility = Visibility.Hidden;
+                //nameEmptyLabel.Visibility = Visibility.Hidden;
+                //priceEmptyLabel.Visibility = Visibility.Hidden;
+                //inStockEmptyLabel.Visibility = Visibility.Hidden;
 
                 //BO.Product newPdct = new BO.Product() { Id = int.Parse(IdBox.Text), Name = NameBox.Text, Price = double.Parse(PriceBox.Text), Category = (BO.Category)Enum.Parse(typeof(BO.Category), CategoryCB.Text), InStock = int.Parse(InStockBox.Text) };
                 if (Complete.Content == "Add")
@@ -193,11 +192,10 @@ namespace PL.productsWindows
                 else if (Complete.Content == "Update")
                 {
                     bl?.Product.UpdateProduct(NewPdct);
-                    action(NewPdct.Id);
-                    
+                    action(NewPdct.Id);                   
                     MessageBox.Show("Updating is done!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
-                else if (Complete.Content == "Add to cart")
+                else if (Complete.Content == "Add to cart") //לבדוק מה הולך פה
                 {
                     //if (AmountAddBox.Text != "0") //מומלץ לעשות שלא יוכל להכניס 0
                     //{
@@ -250,6 +248,7 @@ namespace PL.productsWindows
             this.Close();
         }
 
+        //זה בשביל הוספה לסל, לוודא אם צריך בסוף או לא
         private void OnTextBoxGotFocus(object sender, RoutedEventArgs e)
         {
             if (AmountAddBox.Text == "Enter amount")

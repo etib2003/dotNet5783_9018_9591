@@ -6,9 +6,9 @@ internal class Product : BlApi.IProduct
 {
     private DalApi.IDal? dal = DalApi.Factory.Get();
 
-    public IEnumerable<BO.ProductForList> GetListProductForManagerAndCatalog()
+    public IEnumerable<BO.ProductForList> GetListProductForManagerAndCatalog(Func<DO.Product?, bool>? cond)
     {
-        IEnumerable<DO.Product?> doProductList = dal?.Product.RequestAll()!;//gets the products from the data layer
+        IEnumerable<DO.Product?> doProductList = dal?.Product.RequestAll(p => cond is null ? true : cond!(p))!;//gets the products from the data layer
         return doProductList.CopyPropToList<DO.Product?, BO.ProductForList>();
     }
 

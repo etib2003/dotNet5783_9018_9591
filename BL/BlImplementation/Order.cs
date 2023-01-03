@@ -174,7 +174,16 @@ internal class Order : BlApi.IOrder
     }
 
     public OrderForList GetOrderForList(int orderId)
-    => dal?.Order.GetById(orderId).CopyPropTo(new OrderForList());
+    {
+        DO.Order? doOrderForList = dal?.Order.GetById(orderId);//gets all the orders from the data layer
+
+        BO.OrderForList orderForList = doOrderForList.CopyPropTo(new OrderForList());
+        orderForList.Status = getOrderStatus(doOrderForList);
+        var oiOfOrder = dal?.OrderItem.RequestAll(x => x?.OrderID == orderForList.Id);
+        orderForList.AmountOfItems = oiOfOrder.Count();
+        orderForList.TotalPrice = oiOfOrder.Sum(orderItem => orderItem?.Price * orderItem?.Amount) ?? 0;
+        return orderForList;
+    }
 
     public IEnumerable<OrderStatistics> GroupByStatistics()
     {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,10 +20,12 @@ namespace Cart
     /// </summary>
     public partial class CompleteWindow : Window
     {
-        public CompleteWindow(BO.Cart cart)
+        public BO.Cart cart { get; set; }
+
+        public CompleteWindow(BO.Cart _cart)
         {
+            cart= _cart;
             InitializeComponent();
-           // completeGrid.DataContext = cart;
         }
     }
 }

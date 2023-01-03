@@ -1,5 +1,7 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,13 +22,16 @@ namespace Cart
     public partial class CartWindow : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
-        BO.Cart cart;
+        public BO.Cart cart { get; set; }
+        public ObservableCollection<BO.OrderItem> cartItems { set; get; }
+
         public CartWindow(BO.Cart _cart)
         {
+            cart = _cart;
+            cartItems = new ObservableCollection<BO.OrderItem>(cart.Items);
             InitializeComponent();
-            cart=_cart;
-            CartGrid.DataContext = cart;
-            CartItemsView.ItemsSource = cart.Items;
+            //CartGrid.DataContext = cart;
+            //CartItemsView.ItemsSource = cart.Items;
         }
 
         private void ContToPayButton_Click(object sender, RoutedEventArgs e)

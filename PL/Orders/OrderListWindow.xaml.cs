@@ -26,7 +26,6 @@ namespace Orders
         public ObservableCollection<OrderForList> OrderForList { set; get; }
         private int selectedIndex;
 
-
         public OrderListWindow()
         {
             OrderForList = new ObservableCollection<OrderForList>(bl?.Order.GetOrderListForManager());

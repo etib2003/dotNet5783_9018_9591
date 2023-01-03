@@ -1,5 +1,6 @@
 ﻿using BO;
 using Cart;
+using DO;
 using PL.productsWindows;
 using System;
 using System.Collections.Generic;
@@ -9,12 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
 
 namespace Products
 {
@@ -51,20 +48,31 @@ namespace Products
             }
         }
 
+        private void restartAndAdd(IEnumerable<ProductItem> objects)
+        {
+            ProductsItems.Clear();
+
+            foreach (var item in objects)
+            {
+                ProductsItems.Add(item);
+            }
+        }
+
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             BO.Category category = (BO.Category)CategoryComboBox.SelectedItem;
-            List<ProductItem> objects = bl?.Product.GetListProductForCatalogView(cart, ProductsItems, x => (BO.Category)x?.Category! == category).ToList();
 
-            if (objects.Any())
+            if (ProductsItems.Any(p => p.Category == category) == false)
+                restartAndAdd(bl?.Product.GetListProductForCatalog(cart, x => (BO.Category)x?.Category! == category));
+            else
             {
-                ProductsItems.Clear();
-
-                foreach (var item in objects)
+                List<ProductItem> objects = bl?.Product.GetListProductForCatalogView(cart, ProductsItems, x => (BO.Category)x?.Category! == category).ToList();
+                if (objects.Any())
                 {
-                    ProductsItems.Add(item);
+                    restartAndAdd(objects);
                 }
             }
+
             //CatalogListView.ItemsSource = bl?.Product.GetListProductForCatalog(cart,x => (BO.Category)x?.Category! == category);
         }
 
@@ -75,8 +83,9 @@ namespace Products
         /// <param name="e">the event</param>
         private void ShowAllCategories_Click(object sender, RoutedEventArgs e)
         {
-            CatalogListView.ItemsSource = bl?.Product.GetListProductForCatalogView(cart, ProductsItems);
-            CategoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Category));
+            restartAndAdd(bl?.Product.GetListProductForCatalog(cart));
+            Categories.Clone();/////////////////
+            Categories = Enum.GetValues(typeof(BO.Category)); //לא מסנן כשזה מסומן כבר על הקטגוריה
         }
 
         private void CartButton_Click(object sender, RoutedEventArgs e)
@@ -86,11 +95,22 @@ namespace Products
 
         private void AddToCart(object sender, RoutedEventArgs e)
         {
-            FrameworkElement frameworkElement = (sender as FrameworkElement)!;
-            if (frameworkElement is not null && frameworkElement.DataContext is not null)
+            try
             {
-                int productId = ((ProductItem)(frameworkElement.DataContext)).Id;
-                bl.Cart.AddProductToCart(cart, productId);
+                FrameworkElement frameworkElement = (sender as FrameworkElement)!;
+                int productId;
+                if (frameworkElement is not null && frameworkElement.DataContext is not null)
+                {
+                    productId = ((ProductItem)(frameworkElement.DataContext)).Id;
+                    bl?.Cart.AddProductToCart(cart, productId);
+                    var p=ProductsItems.First(p => p.Id == productId);
+                    ProductsItems[ProductsItems.IndexOf(p)] = bl?.Product.GetProductDetailsForCustomer(productId, cart);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Out of stock!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
             }
 
         }

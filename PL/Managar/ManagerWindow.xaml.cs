@@ -29,13 +29,13 @@ namespace PL
         private void OrderButton_Click(object sender, RoutedEventArgs e)
         {
             //this.Close();
-            new OrderListWindow().ShowDialog();           
+            new OrderListWindow().Show();           
         }
 
         private void ProductButton_Click(object sender, RoutedEventArgs e)
         {
             //this.Close();
-            new ProductListWindow().ShowDialog();
+            new ProductListWindow().Show();
         }
     }
 }
