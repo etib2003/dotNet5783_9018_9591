@@ -1,4 +1,5 @@
-﻿using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+﻿using BO;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using DocumentFormat.OpenXml.Vml.Spreadsheet;
 using System;
 using System.Collections.Generic;
@@ -25,14 +26,14 @@ namespace Orders
         BlApi.IBl? bl = BlApi.Factory.Get();
         private Action<int> action;
         public BO.Order order { get; set; }
-        public List<BO.OrderItem> orderItems { get; set; }
+        public ObservableCollection<BO.OrderItem> orderItems { set; get; }
 
 
         public OrderWindow(int ordLId, Action<int> action)
         {
             this.action = action;
             order = bl?.Order.GetOrderDetails(ordLId);
-            orderItems = order.OrderItems;
+            orderItems = new ObservableCollection<BO.OrderItem>(order.OrderItems);
             InitializeComponent();
             //OrderGrid.DataContext = order;
             //OrderItemGrid.DataContext = order.OrderItems;

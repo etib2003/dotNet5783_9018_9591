@@ -24,6 +24,27 @@
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Price}" Header="Price" Width="70"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Amount}" Header="Amount" Width="90"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=TotalPrice}" Header="Total Price" Width="100"/>
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Click="Add1" Content="+" Height="20" Width="30"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Click="remove1" Content="-" Height="20" Width="30"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Click="deleteProduct" Content="🗑️" Height="20" Width="30"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>

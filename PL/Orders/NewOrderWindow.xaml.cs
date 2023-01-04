@@ -21,9 +21,17 @@ namespace Products
     public partial class NewOrderWindow : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
-        BO.Cart cart;
+        // public BO.Cart cart=new BO.Cart();
+        public BO.Cart cart;
 
-        public ObservableCollection<ProductItem> ProductsItems { set; get; }
+        public static readonly DependencyProperty ProductsDependency
+            = DependencyProperty.Register(nameof(ProductsItems), typeof(ObservableCollection<ProductItem>), typeof(NewOrderWindow));
+
+        public ObservableCollection<ProductItem> ProductsItems
+        {
+            get => (ObservableCollection<ProductItem>)GetValue(ProductsDependency);
+            private set => SetValue(ProductsDependency, value);
+        }
         public Array Categories { set; get; }
         private int selectedIndex;
 
@@ -44,6 +52,7 @@ namespace Products
                 selectedIndex = CatalogListView.SelectedIndex;
                 int pflId = ((ProductItem)CatalogListView.SelectedItem).Id;
                 new ProductWindow(pflId, cart, (productId) => ProductsItems[selectedIndex] = bl?.Product.GetProductDetailsForCustomer(productId, cart)).Show();
+
                 //CatalogListView.ItemsSource = bl?.Product.GetListProductForCatalog(cart);
             }
         }
@@ -90,7 +99,8 @@ namespace Products
 
         private void CartButton_Click(object sender, RoutedEventArgs e)
         {
-            new CartWindow(cart).Show();
+            new CartWindow(cart, ProductsItems).Show();
+            this.Close();
         }
 
         private void AddToCart(object sender, RoutedEventArgs e)
@@ -103,11 +113,11 @@ namespace Products
                 {
                     productId = ((ProductItem)(frameworkElement.DataContext)).Id;
                     bl?.Cart.AddProductToCart(cart, productId);
-                    var p=ProductsItems.First(p => p.Id == productId);
+                    var p = ProductsItems.First(p => p.Id == productId);
                     ProductsItems[ProductsItems.IndexOf(p)] = bl?.Product.GetProductDetailsForCustomer(productId, cart);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Out of stock!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 

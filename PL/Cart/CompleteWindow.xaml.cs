@@ -21,10 +21,11 @@ namespace Cart
     public partial class CompleteWindow : Window
     {
         public BO.Cart cart { get; set; }
+        public BO.Order order { get; set; }
 
-        public CompleteWindow(BO.Cart _cart)
+        public CompleteWindow(BO.Order _order)
         {
-            cart= _cart;
+            order = _order;
             InitializeComponent();
         }
     }

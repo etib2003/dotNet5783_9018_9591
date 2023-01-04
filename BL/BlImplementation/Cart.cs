@@ -17,7 +17,7 @@ internal class Cart : BlApi.ICart
     {
         try
         {
-            DO.Product product = dal?.Product.GetById(productId)??default; //get the right product using its id
+            DO.Product product = dal?.Product.GetById(productId) ?? default; //get the right product using its id
             BO.OrderItem? orderItem = (from OrderItem in cart.Items
                                        where OrderItem.ProductID == productId
                                        select OrderItem).FirstOrDefault(); //            if (cart.Items != null)
@@ -56,11 +56,11 @@ internal class Cart : BlApi.ICart
     {
         try
         {
-            DO.Product doProduct = dal?.Product.GetById(productId)??default;//get the right product using its id
+            DO.Product doProduct = dal?.Product.GetById(productId) ?? default;//get the right product using its id
 
             BO.OrderItem? orderItem = (from OrderItem in cart.Items
-                                      where OrderItem.ProductID == productId
-                                      select OrderItem).First() ?? throw new BO.NotExistInCartException("Not exist in cart");
+                                       where OrderItem.ProductID == productId
+                                       select OrderItem).First() ?? throw new BO.NotExistInCartException("Not exist in cart");
 
             if (newAmount == 0) //remove the product's order from the cart
             {
@@ -109,7 +109,7 @@ internal class Cart : BlApi.ICart
             {
                 orderItem!.Amount.negativeNumber();//exception
 
-                DO.Product doProduct = dal?.Product.GetById(orderItem.ProductID)??default;//get the right product using its id
+                DO.Product doProduct = dal?.Product.GetById(orderItem.ProductID) ?? default;//get the right product using its id
 
                 if (orderItem.Amount > doProduct.InStock)
                     throw new BO.NotValidAmountException("not Valid Amount");//exception
@@ -125,14 +125,14 @@ internal class Cart : BlApi.ICart
                 OrderDate = DateTime.Now,
                 ShipDate = null,
                 DeliveryDate = null
-            })??default;
+            }) ?? default;
 
             foreach (BO.OrderItem? boOrderItem in cart.Items)
             {
                 DO.OrderItem doOrderItem = boOrderItem.CopyPropToStruct(new DO.OrderItem());
                 doOrderItem.OrderID = orderId;
-                boOrderItem.Id = dal?.OrderItem.Create(doOrderItem)??default;
-                DO.Product product = dal?.Product.GetById(doOrderItem.ProductID)??default;//get the right product using its id
+                boOrderItem.Id = dal?.OrderItem.Create(doOrderItem) ?? default;
+                DO.Product product = dal?.Product.GetById(doOrderItem.ProductID) ?? default;//get the right product using its id
                 product.InStock -= doOrderItem.Amount; //delete from the stock
                 dal?.Product.Update(product);
             }
@@ -150,6 +150,8 @@ internal class Cart : BlApi.ICart
                 Status = BO.OrderStatus.confirmed,
                 OrderItems = cart.Items
             };
+            cart.Items.Clear();
+            cart.TotalPrice = 0;
             return boOrder;
 
         }

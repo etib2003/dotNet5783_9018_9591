@@ -17,7 +17,7 @@ namespace PL
         ///Object to access the logical layer.
         /// </summary>
          BlApi.IBl? bl= BlApi.Factory.Get();
-        private static BO.Cart cart = new BO.Cart() { CustomerName = null, CustomerEmail = null, CustomerAddress = null, Items = new List<BO.OrderItem>(), TotalPrice = 0 };
+        BO.Cart cart = new BO.Cart() { CustomerName = null, CustomerEmail = null, CustomerAddress = null, Items = new List<BO.OrderItem>(), TotalPrice = 0 };
 
 
         /// <summary>
