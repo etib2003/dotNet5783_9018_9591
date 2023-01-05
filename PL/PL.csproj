@@ -18,7 +18,14 @@
     <None Remove="background.jpg" />
     <None Remove="LOGO.png" />
     <None Remove="LOGO.png.jpg" />
+    <None Remove="PictursForMain\1.jpg" />
     <None Remove="Products\background.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="PictursForMain\1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

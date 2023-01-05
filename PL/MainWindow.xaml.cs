@@ -4,7 +4,8 @@ using PL.productsWindows;
 using Products;
 using System.Collections.Generic;
 using System.Windows;
-
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace PL
 {
@@ -18,7 +19,7 @@ namespace PL
         /// </summary>
          BlApi.IBl? bl= BlApi.Factory.Get();
         BO.Cart cart = new BO.Cart() { CustomerName = null, CustomerEmail = null, CustomerAddress = null, Items = new List<BO.OrderItem>(), TotalPrice = 0 };
-
+        int i=1;
 
         /// <summary>
         /// constructor
@@ -51,6 +52,26 @@ namespace PL
         private void NewOrderButton_click(object sender, RoutedEventArgs e)
         {
             new  NewOrderWindow(cart).Show();
+        }
+
+        private void back_Click(object sender, RoutedEventArgs e)
+        {
+            i--;
+            if(i<1)
+            {
+                i = 4;
+            }
+            PictureHolder.Source = new BitmapImage(new System.Uri("PictursForMain/" + i + ".jpg",System.UriKind.Relative));
+        }
+
+        private void next_Click(object sender, RoutedEventArgs e)
+        {
+            i++;
+            if (i > 4)
+            {
+                i = 1;
+            }
+            PictureHolder.Source = new BitmapImage(new System.Uri("PictursForMain/" + i + ".jpg", System.UriKind.Relative));
         }
     }
 }
