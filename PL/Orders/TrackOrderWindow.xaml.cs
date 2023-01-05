@@ -35,7 +35,7 @@ namespace Orders
             }
             catch(BoDoesNoExistException ex)
             {
-                MessageBox.Show("No order exists with this ID!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("No Order exists with this ID!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 IdTextBox.Text = "";
             }
         }

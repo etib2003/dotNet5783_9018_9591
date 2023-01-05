@@ -4,10 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Orders"
+        xmlns:converter="clr-namespace:Converters"
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="OrderWindow" Height="450" Width="800">
-    <Grid x:Name="OrderGrid" DataContext="{Binding order}">
+    <Window.Resources>
+        
+        <converter:VisibiltyAndShipDate x:Key="visibiltyAndShipDate" ></converter:VisibiltyAndShipDate>
+        <converter:VisibiltyAndDeliveryDate x:Key="visibiltyAndDeliveryDate" ></converter:VisibiltyAndDeliveryDate>
+    </Window.Resources>
+    
+    
+    
+    <Grid x:Name="OrderGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="357*"/>
             <ColumnDefinition Width="443*"/>
@@ -33,16 +42,16 @@
         <Label x:Name="OrderDateLabel" Content="Order Date:" HorizontalAlignment="Left" Height="30" Margin="32,32,0,0" VerticalAlignment="Top" Width="140" FontFamily="Candara" FontSize="14" Grid.Row="5" Grid.Column="0" VerticalContentAlignment="Stretch" Grid.RowSpan="2" FontWeight="Bold"/>
         <Label x:Name="OrderShipLabel" Content="Ship Date:" HorizontalAlignment="Left" Height="30" Margin="32,31,0,0" VerticalAlignment="Top" Width="140" FontFamily="Candara" FontSize="14" Grid.Row="6" Grid.Column="0" VerticalContentAlignment="Stretch" Grid.RowSpan="2" FontWeight="Bold"/>
         <Label x:Name="OrderDeliLabel" Content="Delivery Date:" HorizontalAlignment="Left" Height="30" Margin="32,31,0,0" VerticalAlignment="Top" Width="140" FontFamily="Candara" FontSize="14" Grid.Row="7" Grid.Column="0" VerticalContentAlignment="Stretch" Grid.RowSpan="2" FontWeight="Bold"/>
-        <TextBlock x:Name="IdTextBlock" Text="{Binding Path=Id}" HorizontalAlignment="Left" Margin="165,0,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="186" FontFamily="Candara" FontSize="14" Height="16"/>
-        <TextBlock x:Name="NameTextBlock" Text="{Binding Path=CustomerName}" HorizontalAlignment="Left" Margin="165,0,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
-        <TextBlock x:Name="EmailTextBlock" Text="{Binding Path=CustomerEmail}" HorizontalAlignment="Left" Margin="165,7,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
-        <TextBlock x:Name="AddressTextBlock" Text="{Binding Path=CustomerAddress}" HorizontalAlignment="Left" Margin="165,0,0,0" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Center" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
-        <TextBlock x:Name="StatusTextBlock" Text="{Binding Path=Status}" HorizontalAlignment="Left" Margin="165,7,0,0" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
-        <TextBlock x:Name="OrderDateTextBlock" Text="{Binding Path=OrderDate}" HorizontalAlignment="Left" Margin="165,6,0,0" Grid.Row="6" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
-        <TextBlock x:Name="ShipDateTextBlock" Text="{Binding Path=ShipDate}" HorizontalAlignment="Left" Margin="165,0,0,0" Grid.Row="7" TextWrapping="Wrap" VerticalAlignment="Center" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
-        <TextBlock x:Name="DeliveryDateTextBlock" Text="{Binding Path=DeliveryDate}" HorizontalAlignment="Left" Margin="165,0,0,0" Grid.Row="8" TextWrapping="Wrap" VerticalAlignment="Center" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
-        <Grid x:Name="OrderItemGrid" DataContext="{Binding orderItems}" Grid.RowSpan="8" Grid.Column="1" Margin="10,5,10,8" Grid.Row="1">
-            <ListView x:Name="OrderItemView" ItemsSource="{Binding orderItems}"  FontFamily="Candara" Foreground="Black" Margin="10,9,22,0" FontSize="12">
+        <TextBlock x:Name="IdTextBlock" Text="{Binding Path=Order.Id}" HorizontalAlignment="Left" Margin="165,0,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="186" FontFamily="Candara" FontSize="14" Height="16"/>
+        <TextBlock x:Name="NameTextBlock" Text="{Binding Path=Order.CustomerName}" HorizontalAlignment="Left" Margin="165,0,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
+        <TextBlock x:Name="EmailTextBlock" Text="{Binding Path=Order.CustomerEmail}" HorizontalAlignment="Left" Margin="165,7,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
+        <TextBlock x:Name="AddressTextBlock" Text="{Binding Path=Order.CustomerAddress}" HorizontalAlignment="Left" Margin="165,0,0,0" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Center" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
+        <TextBlock x:Name="StatusTextBlock" Text="{Binding Path=Order.Status}" HorizontalAlignment="Left" Margin="165,7,0,0" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
+        <TextBlock x:Name="OrderDateTextBlock" Text="{Binding Path=Order.OrderDate}" HorizontalAlignment="Left" Margin="165,6,0,0" Grid.Row="6" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
+        <TextBlock x:Name="ShipDateTextBlock" Text="{Binding Path=Order.ShipDate}" HorizontalAlignment="Left" Margin="165,0,0,0" Grid.Row="7" TextWrapping="Wrap" VerticalAlignment="Center" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
+        <TextBlock x:Name="DeliveryDateTextBlock" Text="{Binding Path=Order.DeliveryDate}" HorizontalAlignment="Left" Margin="165,0,0,0" Grid.Row="8" TextWrapping="Wrap" VerticalAlignment="Center" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
+        <Grid x:Name="OrderItemGrid" Grid.RowSpan="8" Grid.Column="1" Margin="10,5,10,8" Grid.Row="1">
+            <ListView x:Name="OrderItemView" ItemsSource="{Binding Order.OrderItems}"  FontFamily="Candara" Foreground="Black" Margin="10,9,22,0" FontSize="12">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="Id" Width="40"/>
@@ -55,8 +64,24 @@
                 </ListView.View>
             </ListView>
         </Grid>
-        <CheckBox x:Name="ShipCheck" Content="Update ship date" IsChecked="False" Visibility="Collapsed" HorizontalAlignment="Left" Height="15" Margin="164,10,0,0" Grid.Row="7" VerticalAlignment="Top" Width="140" RenderTransformOrigin="-0.357,0.393" FontSize="10"/>
-        <CheckBox x:Name="DeliveryCheck" Content="Update delivery date" IsChecked="False" Visibility="Collapsed" HorizontalAlignment="Left" Height="15" Margin="164,0,0,0" Grid.Row="8" VerticalAlignment="Center" Width="140" RenderTransformOrigin="-0.357,0.393" FontSize="10"/>
+
+
+        <CheckBox x:Name="ShipCheck" Content="Update ship date"  IsChecked="{Binding ShipCheckVar, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HorizontalAlignment="Left" Height="15" Margin="164,10,0,0" Grid.Row="7" VerticalAlignment="Top" Width="140" RenderTransformOrigin="-0.357,0.393" FontSize="10">
+            <CheckBox.Visibility >
+                <MultiBinding Converter="{StaticResource visibiltyAndShipDate}">
+                    <Binding Path="Order.ShipDate"></Binding>
+                    <Binding Path="Order.DeliveryDate"></Binding>
+                </MultiBinding>
+            </CheckBox.Visibility>
+        </CheckBox>
+        <CheckBox x:Name="DeliveryCheck"  Content="Update delivery date"  IsChecked="{Binding DeliveryCheckVar , UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HorizontalAlignment="Left" Height="15" Margin="164,0,0,0" Grid.Row="8" VerticalAlignment="Center" Width="140" RenderTransformOrigin="-0.357,0.393" FontSize="10">
+            <CheckBox.Visibility >
+                <MultiBinding Converter="{StaticResource visibiltyAndDeliveryDate}">
+                    <Binding Path="Order.ShipDate"></Binding>
+                    <Binding Path="Order.DeliveryDate"></Binding>
+                </MultiBinding>
+            </CheckBox.Visibility>
+        </CheckBox>
         <Button x:Name="o_OkButton" Content="OK" HorizontalAlignment="Left" Height="26" Margin="16,33,0,0" Grid.Row="9" VerticalAlignment="Top" Width="54" FontFamily="Candara" Grid.Column="1" FontWeight="Bold" Click="o_OkButton_Click"/>
     </Grid>
 </Window>
