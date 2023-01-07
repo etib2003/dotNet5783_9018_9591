@@ -43,7 +43,7 @@ namespace Orders
 
         public TrackOrderWindow()
         {
-            orderTracking = new BO.OrderTracking() {};
+            orderTracking = new BO.OrderTracking() {Id=null};
 
             InitializeComponent();
         }
@@ -51,8 +51,9 @@ namespace Orders
         private void Enter(object sender, KeyEventArgs e)
         {
             try
+            
             {
-                if (e.Key == Key.Enter)
+                if (e.Key == Key.Enter && Id!=null)
                 {
                     int id = int.Parse(Id);//int.Parse(IdTextBox.Text);                  
                     orderTracking = bl?.Order.TrackingOrder(id);
@@ -61,15 +62,16 @@ namespace Orders
             catch(BoDoesNoExistException ex)
             {
                 MessageBox.Show("No Order exists with this ID!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                IdTextBox.Text = "";
+                Id = "";
             }
+
         }
 
         private void ViewOrderButton_Click(object sender, RoutedEventArgs e)
         {
-            if(IdTextBox.Text!="")
+            if(Id!="" && Id!=null)
             {
-                new OrderWindow(int.Parse(IdTextBox.Text), 1).Show();
+                new OrderWindow(int.Parse(Id)).Show();
             }
         }
 

@@ -8,7 +8,7 @@ public class OrderTracking
     /// <summary>
     /// order tracking id in order to track your order
     /// </summary>
-    public int Id { get; set; }
+    public int? Id { get; set; }
 
     /// <summary>
     /// the order status

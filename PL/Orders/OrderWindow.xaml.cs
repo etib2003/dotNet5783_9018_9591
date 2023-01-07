@@ -44,12 +44,10 @@ namespace Orders
             InitializeComponent();
         }
 
-        public OrderWindow(int ordLId, int different)
+        public OrderWindow(int ordLId)
         {
             Order = bl?.Order.GetOrderDetails(ordLId);
             InitializeComponent();
-            //OrderGrid.DataContext = Order;
-            //OrderItemGrid.DataContext = Order.OrderItems;
         }
 
 

@@ -36,6 +36,34 @@ namespace Converters
         }
     }
 
+    public class IsUpdateCondConverter : IValueConverter
+    {
+        //convert from source property type to target property type
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return (string)value == "Update" ? Visibility.Visible :Visibility.Collapsed;
+        }
+
+        //convert from target property type to source property type
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class IsValidProdcutConverter : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            return values.All(t => !string.IsNullOrWhiteSpace(t as string)) && (string)values[0]!="0" && (string)values[2]!="0";
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class IsValidCTBConverter : IValueConverter
     {
         //convert from source property type to target property type

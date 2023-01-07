@@ -11,8 +11,8 @@
     <Window.Resources>
         <converter:VisibiltyAndShipDate x:Key="visibiltyAndShipDate" ></converter:VisibiltyAndShipDate>
         <converter:VisibiltyAndDeliveryDate x:Key="visibiltyAndDeliveryDate" ></converter:VisibiltyAndDeliveryDate>
-        <Style TargetType="TextBlock" x:Key="WhiteTextBlockStyle">
-            <Setter Property="Foreground" Value="White"/>
+        <Style TargetType="TextBlock" x:Key="ColorTextBlockStyle">
+            <Setter Property="Foreground" Value="Black"/>
         </Style>
     </Window.Resources>
     
@@ -42,14 +42,14 @@
         <Label x:Name="OrderDateLabel" Content="Order Date:" HorizontalAlignment="Left" Height="30" Margin="32,32,0,0" VerticalAlignment="Top" Width="140" FontFamily="Candara" FontSize="14" Grid.Row="5" Grid.Column="0" VerticalContentAlignment="Stretch" Grid.RowSpan="2" FontWeight="Bold"/>
         <Label x:Name="OrderShipLabel" Content="Ship Date:" HorizontalAlignment="Left" Height="30" Margin="32,31,0,0" VerticalAlignment="Top" Width="140" FontFamily="Candara" FontSize="14" Grid.Row="6" Grid.Column="0" VerticalContentAlignment="Stretch" Grid.RowSpan="2" FontWeight="Bold"/>
         <Label x:Name="OrderDeliLabel" Content="Delivery Date:" HorizontalAlignment="Left" Height="30" Margin="32,31,0,0" VerticalAlignment="Top" Width="140" FontFamily="Candara" FontSize="14" Grid.Row="7" Grid.Column="0" VerticalContentAlignment="Stretch" Grid.RowSpan="2" FontWeight="Bold"/>
-        <TextBlock x:Name="IdTextBlock" Text="{Binding Path=Order.Id}" Style="{StaticResource WhiteTextBlockStyle}" HorizontalAlignment="Left" Margin="165,0,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="186" FontFamily="Candara" FontSize="14" Height="16"/>
-        <TextBlock x:Name="NameTextBlock" Text="{Binding Path=Order.CustomerName}" Style="{StaticResource WhiteTextBlockStyle}" HorizontalAlignment="Left" Margin="165,0,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
-        <TextBlock x:Name="EmailTextBlock" Text="{Binding Path=Order.CustomerEmail}" Style="{StaticResource WhiteTextBlockStyle}" HorizontalAlignment="Left" Margin="165,7,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
-        <TextBlock x:Name="AddressTextBlock" Text="{Binding Path=Order.CustomerAddress}" Style="{StaticResource WhiteTextBlockStyle}" HorizontalAlignment="Left" Margin="165,0,0,0" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Center" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
-        <TextBlock x:Name="StatusTextBlock" Text="{Binding Path=Order.Status}" Style="{StaticResource WhiteTextBlockStyle}" HorizontalAlignment="Left" Margin="165,7,0,0" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
-        <TextBlock x:Name="OrderDateTextBlock" Text="{Binding Path=Order.OrderDate}" Style="{StaticResource WhiteTextBlockStyle}" HorizontalAlignment="Left" Margin="165,6,0,0" Grid.Row="6" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
-        <TextBlock x:Name="ShipDateTextBlock" Text="{Binding Path=Order.ShipDate}" Style="{StaticResource WhiteTextBlockStyle}" HorizontalAlignment="Left" Margin="165,0,0,0" Grid.Row="7" TextWrapping="Wrap" VerticalAlignment="Center" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
-        <TextBlock x:Name="DeliveryDateTextBlock" Text="{Binding Path=Order.DeliveryDate}" Style="{StaticResource WhiteTextBlockStyle}" HorizontalAlignment="Left" Margin="165,0,0,0" Grid.Row="8" TextWrapping="Wrap" VerticalAlignment="Center" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
+        <TextBlock x:Name="IdTextBlock" Text="{Binding Path=Order.Id}" Style="{StaticResource ColorTextBlockStyle}" HorizontalAlignment="Left" Margin="165,0,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="186" FontFamily="Candara" FontSize="14" Height="16"/>
+        <TextBlock x:Name="NameTextBlock" Text="{Binding Path=Order.CustomerName}" Style="{StaticResource ColorTextBlockStyle}" HorizontalAlignment="Left" Margin="165,0,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
+        <TextBlock x:Name="EmailTextBlock" Text="{Binding Path=Order.CustomerEmail}" Style="{StaticResource ColorTextBlockStyle}" HorizontalAlignment="Left" Margin="165,7,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
+        <TextBlock x:Name="AddressTextBlock" Text="{Binding Path=Order.CustomerAddress}" Style="{StaticResource ColorTextBlockStyle}" HorizontalAlignment="Left" Margin="165,0,0,0" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Center" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
+        <TextBlock x:Name="StatusTextBlock" Text="{Binding Path=Order.Status}" Style="{StaticResource ColorTextBlockStyle}" HorizontalAlignment="Left" Margin="165,7,0,0" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
+        <TextBlock x:Name="OrderDateTextBlock" Text="{Binding Path=Order.OrderDate}" Style="{StaticResource ColorTextBlockStyle}" HorizontalAlignment="Left" Margin="165,6,0,0" Grid.Row="6" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
+        <TextBlock x:Name="ShipDateTextBlock" Text="{Binding Path=Order.ShipDate}" Style="{StaticResource ColorTextBlockStyle}" HorizontalAlignment="Left" Margin="165,0,0,0" Grid.Row="7" TextWrapping="Wrap" VerticalAlignment="Center" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
+        <TextBlock x:Name="DeliveryDateTextBlock" Text="{Binding Path=Order.DeliveryDate}" Style="{StaticResource ColorTextBlockStyle}" HorizontalAlignment="Left" Margin="165,0,0,0" Grid.Row="8" TextWrapping="Wrap" VerticalAlignment="Center" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
         <Grid x:Name="OrderItemGrid" Grid.RowSpan="8" Grid.Column="1" Margin="10,5,10,8" Grid.Row="1">
             <ListView x:Name="OrderItemView" ItemsSource="{Binding Order.OrderItems}" FontFamily="Candara" Foreground="Black" Margin="10,9,22,0" FontSize="12">
                 <ListView.Background>

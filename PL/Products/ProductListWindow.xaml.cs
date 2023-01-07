@@ -99,7 +99,7 @@ namespace PL.productsWindows
                 selectedIndex = ProductForListView.SelectedIndex;
                 int pflId = ((ProductForList)ProductForListView.SelectedItem).Id;
                 new ProductWindow(pflId, (productId) => ProductsForList[selectedIndex] = bl?.Product.GetProductForList(productId)).Show();
-                //ShowAllCategories_Click(sender, e);
+                this.Close();
             }           
         }
 

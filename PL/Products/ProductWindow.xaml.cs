@@ -37,10 +37,6 @@ namespace PL.productsWindows
             DependencyProperty.Register("NewPdct", typeof(BO.Product), typeof(ProductWindow));
 
 
-
-
-
-
         private Action<int> action;
 
         public string CompleteButton
@@ -85,8 +81,8 @@ namespace PL.productsWindows
         //    NewPdct = bl?.Product.GetProductDetailsForManager(prtrLId);
         //   // DataContext = this;
         //    InitializeComponent();
-        //    Complete.Content = "Add to cart";
-        //    cart = _cart;
+        //    Complete.Content = "Add to Cart";
+        //    Cart = _cart;
         //    CategoryCB.Visibility = Visibility.Collapsed;
         //    CategoryBox.Visibility = Visibility.Visible;
         //    CategoryBox.Text = NewPdct!.Category.ToString();
@@ -123,38 +119,6 @@ namespace PL.productsWindows
             }
         }
 
-        /// <summary>
-        /// Makes sure that when the user stands on the box the warning disappears
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e">the event</param>
-        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            //if (e.Source == IdBox && string.IsNullOrEmpty(IdBox.Text))
-            //    idEmptyLabel.Visibility = Visibility.Visible;
-            //if (e.Source == NameBox && string.IsNullOrEmpty(NameBox.Text))
-            //    nameEmptyLabel.Visibility = Visibility.Visible;
-            //if (e.Source == PriceBox && string.IsNullOrEmpty(PriceBox.Text))
-            //    priceEmptyLabel.Visibility = Visibility.Visible;
-            //if (e.Source == InStockBox && string.IsNullOrEmpty(InStockBox.Text))
-            //    inStockEmptyLabel.Visibility = Visibility.Visible;
-        }
-        /// <summary>
-        /// Makes sure that when the user doesnt stands on the box the warning shows if needed
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            //if (e.Source == IdBox)
-            //    idEmptyLabel.Visibility = Visibility.Hidden;
-            //if (e.Source == NameBox)
-            //    nameEmptyLabel.Visibility = Visibility.Hidden;
-            //if (e.Source == PriceBox)
-            //    priceEmptyLabel.Visibility = Visibility.Hidden;
-            //if (e.Source == InStockBox)
-            //    inStockEmptyLabel.Visibility = Visibility.Hidden;
-        }
 
         /// <summary>
         /// Shows warnings if needed
@@ -165,50 +129,6 @@ namespace PL.productsWindows
         {
             try
             {
-                if (!(NewPdct.Id > 0 && NewPdct.Category != null &&
-                    NewPdct.Name.Length > 0 && NewPdct.Price > 0 &&
-                    NewPdct.InStock >= 0)) { 
-                    //if (IdBox.Text.Length == 0 || IdBox.Text == "0" ||
-                    //   CategoryCB.Text.Length == 0 ||
-                    //   NameBox.Text.Length == 0 ||
-                    //   PriceBox.Text.Length == 0 || PriceBox.Text == "0" ||
-                    //   InStockBox.Text.Length == 0)
-                    //{
-                    //    //if (IdBox.Text.Length == 0 || IdBox.Text=="0")
-                    //    //    idEmptyLabel.Visibility = Visibility.Visible;
-                    //    //else
-                    //    //    idEmptyLabel.Visibility = Visibility.Hidden;
-
-                    //    //if (CategoryCB.Text.Length == 0)
-                    //    //    categoryEmptyLabel.Visibility = Visibility.Visible;
-                    //    //else
-                    //    //    categoryEmptyLabel.Visibility = Visibility.Hidden;
-
-                    //    //if (NameBox.Text.Length == 0)
-                    //    //    nameEmptyLabel.Visibility = Visibility.Visible;
-                    //    //else
-                    //    //    nameEmptyLabel.Visibility = Visibility.Hidden;
-
-                    //    //if (PriceBox.Text.Length == 0 || PriceBox.Text=="0")
-                    //    //    priceEmptyLabel.Visibility = Visibility.Visible;
-                    //    //else
-                    //    //    priceEmptyLabel.Visibility = Visibility.Hidden;
-
-                    //    if (InStockBox.Text.Length == 0)
-                    //        inStockEmptyLabel.Visibility = Visibility.Visible;
-                    //    else
-                    //        inStockEmptyLabel.Visibility = Visibility.Hidden;
-                    return;
-                }
-                
-                //יש מצב שלא צריך את זה
-                //idEmptyLabel.Visibility = Visibility.Hidden; 
-                //categoryEmptyLabel.Visibility = Visibility.Hidden;
-                //nameEmptyLabel.Visibility = Visibility.Hidden;
-                //priceEmptyLabel.Visibility = Visibility.Hidden;
-                //inStockEmptyLabel.Visibility = Visibility.Hidden;
-
-                //BO.Product newPdct = new BO.Product() { Id = int.Parse(IdBox.Text), Name = NameBox.Text, Price = double.Parse(PriceBox.Text), Category = (BO.Category)Enum.Parse(typeof(BO.Category), CategoryCB.Text), InStock = int.Parse(InStockBox.Text) };
                 if (CompleteButton == "Add")
                 {
                     bl?.Product.AddProduct(NewPdct);
@@ -221,16 +141,16 @@ namespace PL.productsWindows
                     action(NewPdct.Id);                   
                     MessageBox.Show("Updating is done!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
-                //else if (Complete.Content == "Add to cart") //לבדוק מה הולך פה
+                //else if (Complete.Content == "Add to Cart") //לבדוק מה הולך פה
                 //{
                 //    //if (AmountAddBox.Text != "0") //מומלץ לעשות שלא יוכל להכניס 0
                 //    //{
-                //        bl?.Cart.AddProductToCart(cart, NewPdct.Id); 
+                //        bl?.Cart.AddProductToCart(Cart, NewPdct.Id); 
                 //        if (AmountAddBox.Text != "Enter amount") //יש בעיה כי אם אין מספיק במלאי הוא עדיין יעשה הוספה של אחד ותכלס זה בעיה
-                //            bl?.Cart.UpdateAmountOfProduct(cart, NewPdct.Id, int.Parse(AmountAddBox.Text));
+                //            bl?.Cart.UpdateAmountOfProduct(Cart, NewPdct.Id, int.Parse(AmountAddBox.Text));
 
                 //    action(NewPdct.Id);
-                //    MessageBox.Show("Adding to cart is done!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                //    MessageBox.Show("Adding to Cart is done!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 //    //}
                 //}
                 this.Close();
@@ -258,9 +178,9 @@ namespace PL.productsWindows
             catch (Exception ex)
             {
                 if (CompleteButton == "Add")
-                    MessageBox.Show("Error, you cant add the product!");
+                    MessageBox.Show("Error, you can't add the product!");
                 if (CompleteButton == "Update")
-                    MessageBox.Show("Error, you cant update the product!");
+                    MessageBox.Show("Error, you can't update the product!");
                 this.Close();
             }
         }
@@ -272,6 +192,20 @@ namespace PL.productsWindows
         private void PWcloseButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            try {
+                bl?.Product.DeleteProduct(NewPdct.Id);
+                MessageBox.Show("Deleting is done!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error, you can't delete the product!\n It is already in the process of buying");
+            }
         }
 
         ////זה בשביל הוספה לסל, לוודא אם צריך בסוף או לא
@@ -286,6 +220,6 @@ namespace PL.productsWindows
         //    if(AmountAddBox.Text== "" || AmountAddBox.Text =="0")
         //        AmountAddBox.Text = "Enter amount";
         //}
- 
+
     }
 }

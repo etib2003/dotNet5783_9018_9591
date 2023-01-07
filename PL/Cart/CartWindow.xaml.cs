@@ -17,20 +17,34 @@ namespace Cart
     public partial class CartWindow : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
-        public BO.Cart cart { get; set; }
+        //public BO.Cart Cart { get; set; }
+
+
+        public BO.Cart Cart
+        {
+            get { return (BO.Cart)GetValue(cartProperty); }
+            set { SetValue(cartProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Cart.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty cartProperty =
+            DependencyProperty.Register("Cart", typeof(BO.Cart), typeof(CartWindow));
+
+
         public ObservableCollection<BO.OrderItem?> cartItems { set; get; }
 
         public CartWindow(BO.Cart _cart, ObservableCollection<ProductItem> ProductItems)
         {
-            cart = _cart;
-            cartItems = new ObservableCollection<BO.OrderItem?>(cart.Items);
+            Cart = _cart;
+           
+            cartItems = new ObservableCollection<BO.OrderItem?>(Cart.Items);
             InitializeComponent();
              
         }
 
         private void ContToPayButton_Click(object sender, RoutedEventArgs e)
         {
-            new CustomerDetailsWindow(cart, cartItems).Show();
+            new CustomerDetailsWindow(Cart, cartItems).Show();
             this.Close();
         }
 
@@ -45,8 +59,8 @@ namespace Cart
                 {
                     productId = ((OrderItem)(frameworkElement.DataContext)).ProductID;
                     amount= ((OrderItem)(frameworkElement.DataContext)).Amount;
-                    bl?.Cart.UpdateAmountOfProduct(cart, productId,amount+1);
-                    //cartItems = cart.Items;
+                    Cart = bl?.Cart.UpdateAmountOfProduct(Cart, productId,amount+1);
+                    //cartItems = Cart.Items;
                     var p = cartItems.First(p => p.ProductID == productId);
                     cartItems[cartItems.IndexOf(p)] = cartItems.FirstOrDefault(p => p.ProductID == productId);
                     CartItemsView.Items.Refresh();
@@ -70,10 +84,8 @@ namespace Cart
                    
                     productId = ((OrderItem)(frameworkElement.DataContext)).ProductID;
                     amount = ((OrderItem)(frameworkElement.DataContext)).Amount;
-                    BO.Cart c=bl?.Cart.UpdateAmountOfProduct(cart, productId, amount - 1);
-                  
+                    Cart =bl?.Cart.UpdateAmountOfProduct(Cart, productId, amount - 1);                
                     var p = cartItems.First(p => p.ProductID == productId);
-
                     cartItems[cartItems.IndexOf(p)] = cartItems.FirstOrDefault(p => p.ProductID == productId);
                     CartItemsView.Items.Refresh();
                 }
@@ -96,7 +108,7 @@ namespace Cart
                 {
                     productId = ((OrderItem)(frameworkElement.DataContext)).ProductID;
                     amount = ((OrderItem)(frameworkElement.DataContext)).Amount;
-                    BO.Cart c = bl?.Cart.UpdateAmountOfProduct(cart, productId, 0);
+                    Cart = bl?.Cart.UpdateAmountOfProduct(Cart, productId, 0);
                     var p = cartItems.First(p => p.ProductID == productId);
                     cartItems.Remove(p);
                     //cartItems[cartItems.IndexOf(p)] = null;

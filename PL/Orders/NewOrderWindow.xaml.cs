@@ -1,6 +1,7 @@
 ﻿using BO;
 using Cart;
 using DO;
+using PL;
 using PL.productsWindows;
 using System;
 using System.Collections.Generic;
@@ -21,17 +22,30 @@ namespace Products
     public partial class NewOrderWindow : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
-        // public BO.Cart cart=new BO.Cart();
-        public BO.Cart cart;
+        // public BO.Cart Cart=new BO.Cart();
 
-        public static readonly DependencyProperty ProductsDependency
-            = DependencyProperty.Register(nameof(ProductsItems), typeof(ObservableCollection<ProductItem>), typeof(NewOrderWindow));
+        //public BO.Cart Cart;
+
+        public BO.Cart cart
+        {
+            get { return (BO.Cart)GetValue(cartProperty); }
+            set { SetValue(cartProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Cart.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty cartProperty =
+            DependencyProperty.Register("Cart", typeof(BO.Cart), typeof(NewOrderWindow));
+
+
 
         public ObservableCollection<ProductItem> ProductsItems
         {
             get => (ObservableCollection<ProductItem>)GetValue(ProductsDependency);
             private set => SetValue(ProductsDependency, value);
         }
+
+        public static readonly DependencyProperty ProductsDependency
+            = DependencyProperty.Register(nameof(ProductsItems), typeof(ObservableCollection<ProductItem>), typeof(NewOrderWindow));
         public Array Categories { set; get; }
         private int selectedIndex;
 
@@ -41,7 +55,7 @@ namespace Products
             ProductsItems = new ObservableCollection<ProductItem>(bl?.Product.GetListProductForCatalog(cart));
             Categories = Enum.GetValues(typeof(BO.Category));
             InitializeComponent();
-            //CatalogListView.ItemsSource = bl?.Product.GetListProductForCatalog(cart);
+            //CatalogListView.ItemsSource = bl?.Product.GetListProductForCatalog(Cart);
             //CategoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Category));
         }
 
@@ -51,9 +65,9 @@ namespace Products
         //    {
         //        selectedIndex = CatalogListView.SelectedIndex;
         //        int pflId = ((ProductItem)CatalogListView.SelectedItem).Id;
-        //        //new ProductWindow(pflId, cart, (productId) => ProductsItems[selectedIndex] = bl?.Product.GetProductDetailsForCustomer(productId, cart)).Show();
+        //        //new ProductWindow(pflId, Cart, (productId) => ProductsItems[selectedIndex] = bl?.Product.GetProductDetailsForCustomer(productId, Cart)).Show();
 
-        //        //CatalogListView.ItemsSource = bl?.Product.GetListProductForCatalog(cart);
+        //        //CatalogListView.ItemsSource = bl?.Product.GetListProductForCatalog(Cart);
         //    }
         //}
 
@@ -82,7 +96,7 @@ namespace Products
                 }
             }
 
-            //CatalogListView.ItemsSource = bl?.Product.GetListProductForCatalog(cart,x => (BO.Category)x?.Category! == category);
+            //CatalogListView.ItemsSource = bl?.Product.GetListProductForCatalog(Cart,x => (BO.Category)x?.Category! == category);
         }
 
         /// <summary>

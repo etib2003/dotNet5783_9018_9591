@@ -18,14 +18,29 @@ namespace PL
         ///Object to access the logical layer.
         /// </summary>
          BlApi.IBl? bl= BlApi.Factory.Get();
-        BO.Cart cart = new BO.Cart() { CustomerName = null, CustomerEmail = null, CustomerAddress = null, Items = new List<BO.OrderItem>(), TotalPrice = 0 };
-        int i=1;
+        //BO.Cart Cart = new BO.Cart() { CustomerName = null, CustomerEmail = null, CustomerAddress = null, Items = new List<BO.OrderItem>(), TotalPrice = 0 };
+
+
+        public BO.Cart cart
+        {
+            get { return (BO.Cart)GetValue(cartProperty); }
+            set { SetValue(cartProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Cart.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty cartProperty =
+            DependencyProperty.Register("Cart", typeof(BO.Cart), typeof(MainWindow));
+
+
+    int i=1;
 
         /// <summary>
         /// constructor
         /// </summary>
         public MainWindow()
         {
+            cart = new BO.Cart() { CustomerName = null, CustomerEmail = null, CustomerAddress = null, Items = new List<BO.OrderItem>(), TotalPrice = 0 };
+
             InitializeComponent();
         }
 

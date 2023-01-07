@@ -37,12 +37,12 @@ namespace Cart
 
             try
             {
-                //cart.CustomerName = NameTB.Text;
-                //cart.CustomerAddress = AddressTB.Text;
+                //Cart.CustomerName = NameTB.Text;
+                //Cart.CustomerAddress = AddressTB.Text;
                 //if (EmailTB.Text != null || EmailTB.Text != "")
-                //    cart.CustomerEmail = EmailTB.Text;             
-                //bl?.Cart.CommitOrder(cart);
-                //new CompleteWindow(cart).Show();
+                //    Cart.CustomerEmail = EmailTB.Text;             
+                //bl?.Cart.CommitOrder(Cart);
+                //new CompleteWindow(Cart).Show();
             cart.CustomerName = NameTB.Text;
             cart.CustomerAddress = AddressTB.Text;
             if (EmailTB.Text != null || EmailTB.Text != "")
