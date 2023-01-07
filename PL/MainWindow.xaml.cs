@@ -2,9 +2,14 @@
 using Orders;
 using PL.productsWindows;
 using Products;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace PL
@@ -18,6 +23,8 @@ namespace PL
         ///Object to access the logical layer.
         /// </summary>
          BlApi.IBl? bl= BlApi.Factory.Get();
+
+        private string _path = Environment.CurrentDirectory + @$"\PictursForMain\";
         //BO.Cart Cart = new BO.Cart() { CustomerName = null, CustomerEmail = null, CustomerAddress = null, Items = new List<BO.OrderItem>(), TotalPrice = 0 };
 
 
@@ -29,10 +36,22 @@ namespace PL
 
         // Using a DependencyProperty as the backing store for Cart.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty cartProperty =
-            DependencyProperty.Register("Cart", typeof(BO.Cart), typeof(MainWindow));
+            DependencyProperty.Register("cart", typeof(BO.Cart), typeof(MainWindow));
 
 
-    int i=1;
+
+        public ImageSource PictureHolderSource
+        {
+            get { return (ImageSource)GetValue(PictureHolderProperty); }
+            set { SetValue(PictureHolderProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PictureHolderProperty =
+            DependencyProperty.Register("PictureHolderSource", typeof(ImageSource), typeof(MainWindow));
+
+        BackgroundWorker backgroundWorker;
+        int i=1;
 
         /// <summary>
         /// constructor
@@ -40,8 +59,30 @@ namespace PL
         public MainWindow()
         {
             cart = new BO.Cart() { CustomerName = null, CustomerEmail = null, CustomerAddress = null, Items = new List<BO.OrderItem>(), TotalPrice = 0 };
-
+          
+            backgroundWorker = new BackgroundWorker();
+            backgroundWorker.DoWork += BackgroundWorker_DoWork;
+            backgroundWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
+            backgroundWorker.WorkerReportsProgress = true;
+            backgroundWorker.WorkerSupportsCancellation = true;
+            backgroundWorker.RunWorkerAsync();
             InitializeComponent();
+        }
+
+        private void BackgroundWorker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
+        {
+            PictureHolderSource = new BitmapImage(new System.Uri(_path + $"{e.ProgressPercentage}.jpg"));
+        }
+
+        private void BackgroundWorker_DoWork(object? sender, DoWorkEventArgs e)
+        {
+            int i = 1;
+            while (true)
+            {
+                backgroundWorker.ReportProgress(i++);
+                i = i < 5 ? i : 1;
+                Thread.Sleep(2000);
+            }
         }
 
         /// <summary>
@@ -76,7 +117,7 @@ namespace PL
             {
                 i = 4;
             }
-            PictureHolder.Source = new BitmapImage(new System.Uri("PictursForMain/" + i + ".jpg",System.UriKind.Relative));
+            PictureHolderSource = new BitmapImage(new System.Uri(_path + $"{i}.jpg"));
         }
 
         private void next_Click(object sender, RoutedEventArgs e)
@@ -86,7 +127,24 @@ namespace PL
             {
                 i = 1;
             }
-            PictureHolder.Source = new BitmapImage(new System.Uri("PictursForMain/" + i + ".jpg", System.UriKind.Relative));
+            
+           PictureHolderSource = new BitmapImage(new System.Uri(_path + $"{i}.jpg"));
+           
+           
+        }
+
+        private void replaceImages()
+        {
+            int i = 1;
+            while (true)
+            {
+                i = i < 5 ? i : 1;
+                PictureHolderSource = new BitmapImage(new System.Uri(_path + $"{i}.jpg"));
+                i++;
+                Thread.Sleep(3000);
+                i = i < 5 ? i : 1;
+                PictureHolderSource = new BitmapImage(new System.Uri(_path + $"{i}.jpg"));
+            }
         }
     }
 }
