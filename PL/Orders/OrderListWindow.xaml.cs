@@ -39,10 +39,7 @@ namespace Orders
                 selectedIndex = OrderForListView.SelectedIndex;
                 int oflId = ((OrderForList)OrderForListView.SelectedItem).Id;
                 new OrderWindow(oflId, (orderId) => OrderForList[selectedIndex] = bl?.Order.GetOrderForList(orderId)).Show();
-                //OrderForListView.ItemsSource = bl?.Order.GetOrderListForManager();//רענון המסך
             }
-        }
-
-         
+        }       
     }
 }

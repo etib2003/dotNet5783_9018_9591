@@ -20,11 +20,7 @@ namespace PL.productsWindows
         ///Object to access the logical layer
         /// </summary>
         BlApi.IBl? bl = BlApi.Factory.Get();
-        BO.Cart cart;
         public Array Categories { set; get; }
-        //public BO.Product NewPdct { get; set; }
-
-
 
         public BO.Product NewPdct
         {
@@ -113,10 +109,10 @@ namespace PL.productsWindows
         {
             Regex regex = new("[^0-9.]+");
             e.Handled = regex.IsMatch(e.Text);
-            if (e.Text == "." && PriceBox.Text.Contains(".")) //$
-            {
-                e.Handled = regex.IsMatch("[.]");
-            }
+            //if (e.Text == "." && PriceBox.Text.Contains(".")) //$
+            //{
+            //    e.Handled = regex.IsMatch("[.]");
+            //}
         }
 
 

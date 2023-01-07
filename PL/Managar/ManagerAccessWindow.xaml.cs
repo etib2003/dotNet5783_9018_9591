@@ -1,4 +1,5 @@
 ﻿using PL;
+using PL.productsWindows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,17 @@ namespace Managar
     public partial class ManagerAccessWindow : Window
     {
         string password = "1";
+
+        public string Password
+        {
+            get { return (string)GetValue(PasswordProperty); }
+            set { SetValue(PasswordProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Password.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PasswordProperty =
+            DependencyProperty.Register("Password", typeof(string), typeof(ManagerAccessWindow));
+
         public ManagerAccessWindow()
         {
             InitializeComponent();
@@ -30,7 +42,7 @@ namespace Managar
         {
             if (e.Key == Key.Enter)
             {
-                if (PasswordBox.Text == password)
+                if (Password == password)
                 {
                     new ManagerWindow().Show();
                     this.Close();

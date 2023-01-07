@@ -27,14 +27,12 @@ namespace Cart
         public CustomerDetailsWindow(BO.Cart _cart, ObservableCollection<BO.OrderItem> _productItems)
         {
             productItems = _productItems;
-             cart = _cart;
+            cart = _cart;
             InitializeComponent();
         }
 
         private void endOrderbutton_Click(object sender, RoutedEventArgs e) //להוסיף בדיקות שנכנס משהו!
         {
-
-
             try
             {
                 //Cart.CustomerName = NameTB.Text;
@@ -55,9 +53,7 @@ namespace Cart
             catch (BO.NotValidEmailException ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-          
-
+            }         
         }
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {

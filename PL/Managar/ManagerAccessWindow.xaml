@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Managar"
         mc:Ignorable="d"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="ManagerAccessWindow" Height="200" Width="250">
     <Grid>
-        <TextBox x:Name="PasswordBox" HorizontalAlignment="Center" Margin="0,92,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="106" Height="22" FontFamily="Candara" KeyDown="Enter" FontSize="14"/>
+        <TextBox x:Name="PasswordBox" Text="{Binding Password,  UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Margin="0,92,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="106" Height="22" FontFamily="Candara" KeyDown="Enter" FontSize="14"/>
         <Label x:Name="PasswordLabel" Content="Enter password:" HorizontalAlignment="Center" Margin="0,62,0,0" VerticalAlignment="Top" Height="25" Width="106" HorizontalContentAlignment="Center"/>
 
     </Grid>

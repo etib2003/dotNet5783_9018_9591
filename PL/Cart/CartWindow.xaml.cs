@@ -17,8 +17,6 @@ namespace Cart
     public partial class CartWindow : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
-        //public BO.Cart Cart { get; set; }
-
 
         public BO.Cart Cart
         {
@@ -30,16 +28,13 @@ namespace Cart
         public static readonly DependencyProperty cartProperty =
             DependencyProperty.Register("Cart", typeof(BO.Cart), typeof(CartWindow));
 
-
         public ObservableCollection<BO.OrderItem?> cartItems { set; get; }
 
         public CartWindow(BO.Cart _cart, ObservableCollection<ProductItem> ProductItems)
         {
-            Cart = _cart;
-           
+            Cart = _cart;          
             cartItems = new ObservableCollection<BO.OrderItem?>(Cart.Items);
-            InitializeComponent();
-             
+            InitializeComponent();             
         }
 
         private void ContToPayButton_Click(object sender, RoutedEventArgs e)
@@ -69,7 +64,6 @@ namespace Cart
             catch (Exception ex)
             {
                 MessageBox.Show("Out of stock!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-
             }
         }
             private void remove1(object sender, RoutedEventArgs e)
@@ -80,8 +74,7 @@ namespace Cart
                 int productId;
                 int amount;
                 if (frameworkElement is not null && frameworkElement.DataContext is not null)
-                {
-                   
+                {                
                     productId = ((OrderItem)(frameworkElement.DataContext)).ProductID;
                     amount = ((OrderItem)(frameworkElement.DataContext)).Amount;
                     Cart =bl?.Cart.UpdateAmountOfProduct(Cart, productId, amount - 1);                
@@ -93,7 +86,6 @@ namespace Cart
             catch (Exception ex)
             {
                 MessageBox.Show("Out of stock!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-
             }
         }
 
@@ -111,14 +103,12 @@ namespace Cart
                     Cart = bl?.Cart.UpdateAmountOfProduct(Cart, productId, 0);
                     var p = cartItems.First(p => p.ProductID == productId);
                     cartItems.Remove(p);
-                    //cartItems[cartItems.IndexOf(p)] = null;
                     CartItemsView.Items.Refresh();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Out of stock!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-
             }
         }
     }

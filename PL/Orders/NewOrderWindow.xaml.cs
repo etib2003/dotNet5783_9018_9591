@@ -22,9 +22,6 @@ namespace Products
     public partial class NewOrderWindow : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
-        // public BO.Cart Cart=new BO.Cart();
-
-        //public BO.Cart Cart;
 
         public BO.Cart cart
         {
@@ -35,8 +32,6 @@ namespace Products
         // Using a DependencyProperty as the backing store for Cart.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty cartProperty =
             DependencyProperty.Register("Cart", typeof(BO.Cart), typeof(NewOrderWindow));
-
-
 
         public ObservableCollection<ProductItem> ProductsItems
         {
@@ -136,8 +131,6 @@ namespace Products
                 MessageBox.Show("Out of stock!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
-
-        }
- 
+        } 
     }
 }
