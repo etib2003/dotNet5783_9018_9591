@@ -1,4 +1,6 @@
 ﻿using BO;
+using DocumentFormat.OpenXml.Office.CustomDocumentInformationPanel;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,10 +17,34 @@ namespace Orders
     public partial class TrackOrderWindow : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
-        public BO.OrderTracking orderTracking { get; set; }
+
+        public BO.OrderTracking orderTracking
+        {
+            get { return (BO.OrderTracking)GetValue(orderTrackingProperty); }
+            set { SetValue(orderTrackingProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for orderTracking.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty orderTrackingProperty =
+            DependencyProperty.Register("orderTracking", typeof(BO.OrderTracking), typeof(TrackOrderWindow));
+
+
+        public string Id
+        {
+            get { return (string)GetValue(IdProperty); }
+            set { SetValue(IdProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Id.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IdProperty =
+            DependencyProperty.Register("Id", typeof(string), typeof(TrackOrderWindow));
+
+
 
         public TrackOrderWindow()
         {
+            orderTracking = new BO.OrderTracking() {};
+
             InitializeComponent();
         }
 
@@ -28,9 +54,8 @@ namespace Orders
             {
                 if (e.Key == Key.Enter)
                 {
-                    int id = int.Parse(IdTextBox.Text);                  
+                    int id = int.Parse(Id);//int.Parse(IdTextBox.Text);                  
                     orderTracking = bl?.Order.TrackingOrder(id);
-                    //OrderTrackingBox.DataContext = orderTracking;
                 }
             }
             catch(BoDoesNoExistException ex)

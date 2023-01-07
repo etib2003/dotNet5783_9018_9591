@@ -7,6 +7,15 @@
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="ProductListWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="StyleForComboBox" TargetType="ComboBox">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=ShowAllCategories, Path=Click}" Value="True">
+                    <Setter Property="Text" Value=""></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
 
     <Grid Name="MainGrid">
         <!--<Grid.Background>
@@ -26,7 +35,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <ComboBox x:Name ="selectCategory" ItemsSource="{Binding Categories}" Grid.Column="1" RenderTransformOrigin="-0.297,0.143" SelectionChanged="ComboBox_SelectionChanged" Margin="112,26,54,23" FontFamily="Candara" FontSize="14">
+            <ComboBox x:Name ="selectCategory" ItemsSource="{Binding Categories}" Style="{StaticResource StyleForComboBox}" Grid.Column="1" RenderTransformOrigin="-0.297,0.143" SelectionChanged="ComboBox_SelectionChanged" Margin="112,26,54,23" FontFamily="Candara" FontSize="14">
 
             </ComboBox>
             <Label x:Name="ProuctsLabel" Content="Our products" Grid.Column="0" RenderTransformOrigin="4.721,1.674" Margin="110,18,110,10" FontSize="26" FontFamily="Candara" FontWeight="Bold" HorizontalContentAlignment="Center" />
@@ -43,7 +52,7 @@
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Category" Width="132"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Name" Width="110"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Price}" Header="Price" Width="65"/>
-                   
+
                 </GridView>
             </ListView.View>
         </ListView>

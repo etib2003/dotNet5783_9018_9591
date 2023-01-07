@@ -13,6 +13,9 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <ListView x:Name="OrderForListView" ItemsSource="{Binding OrderForList}"  FontFamily="Candara" Foreground="Black" Margin="0,102,0,0" MouseDoubleClick="Update_MouseDoubleClick" FontSize="16" Grid.ColumnSpan="2">
+            <ListView.Background>
+                <ImageBrush/>
+            </ListView.Background>
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="Id" Width="125"/>

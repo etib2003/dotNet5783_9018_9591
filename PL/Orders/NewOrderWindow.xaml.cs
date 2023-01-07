@@ -45,17 +45,17 @@ namespace Products
             //CategoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Category));
         }
 
-        private void viewProduct_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            if (CatalogListView.SelectedItem is ProductItem productItem)
-            {
-                selectedIndex = CatalogListView.SelectedIndex;
-                int pflId = ((ProductItem)CatalogListView.SelectedItem).Id;
-                new ProductWindow(pflId, cart, (productId) => ProductsItems[selectedIndex] = bl?.Product.GetProductDetailsForCustomer(productId, cart)).Show();
+        //private void viewProduct_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        //{
+        //    if (CatalogListView.SelectedItem is ProductItem productItem)
+        //    {
+        //        selectedIndex = CatalogListView.SelectedIndex;
+        //        int pflId = ((ProductItem)CatalogListView.SelectedItem).Id;
+        //        //new ProductWindow(pflId, cart, (productId) => ProductsItems[selectedIndex] = bl?.Product.GetProductDetailsForCustomer(productId, cart)).Show();
 
-                //CatalogListView.ItemsSource = bl?.Product.GetListProductForCatalog(cart);
-            }
-        }
+        //        //CatalogListView.ItemsSource = bl?.Product.GetListProductForCatalog(cart);
+        //    }
+        //}
 
         private void restartAndAdd(IEnumerable<ProductItem> objects)
         {

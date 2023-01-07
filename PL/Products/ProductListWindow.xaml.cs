@@ -40,8 +40,7 @@ namespace PL.productsWindows
             catch (Exception)
             {
                 throw;
-            }
-            
+            }            
         }
 
         /// <summary>
@@ -53,7 +52,9 @@ namespace PL.productsWindows
         {
             BO.Category category = (BO.Category)selectCategory.SelectedItem;
             if (ProductsForList.Any(p => p.Category == category) == false)
+            {
                 restartAndAdd(bl?.Product.GetListProductForManagerAndCatalog(x => (BO.Category)x?.Category == category));
+            }
             else
             {
                 List<ProductForList> objects = bl?.Product.GetProductForListByCond(ProductsForList, product => product.Category == category).ToList();
@@ -72,6 +73,7 @@ namespace PL.productsWindows
             {
                 ProductsForList.Add(item);
             }
+
         }
 
         /// <summary>
@@ -83,7 +85,6 @@ namespace PL.productsWindows
         {
             restartAndAdd(bl?.Product.GetListProductForManagerAndCatalog());
             //selectCategory = null;
-
         }
 
         /// <summary>

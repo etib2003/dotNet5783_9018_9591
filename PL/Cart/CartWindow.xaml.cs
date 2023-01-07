@@ -94,14 +94,13 @@ namespace Cart
                 int amount;
                 if (frameworkElement is not null && frameworkElement.DataContext is not null)
                 {
-
                     productId = ((OrderItem)(frameworkElement.DataContext)).ProductID;
                     amount = ((OrderItem)(frameworkElement.DataContext)).Amount;
                     BO.Cart c = bl?.Cart.UpdateAmountOfProduct(cart, productId, 0);
-                     var p = cartItems.First(p => p.ProductID == productId);
-                    cartItems[cartItems.IndexOf(p)] = null;
+                    var p = cartItems.First(p => p.ProductID == productId);
+                    cartItems.Remove(p);
+                    //cartItems[cartItems.IndexOf(p)] = null;
                     CartItemsView.Items.Refresh();
-
                 }
             }
             catch (Exception ex)
