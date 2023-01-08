@@ -27,8 +27,6 @@ namespace OtherFunctions
         {
             if (number.ToString().Length < length || (length == 6 && number.ToString().Length != 6))
                 throw new BO.WrongLengthException("Wrong length number");
-
-
         }
         /// <summary>
         /// check if the name's format valid

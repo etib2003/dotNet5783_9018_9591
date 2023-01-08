@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,19 +25,17 @@ namespace PL
         /// </summary>
          BlApi.IBl? bl= BlApi.Factory.Get();
 
-        private string _path = Environment.CurrentDirectory + @$"\PictursForMain\";
+        private string _path;
 
-        public BO.Cart cart
+        public BO.Cart Cart
         {
             get { return (BO.Cart)GetValue(cartProperty); }
             set { SetValue(cartProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Cart.  This enables animation, styling, binding, etc...
+        // Using a DependencyProperty as the backing store for Cart. This enables animation, styling, binding, etc...
         public static readonly DependencyProperty cartProperty =
-            DependencyProperty.Register("cart", typeof(BO.Cart), typeof(MainWindow));
-
-
+            DependencyProperty.Register("Cart", typeof(BO.Cart), typeof(MainWindow));
 
         public ImageSource PictureHolderSource
         {
@@ -44,7 +43,7 @@ namespace PL
             set { SetValue(PictureHolderProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        // Using a DependencyProperty as the backing store for MyProperty. This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PictureHolderProperty =
             DependencyProperty.Register("PictureHolderSource", typeof(ImageSource), typeof(MainWindow));
 
@@ -56,31 +55,33 @@ namespace PL
         /// </summary>
         public MainWindow()
         {
-            cart = new BO.Cart() { CustomerName = null, CustomerEmail = null, CustomerAddress = null, Items = new List<BO.OrderItem>(), TotalPrice = 0 };
-          
-            backgroundWorker = new BackgroundWorker();
-            backgroundWorker.DoWork += BackgroundWorker_DoWork;
-            backgroundWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
-            backgroundWorker.WorkerReportsProgress = true;
-            backgroundWorker.WorkerSupportsCancellation = true;
-            backgroundWorker.RunWorkerAsync();
             InitializeComponent();
-        }
+            var basePath = AppDomain.CurrentDomain.BaseDirectory.Split(@"\");
+            _path = string.Join(@"\", basePath.Take(basePath.Length - 2)) + @$"\PL\PictursForMain\";
 
-        private void BackgroundWorker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
-        {
-            //PictureHolderSource = new BitmapImage(new System.Uri(_path + $"{e.ProgressPercentage}.jpg"));
-        }
+            Cart = new BO.Cart() { CustomerName = null, CustomerEmail = null, CustomerAddress = null, Items = new List<BO.OrderItem>(), TotalPrice = 0 };
 
-        private void BackgroundWorker_DoWork(object? sender, DoWorkEventArgs e)
-        {
-            int i = 1;
-            while (true)
+            backgroundWorker = new BackgroundWorker
             {
-                backgroundWorker.ReportProgress(i++);
-                i = i < 5 ? i : 1;
-                Thread.Sleep(2000);
-            }
+                WorkerReportsProgress = true,
+                WorkerSupportsCancellation = true
+            };
+
+            backgroundWorker.DoWork += (s, e) =>
+            {
+                int i = 1;
+                while (true)
+                {
+                    backgroundWorker.ReportProgress(i++);
+                    i = i < 5 ? i : 1;
+                    Thread.Sleep(1500);
+                }
+            };
+
+            backgroundWorker.ProgressChanged += (s, e) => PictureHolderSource = new BitmapImage(new System.Uri(_path + $"{e.ProgressPercentage}.jpg")); ;
+ 
+            backgroundWorker.RunWorkerAsync();
+
         }
 
         /// <summary>
@@ -105,7 +106,7 @@ namespace PL
 
         private void NewOrderButton_click(object sender, RoutedEventArgs e)
         {
-            new  NewOrderWindow(cart).Show();
+            new  NewOrderWindow(Cart).Show();
         }
 
         private void back_Click(object sender, RoutedEventArgs e)
@@ -124,11 +125,8 @@ namespace PL
             if (i > 4)
             {
                 i = 1;
-            }
-            
-           PictureHolderSource = new BitmapImage(new System.Uri(_path + $"{i}.jpg"));
-           
-           
+            }          
+           PictureHolderSource = new BitmapImage(new System.Uri(_path + $"{i}.jpg"));        
         }
 
         private void replaceImages()

@@ -21,7 +21,7 @@ namespace Managar
     /// </summary>
     public partial class ManagerAccessWindow : Window
     {
-        string password = "1";
+        string password = "2022";
 
         public string Password
         {
@@ -48,7 +48,6 @@ namespace Managar
                     this.Close();
                 }
             }
-
         }
     }
 }

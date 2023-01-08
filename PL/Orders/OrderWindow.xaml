@@ -15,8 +15,8 @@
             <Setter Property="Foreground" Value="Black"/>
         </Style>
     </Window.Resources>
-    
-        <Grid x:Name="OrderGrid">
+
+    <Grid x:Name="OrderGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="357*"/>
             <ColumnDefinition Width="443*"/>
@@ -73,7 +73,7 @@
             <CheckBox.Visibility >
                 <MultiBinding Converter="{StaticResource visibiltyAndShipDate}">
                     <Binding Path="Order.ShipDate"></Binding>
-                    <Binding Path="Order.DeliveryDate"></Binding>
+                    <Binding Path="ViewCondition"></Binding>
                 </MultiBinding>
             </CheckBox.Visibility>
         </CheckBox>
@@ -82,8 +82,11 @@
                 <MultiBinding Converter="{StaticResource visibiltyAndDeliveryDate}">
                     <Binding Path="Order.ShipDate"></Binding>
                     <Binding Path="Order.DeliveryDate"></Binding>
+                    <Binding Path="ViewCondition"></Binding>
                 </MultiBinding>
             </CheckBox.Visibility>
         </CheckBox>
+        <Image HorizontalAlignment="Left" Height="64" VerticalAlignment="Top" Width="118" Source="/LOGO.png" Grid.Row="9" Margin="0,50,0,0"/>
+
     </Grid>
 </Window>

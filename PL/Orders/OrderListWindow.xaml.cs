@@ -28,19 +28,33 @@ namespace Orders
         Action action;
         public OrderListWindow(Action action)
         {
-            this.action = action;
-            OrderForList = new ObservableCollection<OrderForList>(bl?.Order.GetOrderListForManager());
-            InitializeComponent();
-        }
-     
-            private void Update_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            if (OrderForListView.SelectedItem is OrderForList orderForList)
+            try
             {
-                selectedIndex = OrderForListView.SelectedIndex;
-                int oflId = ((OrderForList)OrderForListView.SelectedItem).Id;
-                new OrderWindow(oflId, (orderId) => OrderForList[selectedIndex] = bl?.Order.GetOrderForList(orderId), action).Show();
+                this.action = action;
+                OrderForList = new ObservableCollection<OrderForList>(bl?.Order.GetOrderListForManager());
+                InitializeComponent();
             }
-        }       
+            catch (BO.BoDoesNoExistException ex)
+            {
+                MessageBox.Show("We could not load the data..\n Please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void Update_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                if (OrderForListView.SelectedItem is OrderForList orderForList)
+                {
+                    selectedIndex = OrderForListView.SelectedIndex;
+                    int oflId = ((OrderForList)OrderForListView.SelectedItem).Id;
+                    new OrderWindow(oflId, (orderId) => OrderForList[selectedIndex] = bl?.Order.GetOrderForList(orderId), action).Show();
+                }
+            }
+            catch(BO.BoDoesNoExistException ex)
+            {
+                MessageBox.Show("We could not find the order\n Please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }

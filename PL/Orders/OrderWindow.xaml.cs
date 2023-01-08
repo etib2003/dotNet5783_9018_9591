@@ -36,18 +36,34 @@ namespace Orders
         public static readonly DependencyProperty OrderProperty =
             DependencyProperty.Register("Order", typeof(BO.Order), typeof(OrderWindow));
 
+
+
+        public bool ViewCondition
+        {
+            get { return (bool)GetValue(ViewConditionProperty); }
+            set { SetValue(ViewConditionProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ViewCondition.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ViewConditionProperty =
+            DependencyProperty.Register("ViewCondition", typeof(bool), typeof(OrderWindow));
+
+
+
         Action _action;
         public OrderWindow(int ordLId, Action<int> action, Action _action)
         {
             this.action = action;
             this._action = _action;
             Order = bl?.Order.GetOrderDetails(ordLId);
+            ViewCondition = false;
             InitializeComponent();
         }
 
         public OrderWindow(int ordLId)
         {
             Order = bl?.Order.GetOrderDetails(ordLId);
+            ViewCondition=true;
             InitializeComponent();
         }
 

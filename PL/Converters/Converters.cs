@@ -14,7 +14,20 @@ namespace Converters
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            return values[0] is null ? Visibility.Visible : Visibility.Collapsed;
+            return values[0] is null && (bool)values[1] == false ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class VisibiltyAndDeliveryDate : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            return values[0] is not null && values[1] is null && (bool)values[2] == false ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
@@ -103,31 +116,5 @@ namespace Converters
         }
     }
 
-    //public class VisibiltyProductLabelConverter : IMultiValueConverter
-    //{
-    //    //convert from source property type to target property type
-    //    public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
-    //    {
-    //        return (bool)value[0] && (string)value[1]=="" ? Visibility.Collapsed : Visibility.Visible;
-    //    }
-    //    //convert from target property type to source property type
 
-    //    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-    //}
-
-    public class VisibiltyAndDeliveryDate : IMultiValueConverter
-    {
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-        {
-            return values[0] is not null && values[1] is null ? Visibility.Visible : Visibility.Collapsed;
-        }
-
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
 }

@@ -10,6 +10,6 @@
     <Grid>
         <TextBox x:Name="PasswordBox" Text="{Binding Password,  UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Margin="0,92,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="106" Height="22" FontFamily="Candara" KeyDown="Enter" FontSize="14"/>
         <Label x:Name="PasswordLabel" Content="Enter password:" HorizontalAlignment="Center" Margin="0,62,0,0" VerticalAlignment="Top" Height="25" Width="106" HorizontalContentAlignment="Center"/>
-
+        <Image HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Width="42" Source="/LOGO.png" Margin="10,139,0,0"/>
     </Grid>
 </Window>

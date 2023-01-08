@@ -1,4 +1,5 @@
 ﻿
+using BO;
 using DocumentFormat.OpenXml.Vml;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,6 @@ namespace PL.productsWindows
         public static readonly DependencyProperty NewPdctProperty =
             DependencyProperty.Register("NewPdct", typeof(BO.Product), typeof(ProductWindow));
 
-
         private Action<int> action;
 
         public string CompleteButton
@@ -64,30 +64,27 @@ namespace PL.productsWindows
         /// <param name="prtrLId">id of a product</param>
         public ProductWindow(int prtrLId, Action<int> action) 
         {
-            this.action = action;
-            NewPdct = bl?.Product.GetProductDetailsForManager(prtrLId);
-            Categories = Enum.GetValues(typeof(BO.Category));
-            InitializeComponent();
-            CompleteButton = "Update";
+            try
+            {
+                this.action = action;
+                NewPdct = bl?.Product.GetProductDetailsForManager(prtrLId);
+                Categories = Enum.GetValues(typeof(BO.Category));
+                InitializeComponent();
+                CompleteButton = "Update";
+            }
+            catch(BO.BoDoesNoExistException ex)
+            {
+                MessageBox.Show("We could not load the product details..\nPlease try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch(BO.NegativeNumberException ex)
+            {
+                MessageBox.Show("Ivalide Id\nPlease try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (BO.WrongLengthException ex)
+            {
+                MessageBox.Show("Too short Id number\nPlease try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
-
-        //public ProductWindow(int prtrLId, BO.Cart _cart, Action<int> action)
-        //{
-        //    this.action = action;
-        //    NewPdct = bl?.Product.GetProductDetailsForManager(prtrLId);
-        //   // DataContext = this;
-        //    InitializeComponent();
-        //    Complete.Content = "Add to Cart";
-        //    Cart = _cart;
-        //    CategoryCB.Visibility = Visibility.Collapsed;
-        //    CategoryBox.Visibility = Visibility.Visible;
-        //    CategoryBox.Text = NewPdct!.Category.ToString();
-        //    IdBox.IsReadOnly = true;
-        //    NameBox.IsReadOnly = true;
-        //    PriceBox.IsReadOnly = true;
-        //    InStockBox.IsReadOnly = true;
-        //    AmountAddBox.Visibility = Visibility.Visible;
-        //}
 
         /// <summary>
         /// makes sure the id is valid
@@ -109,10 +106,6 @@ namespace PL.productsWindows
         {
             Regex regex = new("[^0-9.]+");
             e.Handled = regex.IsMatch(e.Text);
-            //if (e.Text == "." && PriceBox.Text.Contains(".")) //$
-            //{
-            //    e.Handled = regex.IsMatch("[.]");
-            //}
         }
 
 
@@ -137,31 +130,20 @@ namespace PL.productsWindows
                     action(NewPdct.Id);                   
                     MessageBox.Show("Updating is done!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
-                //else if (Complete.Content == "Add to Cart") //לבדוק מה הולך פה
-                //{
-                //    //if (AmountAddBox.Text != "0") //מומלץ לעשות שלא יוכל להכניס 0
-                //    //{
-                //        bl?.Cart.AddProductToCart(Cart, NewPdct.Id); 
-                //        if (AmountAddBox.Text != "Enter amount") //יש בעיה כי אם אין מספיק במלאי הוא עדיין יעשה הוספה של אחד ותכלס זה בעיה
-                //            bl?.Cart.UpdateAmountOfProduct(Cart, NewPdct.Id, int.Parse(AmountAddBox.Text));
-
-                //    action(NewPdct.Id);
-                //    MessageBox.Show("Adding to Cart is done!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-                //    //}
-                //}
+               
                 this.Close();
             }
             catch (BO.BoAlreadyExistsException ex)
             {
-                MessageBox.Show("Product with this barcode already exists!\nPlease try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Product with this Id already exists!\nPlease try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (BO.NegativeNumberException ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message+"\nPlease try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (BO.NegativeDoubleNumberException ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message+"\nPlease try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (BO.WrongLengthException ex)
             {
@@ -169,25 +151,16 @@ namespace PL.productsWindows
             }
             catch (BO.NotValidFormatNameException ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message + "\nPlease try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (Exception ex)
             {
                 if (CompleteButton == "Add")
-                    MessageBox.Show("Error, you can't add the product!");
+                    MessageBox.Show("Error, you can't add the product!\nPlease try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 if (CompleteButton == "Update")
-                    MessageBox.Show("Error, you can't update the product!");
+                    MessageBox.Show("Error, you can't update the product!\nPlease try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 this.Close();
             }
-        }
-        /// <summary>
-        /// close the window
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e">the event</param>
-        private void PWcloseButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
@@ -198,24 +171,10 @@ namespace PL.productsWindows
                 this.Close();
 
             }
-            catch (Exception ex)
+            catch (BO.NotValidDeleteException ex)
             {
-                MessageBox.Show("Error, you can't delete the product!\n It is already in the process of buying");
+                MessageBox.Show("Product is already in order prosses\nYou can't delete it!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
-        ////זה בשביל הוספה לסל, לוודא אם צריך בסוף או לא
-        //private void OnTextBoxGotFocus(object sender, RoutedEventArgs e)
-        //{
-        //    if (AmountAddBox.Text == "Enter amount")
-        //        AmountAddBox.Text = "";
-        //}
-
-        //private void OnTextBoxLostFocus(object sender, RoutedEventArgs e)
-        //{
-        //    if(AmountAddBox.Text== "" || AmountAddBox.Text =="0")
-        //        AmountAddBox.Text = "Enter amount";
-        //}
-
     }
 }

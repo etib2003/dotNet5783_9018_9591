@@ -11,16 +11,23 @@ internal class Order : BlApi.IOrder
 
     public IEnumerable<BO.OrderForList> GetOrderListForManager()
     {
-        IEnumerable<DO.Order?> doOrderList = dal!.Order.RequestAll();//gets all the orders from the data layer
-        return doOrderList.Select(order =>
+        try
         {
-            BO.OrderForList boOrderForList = order.CopyPropTo(new BO.OrderForList());
-            boOrderForList.Status = getOrderStatus(order);
-            var oiOfOrder = dal?.OrderItem.RequestAll(x => x?.OrderID == boOrderForList.Id);
-            boOrderForList.AmountOfItems = oiOfOrder.Count();
-            boOrderForList.TotalPrice = oiOfOrder.Sum(orderItem => orderItem?.Price * orderItem?.Amount) ?? 0;//calculate the total price
-            return boOrderForList;
-        });
+            IEnumerable<DO.Order?> doOrderList = dal!.Order.RequestAll();//gets all the orders from the data layer
+            return doOrderList.Select(order =>
+            {
+                BO.OrderForList boOrderForList = order.CopyPropTo(new BO.OrderForList());
+                boOrderForList.Status = getOrderStatus(order);
+                var oiOfOrder = dal?.OrderItem.RequestAll(x => x?.OrderID == boOrderForList.Id);
+                boOrderForList.AmountOfItems = oiOfOrder.Count();
+                boOrderForList.TotalPrice = oiOfOrder.Sum(orderItem => orderItem?.Price * orderItem?.Amount) ?? 0;//calculate the total price
+                return boOrderForList;
+            });
+        }
+        catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
+        {
+            throw new BO.BoDoesNoExistException("Data exception:", ex);
+        }
     }
 
     /// <summary>
@@ -45,19 +52,26 @@ internal class Order : BlApi.IOrder
     /// <returns></returns>
     private BO.Order getBoOrder(DO.Order doOrder)
     {
-        BO.Order boOrder = doOrder.CopyPropTo(new BO.Order());
-        boOrder.Status = getOrderStatus(doOrder);
+        try
+        {
+            BO.Order boOrder = doOrder.CopyPropTo(new BO.Order());
+            boOrder.Status = getOrderStatus(doOrder);
 
-        IEnumerable<DO.OrderItem?> orderItemsList = dal?.OrderItem.RequestAll(x => x?.OrderID == doOrder.Id)!;
-        boOrder.OrderItems = (from orderItem in orderItemsList
-                              select orderItem.CopyPropTo(new BO.OrderItem()
-                              {
-                                  TotalPrice = (orderItem?.Price ?? 0) * (orderItem?.Amount ?? 0),
-                                  Name = dal?.Product.GetById(orderItem?.ProductID ?? 0).Name,
-                              })
-                              ).ToList();
-        boOrder.TotalPrice = boOrder.OrderItems.Sum(OrderItem => OrderItem.TotalPrice);
-        return boOrder;
+            IEnumerable<DO.OrderItem?> orderItemsList = dal?.OrderItem.RequestAll(x => x?.OrderID == doOrder.Id)!;
+            boOrder.OrderItems = (from orderItem in orderItemsList
+                                  select orderItem.CopyPropTo(new BO.OrderItem()
+                                  {
+                                      TotalPrice = (orderItem?.Price ?? 0) * (orderItem?.Amount ?? 0),
+                                      Name = dal?.Product.GetById(orderItem?.ProductID ?? 0).Name,
+                                  })
+                                  ).ToList();
+            boOrder.TotalPrice = boOrder.OrderItems.Sum(OrderItem => OrderItem.TotalPrice);
+            return boOrder;
+        }
+        catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
+        {
+            throw new BO.BoDoesNoExistException("Data exception:", ex);
+        }
     }
 
     public BO.Order GetOrderDetails(int orderID)
@@ -175,28 +189,40 @@ internal class Order : BlApi.IOrder
 
     public OrderForList GetOrderForList(int orderId)
     {
-        DO.Order? doOrderForList = dal?.Order.GetById(orderId);//gets all the orders from the data layer
+        try
+        {
+            DO.Order? doOrderForList = dal?.Order.GetById(orderId);//gets all the orders from the data layer
 
-        BO.OrderForList orderForList = doOrderForList.CopyPropTo(new OrderForList());
-        orderForList.Status = getOrderStatus(doOrderForList);
-        var oiOfOrder = dal?.OrderItem.RequestAll(x => x?.OrderID == orderForList.Id);
-        orderForList.AmountOfItems = oiOfOrder.Count();
-        orderForList.TotalPrice = oiOfOrder.Sum(orderItem => orderItem?.Price * orderItem?.Amount) ?? 0;
-        return orderForList;
+            BO.OrderForList orderForList = doOrderForList.CopyPropTo(new OrderForList());
+            orderForList.Status = getOrderStatus(doOrderForList);
+            var oiOfOrder = dal?.OrderItem.RequestAll(x => x?.OrderID == orderForList.Id);
+            orderForList.AmountOfItems = oiOfOrder.Count();
+            orderForList.TotalPrice = oiOfOrder.Sum(orderItem => orderItem?.Price * orderItem?.Amount) ?? 0;
+            return orderForList;
+        }
+        catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
+        {
+            throw new BO.BoDoesNoExistException("Data exception:", ex);
+        }
     }
 
     public IEnumerable<OrderStatistics> GroupByStatistics()
     {
-
-        return from order in dal?.Order.RequestAll()
-               group order by getOrderStatus(order) into newGroup
-               select new OrderStatistics
-               {
-                   OrderStatus = newGroup.Key,
-                   CountPerStatus = newGroup.Count()
-               };              
-    }
-   
+        try
+        {
+            return from order in dal?.Order.RequestAll()
+                   group order by getOrderStatus(order) into newGroup
+                   select new OrderStatistics
+                   {
+                       OrderStatus = newGroup.Key,
+                       CountPerStatus = newGroup.Count()
+                   };
+        }
+        catch(Exception ex)
+        {
+            throw new Exception("Failed to divide into groups");
+        }
+    } 
 }
 
 public class OrderStatistics

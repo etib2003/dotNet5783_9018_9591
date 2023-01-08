@@ -7,20 +7,8 @@
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="ProductListWindow" Height="450" Width="800">
-    <Window.Resources>
-        <Style x:Key="StyleForComboBox" TargetType="ComboBox">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=ShowAllCategories, Path=Click}" Value="True">
-                    <Setter Property="Text" Value=""></Setter>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-    </Window.Resources>
 
     <Grid Name="MainGrid">
-        <!--<Grid.Background>
-            <ImageBrush ImageSource="/Products/depositphotos_77706562-stock-photo-musical-instruments-on-wooden-planks.jpg" Opacity="0.8"/>
-        </Grid.Background>-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="399*"/>
             <ColumnDefinition Width="401*"/>
@@ -35,9 +23,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <ComboBox x:Name ="selectCategory" ItemsSource="{Binding Categories}" Style="{StaticResource StyleForComboBox}" Grid.Column="1" RenderTransformOrigin="-0.297,0.143" SelectionChanged="ComboBox_SelectionChanged" Margin="112,26,54,23" FontFamily="Candara" FontSize="14">
-
-            </ComboBox>
+            <ComboBox x:Name ="selectCategory" ItemsSource="{Binding Categories}" Grid.Column="1" RenderTransformOrigin="-0.297,0.143" SelectionChanged="ComboBox_SelectionChanged" Margin="112,26,54,23" FontFamily="Candara" FontSize="14"/>
             <Label x:Name="ProuctsLabel" Content="Our products" Grid.Column="0" RenderTransformOrigin="4.721,1.674" Margin="110,18,110,10" FontSize="26" FontFamily="Candara" FontWeight="Bold" HorizontalContentAlignment="Center" />
             <Label x:Name="CategoryLabel" Grid.Column="1" Content="Category:" HorizontalAlignment="Left" Height="38" Margin="33,26,0,0" VerticalAlignment="Top" Width="97" FontFamily="Candara" FontSize="16"/>
         </Grid>
@@ -52,7 +38,6 @@
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Category" Width="132"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Name" Width="110"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Price}" Header="Price" Width="65"/>
-
                 </GridView>
             </ListView.View>
         </ListView>
@@ -67,10 +52,8 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-        <Button x:Name="AddButton" Content="Add new Product" Grid.Row="2" HorizontalAlignment="Left" Margin="174,5,0,5" Height="32" Padding="5" Click="AddButton_Click" FontFamily="Candara" FontSize="16" Width="129" Grid.Column="1"/>
-        <Button x:Name="CloseButton" Content="Close" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Height="32" Width="74" FontFamily="Candara" FontSize="16" Click="CloseButton_Click" Grid.Column="1" Margin="312,0,0,0"/>
+        <Button x:Name="AddButton" Content="Add new Product" Grid.Row="2" HorizontalAlignment="Left" Margin="242,16,0,16" Height="32" Padding="5" Click="AddButton_Click" FontFamily="Candara" FontSize="16" Width="129" Grid.Column="1"/>
         <Image HorizontalAlignment="Left" Height="64" VerticalAlignment="Top" Width="118" Source="/LOGO.png" Grid.Row="2"/>
-
     </Grid>
 
 </Window>

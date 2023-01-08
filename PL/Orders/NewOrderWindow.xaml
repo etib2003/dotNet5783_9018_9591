@@ -20,19 +20,47 @@
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Category" Width="132"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=InStock}" Header="Is In Stock" Width="132"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Amount}" Header="Amount" Width="132"/>
-                    <GridViewColumn Header="Add To Cart">
+                    <!--<GridViewColumn Header="Add To Cart">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Click="AddToCart" Content="+" Height="20" Width="30">
                                 </Button>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                    </GridViewColumn>-->
                 </GridView>
+         
             </ListView.View>
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Expander IsExpanded="True">
+                                            <Expander.Header>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="{DynamicResource PrimaryHueMidBrush}" FontSize="18" VerticalAlignment="Bottom" />
+                                                    <TextBlock Text="{Binding ItemCount}" FontSize="16" Foreground="{DynamicResource PrimaryHueLightBrush}" FontWeight="Bold" FontStyle="Italic" Margin="10,0,0,0" VerticalAlignment="Bottom" />
+                                                    <TextBlock Text=" item(s)" FontSize="12" Foreground="{DynamicResource PrimaryHueLightBrush}" FontStyle="Italic" VerticalAlignment="Bottom"  />
+                                                </StackPanel>
+                                            </Expander.Header>
+                                            <ItemsPresenter />
+                                        </Expander>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                </GroupStyle>
+            </ListView.GroupStyle>
         </ListView>
         <Button x:Name="ShowAllCategories" HorizontalAlignment="Left" Margin="734,45,0,0" VerticalAlignment="Top" FontFamily="Candara" FontSize="24" Width="29" Click="ShowAllCategories_Click" FontWeight="Bold" Height="28" Content="↻" RenderTransformOrigin="1.333,0.416" BorderThickness="0,0,0,0" Background="{x:Null}"/>
-        <ComboBox x:Name="CategoryComboBox" ItemsSource="{Binding Categories}" HorizontalAlignment="Left" Height="25" Margin="581,47,0,0" VerticalAlignment="Top" Width="150" SelectionChanged="ComboBox_SelectionChanged"/>
+        <ComboBox x:Name="CategoryComboBox" SelectedItem="{Binding CategorySelected}" ItemsSource="{Binding Categories}" HorizontalAlignment="Left" Height="25" Margin="581,47,0,0" VerticalAlignment="Top" Width="150" SelectionChanged="ComboBox_SelectionChanged"/>
         <Button x:Name="CartButton" Content="🛒" HorizontalAlignment="Left" Height="38" Margin="33,22,0,0" VerticalAlignment="Top" Width="52" Click="CartButton_Click" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" />
+        <Button Content="Grouping" HorizontalAlignment="Left" Height="26" Margin="432,47,0,0" VerticalAlignment="Top" Width="134" Click="grouping_Click"/>
+        <Image HorizontalAlignment="Left" Height="68" Stretch="Uniform" VerticalAlignment="Top" Width="118" Source="/LOGO.png" Margin="0,351,0,0" />
+
     </Grid>
 </Window>

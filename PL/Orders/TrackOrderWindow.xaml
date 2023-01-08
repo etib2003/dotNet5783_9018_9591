@@ -26,6 +26,7 @@
         In case of any problem, you can contact us at Harmony@gmail.com
         </TextBlock>
 
+        <Image HorizontalAlignment="Left" Height="64" VerticalAlignment="Top" Width="118" Source="/LOGO.png" Margin="0,349,0,0"/>
 
     </Grid>
 </Window>

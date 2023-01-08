@@ -27,6 +27,7 @@ namespace Cart
         {
             order = _order;
             InitializeComponent();
+
         }
     }
 }

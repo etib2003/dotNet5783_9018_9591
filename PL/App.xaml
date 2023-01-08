@@ -5,6 +5,8 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
+            <!--<ResourceDictionary.MergedDictionaries>                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />            </ResourceDictionary.MergedDictionaries>-->
+
             <ImageBrush x:Key="WindowBackgroundImage" ImageSource="/background3.jpg" />
             <Style TargetType="Window">
                 <Setter Property="Background" Value="{StaticResource WindowBackgroundImage}"/>
@@ -23,14 +25,19 @@
             <SolidColorBrush x:Key="ListViewForegroundBrush" Color="Black"/>
             <Style TargetType="ListView">
                 <Setter Property="Foreground" Value="{StaticResource ListViewForegroundBrush}"/>
+                <Setter Property="TextBlock.Text" Value="Center"/>
             </Style>
             <Style TargetType="Border">
                 <Setter Property="CornerRadius" Value="4"/>
             </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            </Style>
 
 
-            
+
+
         </ResourceDictionary>
-        
+
     </Application.Resources>
 </Application>

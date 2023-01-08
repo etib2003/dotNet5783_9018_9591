@@ -15,10 +15,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="background.jpg" />
-    <None Remove="background1.jpg" />
-    <None Remove="background2.jpg" />
     <None Remove="background3.jpg" />
+    <None Remove="Cart\pictureForComplete.jpg" />
     <None Remove="LOGO.png" />
     <None Remove="LOGO.png.jpg" />
     <None Remove="PictursForMain\1.jpg" />
@@ -40,10 +38,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="background.jpg" />
-    <Resource Include="background1.jpg" />
-    <Resource Include="background2.jpg" />
     <Resource Include="background3.jpg" />
+    <Resource Include="Cart\pictureForComplete.jpg" />
     <Resource Include="LOGO.png" />
     <Resource Include="LOGO.png.jpg" />
     <Resource Include="Products\background.jpg" />

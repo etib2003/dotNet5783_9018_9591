@@ -8,25 +8,46 @@ internal class Product : BlApi.IProduct
 
     public IEnumerable<BO.ProductForList> GetListProductForManagerAndCatalog(Func<DO.Product?, bool>? cond)
     {
-        IEnumerable<DO.Product?> doProductList = dal?.Product.RequestAll(p => cond is null ? true : cond!(p))!;//gets the products from the data layer
-        return doProductList.CopyPropToList<DO.Product?, BO.ProductForList>();
+        try
+        {
+            IEnumerable<DO.Product?> doProductList = dal?.Product.RequestAll(p => cond is null ? true : cond!(p))!;//gets the products from the data layer
+            return doProductList.CopyPropToList<DO.Product?, BO.ProductForList>();
+        }
+        catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
+        {
+            throw new BO.BoDoesNoExistException("Data exception:", ex);
+        }
     }
 
     public IEnumerable<BO.ProductItem> GetListProductForCatalogView(BO.Cart cart, IEnumerable<ProductItem> productItems, Func<BO.ProductItem?, bool>? cond)
     {
-        IEnumerable<BO.ProductItem> ProductItemList = from productItem in productItems.Where(p => cond is null ? true : cond!(p))
-                                                        let id = (int)productItem?.Id!
-                                                        select GetProductDetailsForCustomer(id, cart);
-        return ProductItemList;
+        try
+        {
+            IEnumerable<BO.ProductItem> ProductItemList = from productItem in productItems.Where(p => cond is null ? true : cond!(p))
+                                                          let id = (int)productItem?.Id!
+                                                          select GetProductDetailsForCustomer(id, cart);
+            return ProductItemList;
+        }
+        catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
+        {
+            throw new BO.BoDoesNoExistException("Data exception:", ex);
+        }
     }
 
     public IEnumerable<BO.ProductItem> GetListProductForCatalog(BO.Cart cart, Func<DO.Product?, bool>? cond)
     {
-        IEnumerable<DO.Product?> doProductList = dal?.Product.RequestAll()!;//gets the products from the data layer
-        IEnumerable<BO.ProductItem> doProductItemList = from product in doProductList.Where(p => cond is null ? true : cond!(p))
-                                                        let id = (int)product?.Id!
-                                                        select GetProductDetailsForCustomer(id, cart);
-        return doProductItemList;
+        try
+        {
+            IEnumerable<DO.Product?> doProductList = dal?.Product.RequestAll()!;//gets the products from the data layer
+            IEnumerable<BO.ProductItem> doProductItemList = from product in doProductList.Where(p => cond is null ? true : cond!(p))
+                                                            let id = (int)product?.Id!
+                                                            select GetProductDetailsForCustomer(id, cart);
+            return doProductItemList;
+        }
+        catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
+        {
+            throw new BO.BoDoesNoExistException("Data exception:", ex);
+        }
     }
 
     public BO.Product GetProductDetailsForManager(int productId)
@@ -86,7 +107,7 @@ internal class Product : BlApi.IProduct
 
             DO.Product doProduct = product.CopyPropToStruct(new DO.Product());//create a new logical layer product
             doProduct.Category = (DO.Category?)product.Category;
-            return dal?.Product.Create(doProduct)??default;
+            return dal?.Product.Create(doProduct) ?? default;
         }
         catch (DalApi.DalAlreadyExistsException ex)//catches the exception from the data layer
         {
@@ -123,7 +144,7 @@ internal class Product : BlApi.IProduct
         if (!doOrderItemList.Any())
             dal?.Product.Delete(productId);
         else
-            throw new NotValidDeleteException("product Already In Order Prosses");//exception
+            throw new BO.NotValidDeleteException("product Already In Order Prosses");//exception
     }
 
     public IEnumerable<ProductForList> GetProductForListByCond(IEnumerable<ProductForList> productForLists, Func<BO.ProductForList, bool>? cond)
@@ -133,7 +154,16 @@ internal class Product : BlApi.IProduct
         return ProductForList;
     }
 
-        public ProductForList GetProductForList(int productId)
-    => dal?.Product.GetById(productId).CopyPropTo(new ProductForList());
+    public ProductForList GetProductForList(int productId)
+    {
+        try
+        {
+            return dal?.Product.GetById(productId).CopyPropTo(new ProductForList());
+        }
+        catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
+        {
+            throw new BO.BoDoesNoExistException("Data exception:", ex);
+        }
+    }
 }
 

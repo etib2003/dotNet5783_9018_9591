@@ -69,9 +69,17 @@ namespace Orders
 
         private void ViewOrderButton_Click(object sender, RoutedEventArgs e)
         {
-            if(Id!="" && Id!=null)
+            try
             {
-                new OrderWindow(int.Parse(Id)).Show();
+                if (Id != "" && Id != null)
+                {
+                    new OrderWindow(int.Parse(Id)).Show();
+                }
+            }
+            catch(BO.BoDoesNoExistException ex)
+            {
+                MessageBox.Show("No Order exists with this ID!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Id = "";
             }
         }
 

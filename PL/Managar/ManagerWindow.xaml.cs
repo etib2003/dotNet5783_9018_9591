@@ -25,8 +25,6 @@ namespace PL
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
 
-
-
         public IEnumerable<OrderStatistics> Statistics
         {
             get { return (IEnumerable<OrderStatistics>)GetValue(StatisticsProperty); }
@@ -37,14 +35,17 @@ namespace PL
         public static readonly DependencyProperty StatisticsProperty =
             DependencyProperty.Register("Statistics", typeof(IEnumerable<OrderStatistics>), typeof(ManagerWindow));
 
-
-      
-
-
         public ManagerWindow()
         {
-            Statistics = bl?.Order.GroupByStatistics();
-            InitializeComponent();
+            try
+            {
+                Statistics = bl?.Order.GroupByStatistics();
+                InitializeComponent();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message+"\n Please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void OrderButton_Click(object sender, RoutedEventArgs e)
@@ -55,8 +56,6 @@ namespace PL
         private void ProductButton_Click(object sender, RoutedEventArgs e)
         {
             new ProductListWindow().Show();
-        }
-
-       
+        }      
     }
 }
