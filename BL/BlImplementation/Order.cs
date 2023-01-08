@@ -196,7 +196,6 @@ internal class Order : BlApi.IOrder
                    CountPerStatus = newGroup.Count()
                };              
     }
-
    
 }
 

@@ -1,7 +1,9 @@
-﻿using Orders;
+﻿using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using Orders;
 using PL.productsWindows;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,19 +23,40 @@ namespace PL
     /// </summary>
     public partial class ManagerWindow : Window
     {
+        BlApi.IBl? bl = BlApi.Factory.Get();
+
+
+
+        public IEnumerable<OrderStatistics> Statistics
+        {
+            get { return (IEnumerable<OrderStatistics>)GetValue(StatisticsProperty); }
+            set { SetValue(StatisticsProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Statistics.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty StatisticsProperty =
+            DependencyProperty.Register("Statistics", typeof(IEnumerable<OrderStatistics>), typeof(ManagerWindow));
+
+
+      
+
+
         public ManagerWindow()
         {
+            Statistics = bl?.Order.GroupByStatistics();
             InitializeComponent();
         }
 
         private void OrderButton_Click(object sender, RoutedEventArgs e)
         {
-            new OrderListWindow().Show();           
+            new OrderListWindow(() => Statistics = Statistics.Select(s => s)).Show();
         }
 
         private void ProductButton_Click(object sender, RoutedEventArgs e)
         {
             new ProductListWindow().Show();
         }
+
+       
     }
 }

@@ -64,6 +64,19 @@ namespace Converters
         }
     }
 
+    public class IsValidDetailsConverter : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            return values.All(t => !string.IsNullOrWhiteSpace(t as string));
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class IsValidCTBConverter : IValueConverter
     {
         //convert from source property type to target property type

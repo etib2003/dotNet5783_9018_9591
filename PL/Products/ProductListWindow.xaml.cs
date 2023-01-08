@@ -1,5 +1,6 @@
 ﻿
  using BO;
+using DO;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace PL.productsWindows
     {
         //Object to access the logical layer
         BlApi.IBl? bl = BlApi.Factory.Get();
-        public ObservableCollection<ProductForList> ProductsForList { set; get; }
+        public ObservableCollection<BO.ProductForList> ProductsForList { set; get; }
         public Array Categories { set; get; }
         private int selectedIndex;
    
@@ -26,7 +27,7 @@ namespace PL.productsWindows
         /// </summary>
         public ProductListWindow()
         {
-            ProductsForList = new ObservableCollection<ProductForList>(bl?.Product.GetListProductForManagerAndCatalog()); 
+            ProductsForList = new ObservableCollection<BO.ProductForList>(bl?.Product.GetListProductForManagerAndCatalog()); 
             Categories = Enum.GetValues(typeof(BO.Category));
             InitializeComponent();           
         }
@@ -57,7 +58,7 @@ namespace PL.productsWindows
             }
             else
             {
-                List<ProductForList> objects = bl?.Product.GetProductForListByCond(ProductsForList, product => product.Category == category).ToList();
+                List<BO.ProductForList> objects = bl?.Product.GetProductForListByCond(ProductsForList, product => product.Category == category).ToList();
                 if (objects.Any())
                 {
                     restartAndAdd(objects);
@@ -65,7 +66,7 @@ namespace PL.productsWindows
             }
         }
 
-        private void restartAndAdd(IEnumerable<ProductForList> objects)
+        private void restartAndAdd(IEnumerable<BO.ProductForList> objects)
         {
             ProductsForList.Clear();
 
@@ -100,7 +101,9 @@ namespace PL.productsWindows
                 int pflId = ((ProductForList)ProductForListView.SelectedItem).Id;
                 new ProductWindow(pflId, (productId) => ProductsForList[selectedIndex] = bl?.Product.GetProductForList(productId)).Show();
                 this.Close();
-            }           
+                //ProductsForList.Remove(ProductsForList[selectedIndex]);
+
+            }
         }
 
         /// <summary>

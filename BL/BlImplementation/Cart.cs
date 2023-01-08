@@ -44,7 +44,7 @@ internal class Cart : BlApi.ICart
                     throw new BO.NotInStockException("Not In Stock");//exception
             }
 
-            return cart;
+            return getCart(cart);
         }
         catch (DalApi.DalDoesNoExistException ex) //catches the exception from the data layer
         {
@@ -87,7 +87,7 @@ internal class Cart : BlApi.ICart
                 }
             }
 
-            return cart;
+            return getCart(cart);
 
         }
         catch (DalApi.DalDoesNoExistException ex) //catches the exception from the data layer
@@ -159,7 +159,9 @@ internal class Cart : BlApi.ICart
         {
             throw new BO.BoDoesNoExistException("Data exception:", ex);
         }
-
     }
+
+
+    private BO.Cart getCart(BO.Cart cart) => new BO.Cart { Items = cart.Items, TotalPrice = cart.TotalPrice};
 }
 

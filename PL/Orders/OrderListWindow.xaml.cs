@@ -25,9 +25,10 @@ namespace Orders
         BlApi.IBl? bl = BlApi.Factory.Get();
         public ObservableCollection<OrderForList> OrderForList { set; get; }
         private int selectedIndex;
-
-        public OrderListWindow()
+        Action action;
+        public OrderListWindow(Action action)
         {
+            this.action = action;
             OrderForList = new ObservableCollection<OrderForList>(bl?.Order.GetOrderListForManager());
             InitializeComponent();
         }
@@ -38,7 +39,7 @@ namespace Orders
             {
                 selectedIndex = OrderForListView.SelectedIndex;
                 int oflId = ((OrderForList)OrderForListView.SelectedItem).Id;
-                new OrderWindow(oflId, (orderId) => OrderForList[selectedIndex] = bl?.Order.GetOrderForList(orderId)).Show();
+                new OrderWindow(oflId, (orderId) => OrderForList[selectedIndex] = bl?.Order.GetOrderForList(orderId), action).Show();
             }
         }       
     }

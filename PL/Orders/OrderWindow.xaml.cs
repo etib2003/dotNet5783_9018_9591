@@ -36,10 +36,11 @@ namespace Orders
         public static readonly DependencyProperty OrderProperty =
             DependencyProperty.Register("Order", typeof(BO.Order), typeof(OrderWindow));
 
-        
-        public OrderWindow(int ordLId, Action<int> action)
+        Action _action;
+        public OrderWindow(int ordLId, Action<int> action, Action _action)
         {
             this.action = action;
+            this._action = _action;
             Order = bl?.Order.GetOrderDetails(ordLId);
             InitializeComponent();
         }
@@ -55,12 +56,14 @@ namespace Orders
         {
             Order = bl?.Order.UpdateOrderShip(Order.Id);
             action(Order.Id);
+            _action();
         }
 
         private void DeliveryCheck_Checked(object sender, RoutedEventArgs e)
         {
             Order = bl?.Order.UpdateOrderDelivery(Order.Id);
             action(Order.Id);
+            _action();
         }
     }
 }

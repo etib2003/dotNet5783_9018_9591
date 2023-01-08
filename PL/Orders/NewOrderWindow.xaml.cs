@@ -50,21 +50,8 @@ namespace Products
             ProductsItems = new ObservableCollection<ProductItem>(bl?.Product.GetListProductForCatalog(cart));
             Categories = Enum.GetValues(typeof(BO.Category));
             InitializeComponent();
-            //CatalogListView.ItemsSource = bl?.Product.GetListProductForCatalog(Cart);
-            //CategoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Category));
+     
         }
-
-        //private void viewProduct_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        //{
-        //    if (CatalogListView.SelectedItem is ProductItem productItem)
-        //    {
-        //        selectedIndex = CatalogListView.SelectedIndex;
-        //        int pflId = ((ProductItem)CatalogListView.SelectedItem).Id;
-        //        //new ProductWindow(pflId, Cart, (productId) => ProductsItems[selectedIndex] = bl?.Product.GetProductDetailsForCustomer(productId, Cart)).Show();
-
-        //        //CatalogListView.ItemsSource = bl?.Product.GetListProductForCatalog(Cart);
-        //    }
-        //}
 
         private void restartAndAdd(IEnumerable<ProductItem> objects)
         {
@@ -90,8 +77,6 @@ namespace Products
                     restartAndAdd(objects);
                 }
             }
-
-            //CatalogListView.ItemsSource = bl?.Product.GetListProductForCatalog(Cart,x => (BO.Category)x?.Category! == category);
         }
 
         /// <summary>
@@ -108,7 +93,7 @@ namespace Products
 
         private void CartButton_Click(object sender, RoutedEventArgs e)
         {
-            new CartWindow(cart, ProductsItems).Show();
+            new CartWindow(cart/*, ProductsItems*/).Show();
             this.Close();
         }
 

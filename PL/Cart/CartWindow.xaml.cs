@@ -3,11 +3,12 @@ using Products;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-
+using System.Windows.Data;
 
 namespace Cart
 {
@@ -17,7 +18,7 @@ namespace Cart
     public partial class CartWindow : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
-
+        ICollectionView collectionView;
         public BO.Cart Cart
         {
             get { return (BO.Cart)GetValue(cartProperty); }
@@ -28,18 +29,19 @@ namespace Cart
         public static readonly DependencyProperty cartProperty =
             DependencyProperty.Register("Cart", typeof(BO.Cart), typeof(CartWindow));
 
-        public ObservableCollection<BO.OrderItem?> cartItems { set; get; }
+        //public ObservableCollection<BO.OrderItem?> CartItems { set; get; }
 
-        public CartWindow(BO.Cart _cart, ObservableCollection<ProductItem> ProductItems)
+        public CartWindow(BO.Cart _cart/*, ObservableCollection<ProductItem> ProductItems*/)
         {
-            Cart = _cart;          
-            cartItems = new ObservableCollection<BO.OrderItem?>(Cart.Items);
+            Cart = _cart;
+            collectionView = CollectionViewSource.GetDefaultView(Cart.Items);
+            //CartItems = new ObservableCollection<BO.OrderItem?>(Cart.Items);
             InitializeComponent();             
         }
 
         private void ContToPayButton_Click(object sender, RoutedEventArgs e)
         {
-            new CustomerDetailsWindow(Cart, cartItems).Show();
+            new CustomerDetailsWindow(Cart/*, CartItems*/).Show();
             this.Close();
         }
 
@@ -47,6 +49,7 @@ namespace Cart
         {
             try
             {
+             
                 FrameworkElement frameworkElement = (sender as FrameworkElement)!;
                 int productId;
                 int amount;
@@ -55,10 +58,10 @@ namespace Cart
                     productId = ((OrderItem)(frameworkElement.DataContext)).ProductID;
                     amount= ((OrderItem)(frameworkElement.DataContext)).Amount;
                     Cart = bl?.Cart.UpdateAmountOfProduct(Cart, productId,amount+1);
-                    //cartItems = Cart.Items;
-                    var p = cartItems.First(p => p.ProductID == productId);
-                    cartItems[cartItems.IndexOf(p)] = cartItems.FirstOrDefault(p => p.ProductID == productId);
-                    CartItemsView.Items.Refresh();
+                    //var p = Cart.Items.First(p => p.ProductID == productId);
+                    //Cart.Items[Cart.Items.IndexOf(p)] = p;
+                    ////CartItems[Cart.Items.IndexOf(p)] = Cart.Items[Cart.Items.IndexOf(p)];
+                    collectionView.Refresh();
                 }
             }
             catch (Exception ex)
@@ -77,10 +80,8 @@ namespace Cart
                 {                
                     productId = ((OrderItem)(frameworkElement.DataContext)).ProductID;
                     amount = ((OrderItem)(frameworkElement.DataContext)).Amount;
-                    Cart =bl?.Cart.UpdateAmountOfProduct(Cart, productId, amount - 1);                
-                    var p = cartItems.First(p => p.ProductID == productId);
-                    cartItems[cartItems.IndexOf(p)] = cartItems.FirstOrDefault(p => p.ProductID == productId);
-                    CartItemsView.Items.Refresh();
+                    Cart =bl?.Cart.UpdateAmountOfProduct(Cart, productId, amount - 1);
+                    collectionView.Refresh();
                 }
             }
             catch (Exception ex)
@@ -101,9 +102,11 @@ namespace Cart
                     productId = ((OrderItem)(frameworkElement.DataContext)).ProductID;
                     amount = ((OrderItem)(frameworkElement.DataContext)).Amount;
                     Cart = bl?.Cart.UpdateAmountOfProduct(Cart, productId, 0);
-                    var p = cartItems.First(p => p.ProductID == productId);
-                    cartItems.Remove(p);
-                    CartItemsView.Items.Refresh();
+                    //var p = Cart.Items.First(p => p.ProductID == productId);
+                    //Cart.Items.Remove(p);
+                    //CartItems.Remove(p);
+
+                    collectionView.Refresh();
                 }
             }
             catch (Exception ex)
