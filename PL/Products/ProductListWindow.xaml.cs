@@ -145,7 +145,7 @@ namespace PL.productsWindows
         {
             try
             {
-                if (ProductForListView.SelectedItem is ProductForList productForList)
+                if (ProductForListView.SelectedItem is ProductForList productForList)//ProductForListView.SelectedItem is ProductForList productForList)
                 {
                     selectedIndex = ProductForListView.SelectedIndex;
                     int pflId = ((ProductForList)ProductForListView.SelectedItem).Id;

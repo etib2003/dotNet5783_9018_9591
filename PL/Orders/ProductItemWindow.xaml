@@ -9,8 +9,8 @@
         Title="ProductItemWindow" Height="450" Width="800">
     <Grid>
         <Image Source="{Binding NewPdctItem.Image}" HorizontalAlignment="Left" Height="344" Margin="400,50,0,0" VerticalAlignment="Top" Width="312"/>
-        <Label Content="{Binding NewPdctItem.Id}" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="36" Margin="140,153,0,0" VerticalAlignment="Top" Width="188" FontSize="18" FontWeight="Bold" Foreground="Red"/>
-        <Label Content="{Binding NewPdctItem.Name}" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="80" Margin="124,50,0,0" VerticalAlignment="Top" Width="220"  FontSize="35" FontWeight="Bold" Foreground="Red" FontFamily="Britannic Bold"/>
+        <Label Content="{Binding NewPdctItem.Id}" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="36" Margin="140,149,0,0" VerticalAlignment="Top" Width="188" FontSize="18" FontWeight="Bold" Foreground="Black"/>
+        <Label Content="{Binding NewPdctItem.Name}" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="80" Margin="124,86,0,0" VerticalAlignment="Top" Width="220"  FontSize="50" FontWeight="Bold" Foreground="Red" FontFamily="Britannic Bold"/>
         <Label Content="{Binding NewPdctItem.Category}" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="36" Margin="156,253,0,0"  VerticalAlignment="Top" Width="188"  FontSize="18" FontWeight="Bold"/>
         <Label Content="{Binding NewPdctItem.Price}" ContentStringFormat=" {0} ₪" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="36" VerticalAlignment="Top" Width="188" Margin="156,305,0,0"  FontSize="18" FontWeight="Bold"/>
         <Label Content="{Binding NewPdctItem.InStock}" ContentStringFormat="Available in stock: {0}" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="36"  VerticalAlignment="Top" Width="228" Margin="156,357,0,0"  FontSize="18" FontWeight="Bold"/>

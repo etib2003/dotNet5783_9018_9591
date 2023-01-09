@@ -71,7 +71,7 @@ namespace PL
 
         private void BackgroundWorker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
         {
-            //PictureHolderSource = new BitmapImage(new System.Uri(_path + $"{e.ProgressPercentage}.jpg"));
+            PictureHolderSource = new BitmapImage(new System.Uri(_path + $"{e.ProgressPercentage}.jpg"));
         }
 
         private void BackgroundWorker_DoWork(object? sender, DoWorkEventArgs e)
