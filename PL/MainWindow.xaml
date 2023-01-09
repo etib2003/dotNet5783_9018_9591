@@ -9,42 +9,51 @@
         Title="tempraryMain" Height="450" Width="800" >
 
     <Grid RenderTransformOrigin="0.419,0.483">
+        <!--<Grid.Background>
+            <ImageBrush ImageSource="/background.jpg"/>
+        </Grid.Background>-->
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="357*"/>
         </Grid.ColumnDefinitions>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="83*"/>
             <RowDefinition Height="304*"/>
             <RowDefinition Height="47*"/>
         </Grid.RowDefinitions>
-
         <Button x:Name="MWcloseButton" Content="Close" DockPanel.Dock="Top" HorizontalAlignment="Right" Margin="0,5,10,0" VerticalAlignment="Top" Width="74" Height="32" FontFamily="Candara" FontSize="16" Click="MWcloseButton_Click" Grid.Row="2"/>
         <Image HorizontalAlignment="Left" Height="68" Stretch="Uniform" VerticalAlignment="Center" Width="118" Source="/LOGO.png" Grid.Row="2" Margin="10,0,0,0" />
         <Button x:Name="managerButton" Content="Log in as manager" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="32" Width="143" FontFamily="Candara" FontSize="16" Click="managerButton_Click" Background="White" FontWeight="Bold"/>
         <Button x:Name="TrackingOrderButton" Content="Track your order" HorizontalAlignment="Left" Margin="138,239,0,0" Grid.Row="1" VerticalAlignment="Top" FontFamily="Candara" Height="45" Width="192" Click="TrackingOrderButton_Click" FontSize="20" Background="White" FontWeight="Bold"/>
-        <Button x:Name="NewOrderButton" Content="View Catalog" HorizontalAlignment="Left" Margin="496,239,0,0" Grid.Row="1" VerticalAlignment="Top" Click="NewOrderButton_click" FontSize="20" FontFamily="Candara" Height="45" Width="192" FontWeight="Bold" Background="White"/>
-        <TextBlock x:Name="AboutusBox" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Segoe Print" Foreground="Black" FontWeight="Bold" FontSize="13
+        <Button x:Name="NewOrderButton" Content="Create a new order" HorizontalAlignment="Left" Margin="496,239,0,0" Grid.Row="1" VerticalAlignment="Top" Click="NewOrderButton_click" FontSize="20" FontFamily="Candara" Height="45" Width="192" FontWeight="Bold" Background="White"/>
+        <TextBlock x:Name="AboutusBox" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Sitka Small" Foreground="Black" FontWeight="Bold" FontSize="13
                    " Height="242" Width="288" TextWrapping="Wrap" TextAlignment="Center" Grid.RowSpan="2" RenderTransformOrigin="0.523,0.706" Margin="448,75,0,0">
         About Us: <LineBreak />
         harmony is a boutique store since 2022           
-        offering a variety of quality musical instruments.<LineBreak />
-        On the website you can see the selection and purchase the right musical instrument for you.<LineBreak />
-        You can contact us at harmony@gmail.com <LineBreak />
+        offering a variety of quality musical instruments.<LineBreak /> <LineBreak />
+        On the website you can see the selection and purchase the right musical instrument for you.<LineBreak /><LineBreak />
+        You can contact us at harmony@gmail.com <LineBreak /><LineBreak />
         Have a pleasant shopping experience."
         </TextBlock>
+
         <Grid Margin="59,37,333,133" Grid.Row="1">
+
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1"/>
                 <ColumnDefinition Width="20"/>
+
             </Grid.ColumnDefinitions>
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="6"/>
             </Grid.RowDefinitions>
             <Image Name="PictureHolder"  Grid.Column="0" Grid.Row="0"  Source="{Binding PictureHolderSource, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.ColumnSpan="2" Margin="-76,-32,-431,-106" Grid.RowSpan="2"/>
-            <Button x:Name="back" Grid.Column="1" RenderTransformOrigin="0.067,0.662" FontFamily="Candara" Content="«" Click="back_Click" Foreground="White" Grid.Row="1" Margin="66,79,-71,-99" FontSize="24" FontWeight="Bold" BorderBrush="{x:Null}" Background="{x:Null}"/>
-            <Button x:Name="next" Grid.Column="1" RenderTransformOrigin="0.067,0.662" FontFamily="Candara" Content="»" Click="next_Click" Foreground="White" Grid.Row="1" Margin="279,79,-284,-99" FontSize="24" FontWeight="Bold" BorderBrush="{x:Null}" Background="{x:Null}"/>
+            <Button x:Name="back" Grid.Column="1" RenderTransformOrigin="0.067,0.662" FontFamily="Candara" Content="«" Click="back_Click" Foreground="#FFF7EEEE" Grid.Row="1" Margin="47,62,-64,-97" Background="#FFA9A3A3" FontSize="24"/>
+            <Button x:Name="next" Grid.Column="1" RenderTransformOrigin="0.067,0.662" FontFamily="Candara" Content="»" Click="next_Click" Foreground="#FFF7EEEE" Grid.Row="1" Margin="295,62,-315,-96" Background="#FFA9A3A3" FontSize="24"/>
+
         </Grid>
     </Grid>
 </Window>
