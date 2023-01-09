@@ -33,35 +33,17 @@
 
         <ListView x:Name="CatalogListView" ItemsSource="{Binding ProductsItems}" FontFamily="Candara" Margin="0,93,0,0" FontSize="16" 
    ScrollViewer.HorizontalScrollBarVisibility="Disabled"  
-                    ItemTemplate="{StaticResource Product}" >
+                    ItemTemplate="{StaticResource Product}" MouseDoubleClick="MouseDoubleClick" >
             <ListView.Background>
                 <ImageBrush/>
             </ListView.Background>
-            <!--<ListView.View>-->
                 
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
-                <!--<GridView>
-                    --><!--<GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="Id" Width="85"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Name" Width="110"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Price}" Header="Price" Width="65"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Category" Width="132"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=InStock}" Header="Is In Stock" Width="132"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Amount}" Header="Amount" Width="132"/>--><!--
-                    <GridViewColumn Header="Add To Cart">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Click="AddToCart" Content="+" Height="20" Width="30">
-                                </Button>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>-->
-         
-            <!--</ListView.View>-->
+               
             
             <ListView.GroupStyle>
                 <GroupStyle>

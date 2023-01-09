@@ -21,27 +21,31 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="0.8*"/>
-            <RowDefinition Height="0.8*"/>
-            <RowDefinition Height="0.8*"/>
-            <RowDefinition Height="0.8*"/>
-            <RowDefinition Height="0.8*"/>
-            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="45*"/>
+            <RowDefinition Height="53*"/>
+            <RowDefinition Height="53*"/>
+            <RowDefinition Height="53*"/>
+            <RowDefinition Height="53*"/>
+            <RowDefinition Height="53*"/>
+            <RowDefinition Height="53*"/>
+            <RowDefinition Height="80*"/>
         </Grid.RowDefinitions>
 
         <TextBox x:Name="IdBox" Text="{Binding Path=NewPdct.Id, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="{Binding ElementName=Complete,Path=Content, Converter={StaticResource idBoxIsReadOnlyConverter}}" MaxLength="6"  PreviewTextInput="PreviewTextInputDecimal" HorizontalAlignment="Left" Margin="8,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="129" FontFamily="Candara" FontSize="16" Grid.Row="1" Grid.Column="1" Height="26" Padding="1,0,1,0" Grid.IsSharedSizeScope="False"/>
-        <TextBox x:Name="NameBox" Text="{Binding Path=NewPdct.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  HorizontalAlignment="Left" Margin="8,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="129" FontFamily="Candara" FontSize="16" Grid.Row="3" Grid.Column="1" Height="26" Padding="1,0,1,0" Grid.IsSharedSizeScope="False"/>
-        <TextBox x:Name="PriceBox" Text="{Binding Path=NewPdct.Price, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  PreviewTextInput="PreviewTextInputDouble" HorizontalAlignment="Left" Margin="8,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="129" FontFamily="Candara" FontSize="16" Grid.Row="4" Grid.Column="1" Height="26" Padding="1,0,1,0" Grid.IsSharedSizeScope="False"/>
-        <TextBox x:Name="InStockBox" Text="{Binding Path=NewPdct.InStock,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  PreviewTextInput="PreviewTextInputDecimal" HorizontalAlignment="Left" Margin="8,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="129" FontFamily="Candara" FontSize="16" Grid.Row="5" Grid.Column="1" Height="26" Padding="1,0,1,0" Grid.IsSharedSizeScope="False"/>
-        <ComboBox x:Name="CategoryCB" ItemsSource="{Binding Categories}" Text="{Binding Path=NewPdct.Category}" Margin="8,14,0,11" FontFamily="Candara" FontSize="14" Grid.Row="2" Grid.Column="1" Width="129" Padding="1,3,1,3" Grid.IsSharedSizeScope="False" BorderThickness="2,2,2,2" Height="26" RenderTransformOrigin="0.509,0.474" HorizontalAlignment="Left"/>
+        <TextBox x:Name="NameBox" Text="{Binding Path=NewPdct.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  HorizontalAlignment="Left" Margin="8,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="129" FontFamily="Candara" FontSize="16" Grid.Row="3" Grid.Column="1" Height="26" Padding="1,0,1,0" Grid.IsSharedSizeScope="False"/>
+        <TextBox x:Name="PriceBox" Text="{Binding Path=NewPdct.Price, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  PreviewTextInput="PreviewTextInputDouble" HorizontalAlignment="Left" Margin="8,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="129" FontFamily="Candara" FontSize="16" Grid.Row="4" Grid.Column="1" Height="26" Padding="1,0,1,0" Grid.IsSharedSizeScope="False"/>
+        <TextBox x:Name="InStockBox" Text="{Binding Path=NewPdct.InStock,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  PreviewTextInput="PreviewTextInputDecimal" HorizontalAlignment="Left" Margin="8,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="129" FontFamily="Candara" FontSize="16" Grid.Row="5" Grid.Column="1" Height="26" Padding="1,0,1,0" Grid.IsSharedSizeScope="False"/>
+        <TextBox x:Name="ImageBox" Text="{Binding Path=NewPdct.Image, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  HorizontalAlignment="Left" Margin="8,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="129" FontFamily="Candara" FontSize="16" Grid.Row="6" Grid.Column="1" Height="26" Padding="1,0,1,0" />
+        <ComboBox x:Name="CategoryCB" ItemsSource="{Binding Categories}" Text="{Binding Path=NewPdct.Category}" Margin="8,16,0,8" FontFamily="Candara" FontSize="14" Grid.Row="2" Grid.Column="1" Width="129" Padding="1,3,1,3" Grid.IsSharedSizeScope="False" BorderThickness="2,2,2,2" RenderTransformOrigin="0.509,0.474" HorizontalAlignment="Left"/>
 
-        <Label x:Name="IdLabel" Content="Id:" HorizontalAlignment="Left" Margin="256,11,0,0" VerticalAlignment="Top" Width="120" Height="33" RenderTransformOrigin="0.046,0.051" FontWeight="Bold" FontFamily="Candara" FontSize="20" Grid.Row="1" VerticalContentAlignment="Center"/>
-        <Label x:Name="CategoryLabel" Content="Category:" HorizontalAlignment="Left" Margin="256,11,0,0" VerticalAlignment="Top" Width="120" FontWeight="Bold" FontFamily="Candara" FontSize="20" Grid.Row="2" Height="36" />
-        <Label x:Name="NameLabel"  Content="Name:" HorizontalAlignment="Left" Margin="256,11,0,0" VerticalAlignment="Top" Width="120" FontWeight="Bold" FontFamily="Candara" FontSize="20" Grid.Row="3" RenderTransformOrigin="0.556,0.975" Height="36" />
-        <Label x:Name="PriceLabel" Content="Price:" HorizontalAlignment="Left" Margin="256,11,0,0" VerticalAlignment="Top"  Width="120" FontWeight="Bold" FontFamily="Candara" FontSize="20" Grid.Row="4" Height="36"/>
-        <Label x:Name="InStockLabel" Content="In Stock:" HorizontalAlignment="Left" Margin="256,11,0,0" VerticalAlignment="Top"  Width="120" FontWeight="Bold" RenderTransformOrigin="-0.239,0.11" FontFamily="Candara" FontSize="20" Grid.Row="5" Height="36" />
-        <Button x:Name="Complete"  Content="{Binding CompleteButton}" Visibility="Visible" HorizontalAlignment="Left" Margin="336,50,0,0" VerticalAlignment="Top" Click="Button_Click" FontWeight="Bold" Width="128" FontFamily="Candara" FontSize="20" Grid.Row="6" Grid.ColumnSpan="2" Height="31" Foreground="Black" Background="White">
+        <Label x:Name="IdLabel" Content="Id:" HorizontalAlignment="Left" Margin="256,0,0,0" VerticalAlignment="Center" Width="120" Height="33" RenderTransformOrigin="0.046,0.051" FontWeight="Bold" FontFamily="Candara" FontSize="20" Grid.Row="1" VerticalContentAlignment="Center"/>
+        <Label x:Name="CategoryLabel" Content="Category:" HorizontalAlignment="Left" Margin="256,0,0,0" VerticalAlignment="Center" Width="120" FontWeight="Bold" FontFamily="Candara" FontSize="20" Grid.Row="2" Height="36" />
+        <Label x:Name="NameLabel"  Content="Name:" HorizontalAlignment="Left" Margin="256,0,0,0" VerticalAlignment="Center" Width="120" FontWeight="Bold" FontFamily="Candara" FontSize="20" Grid.Row="3" RenderTransformOrigin="0.556,0.975" Height="36" />
+        <Label x:Name="PriceLabel" Content="Price:" HorizontalAlignment="Left" Margin="256,0,0,0" VerticalAlignment="Center"  Width="120" FontWeight="Bold" FontFamily="Candara" FontSize="20" Grid.Row="4" Height="36"/>
+        <Label x:Name="InStockLabel" Content="In Stock:" HorizontalAlignment="Left" Margin="256,0,0,0" VerticalAlignment="Center"  Width="120" FontWeight="Bold" RenderTransformOrigin="-0.239,0.11" FontFamily="Candara" FontSize="20" Grid.Row="5" Height="36" />
+        <Label x:Name="ImageLabel" Content="Image:" HorizontalAlignment="Left" Margin="256,0,0,0" VerticalAlignment="Center"  Width="120" FontWeight="Bold" RenderTransformOrigin="-0.239,0.11" FontFamily="Candara" FontSize="20" Grid.Row="6" Height="36" />
+
+        <Button x:Name="Complete"  Content="{Binding CompleteButton}" Visibility="Visible" HorizontalAlignment="Left" Margin="336,38,0,0" VerticalAlignment="Top" Click="Button_Click" FontWeight="Bold" Width="128" FontFamily="Candara" FontSize="18" Grid.Row="7" Grid.ColumnSpan="2" Height="25" Foreground="Black" Background="White">
             <Button.IsEnabled>
                 <MultiBinding Converter="{StaticResource isValidProdcutConverter}">
                     <MultiBinding.Bindings>
@@ -59,14 +63,16 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Label x:Name="EnterLabel" Content="Product details" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="30" Grid.ColumnSpan="2" Margin="298,0,0,0" FontFamily="Candara" FontWeight="Bold"/>
-        <Label x:Name="idEmptyLabel" Visibility="{Binding ElementName=IdBox, Path=Text,Converter={StaticResource isValidTBConverter}}"  Content="× Please enter details" HorizontalAlignment="Left" Height="26" Margin="9,37,0,0" VerticalAlignment="Top" Width="128" Foreground="Red" FontFamily="Candara" Grid.Column="1" Grid.Row="1" FontSize="11" Grid.RowSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
-        <Label x:Name="categoryEmptyLabel" Visibility="{Binding ElementName=CategoryCB, Path=Text,Converter={StaticResource isValidCTBConverter}}" Grid.Column="1" Content="× Please enter details" HorizontalAlignment="Left" Height="26" Margin="10,40,0,0" Grid.Row="2" VerticalAlignment="Top" Width="127" Foreground="Red" FontFamily="Candara" FontSize="11" Grid.RowSpan="2" HorizontalContentAlignment="Right" />
-        <Label x:Name="nameEmptyLabel" Visibility="{Binding ElementName=NameBox, Path=Text,Converter={StaticResource isValidTBConverter}}" Grid.Column="1" Content="× Please enter details" HorizontalAlignment="Left" Height="26" Margin="10,40,0,0" Grid.Row="3" VerticalAlignment="Top" Width="127" Foreground="Red" FontFamily="Candara" FontSize="11" Grid.RowSpan="2" HorizontalContentAlignment="Right"/>
-        <Label x:Name="priceEmptyLabel" Visibility="{Binding ElementName=PriceBox, Path=Text,Converter={StaticResource isValidTBConverter}}" Grid.Column="1" Content="× Please enter details" HorizontalAlignment="Left" Height="26" Margin="10,38,0,0" Grid.Row="4" VerticalAlignment="Top" Width="127" Foreground="Red" FontFamily="Candara" FontSize="11" Grid.RowSpan="2" HorizontalContentAlignment="Right"/>
-        <Label x:Name="inStockEmptyLabel" Visibility="{Binding ElementName=InStockBox, Path=Text,Converter={StaticResource isValidCTBConverter}}" Grid.Column="1" Content="× Please enter details" HorizontalAlignment="Left" Height="26" Margin="10,38,0,0" Grid.Row="5" VerticalAlignment="Top" Width="127" Foreground="Red" FontFamily="Candara" FontSize="11" Grid.RowSpan="2" HorizontalContentAlignment="Right"/>
-        <Image HorizontalAlignment="Left" Height="64" VerticalAlignment="Top" Width="118" Source="/LOGO.png" Grid.Row="6" OpacityMask="White" Margin="0,30,0,0"/>
-        <Button x:Name="deleteButton" Content="Delete" Visibility="{Binding ElementName=Complete, Path=Content, Converter={StaticResource isUpdateCondConverter}}" HorizontalAlignment="Left" Margin="340,8,0,0" VerticalAlignment="Top" Click="DeleteButton_Click" FontWeight="Bold" Width="120" FontFamily="Candara" FontSize="20" Grid.Row="6" Grid.ColumnSpan="2" Height="31">
+        <Label x:Name="EnterLabel" Content="Product details" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="27" Grid.ColumnSpan="2" Margin="298,0,0,0" FontFamily="Candara" FontWeight="Bold" Height="47" Width="204"/>
+        <Label x:Name="idEmptyLabel" Visibility="{Binding ElementName=IdBox, Path=Text,Converter={StaticResource isValidTBConverter}}"  Content="× Please enter details" HorizontalAlignment="Left" Height="26" Margin="9,35,0,0" VerticalAlignment="Top" Width="128" Foreground="Red" FontFamily="Candara" Grid.Column="1" Grid.Row="1" FontSize="11" Grid.RowSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
+        <Label x:Name="categoryEmptyLabel" Visibility="{Binding ElementName=CategoryCB, Path=Text,Converter={StaticResource isValidCTBConverter}}" Grid.Column="1" Content="× Please enter details" HorizontalAlignment="Left" Height="26" Margin="10,38,0,0" Grid.Row="2" VerticalAlignment="Top" Width="127" Foreground="Red" FontFamily="Candara" FontSize="11" Grid.RowSpan="2" HorizontalContentAlignment="Right" />
+        <Label x:Name="nameEmptyLabel" Visibility="{Binding ElementName=NameBox, Path=Text,Converter={StaticResource isValidTBConverter}}" Grid.Column="1" Content="× Please enter details" HorizontalAlignment="Left" Height="26" Margin="10,38,0,0" Grid.Row="3" VerticalAlignment="Top" Width="127" Foreground="Red" FontFamily="Candara" FontSize="11" Grid.RowSpan="2" HorizontalContentAlignment="Right"/>
+        <Label x:Name="priceEmptyLabel" Visibility="{Binding ElementName=PriceBox, Path=Text,Converter={StaticResource isValidTBConverter}}" Grid.Column="1" Content="× Please enter details" HorizontalAlignment="Left" Height="26" Margin="10,36,0,0" Grid.Row="4" VerticalAlignment="Top" Width="127" Foreground="Red" FontFamily="Candara" FontSize="11" Grid.RowSpan="2" HorizontalContentAlignment="Right"/>
+        <Label x:Name="inStockEmptyLabel" Visibility="{Binding ElementName=InStockBox, Path=Text,Converter={StaticResource isValidCTBConverter}}" Grid.Column="1" Content="× Please enter details" HorizontalAlignment="Left" Height="26" Margin="10,36,0,0" Grid.Row="5" VerticalAlignment="Top" Width="127" Foreground="Red" FontFamily="Candara" FontSize="11" Grid.RowSpan="2" HorizontalContentAlignment="Right"/>
+        <Label x:Name="imageEmptyLabel" Visibility="{Binding ElementName=ImageBox, Path=Text,Converter={StaticResource isValidCTBConverter}}" Grid.Column="1" Content="× Please enter details" HorizontalAlignment="Left" Height="26" Margin="10,36,0,0" Grid.Row="6" VerticalAlignment="Top" Width="127" Foreground="Red" FontFamily="Candara" FontSize="11" Grid.RowSpan="2" HorizontalContentAlignment="Right"/>
+
+        <Image HorizontalAlignment="Left" Height="64" VerticalAlignment="Top" Width="118" Source="/LOGO.png" Grid.Row="6" OpacityMask="White" Margin="0,30,0,0" Grid.RowSpan="2"/>
+        <Button x:Name="deleteButton" Content="Delete" Visibility="{Binding ElementName=Complete, Path=Content, Converter={StaticResource isUpdateCondConverter}}"  HorizontalAlignment="Left" Margin="336,6,0,0" VerticalAlignment="Top" Click="DeleteButton_Click" FontWeight="Bold" Width="128" FontFamily="Candara" FontSize="18" Grid.Row="7" Grid.ColumnSpan="2" Height="25">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}" >
                     <Setter Property="CornerRadius" Value="10"/>

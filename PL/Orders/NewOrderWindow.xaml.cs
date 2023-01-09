@@ -2,6 +2,7 @@
 using Cart;
 using DO;
 using DocumentFormat.OpenXml.ExtendedProperties;
+using Orders;
 using PL;
 using PL.productsWindows;
 using System;
@@ -136,26 +137,26 @@ namespace Products
             this.Close();
         }
 
-        private void AddToCart(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                FrameworkElement frameworkElement = (sender as FrameworkElement)!;
-                int productId;
-                if (frameworkElement is not null && frameworkElement.DataContext is not null)
-                {
-                    productId = ((ProductItem)(frameworkElement.DataContext)).Id;
-                    bl?.Cart.AddProductToCart(cart, productId);
-                    var p = ProductsItems.First(p => p.Id == productId);
-                    ProductsItems[ProductsItems.IndexOf(p)] = bl?.Product.GetProductDetailsForCustomer(productId, cart);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Out of stock!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        //private void AddToCart(object sender, RoutedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        FrameworkElement frameworkElement = (sender as FrameworkElement)!;
+        //        int productId;
+        //        if (frameworkElement is not null && frameworkElement.DataContext is not null)
+        //        {
+        //            productId = ((ProductItem)(frameworkElement.DataContext)).Id;
+        //            bl?.Cart.AddProductToCart(CCart, productId);
+        //            var p = ProductsItems.First(p => p.Id == productId);
+        //            ProductsItems[ProductsItems.IndexOf(p)] = bl?.Product.GetProductDetailsForCustomer(productId, CCart);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Out of stock!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
-            }
-        }
+        //    }
+        //}
 
         private void grouping_Click(object sender, RoutedEventArgs e)
         {
@@ -168,7 +169,7 @@ namespace Products
             //    PropertyGroupDescription groupDescription=new PropertyGroupDescription("Category");
             //    view.GroupDescriptions.Add(groupDescription);
             //}
-            //var objects = (from item in bl?.Product.GetListProductForCatalog(cart)
+            //var objects = (from item in bl?.Product.GetListProductForCatalog(CCart)
             //               orderby item.Category
             //               select item);
             //restartAndAdd(objects);
@@ -192,6 +193,23 @@ namespace Products
             {
                 MessageBox.Show("Out of stock!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
+            }
+        }
+
+        private void MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                if (CatalogListView.SelectedItem is ProductItem p)
+                {
+                    selectedIndex = CatalogListView.SelectedIndex;
+                    int pflId = ((ProductItem)CatalogListView.SelectedItem).Id;
+                    new ProductItemWindow(pflId,cart, (productId) => ProductsItems[selectedIndex] = bl?.Product.GetProductDetailsForCustomer(pflId, cart)).Show();
+                }
+            }
+            catch (BO.BoDoesNoExistException ex)//catches the exception from the data layer
+            {
+                MessageBox.Show("We could not find the product..\n Please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
