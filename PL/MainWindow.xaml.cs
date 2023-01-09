@@ -25,8 +25,7 @@ namespace PL
          BlApi.IBl? bl= BlApi.Factory.Get();
 
         private string _path = Environment.CurrentDirectory + @$"\PicturesForMain\";
-        //BO.Cart Cart = new BO.Cart() { CustomerName = null, CustomerEmail = null, CustomerAddress = null, Items = new List<BO.OrderItem>(), TotalPrice = 0 };
-
+ 
 
         public BO.Cart cart
         {
@@ -71,7 +70,7 @@ namespace PL
 
         private void BackgroundWorker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
         {
-            //PictureHolderSource = new BitmapImage(new System.Uri(_path + $"{e.ProgressPercentage}.jpg"));
+            PictureHolderSource = new BitmapImage(new System.Uri(_path + $"{e.ProgressPercentage}.jpg"));
         }
 
         private void BackgroundWorker_DoWork(object? sender, DoWorkEventArgs e)
@@ -141,7 +140,7 @@ namespace PL
                 i = i < 8 ? i : 1;
                 PictureHolderSource = new BitmapImage(new System.Uri(_path + $"{i}.jpg"));
                 i++;
-                Thread.Sleep(3000);
+                Thread.Sleep(2300);
                 i = i < 8 ? i : 1;
                 PictureHolderSource = new BitmapImage(new System.Uri(_path + $"{i}.jpg"));
             }
