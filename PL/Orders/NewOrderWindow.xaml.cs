@@ -21,8 +21,6 @@ namespace Products
 {
     
 
-
-
     /// <summary>
     /// Interaction logic for NewOrderWindow.xaml
     /// </summary>
@@ -122,9 +120,9 @@ namespace Products
         {
             CollectionViewProductItemList.GroupDescriptions.Clear();
 
-            //view = null;
             restartAndAdd(bl?.Product.GetListProductForCatalog(cart));
             Categories = Enum.GetValues(typeof(BO.Category)); //לא מסנן כשזה מסומן כבר על הקטגוריה
+
         }
 
         private void CartButton_Click(object sender, RoutedEventArgs e)
@@ -156,6 +154,7 @@ namespace Products
 
         private void grouping_Click(object sender, RoutedEventArgs e)
         {
+            ShowAllCategories_Click(sender, e);
             CollectionViewProductItemList.GroupDescriptions.Add(propertyGroupDescription);
 
             //if (view==null)
@@ -172,36 +171,3 @@ namespace Products
     }
 }
 
-/*
-  <ListView.GroupStyle>
-                <GroupStyle>
-                    <GroupStyle.ContainerStyle>
-                        <Style TargetType="{x:Type GroupItem}">
-                            <Setter Property="Template" >
-                                <Setter.Value>
-                                    <ControlTemplate>
-                                        <Expander IsExpanded="True" >
-                                            <Expander.Background>
-                                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                                    <GradientStop  Offset="0.15"/>
-                                                    <GradientStop  Offset="1"/>
-                                                    <GradientStop  Offset="0.342"/>
-                                                </LinearGradientBrush>
-                                            </Expander.Background>
-                                            <Expander.Header>
-                                                <StackPanel Orientation="Horizontal"  >
-                                                    <TextBlock Text="{Binding Name}" FontWeight="DemiBold" Foreground="Black" FontSize="14" VerticalAlignment="Bottom" />
-                                                    <TextBlock Text="{Binding ItemCount}" FontSize="14" Foreground="Gray" FontWeight="Bold" FontStyle="Italic" Margin="10,0,0,0" VerticalAlignment="Bottom" />
-                                                    <TextBlock Text=" record(s)" FontSize="14" Foreground="Gray" FontStyle="Italic" VerticalAlignment="Bottom" />
-                                                </StackPanel>
-                                            </Expander.Header>
-                                            <ItemsPresenter />
-                                        </Expander>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </GroupStyle.ContainerStyle>
-                </GroupStyle>
-            </ListView.GroupStyle>
- */

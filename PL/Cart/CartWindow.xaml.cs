@@ -41,7 +41,7 @@ namespace Cart
 
         private void ContToPayButton_Click(object sender, RoutedEventArgs e)
         {
-            new CustomerDetailsWindow(Cart/*, CartItems*/).Show();
+            new CustomerDetailsWindow(Cart).Show();
             this.Close();
         }
 
