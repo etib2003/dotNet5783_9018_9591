@@ -33,9 +33,7 @@
             <Style TargetType="TextBox">
                 <Setter Property="HorizontalContentAlignment" Value="Center"/>
             </Style>
-
-
-
+        
 
         </ResourceDictionary>
 
