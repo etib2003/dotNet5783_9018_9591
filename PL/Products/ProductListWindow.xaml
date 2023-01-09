@@ -23,7 +23,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <ComboBox x:Name ="selectCategory" ItemsSource="{Binding Categories}" Grid.Column="1" RenderTransformOrigin="-0.297,0.143" SelectionChanged="ComboBox_SelectionChanged" Margin="112,26,54,23" FontFamily="Candara" FontSize="14"/>
+            <ComboBox x:Name ="selectCategory" SelectedItem="{Binding CategorySelected}" ItemsSource="{Binding Categories}" Grid.Column="1" RenderTransformOrigin="-0.297,0.143" SelectionChanged="ComboBox_SelectionChanged" Margin="112,26,54,23" FontFamily="Candara" FontSize="14"/>
             <Label x:Name="ProuctsLabel" Content="Our products" Grid.Column="0" RenderTransformOrigin="4.721,1.674" Margin="110,18,110,10" FontSize="26" FontFamily="Candara" FontWeight="Bold" HorizontalContentAlignment="Center" />
             <Label x:Name="CategoryLabel" Grid.Column="1" Content="Category:" HorizontalAlignment="Left" Height="38" Margin="33,26,0,0" VerticalAlignment="Top" Width="97" FontFamily="Candara" FontSize="16"/>
         </Grid>
