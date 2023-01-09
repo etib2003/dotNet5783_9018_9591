@@ -31,7 +31,9 @@ public struct Product
     /// </summary>
     public int InStock { get; set; }
 
-    
+    public string Image { get; set; }
+
+
     /// <summary>
     /// the product's print method
     /// </summary>

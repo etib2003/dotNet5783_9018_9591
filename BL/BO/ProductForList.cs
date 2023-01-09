@@ -25,6 +25,8 @@ public class ProductForList
     /// price of product
     /// </summary>
     public double Price { get; set; }
+    public string Image { get; set; }
+
 
     /// <summary>
     /// the list of products print method

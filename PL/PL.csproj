@@ -19,11 +19,219 @@
     <None Remove="Cart\pictureForComplete.jpg" />
     <None Remove="LOGO.png" />
     <None Remove="LOGO.png.jpg" />
+    <None Remove="photoes\bow instruments\berimbaus.jpg" />
+    <None Remove="photoes\bow instruments\cello.jpg" />
+    <None Remove="photoes\bow instruments\double bass.jpg" />
+    <None Remove="photoes\bow instruments\electric violin.jpg" />
+    <None Remove="photoes\bow instruments\Half size violin.jpg" />
+    <None Remove="photoes\bow instruments\violin 3.4.jpg" />
+    <None Remove="photoes\bow instruments\violin 4.4.jpg" />
+    <None Remove="photoes\keyboard\Electric piano 88 keys.jpg" />
+    <None Remove="photoes\keyboard\Electric piano.jpg" />
+    <None Remove="photoes\keyboard\Grand piano.jpg" />
+    <None Remove="photoes\keyboard\Novation Launchkey.jpg" />
+    <None Remove="photoes\keyboard\organ.jpg" />
+    <None Remove="photoes\keyboard\Organic 5 octaves with lights.jpg" />
+    <None Remove="photoes\keyboard\Organic 5 octaves.jpg" />
+    <None Remove="photoes\keyboard\organic for children.jpg" />
+    <None Remove="photoes\percussions\A set of cymbals.jpg" />
+    <None Remove="photoes\percussions\Drum set.jpg" />
+    <None Remove="photoes\percussions\drum tabs.jpg" />
+    <None Remove="photoes\percussions\electronic drum system.jpg" />
+    <None Remove="photoes\percussions\gong.jpg" />
+    <None Remove="photoes\percussions\Percussion triangle.jpg" />
+    <None Remove="photoes\percussions\Professional wooden darbuka.webp" />
+    <None Remove="photoes\percussions\tambourine.jpg" />
+    <None Remove="photoes\percussions\white Drum set.jpg" />
+    <None Remove="photoes\percussions\wooden drum.jpg" />
+    <None Remove="photoes\percussions\xylophone.jpg" />
+    <None Remove="photoes\string instruments\16 string harp.jpg" />
+    <None Remove="photoes\string instruments\Amplified acoustic guitar.jpg" />
+    <None Remove="photoes\string instruments\bass guitar.jpg" />
+    <None Remove="photoes\string instruments\black electric guitar.jpg" />
+    <None Remove="photoes\string instruments\blue acoustic guitar.jpg" />
+    <None Remove="photoes\string instruments\bouzouki.jpg" />
+    <None Remove="photoes\string instruments\classic guitar.jpg" />
+    <None Remove="photoes\string instruments\Concert ukulele.jpg" />
+    <None Remove="photoes\string instruments\Electric bass guitar.jpg" />
+    <None Remove="photoes\string instruments\electric guitar.jpg" />
+    <None Remove="photoes\string instruments\Increased ukulele.jpg" />
+    <None Remove="photoes\string instruments\mandoline.jpg" />
+    <None Remove="photoes\string instruments\red electric guitar.jpg" />
+    <None Remove="photoes\string instruments\Soprano ukulele.jpg" />
+    <None Remove="photoes\string instruments\ukulele.png" />
+    <None Remove="photoes\string instruments\Wooden mandolin.jpg" />
+    <None Remove="photoes\wind instruments\10 hole harmonica.jpg" />
+    <None Remove="photoes\wind instruments\electronic fluet.webp" />
+    <None Remove="photoes\wind instruments\hole flute.webp" />
+    <None Remove="photoes\wind instruments\Professional clarinet.jpg" />
+    <None Remove="photoes\wind instruments\saxophone.jpg" />
+    <None Remove="photoes\wind instruments\Side flute 15 notes.jpg" />
+    <None Remove="photoes\wind instruments\Soprano flute.webp" />
+    <None Remove="photoes\wind instruments\table bell.webp" />
+    <None Remove="photoes\wind instruments\trombone.jpg" />
+    <None Remove="photoes\wind instruments\trumpet.jpg" />
     <None Remove="PictursForMain\1.jpg" />
     <None Remove="Products\background.jpg" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="photoes\bow instruments\berimbaus.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\bow instruments\cello.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\bow instruments\double bass.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\bow instruments\electric violin.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\bow instruments\Half size violin.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\bow instruments\violin 3.4.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\bow instruments\violin 4.4.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\keyboard\Electric piano 88 keys.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\keyboard\Electric piano.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\keyboard\Grand piano.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\keyboard\Novation Launchkey.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\keyboard\organ.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\keyboard\Organic 5 octaves with lights.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\keyboard\Organic 5 octaves.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\keyboard\organic for children.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\percussions\A set of cymbals.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\percussions\Drum set.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\percussions\drum tabs.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\percussions\electronic drum system.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\percussions\gong.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\percussions\Percussion triangle.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\percussions\Professional wooden darbuka.webp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\percussions\tambourine.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\percussions\white Drum set.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\percussions\wooden drum.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\percussions\xylophone.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\string instruments\16 string harp.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\string instruments\Amplified acoustic guitar.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\string instruments\bass guitar.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\string instruments\black electric guitar.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\string instruments\blue acoustic guitar.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\string instruments\bouzouki.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\string instruments\classic guitar.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\string instruments\Concert ukulele.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\string instruments\Electric bass guitar.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\string instruments\electric guitar.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\string instruments\Increased ukulele.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\string instruments\mandoline.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\string instruments\red electric guitar.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\string instruments\Soprano ukulele.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\string instruments\ukulele.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\string instruments\Wooden mandolin.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\wind instruments\10 hole harmonica.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\wind instruments\electronic fluet.webp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\wind instruments\hole flute.webp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\wind instruments\Professional clarinet.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\wind instruments\saxophone.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\wind instruments\Side flute 15 notes.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\wind instruments\Soprano flute.webp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\wind instruments\table bell.webp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\wind instruments\trombone.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photoes\wind instruments\trumpet.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="PictursForMain\1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

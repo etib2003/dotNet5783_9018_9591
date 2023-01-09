@@ -36,6 +36,8 @@ public class ProductItem
     /// amount of the product
     /// </summary>
     public int Amount { get; set; }
+    public string Image { get; set; }
+
 
     /// <summary>
     /// the product item print method
