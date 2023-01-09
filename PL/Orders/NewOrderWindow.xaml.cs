@@ -2,6 +2,7 @@
 using Cart;
 using DO;
 using DocumentFormat.OpenXml.ExtendedProperties;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using Orders;
 using PL;
 using PL.productsWindows;
@@ -68,12 +69,10 @@ namespace Products
             = DependencyProperty.Register(nameof(ProductsItems), typeof(ObservableCollection<ProductItem>), typeof(NewOrderWindow));
 
         public Array Categories { set; get; }
-        private int selectedIndex;
+        private int selectedIndex { set; get; }
 
         public NewOrderWindow(BO.Cart _cart)
-        {
-            //view = null;
-            
+        {            
 
             cart = _cart;
             ProductsItems = new ObservableCollection<ProductItem>(bl?.Product.GetListProductForCatalog(cart));
@@ -137,42 +136,10 @@ namespace Products
             this.Close();
         }
 
-        //private void AddToCart(object sender, RoutedEventArgs e)
-        //{
-        //    try
-        //    {
-        //        FrameworkElement frameworkElement = (sender as FrameworkElement)!;
-        //        int productId;
-        //        if (frameworkElement is not null && frameworkElement.DataContext is not null)
-        //        {
-        //            productId = ((ProductItem)(frameworkElement.DataContext)).Id;
-        //            bl?.Cart.AddProductToCart(CCart, productId);
-        //            var p = ProductsItems.First(p => p.Id == productId);
-        //            ProductsItems[ProductsItems.IndexOf(p)] = bl?.Product.GetProductDetailsForCustomer(productId, CCart);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("Out of stock!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-
-        //    }
-        //}
-
         private void grouping_Click(object sender, RoutedEventArgs e)
         {
             ShowAllCategories_Click(sender, e);
             CollectionViewProductItemList.GroupDescriptions.Add(propertyGroupDescription);
-
-            //if (view==null)
-            //{
-            //    view = (CollectionView)CollectionViewSource.GetDefaultView(ProductsItems);
-            //    PropertyGroupDescription groupDescription=new PropertyGroupDescription("Category");
-            //    view.GroupDescriptions.Add(groupDescription);
-            //}
-            //var objects = (from item in bl?.Product.GetListProductForCatalog(CCart)
-            //               orderby item.Category
-            //               select item);
-            //restartAndAdd(objects);
         }
 
         private void AddToCart_Click(object sender, RoutedEventArgs e)
@@ -196,18 +163,23 @@ namespace Products
             }
         }
 
-        private void MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void Update_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             try
             {
-                if (CatalogListView.SelectedItem is ProductItem p)
-                {
-                    selectedIndex = CatalogListView.SelectedIndex;
-                    int pflId = ((ProductItem)CatalogListView.SelectedItem).Id;
-                    new ProductItemWindow(pflId,cart, (productId) => ProductsItems[selectedIndex] = bl?.Product.GetProductDetailsForCustomer(pflId, cart)).Show();
-                }
+                var lv = (sender as ListViewItem)!;
+                var product = (BO.ProductItem)lv!.DataContext;
+                int piId = product.Id;
+
+                new ProductItemWindow(piId, cart, () => ProductsItems![ProductsItems!.IndexOf(product)] = bl.Product.GetProductDetailsForCustomer(piId, cart)).Show();
+                //if (CatalogListView.SelectedItem is ProductItem p)
+                //{
+                //    selectedIndex = CatalogListView.SelectedIndex;
+                //    int pflId = ((ProductItem)CatalogListView.SelectedItem).Id;
+                //    new ProductItemWindow(pflId, cart, (productId) => ProductsItems[selectedIndex] = bl?.Product.GetProductDetailsForCustomer(pflId, cart)).Show();
+                //}
             }
-            catch (BO.BoDoesNoExistException ex)//catches the exception from the data layer
+            catch (BO.BoDoesNoExistException)//catches the exception from the data layer
             {
                 MessageBox.Show("We could not find the product..\n Please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }

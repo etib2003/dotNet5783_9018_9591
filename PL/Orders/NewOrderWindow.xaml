@@ -9,44 +9,49 @@
         Title="NewOrderWindow" Height="450" Width="800">
     <Window.Resources>
         <DataTemplate x:Key="Product" DataType="local: Product" >
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="5*" />
-                <RowDefinition Height="0.5*" />
-                <RowDefinition Height="0.5*" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*" />
+                    <RowDefinition Height="0.5*" />
+                    <RowDefinition Height="0.5*" />
                     <RowDefinition Height="0.5*" />
                     <RowDefinition Height="0.5*" />
                 </Grid.RowDefinitions>
-            <Border Grid.Row="0" HorizontalAlignment="Center" Height="150"  Width="125" BorderBrush="Black" BorderThickness="0,0,0,0" >
-                <Border.Background>
-                    <ImageBrush ImageSource="{Binding Path=Image}" Stretch="UniformToFill" />
-                </Border.Background>
-            </Border>
-            <Label  Grid.Row="1" Content="{Binding Path=Name}" Width="200" HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>
-            <Label   Grid.Row="3" Content="{Binding Path=Price}" ContentStringFormat=" {0} ₪" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+                <Border Grid.Row="0" HorizontalAlignment="Center" Height="150"  Width="125" BorderBrush="Black" BorderThickness="0,0,0,0" >
+                    <Border.Background>
+                        <ImageBrush ImageSource="{Binding Path=Image}" Stretch="UniformToFill" />
+                    </Border.Background>
+                </Border>
+                <Label  Grid.Row="1" Content="{Binding Path=Name}" Width="200" HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>
+                <Label   Grid.Row="3" Content="{Binding Path=Price}" ContentStringFormat=" {0} ₪" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
                 <Label Grid.Column="2" Grid.Row="2" Content="{Binding Path=Name}" HorizontalAlignment="Center"/>
                 <Label Grid.Column="3" Grid.Row="4" Content="Amount: " HorizontalAlignment="Center"/>
-               <Label   Grid.Column="3" Grid.Row="4" Content="{Binding Path=Amount}"   HorizontalAlignment="Right" HorizontalContentAlignment="Center"/>
+                <Label   Grid.Column="3" Grid.Row="4" Content="{Binding Path=Amount}"   HorizontalAlignment="Right" HorizontalContentAlignment="Center"/>
                 <Button x:Name="btnAddToCart"   Content="Add To Cart" Grid.Row="1" VerticalAlignment="Bottom" Click="AddToCart_Click" Visibility="Visible"/>
-        </Grid>
-    </DataTemplate>
+            </Grid>
+        </DataTemplate>
     </Window.Resources>
-        <Grid x:Name="CatalogGrid" Height="434" VerticalAlignment="Bottom">
+    <Grid x:Name="CatalogGrid" Height="434" VerticalAlignment="Bottom">
 
-        <ListView x:Name="CatalogListView" ItemsSource="{Binding ProductsItems}" FontFamily="Candara" Margin="0,93,0,0" FontSize="16" 
-   ScrollViewer.HorizontalScrollBarVisibility="Disabled"  
-                    ItemTemplate="{StaticResource Product}" MouseDoubleClick="MouseDoubleClick" >
+        <ListView x:Name="CatalogListView" ItemsSource="{Binding ProductsItems}" SelectedIndex="{Binding selectedIndex, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                  FontFamily="Candara" Margin="0,93,0,0" FontSize="16" 
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"  
+                    ItemTemplate="{StaticResource Product}"  >
             <ListView.Background>
                 <ImageBrush/>
             </ListView.Background>
-                
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-               
-            
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <EventSetter Event="MouseDoubleClick" Handler="Update_MouseDoubleClick"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
+
             <ListView.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.ContainerStyle>

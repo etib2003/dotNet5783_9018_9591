@@ -25,10 +25,6 @@ namespace Orders
 
         BlApi.IBl? bl = BlApi.Factory.Get();
 
-
-
-
-
         public BO.Cart Cart
         {
             get { return (BO.Cart)GetValue(CartProperty); }
@@ -52,10 +48,10 @@ namespace Orders
         public static readonly DependencyProperty NewPdctProperty =
             DependencyProperty.Register("NewPdctItem", typeof(BO.ProductItem), typeof(ProductItemWindow));
 
-        private Action<int> action;
+        private Action action;
 
 
-        public ProductItemWindow(int id, BO.Cart _cart, Action<int> action)
+        public ProductItemWindow(int id, BO.Cart _cart, Action action)
         {
             this.action = action;
             Cart = _cart;
