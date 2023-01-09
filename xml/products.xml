@@ -4,7 +4,7 @@
 		<Id>376326</Id>
 		<Name>berimbaus</Name>
 		<Price>805</Price>
-		<Category>StringInstrument</Category>
+		<Category>BowInstrument</Category>
 		<InStock>0</InStock>
 		<Image>\photoes\bow instruments\berimbaus.jpg</Image>
 	</Product>
@@ -12,8 +12,9 @@
 		<Id>412789</Id>
 		<Name>product3</Name>
 		<Price>559</Price>
-		<Category>KeyBoard</Category>
+		<Category>BowInstrument</Category>
 		<InStock>9</InStock>
+		<Image>\photoes\bow instruments\berimbaus.jpg</Image>
 	</Product>
 	<Product>
 		<Id>533228</Id>
@@ -26,49 +27,49 @@
 		<Id>222807</Id>
 		<Name>product5</Name>
 		<Price>347</Price>
-		<Category>Percussions</Category>
+		<Category>BowInstrument</Category>
 		<InStock>15</InStock>
 	</Product>
 	<Product>
 		<Id>903884</Id>
 		<Name>product6</Name>
 		<Price>1099</Price>
-		<Category>StringInstrument</Category>
+		<Category>BowInstrument</Category>
 		<InStock>18</InStock>
 	</Product>
 	<Product>
 		<Id>111116</Id>
 		<Name>stam6</Name>
 		<Price>541</Price>
-		<Category>WindInstrument</Category>
+		<Category>BowInstrument</Category>
 		<InStock>56</InStock>
 	</Product>
 	<Product>
 		<Id>111113</Id>
 		<Name>stam3</Name>
 		<Price>111</Price>
-		<Category>KeyBoard</Category>
+		<Category>BowInstrument</Category>
 		<InStock>48</InStock>
 	</Product>
 	<Product>
 		<Id>111111</Id>
 		<Name>stam</Name>
 		<Price>100</Price>
-		<Category>KeyBoard</Category>
+		<Category>BowInstrument</Category>
 		<InStock>49</InStock>
 	</Product>
 	<Product>
 		<Id>686995</Id>
 		<Name>product7</Name>
 		<Price>100</Price>
-		<Category>WindInstrument</Category>
+		<Category>BowInstrument</Category>
 		<InStock>21</InStock>
 	</Product>
 	<Product>
 		<Id>111115</Id>
 		<Name>wsedf</Name>
 		<Price>541</Price>
-		<Category>WindInstrument</Category>
+		<Category>BowInstrument</Category>
 		<InStock>55</InStock>
 	</Product>
 	<Product>
