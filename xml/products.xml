@@ -10,46 +10,51 @@
 	</Product>
 	<Product>
 		<Id>412789</Id>
-		<Name>product3</Name>
+		<Name>cello</Name>
 		<Price>559</Price>
 		<Category>BowInstrument</Category>
 		<InStock>9</InStock>
-		<Image>\photoes\bow instruments\berimbaus.jpg</Image>
+		<Image>\photoes\bow instruments\cello.jpg</Image>
 	</Product>
 	<Product>
 		<Id>533228</Id>
-		<Name>product4</Name>
+		<Name>double bass</Name>
 		<Price>643</Price>
 		<Category>BowInstrument</Category>
 		<InStock>12</InStock>
+		<Image>\photoes\bow instruments\double bass.jpg</Image>
 	</Product>
 	<Product>
 		<Id>222807</Id>
-		<Name>product5</Name>
+		<Name>electric violin</Name>
 		<Price>347</Price>
 		<Category>BowInstrument</Category>
 		<InStock>15</InStock>
+		<Image>\photoes\bow instruments\electric violin.jpg</Image>
 	</Product>
 	<Product>
 		<Id>903884</Id>
-		<Name>product6</Name>
+		<Name>Half size violin</Name>
 		<Price>1099</Price>
 		<Category>BowInstrument</Category>
 		<InStock>18</InStock>
+		<Image> \photoes\bow instruments\Half size violin.jpg</Image>
 	</Product>
 	<Product>
 		<Id>111116</Id>
-		<Name>stam6</Name>
+		<Name>violin 3.4</Name>
 		<Price>541</Price>
 		<Category>BowInstrument</Category>
 		<InStock>56</InStock>
+		<Image> \photoes\bow instruments\violin 3.4.jpg</Image>
 	</Product>
 	<Product>
 		<Id>111113</Id>
-		<Name>stam3</Name>
+		<Name>violin 4.4</Name>
 		<Price>111</Price>
 		<Category>BowInstrument</Category>
 		<InStock>48</InStock>
+		<Image> \photoes\bow instruments\violin 4.4.jpg</Image>
 	</Product>
 	<Product>
 		<Id>111111</Id>
@@ -57,6 +62,7 @@
 		<Price>100</Price>
 		<Category>BowInstrument</Category>
 		<InStock>49</InStock>
+		<Image>\photoes\bow instruments\cello.jpg</Image>
 	</Product>
 	<Product>
 		<Id>686995</Id>
@@ -64,6 +70,7 @@
 		<Price>100</Price>
 		<Category>BowInstrument</Category>
 		<InStock>21</InStock>
+		<Image>\photoes\bow instruments\cello.jpg</Image>
 	</Product>
 	<Product>
 		<Id>111115</Id>
@@ -71,6 +78,7 @@
 		<Price>541</Price>
 		<Category>BowInstrument</Category>
 		<InStock>55</InStock>
+		<Image>\photoes\bow instruments\cello.jpg</Image>
 	</Product>
 	<Product>
 		<Id>754334</Id>
@@ -78,6 +86,7 @@
 		<Price>354</Price>
 		<Category>WindInstrument</Category>
 		<InStock>34</InStock>
+		<Image>\photoes\bow instruments\cello.jpg</Image>
 	</Product>
 	<Product>
 		<Id>111114</Id>
@@ -85,6 +94,7 @@
 		<Price>141</Price>
 		<Category>WindInstrument</Category>
 		<InStock>53</InStock>
+		<Image>\photoes\bow instruments\cello.jpg</Image>
 	</Product>
 	<Product>
 		<Id>668534</Id>
@@ -92,6 +102,7 @@
 		<Price>1267</Price>
 		<Category>WindInstrument</Category>
 		<InStock>6</InStock>
+		<Image>\photoes\bow instruments\cello.jpg</Image>
 	</Product>
 	<Product>
 		<Id>110306</Id>
@@ -99,6 +110,7 @@
 		<Price>1198</Price>
 		<Category>KeyBoard</Category>
 		<InStock>24</InStock>
+		<Image>\photoes\bow instruments\cello.jpg</Image>
 	</Product>
 	<Product>
 		<Id>111112</Id>
@@ -106,6 +118,7 @@
 		<Price>110</Price>
 		<Category>KeyBoard</Category>
 		<InStock>51</InStock>
+		<Image>\photoes\bow instruments\cello.jpg</Image>
 	</Product>
 	<Product>
 		<Id>200688</Id>
@@ -113,6 +126,7 @@
 		<Price>1903</Price>
 		<Category>Percussions</Category>
 		<InStock>30</InStock>
+		<Image>\photoes\bow instruments\cello.jpg</Image>
 	</Product>
 	<Product>
 		<Id>613085</Id>
@@ -120,5 +134,6 @@
 		<Price>1948</Price>
 		<Category>BowInstrument</Category>
 		<InStock>27</InStock>
+		<Image>\photoes\bow instruments\cello.jpg</Image>
 	</Product>
 </ArrayOfProduct>
