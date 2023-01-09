@@ -1,6 +1,7 @@
 ﻿
 using BO;
 using DO;
+using Products;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,12 +23,25 @@ namespace PL.productsWindows
         public Array Categories { set; get; }
         private int selectedIndex;
 
+        public BO.Category? CategorySelected
+        {
+            get { return (BO.Category?)GetValue(CategorySelectedProperty); }
+            set { SetValue(CategorySelectedProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CategorySelected.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CategorySelectedProperty =
+            DependencyProperty.Register("CategorySelected", typeof(BO.Category?), typeof(ProductListWindow));
+
+
         public ProductListWindow()
         {
             try
             {
                 ProductsForList = new ObservableCollection<BO.ProductForList>(bl?.Product.GetListProductForManagerAndCatalog());
                 Categories = Enum.GetValues(typeof(BO.Category));
+                restartAndAdd(bl?.Product.GetListProductForManagerAndCatalog());
+                CategorySelected = null;
                 InitializeComponent();
             }
             catch(BO.BoDoesNoExistException ex)
@@ -68,14 +82,14 @@ namespace PL.productsWindows
         {
             try
             {
-                BO.Category category = (BO.Category)selectCategory.SelectedItem;
-                if (ProductsForList.Any(p => p.Category == category) == false)
+                //BO.Category category = (BO.Category)selectCategory.SelectedItem;
+                if (ProductsForList.Any(p => p.Category == CategorySelected) == false)
                 {
-                    restartAndAdd(bl?.Product.GetListProductForManagerAndCatalog(x => (BO.Category)x?.Category == category));
+                    restartAndAdd(bl?.Product.GetListProductForManagerAndCatalog(x => (BO.Category)x?.Category == CategorySelected));
                 }
                 else
                 {
-                    List<BO.ProductForList> objects = bl?.Product.GetProductForListByCond(ProductsForList, product => product.Category == category).ToList();
+                    List<BO.ProductForList> objects = bl?.Product.GetProductForListByCond(ProductsForList, product => product.Category == CategorySelected).ToList();
                     if (objects.Any())
                     {
                         restartAndAdd(objects);
@@ -111,7 +125,10 @@ namespace PL.productsWindows
         {
             try
             {
+                CategorySelected = null;
+
                 restartAndAdd(bl?.Product.GetListProductForManagerAndCatalog());
+
             }
             catch (BO.BoDoesNoExistException ex)//catches the exception from the data layer
             {

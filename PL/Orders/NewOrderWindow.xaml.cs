@@ -79,7 +79,12 @@ namespace Products
             Categories = Enum.GetValues(typeof(BO.Category));
             CollectionViewProductItemList = CollectionViewSource.GetDefaultView(ProductsItems);
             propertyGroupDescription = new PropertyGroupDescription(groupName);
-            //CollectionViewProductItemList.GroupDescriptions.Clear();
+
+            CollectionViewProductItemList.GroupDescriptions.Clear();
+
+            restartAndAdd(bl?.Product.GetListProductForCatalog(cart));
+            CategorySelected = null;
+
             InitializeComponent();
 
         }
@@ -96,7 +101,7 @@ namespace Products
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            CategorySelected = (BO.Category)CategoryComboBox.SelectedItem;
+            //CategorySelected = (BO.Category)CategoryComboBox.SelectedItem;
 
 
             if (ProductsItems.Any(p => p.Category == CategorySelected) == false)
@@ -119,10 +124,10 @@ namespace Products
         private void ShowAllCategories_Click(object sender, RoutedEventArgs e)
         {
             CollectionViewProductItemList.GroupDescriptions.Clear();
+            CategorySelected = null;
 
             restartAndAdd(bl?.Product.GetListProductForCatalog(cart));
             Categories = Enum.GetValues(typeof(BO.Category)); //לא מסנן כשזה מסומן כבר על הקטגוריה
-
         }
 
         private void CartButton_Click(object sender, RoutedEventArgs e)
