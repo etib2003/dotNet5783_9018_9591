@@ -5,21 +5,49 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Products"
         mc:Ignorable="d"
-        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"  
         Title="NewOrderWindow" Height="450" Width="800">
-    <Grid x:Name="CatalogGrid" Height="434" VerticalAlignment="Bottom">
-        <ListView x:Name="CatalogListView" ItemsSource="{Binding ProductsItems}" FontFamily="Candara" Margin="0,93,0,0" FontSize="16" >
+    <Window.Resources>
+        <DataTemplate x:Key="Product" DataType="local: Product" >
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5*" />
+                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="0.5*" />
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" HorizontalAlignment="Center" Height="150"  Width="125" BorderBrush="Black" BorderThickness="0,0,0,0" >
+                <Border.Background>
+                    <ImageBrush ImageSource="{Binding Path=Image}" Stretch="UniformToFill" />
+                </Border.Background>
+            </Border>
+            <Label  Grid.Row="1" Content="{Binding Path=Name}" Width="200" HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>
+            <Label   Grid.Row="2" Content="{Binding Path=Price}" ContentStringFormat=" {0} ₪" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+            <Button x:Name="btnAddToCart"   Content="Add To Cart" Grid.Row="1" VerticalAlignment="Bottom" Click="AddToCart_Click" Visibility="Visible"/>
+        </Grid>
+    </DataTemplate>
+    </Window.Resources>
+        <Grid x:Name="CatalogGrid" Height="434" VerticalAlignment="Bottom">
+
+        <ListView x:Name="CatalogListView" ItemsSource="{Binding ProductsItems}" FontFamily="Candara" Margin="0,93,0,0" FontSize="16" 
+   ScrollViewer.HorizontalScrollBarVisibility="Disabled"  
+                    ItemTemplate="{StaticResource Product}" >
             <ListView.Background>
                 <ImageBrush/>
             </ListView.Background>
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="Id" Width="85"/>
+            <!--<ListView.View>-->
+                
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <!--<GridView>
+                    --><!--<GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="Id" Width="85"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Name" Width="110"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Price}" Header="Price" Width="65"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Category" Width="132"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=InStock}" Header="Is In Stock" Width="132"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Amount}" Header="Amount" Width="132"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Amount}" Header="Amount" Width="132"/>--><!--
                     <GridViewColumn Header="Add To Cart">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -28,9 +56,10 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                </GridView>
+                </GridView>-->
          
-            </ListView.View>
+            <!--</ListView.View>-->
+            
             <ListView.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.ContainerStyle>

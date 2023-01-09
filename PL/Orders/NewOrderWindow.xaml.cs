@@ -173,6 +173,27 @@ namespace Products
             //               select item);
             //restartAndAdd(objects);
         }
+
+        private void AddToCart_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                FrameworkElement frameworkElement = (sender as FrameworkElement)!;
+                int productId;
+                if (frameworkElement is not null && frameworkElement.DataContext is not null)
+                {
+                    productId = ((ProductItem)(frameworkElement.DataContext)).Id;
+                    bl?.Cart.AddProductToCart(cart, productId);
+                    var p = ProductsItems.First(p => p.Id == productId);
+                    ProductsItems[ProductsItems.IndexOf(p)] = bl?.Product.GetProductDetailsForCustomer(productId, cart);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Out of stock!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+        }
     }
 }
 
