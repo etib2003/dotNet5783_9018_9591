@@ -51,8 +51,8 @@
                 <RowDefinition Height="6"/>
             </Grid.RowDefinitions>
             <Image Name="PictureHolder"  Grid.Column="0" Grid.Row="0"  Source="{Binding PictureHolderSource, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.ColumnSpan="2" Margin="-76,-32,-431,-106" Grid.RowSpan="2"/>
-            <Button x:Name="back" Grid.Column="1" RenderTransformOrigin="0.067,0.662" FontFamily="Candara" Content="«" Click="back_Click" Foreground="#FFF7EEEE" Grid.Row="1" Margin="47,62,-64,-97" Background="#FFA9A3A3" FontSize="24"/>
-            <Button x:Name="next" Grid.Column="1" RenderTransformOrigin="0.067,0.662" FontFamily="Candara" Content="»" Click="next_Click" Foreground="#FFF7EEEE" Grid.Row="1" Margin="295,62,-315,-96" Background="#FFA9A3A3" FontSize="24"/>
+            <Button x:Name="back" Grid.Column="1" RenderTransformOrigin="0.067,0.662" FontFamily="Candara" Content="«" Click="back_Click" Foreground="#FFF7EEEE" Grid.Row="1" Margin="52,67,-73,-102" FontSize="26" FontWeight="Bold" BorderBrush="{x:Null}" Background="{x:Null}"/>
+            <Button x:Name="next" Grid.Column="1" RenderTransformOrigin="0.067,0.662" FontFamily="Candara" Content="»" Click="next_Click" Foreground="#FFF7EEEE" Grid.Row="1" Margin="280,65,-300,-99" FontSize="26" FontWeight="Bold" BorderBrush="{x:Null}" Background="{x:Null}"/>
 
         </Grid>
     </Grid>
