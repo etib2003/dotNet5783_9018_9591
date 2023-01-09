@@ -18,8 +18,8 @@
 
     <Grid x:Name="OrderGrid">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="357*"/>
-            <ColumnDefinition Width="443*"/>
+            <ColumnDefinition Width="363*"/>
+            <ColumnDefinition Width="437*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="59*"/>
@@ -50,18 +50,18 @@
         <TextBlock x:Name="OrderDateTextBlock" Text="{Binding Path=Order.OrderDate}" Style="{StaticResource ColorTextBlockStyle}" HorizontalAlignment="Left" Margin="165,6,0,0" Grid.Row="6" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
         <TextBlock x:Name="ShipDateTextBlock" Text="{Binding Path=Order.ShipDate}" Style="{StaticResource ColorTextBlockStyle}" HorizontalAlignment="Left" Margin="165,0,0,0" Grid.Row="7" TextWrapping="Wrap" VerticalAlignment="Center" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
         <TextBlock x:Name="DeliveryDateTextBlock" Text="{Binding Path=Order.DeliveryDate}" Style="{StaticResource ColorTextBlockStyle}" HorizontalAlignment="Left" Margin="165,0,0,0" Grid.Row="8" TextWrapping="Wrap" VerticalAlignment="Center" Width="186" Height="16" FontFamily="Candara" FontSize="14"/>
-        <Grid x:Name="OrderItemGrid" Grid.RowSpan="8" Grid.Column="1" Margin="10,5,10,8" Grid.Row="1">
-            <ListView x:Name="OrderItemView" ItemsSource="{Binding Order.OrderItems}" FontFamily="Candara" Foreground="Black" Margin="10,9,22,0" FontSize="12">
+        <Grid x:Name="OrderItemGrid" Grid.RowSpan="8" Margin="351,5,10,8" Grid.Row="1" Grid.ColumnSpan="2">
+            <ListView x:Name="OrderItemView" ItemsSource="{Binding Order.OrderItems}" FontFamily="Candara" Foreground="Black" Margin="0,9,0,0" FontSize="12">
                 <ListView.Background>
                     <ImageBrush/>
                 </ListView.Background>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="Id" Width="40"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Name" Width="70"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=ProductID}" Header="Product ID" Width="80"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=Price}" Header="Price" Width="55"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=Amount}" Header="Amount" Width="65"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="Id" Width="35"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Name" Width="128"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=ProductID}" Header="Product ID" Width="85"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Price}" Header="Price" Width="50"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Amount}" Header="Amount" Width="60"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=TotalPrice}" Header="Total Price" Width="70"/>
                     </GridView>
                 </ListView.View>
