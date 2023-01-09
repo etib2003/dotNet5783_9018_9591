@@ -34,6 +34,8 @@ namespace PL.productsWindows
             DependencyProperty.Register("NewPdct", typeof(BO.Product), typeof(ProductWindow));
 
         private Action<int> action;
+        private Action update;
+        private Action delete;
 
         public string CompleteButton
         {
@@ -62,11 +64,12 @@ namespace PL.productsWindows
         /// get the wanted product from the logical layer and put its detailes in the boxes
         /// </summary>
         /// <param name="prtrLId">id of a product</param>
-        public ProductWindow(int prtrLId, Action<int> action) 
+        public ProductWindow(int prtrLId, Action update, Action delete) 
         {
             try
             {
-                this.action = action;
+                this.update = update;
+                this.delete = delete;
                 NewPdct = bl?.Product.GetProductDetailsForManager(prtrLId);
                 Categories = Enum.GetValues(typeof(BO.Category));
                 InitializeComponent();
@@ -127,7 +130,7 @@ namespace PL.productsWindows
                 else if (CompleteButton == "Update")
                 {
                     bl?.Product.UpdateProduct(NewPdct);
-                    action(NewPdct.Id);                   
+                    update();                   
                     MessageBox.Show("Updating is done!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                
@@ -167,8 +170,9 @@ namespace PL.productsWindows
         {
             try {
                 bl?.Product.DeleteProduct(NewPdct.Id);
-                MessageBox.Show("Deleting is done!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
+                delete();
+                MessageBox.Show("Deleting is done!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
 
             }
             catch (BO.NotValidDeleteException ex)

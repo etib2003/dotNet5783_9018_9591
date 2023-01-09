@@ -18,10 +18,10 @@ namespace PL.productsWindows
     public partial class ProductListWindow : Window
     {
         //Object to access the logical layer
-        BlApi.IBl? bl = BlApi.Factory.Get();
-        public ObservableCollection<BO.ProductForList> ProductsForList { set; get; }
-        public Array Categories { set; get; }
-        private int selectedIndex;
+        static readonly BlApi.IBl bl = BlApi.Factory.Get()!;
+        public ObservableCollection<BO.ProductForList?>? ProductsForList { set; get; }
+        public Array? Categories { set; get; }
+        private int selectedIndex { set; get; }
 
         public BO.Category? CategorySelected
         {
@@ -38,13 +38,13 @@ namespace PL.productsWindows
         {
             try
             {
-                ProductsForList = new ObservableCollection<BO.ProductForList>(bl?.Product.GetListProductForManagerAndCatalog());
+                ProductsForList = new ObservableCollection<BO.ProductForList?>(bl.Product.GetListProductForManagerAndCatalog());
                 Categories = Enum.GetValues(typeof(BO.Category));
-                restartAndAdd(bl?.Product.GetListProductForManagerAndCatalog());
+                restartAndAdd(bl.Product.GetListProductForManagerAndCatalog());
                 CategorySelected = null;
                 InitializeComponent();
             }
-            catch(BO.BoDoesNoExistException ex)
+            catch(BO.BoDoesNoExistException)
             {
                 MessageBox.Show("We could not load the data..\n Please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
@@ -53,7 +53,7 @@ namespace PL.productsWindows
 
         private void addProductForList(int productId)
         {
-            ProductsForList.Add(bl?.Product.GetProductForList(productId));
+            ProductsForList!.Add(bl?.Product.GetProductForList(productId));
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace PL.productsWindows
             {
                 new ProductWindow(addProductForList).Show();
             }
-            catch (BO.BoDoesNoExistException ex)
+            catch (BO.BoDoesNoExistException)
             {
                 MessageBox.Show("Can't add the product!\n Please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -83,32 +83,32 @@ namespace PL.productsWindows
             try
             {
                 //BO.Category category = (BO.Category)selectCategory.SelectedItem;
-                if (ProductsForList.Any(p => p.Category == CategorySelected) == false)
+                if (ProductsForList!.Any(p => p.Category == CategorySelected) == false)
                 {
-                    restartAndAdd(bl?.Product.GetListProductForManagerAndCatalog(x => (BO.Category)x?.Category == CategorySelected));
+                    restartAndAdd(bl.Product.GetListProductForManagerAndCatalog(x => (BO.Category)x?.Category! == CategorySelected));
                 }
                 else
                 {
-                    List<BO.ProductForList> objects = bl?.Product.GetProductForListByCond(ProductsForList, product => product.Category == CategorySelected).ToList();
-                    if (objects.Any())
+                    List<BO.ProductForList?> objects = bl?.Product.GetProductForListByCond(ProductsForList, product => product.Category == CategorySelected).ToList();
+                    if (objects!.Any())
                     {
-                        restartAndAdd(objects);
+                        restartAndAdd(objects!);
                     }
                 }
             }
-            catch (BO.BoDoesNoExistException ex)//catches the exception from the data layer
+            catch (BO.BoDoesNoExistException)//catches the exception from the data layer
             {
                 MessageBox.Show("We could not load the data..\n Please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (Exception ex)//catches the exception from the data layer
+            catch (Exception)//catches the exception from the data layer
             {
                 MessageBox.Show("Error\n Please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
-        private void restartAndAdd(IEnumerable<BO.ProductForList> objects)
+        private void restartAndAdd(IEnumerable<BO.ProductForList?> objects)
         {
-            ProductsForList.Clear();
+            ProductsForList!.Clear();
 
             foreach (var item in objects)
             {
@@ -127,10 +127,10 @@ namespace PL.productsWindows
             {
                 CategorySelected = null;
 
-                restartAndAdd(bl?.Product.GetListProductForManagerAndCatalog());
+                restartAndAdd(bl.Product.GetListProductForManagerAndCatalog());
 
             }
-            catch (BO.BoDoesNoExistException ex)//catches the exception from the data layer
+            catch (BO.BoDoesNoExistException)//catches the exception from the data layer
             {
                 MessageBox.Show("We could not load the data..\n Please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -145,15 +145,24 @@ namespace PL.productsWindows
         {
             try
             {
-                if (ProductForListView.SelectedItem is ProductForList productForList)//ProductForListView.SelectedItem is ProductForList productForList)
-                {
-                    selectedIndex = ProductForListView.SelectedIndex;
-                    int pflId = ((ProductForList)ProductForListView.SelectedItem).Id;
-                    new ProductWindow(pflId, (productId) => ProductsForList[selectedIndex] = bl?.Product.GetProductForList(productId)).Show();
-                    this.Close();
-                }
+                var lv = (sender as ListViewItem)!;
+                var product = (BO.ProductForList)(sender as ListViewItem)!.DataContext;
+
+                int pflId = product.Id;
+                new ProductWindow(prtrLId: pflId,
+                                  update: () => ProductsForList![ProductsForList!.IndexOf(product)] = bl.Product.GetProductForList(pflId),
+                                  delete: () => ProductsForList!.RemoveAt(ProductsForList!.IndexOf(product))).Show();
+                //this.Close();
+
+                //if (ProductForListView.SelectedItem is ProductForList productForList)//ProductForListView.SelectedItem is ProductForList productForList)
+                //{
+                //    selectedIndex = ProductForListView.SelectedIndex;
+                //    int pflId = ((ProductForList)ProductForListView.SelectedItem).Id;
+                //    new ProductWindow(pflId, (productId) => ProductsForList[selectedIndex] = bl?.Product.GetProductForList(productId)).Show();
+                //    this.Close();
+                //}
             }
-            catch (BO.BoDoesNoExistException ex)//catches the exception from the data layer
+            catch (BO.BoDoesNoExistException)//catches the exception from the data layer
             {
                 MessageBox.Show("We could not find the product..\n Please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
