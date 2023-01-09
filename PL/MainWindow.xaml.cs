@@ -24,7 +24,7 @@ namespace PL
         /// </summary>
          BlApi.IBl? bl= BlApi.Factory.Get();
 
-        private string _path = Environment.CurrentDirectory + @$"\PictursForMain\";
+        private string _path = Environment.CurrentDirectory + @$"\PicturesForMain\";
         //BO.Cart Cart = new BO.Cart() { CustomerName = null, CustomerEmail = null, CustomerAddress = null, Items = new List<BO.OrderItem>(), TotalPrice = 0 };
 
 

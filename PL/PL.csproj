@@ -15,6 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="1.jpg" />
     <None Remove="background3.jpg" />
     <None Remove="Cart\pictureForComplete.jpg" />
     <None Remove="LOGO.png" />
@@ -71,14 +72,19 @@
     <None Remove="photoes\wind instruments\table bell.webp" />
     <None Remove="photoes\wind instruments\trombone.jpg" />
     <None Remove="photoes\wind instruments\trumpet.jpg" />
-    <None Remove="PictursForMain\1.jpg" />
-    <None Remove="PictursForMain\5.jpg" />
-    <None Remove="PictursForMain\6.jpg" />
-    <None Remove="PictursForMain\7.jpg" />
+    <None Remove="PicturesForMain\2.jpg" />
+    <None Remove="PicturesForMain\3.jpg" />
+    <None Remove="PicturesForMain\4.jpg" />
+    <None Remove="PicturesForMain\5.jpg" />
+    <None Remove="PicturesForMain\6.jpg" />
+    <None Remove="PicturesForMain\7.jpg" />
     <None Remove="Products\background.jpg" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="PicturesForMain\1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="photoes\bow instruments\berimbaus.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -235,16 +241,22 @@
     <Content Include="photoes\wind instruments\trumpet.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="PictursForMain\1.jpg">
+    <Content Include="PicturesForMain\2.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="PictursForMain\5.jpg">
+    <Content Include="PicturesForMain\3.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="PictursForMain\6.jpg">
+    <Content Include="PicturesForMain\4.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="PictursForMain\7.jpg">
+    <Content Include="PicturesForMain\5.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PicturesForMain\6.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PicturesForMain\7.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
