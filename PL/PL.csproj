@@ -72,6 +72,9 @@
     <None Remove="photoes\wind instruments\trombone.jpg" />
     <None Remove="photoes\wind instruments\trumpet.jpg" />
     <None Remove="PictursForMain\1.jpg" />
+    <None Remove="PictursForMain\5.jpg" />
+    <None Remove="PictursForMain\6.jpg" />
+    <None Remove="PictursForMain\7.jpg" />
     <None Remove="Products\background.jpg" />
   </ItemGroup>
 
@@ -233,6 +236,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="PictursForMain\1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PictursForMain\5.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PictursForMain\6.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PictursForMain\7.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
