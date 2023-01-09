@@ -36,6 +36,17 @@ namespace Converters
         }
     }
 
+    public class ExplainCvv: IValueConverter
+    {
+        //convert from source property type to target property type
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => (bool)value ? Visibility.Visible : Visibility.Collapsed;
+ 
+        //convert from target property type to source property type
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
     public class IsValidTBConverter : IValueConverter
     {
         //convert from source property type to target property type
