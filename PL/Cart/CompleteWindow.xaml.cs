@@ -20,7 +20,7 @@ namespace Cart
     /// </summary>
     public partial class CompleteWindow : Window
     {
-        public BO.Cart cart { get; set; }
+        public BO.Cart? cart { get; set; }
         public BO.Order order { get; set; }
 
         public CompleteWindow(BO.Order _order)

@@ -34,8 +34,7 @@ namespace Cart
         public CartWindow(BO.Cart _cart/*, ObservableCollection<ProductItem> ProductItems*/)
         {
             Cart = _cart;
-            collectionView = CollectionViewSource.GetDefaultView(Cart.Items);
-            //CartItems = new ObservableCollection<BO.OrderItem?>(Cart.Items);
+            collectionView = CollectionViewSource.GetDefaultView(Cart.Items);           
             InitializeComponent();             
         }
 
@@ -57,17 +56,20 @@ namespace Cart
                 {
                     productId = ((OrderItem)(frameworkElement.DataContext)).ProductID;
                     amount= ((OrderItem)(frameworkElement.DataContext)).Amount;
-                    Cart = bl?.Cart.UpdateAmountOfProduct(Cart, productId,amount+1);
-                    //var p = Cart.Items.First(p => p.ProductID == productId);
-                    //Cart.Items[Cart.Items.IndexOf(p)] = p;
-                    ////CartItems[Cart.Items.IndexOf(p)] = Cart.Items[Cart.Items.IndexOf(p)];
+                    Cart = bl?.Cart.UpdateAmountOfProduct(Cart, productId,amount+1)!;                   
                     collectionView.Refresh();
                 }
             }
-            catch (Exception)
+            catch (BO.NotInStockException)
             {
                 MessageBox.Show("Out of stock!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            catch (BO.BoDoesNoExistException)
+            {
+                MessageBox.Show("We could not load the data..\n Please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+             
+           
         }
             private void remove1(object sender, RoutedEventArgs e)
         { 
@@ -80,13 +82,13 @@ namespace Cart
                 {                
                     productId = ((OrderItem)(frameworkElement.DataContext)).ProductID;
                     amount = ((OrderItem)(frameworkElement.DataContext)).Amount;
-                    Cart =bl?.Cart.UpdateAmountOfProduct(Cart, productId, amount - 1);
+                    Cart =bl?.Cart.UpdateAmountOfProduct(Cart, productId, amount - 1)!;
                     collectionView.Refresh();
                 }
             }
-            catch (Exception)
+            catch (BO.BoDoesNoExistException)
             {
-                MessageBox.Show("Out of stock!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("We could not load the data..\n Please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -101,17 +103,13 @@ namespace Cart
                 {
                     productId = ((OrderItem)(frameworkElement.DataContext)).ProductID;
                     amount = ((OrderItem)(frameworkElement.DataContext)).Amount;
-                    Cart = bl?.Cart.UpdateAmountOfProduct(Cart, productId, 0);
-                    //var p = Cart.Items.First(p => p.ProductID == productId);
-                    //Cart.Items.Remove(p);
-                    //CartItems.Remove(p);
-
+                    Cart = bl?.Cart.UpdateAmountOfProduct(Cart, productId, 0)!;
                     collectionView.Refresh();
                 }
             }
-            catch (Exception)
+            catch (BO.BoDoesNoExistException)
             {
-                MessageBox.Show("Out of stock!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("We could not load the data..\n Please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
