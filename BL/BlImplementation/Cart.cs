@@ -131,7 +131,7 @@ internal class Cart : BlApi.ICart
             {
                 DO.OrderItem doOrderItem = boOrderItem.CopyPropToStruct(new DO.OrderItem());
                 doOrderItem.OrderID = orderId;
-                boOrderItem.Id = dal?.OrderItem.Create(doOrderItem) ?? default;
+                boOrderItem!.Id = dal?.OrderItem.Create(doOrderItem) ?? default;
                 DO.Product product = dal?.Product.GetById(doOrderItem.ProductID) ?? default;//get the right product using its id
                 product.InStock -= doOrderItem.Amount; //delete from the stock
                 dal?.Product.Update(product);

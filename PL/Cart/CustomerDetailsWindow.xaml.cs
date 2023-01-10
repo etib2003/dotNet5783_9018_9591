@@ -40,18 +40,32 @@ namespace Cart
             InitializeComponent();
         }
 
-        private void endOrderbutton_Click(object sender, RoutedEventArgs e) //להוסיף בדיקות שנכנס משהו!
+        private void endOrderbutton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-            var order=bl?.Cart.CommitOrder(Cart);
-            new CompleteWindow(order).Show();
-            this.Close();
+                var order = bl?.Cart.CommitOrder(Cart);
+                new CompleteWindow(order!).Show();
+                this.Close();
             }
-            catch (BO.NotValidEmailException ex)
+            catch (BO.NotValidFormatNameException)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }         
+                MessageBox.Show("Not valid name", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (BO.NegativeNumberException)
+
+            {
+                MessageBox.Show("Not valid amount", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            catch (BO.NotValidEmailException)
+            {
+                MessageBox.Show("Not valid email", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (BO.BoDoesNoExistException)
+            {
+                MessageBox.Show("We could not load the data..\n Please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         private void PreviewTextInputDecimal(object sender, TextCompositionEventArgs e)
         {
