@@ -27,7 +27,7 @@ namespace PL
         private string _path = Environment.CurrentDirectory + @$"\PicturesForMain\";
  
 
-        public BO.Cart cart
+        public BO.Cart Cart
         {
             get { return (BO.Cart)GetValue(cartProperty); }
             set { SetValue(cartProperty, value); }
@@ -35,7 +35,7 @@ namespace PL
 
         // Using a DependencyProperty as the backing store for Cart.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty cartProperty =
-            DependencyProperty.Register("cart", typeof(BO.Cart), typeof(MainWindow));
+            DependencyProperty.Register("Cart", typeof(BO.Cart), typeof(MainWindow));
 
 
 
@@ -57,8 +57,9 @@ namespace PL
         /// </summary>
         public MainWindow()
         {
-            cart = new BO.Cart() { CustomerName = null, CustomerEmail = null, CustomerAddress = null, Items = new List<BO.OrderItem>(), TotalPrice = 0 };
+            Cart = new BO.Cart() { Items = new List<BO.OrderItem>(), TotalPrice=0 };
           
+
             backgroundWorker = new BackgroundWorker();
             backgroundWorker.DoWork += BackgroundWorker_DoWork;
             backgroundWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
@@ -106,7 +107,9 @@ namespace PL
 
         private void NewOrderButton_click(object sender, RoutedEventArgs e)
         {
-            new  NewOrderWindow(cart).Show();
+            new  NewOrderWindow(Cart).ShowDialog();
+            BO.Cart c = Cart; 
+            MessageBox.Show(Cart.ToString());
         }
 
         private void back_Click(object sender, RoutedEventArgs e)

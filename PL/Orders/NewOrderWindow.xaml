@@ -42,7 +42,7 @@
             </ListView.Background>
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
-                    <EventSetter Event="MouseDoubleClick" Handler="Update_MouseDoubleClick"/>
+                    <EventSetter Event="MouseDoubleClick" Handler="ShowItem_MouseDoubleClick"/>
                 </Style>
             </ListView.ItemContainerStyle>
             <ItemsControl.ItemsPanel>
@@ -62,9 +62,9 @@
                                         <Expander IsExpanded="True">
                                             <Expander.Header>
                                                 <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="{DynamicResource PrimaryHueMidBrush}" FontSize="18" VerticalAlignment="Bottom" />
-                                                    <TextBlock Text="{Binding ItemCount}" FontSize="16" Foreground="{DynamicResource PrimaryHueLightBrush}" FontWeight="Bold" FontStyle="Italic" Margin="10,0,0,0" VerticalAlignment="Bottom" />
-                                                    <TextBlock Text=" item(s)" FontSize="12" Foreground="{DynamicResource PrimaryHueLightBrush}" FontStyle="Italic" VerticalAlignment="Bottom"  />
+                                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="{DynamicResource ButtonForegroundBrush}" FontSize="18" VerticalAlignment="Bottom" />
+                                                    <TextBlock Text="{Binding ItemCount}" FontSize="16" Foreground="{DynamicResource ButtonForegroundBrush}" FontWeight="Bold" FontStyle="Italic" Margin="10,0,0,0" VerticalAlignment="Bottom" />
+                                                    <TextBlock Text=" item(s)" FontSize="12" Foreground="{DynamicResource ButtonForegroundBrush}" FontStyle="Italic" VerticalAlignment="Bottom"  />
                                                 </StackPanel>
                                             </Expander.Header>
                                             <ItemsPresenter />

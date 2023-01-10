@@ -67,25 +67,30 @@ internal class Cart : BlApi.ICart
                 cart.TotalPrice -= orderItem.TotalPrice;
                 cart.Items.Remove(orderItem);
             }
-            else if (orderItem.Amount > newAmount) //in case the new amount is smaller- remove products from the cart
+            else
             {
-                cart.TotalPrice -= orderItem.Price * (orderItem.Amount - newAmount);
-                orderItem.TotalPrice -= orderItem.Price * (orderItem.Amount - newAmount);
-                orderItem.Amount = newAmount;
+                cart.Items.
             }
-            else if (orderItem.Amount < newAmount)//in case the new amount is bigger- add products to the cart
-            {
-                if (doProduct.InStock >= newAmount) // the products requested are in stock
-                {
-                    cart.TotalPrice += orderItem.Price * (newAmount - orderItem.Amount);
-                    orderItem.TotalPrice += orderItem.Price * (newAmount - orderItem.Amount);
-                    orderItem.Amount = newAmount;
-                }
-                else
-                {
-                    throw new BO.NotInStockException("Not In Stock");
-                }
-            }
+
+            //else if (orderItem.Amount > newAmount) //in case the new amount is smaller- remove products from the cart
+            //{
+            //    cart.TotalPrice -= orderItem.Price * (orderItem.Amount - newAmount);
+            //    orderItem.TotalPrice -= orderItem.Price * (orderItem.Amount - newAmount);
+            //    orderItem.Amount = newAmount;
+            //}
+            //else if (orderItem.Amount < newAmount)//in case the new amount is bigger- add products to the cart
+            //{
+            //    if (doProduct.InStock >= newAmount) // the products requested are in stock
+            //    {
+            //        cart.TotalPrice += orderItem.Price * (newAmount - orderItem.Amount);
+            //        orderItem.TotalPrice += orderItem.Price * (newAmount - orderItem.Amount);
+            //        orderItem.Amount = newAmount;
+            //    }
+            //    else
+            //    {
+            //        throw new BO.NotInStockException("Not In Stock");
+            //    }
+            //}
 
             return getCart(cart);
 
@@ -162,6 +167,11 @@ internal class Cart : BlApi.ICart
     }
 
 
+    //public BO.Cart CopyCarts(BO.Cart cart1, BO.Cart cart2)
+    //{
+    //    cart1.CopyPropTo(cart2);
+    //    return cart2;
+    //}
     private BO.Cart getCart(BO.Cart cart) => new BO.Cart { Items = cart.Items, TotalPrice = cart.TotalPrice};
 }
 

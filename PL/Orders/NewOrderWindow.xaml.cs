@@ -70,6 +70,7 @@ namespace Products
             try
             {
                 Cart = _cart;
+
                 var pList = bl?.Product.GetListProductForCatalog(Cart)!;
                 ProductsItems = new ObservableCollection<ProductItem>(pList);
                 Categories = Enum.GetValues(typeof(BO.Category));
@@ -156,7 +157,7 @@ namespace Products
 
         private void CartButton_Click(object sender, RoutedEventArgs e)
         {
-            new CartWindow(Cart).Show();
+            new CartWindow(Cart /*,(Cart) => this.Cart = Cart*/).Show() ;
             this.Close();
         }
 
@@ -175,7 +176,10 @@ namespace Products
                 if (frameworkElement is not null && frameworkElement.DataContext is not null)
                 {
                     productId = ((ProductItem)(frameworkElement.DataContext)).Id;
-                    bl?.Cart.AddProductToCart(Cart, productId);
+                    
+                    Cart= bl?.Cart.AddProductToCart(Cart, productId)!;
+                    //var tmpCart =
+                    //Cart=bl?.Cart.CopyCarts(tmpCart, Cart);
                     var p = ProductsItems.First(p => p.Id == productId);
                     ProductsItems[ProductsItems.IndexOf(p)] = bl?.Product.GetProductDetailsForCustomer(productId, Cart)!;
                 }
@@ -198,7 +202,7 @@ namespace Products
             }
         }
 
-        private void Update_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void ShowItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             try
             {

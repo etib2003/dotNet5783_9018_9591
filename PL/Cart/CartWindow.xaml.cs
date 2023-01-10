@@ -25,14 +25,18 @@ namespace Cart
             set { SetValue(cartProperty, value); }
         }
 
+
         // Using a DependencyProperty as the backing store for Cart.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty cartProperty =
             DependencyProperty.Register("Cart", typeof(BO.Cart), typeof(CartWindow));
 
+        //Action<BO.Cart> action;
 
-        public CartWindow(BO.Cart _cart)
+        public CartWindow(BO.Cart _cart/*, Action<BO.Cart> action*/)
         {
+            //this.action = action;
             Cart = _cart;
+            //Cart = bl.Cart.CopyCarts(_cart, Cart);
             collectionView = CollectionViewSource.GetDefaultView(Cart.Items);           
             InitializeComponent();             
         }
@@ -54,7 +58,11 @@ namespace Cart
                 {
                     productId = ((OrderItem)(frameworkElement.DataContext)).ProductID;
                     amount= ((OrderItem)(frameworkElement.DataContext)).Amount;
-                    Cart = bl?.Cart.UpdateAmountOfProduct(Cart, productId,amount+1)!;                   
+                    //var tmpCart= bl?.Cart.UpdateAmountOfProduct(Cart, productId,amount+1)!;
+                    //Cart= bl.Cart.CopyCarts(tmpCart, Cart);
+
+                    Cart= bl?.Cart.UpdateAmountOfProduct(Cart, productId, amount + 1)!;
+                    //action(Cart);
                     collectionView.Refresh();
                 }
             }
@@ -80,7 +88,11 @@ namespace Cart
                 {                
                     productId = ((OrderItem)(frameworkElement.DataContext)).ProductID;
                     amount = ((OrderItem)(frameworkElement.DataContext)).Amount;
-                    Cart =bl?.Cart.UpdateAmountOfProduct(Cart, productId, amount - 1)!;
+                    //var tmpCart = bl?.Cart.UpdateAmountOfProduct(Cart, productId, amount - 1)!;
+                    //Cart = bl.Cart.CopyCarts(tmpCart, Cart);
+                    Cart= bl?.Cart.UpdateAmountOfProduct(Cart, productId, amount - 1)!;
+
+                    //action(Cart);
                     collectionView.Refresh();
                 }
             }
@@ -101,7 +113,11 @@ namespace Cart
                 {
                     productId = ((OrderItem)(frameworkElement.DataContext)).ProductID;
                     amount = ((OrderItem)(frameworkElement.DataContext)).Amount;
-                    Cart = bl?.Cart.UpdateAmountOfProduct(Cart, productId, 0)!;
+                    //var tmpCart = bl?.Cart.UpdateAmountOfProduct(Cart, productId, 0)!;
+                    //Cart = bl.Cart.CopyCarts(tmpCart, Cart);
+                    Cart= bl?.Cart.UpdateAmountOfProduct(Cart, productId, 0)!;
+                    //action(Cart);
+
                     collectionView.Refresh();
                 }
             }

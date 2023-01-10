@@ -89,18 +89,29 @@ internal static class DataSource
     /// </summary>
     static void productInitialize()//initializing products
     {
+        string[] images = { "C:\\dotNet5783_9018_9591\\PL\\photoes\\percussions\\A set of cymbals.jpg",
+            "C:\\dotNet5783_9018_9591\\PL\\photoes\\string instruments\\black electric guitar.jpg",
+        "C:\\dotNet5783_9018_9591\\PL\\photoes\\wind instruments\\10 hole harmonica.jpg",
+        "C:\\dotNet5783_9018_9591\\PL\\photoes\\keyboard\\Electric piano 88 keys.jpg",
+        "C:\\dotNet5783_9018_9591\\PL\\photoes\\bow instruments\\violin 4.4.jpg",
+        "C:\\dotNet5783_9018_9591\\PL\\photoes\\percussions\\wooden drum.jpg",
+        "C:\\dotNet5783_9018_9591\\PL\\photoes\\string instruments\\red electric guitar.jpg",
+        "C:\\dotNet5783_9018_9591\\PL\\photoes\\wind instruments\\trombone.jpg",
+        "C:\\dotNet5783_9018_9591\\PL\\photoes\\keyboard\\Grand piano.jpg",
+        "C:\\dotNet5783_9018_9591\\PL\\photoes\\bow instruments\\electric violin.jpg"};
         int AmountOfProducts = 10;
         for (int i = 1; i <= AmountOfProducts; i++)
         {
             Product product = new Product();//create a new object
             do
             {
-                product.Id = random.Next(100000, 999999);
+                product.Id = 100000 + i;//random.Next(100000, 999999);
             }
             while (_products.Exists(x => x?.Id == product.Id));
             product.Name = "product" + i;
             product.Price = random.Next(200, 2000);
             product.Category = (Category)(i % 5);
+            product.Image = images[i-1];
             if (i <= AmountOfProducts * 0.05 + 1)
                 product.InStock = 0;
             else
