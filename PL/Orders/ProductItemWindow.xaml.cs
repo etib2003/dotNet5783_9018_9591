@@ -7,13 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
 
 namespace Orders
 {
@@ -36,8 +30,6 @@ namespace Orders
             DependencyProperty.Register("Cart", typeof(BO.Cart), typeof(ProductItemWindow));
 
 
-
-
         public BO.ProductItem NewPdctItem
         {
             get { return (BO.ProductItem)GetValue(NewPdctProperty); }
@@ -48,17 +40,30 @@ namespace Orders
         public static readonly DependencyProperty NewPdctProperty =
             DependencyProperty.Register("NewPdctItem", typeof(BO.ProductItem), typeof(ProductItemWindow));
 
-        private Action action;
+        private Action? action;
 
 
         public ProductItemWindow(int id, BO.Cart _cart, Action action)
         {
-            this.action = action;
-            Cart = _cart;
-            NewPdctItem = bl?.Product.GetProductDetailsForCustomer(id, Cart);
-            InitializeComponent();
+            try
+            {
+                this.action = action;
+                Cart = _cart;
+                NewPdctItem = bl?.Product.GetProductDetailsForCustomer(id, Cart)!;
+                InitializeComponent();
+            }
+            catch (BO.NegativeNumberException)
+            {
+                MessageBox.Show("Negative ID!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (BO.WrongLengthException)
+            {
+                MessageBox.Show("Wrong length ID", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (BO.BoDoesNoExistException)
+            {
+                MessageBox.Show("No Order exists with this ID!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
-
-
     }
 }

@@ -20,8 +20,8 @@ namespace PL.productsWindows
         /// <summary>
         ///Object to access the logical layer
         /// </summary>
-        BlApi.IBl? bl = BlApi.Factory.Get();
-        public Array Categories { set; get; }
+        static readonly BlApi.IBl? bl = BlApi.Factory.Get();
+        public Array? Categories { set; get; }
 
         public BO.Product NewPdct
         {
@@ -33,9 +33,9 @@ namespace PL.productsWindows
         public static readonly DependencyProperty NewPdctProperty =
             DependencyProperty.Register("NewPdct", typeof(BO.Product), typeof(ProductWindow));
 
-        private Action<int> action;
-        private Action update;
-        private Action delete;
+        private Action<int>? add;
+        private Action? update;
+        private Action? delete;
 
         public string CompleteButton
         {
@@ -51,9 +51,9 @@ namespace PL.productsWindows
         /// <summary>
         /// constructor, bruild the labels
         /// </summary>
-        public ProductWindow(Action<int> action) 
+        public ProductWindow(Action<int> action)
         {
-            this.action = action;
+            this.add = action;
             NewPdct = new BO.Product();
             Categories = Enum.GetValues(typeof(BO.Category));
             InitializeComponent();
@@ -70,20 +70,20 @@ namespace PL.productsWindows
             {
                 this.update = update;
                 this.delete = delete;
-                NewPdct = bl?.Product.GetProductDetailsForManager(prtrLId);
+                NewPdct = bl?.Product.GetProductDetailsForManager(prtrLId)!;
                 Categories = Enum.GetValues(typeof(BO.Category));
                 InitializeComponent();
                 CompleteButton = "Update";
             }
-            catch(BO.BoDoesNoExistException ex)
+            catch(BO.BoDoesNoExistException)
             {
                 MessageBox.Show("We could not load the product details..\nPlease try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch(BO.NegativeNumberException ex)
+            catch(BO.NegativeNumberException)
             {
                 MessageBox.Show("Ivalide Id\nPlease try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (BO.WrongLengthException ex)
+            catch (BO.WrongLengthException)
             {
                 MessageBox.Show("Too short Id number\nPlease try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -124,19 +124,19 @@ namespace PL.productsWindows
                 if (CompleteButton == "Add")
                 {
                     bl?.Product.AddProduct(NewPdct);
-                    action(NewPdct.Id);
+                    add!(NewPdct.Id);
                     MessageBox.Show("Adding is done!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else if (CompleteButton == "Update")
                 {
                     bl?.Product.UpdateProduct(NewPdct);
-                    update();                   
+                    update!();                   
                     MessageBox.Show("Updating is done!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                
                 this.Close();
             }
-            catch (BO.BoAlreadyExistsException ex)
+            catch (BO.BoAlreadyExistsException)
             {
                 MessageBox.Show("Product with this Id already exists!\nPlease try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -148,7 +148,7 @@ namespace PL.productsWindows
             {
                 MessageBox.Show(ex.Message+"\nPlease try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (BO.WrongLengthException ex)
+            catch (BO.WrongLengthException)
             {
                 MessageBox.Show("Too short id, please try again!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -156,7 +156,7 @@ namespace PL.productsWindows
             {
                 MessageBox.Show(ex.Message + "\nPlease try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 if (CompleteButton == "Add")
                     MessageBox.Show("Error, you can't add the product!\nPlease try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -171,11 +171,11 @@ namespace PL.productsWindows
             try {
                 bl?.Product.DeleteProduct(NewPdct.Id);
                 this.Close();
-                delete();
+                delete!();
                 MessageBox.Show("Deleting is done!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
 
             }
-            catch (BO.NotValidDeleteException ex)
+            catch (BO.NotValidDeleteException)
             {
                 MessageBox.Show("Product is already in order prosses\nYou can't delete it!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }

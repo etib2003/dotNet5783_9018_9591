@@ -152,15 +152,6 @@ namespace PL.productsWindows
                 new ProductWindow(prtrLId: pflId,
                                   update: () => ProductsForList![ProductsForList!.IndexOf(product)] = bl.Product.GetProductForList(pflId),
                                   delete: () => ProductsForList!.RemoveAt(ProductsForList!.IndexOf(product))).Show();
-                //this.Close();
-
-                //if (ProductForListView.SelectedItem is ProductForList productForList)//ProductForListView.SelectedItem is ProductForList productForList)
-                //{
-                //    selectedIndex = ProductForListView.SelectedIndex;
-                //    int pflId = ((ProductForList)ProductForListView.SelectedItem).Id;
-                //    new ProductWindow(pflId, (productId) => ProductsForList[selectedIndex] = bl?.Product.GetProductForList(productId)).Show();
-                //    this.Close();
-                //}
             }
             catch (BO.BoDoesNoExistException)//catches the exception from the data layer
             {

@@ -8,12 +8,12 @@
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="ProductItemWindow" Height="450" Width="800">
     <Grid>
-        <Image Source="{Binding NewPdctItem.Image}" HorizontalAlignment="Left" Height="344" Margin="426,48,0,0" VerticalAlignment="Top" Width="312"/>
-        <Label Content="{Binding NewPdctItem.Id}" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="36" Margin="42,123,0,0" VerticalAlignment="Top" Width="358" FontSize="18" FontWeight="Bold" Foreground="Black" FontFamily="Britannic Bold"/>
-        <Label Content="{Binding NewPdctItem.Name}" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="80" Margin="42,64,0,0" VerticalAlignment="Top" Width="358"  FontSize="41" FontWeight="Bold" Foreground="Red" FontFamily="Britannic Bold"/>
-        <Label Content="{Binding NewPdctItem.Category}" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="36" Margin="42,175,0,0"  VerticalAlignment="Top" Width="358"  FontSize="25" FontWeight="Bold" FontFamily="Britannic Bold"/>
-        <Label Content="{Binding NewPdctItem.Price}" ContentStringFormat=" {0} ₪" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="36" VerticalAlignment="Top" Width="358" Margin="42,245,0,0"  FontSize="29" FontWeight="Bold" FontFamily="Britannic Bold"/>
-        <Label Content="{Binding NewPdctItem.InStock}" ContentStringFormat="Available in stock: {0}" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="36"  VerticalAlignment="Top" Width="358" Margin="42,339,0,0"  FontSize="19" FontWeight="Bold" FontFamily="Britannic Bold"/>
+        <Image Source="{Binding NewPdctItem.Image}" HorizontalAlignment="Left" Height="344" Margin="444,48,0,0" VerticalAlignment="Top" Width="312"/>
+        <Label Content="{Binding NewPdctItem.Id}" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="36" Margin="0,123,0,0" VerticalAlignment="Top" Width="436" FontSize="18" FontWeight="Bold" Foreground="Black" FontFamily="Britannic Bold"/>
+        <Label Content="{Binding NewPdctItem.Name}" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="80" Margin="0,64,0,0" VerticalAlignment="Top" Width="436"  FontSize="40" FontWeight="Bold" Foreground="Red" FontFamily="Britannic Bold"/>
+        <Label Content="{Binding NewPdctItem.Category}" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="36" Margin="0,175,0,0"  VerticalAlignment="Top" Width="436"  FontSize="25" FontWeight="Bold" FontFamily="Britannic Bold"/>
+        <Label Content="{Binding NewPdctItem.Price}" ContentStringFormat=" {0} ₪" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="36" VerticalAlignment="Top" Width="436" Margin="0,245,0,0"  FontSize="29" FontWeight="Bold" FontFamily="Britannic Bold"/>
+        <Label Content="{Binding NewPdctItem.InStock}" ContentStringFormat="Available in stock: {0}" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="36"  VerticalAlignment="Top" Width="436" Margin="0,339,0,0"  FontSize="19" FontWeight="Bold" FontFamily="Britannic Bold"/>
 
 
     </Grid>

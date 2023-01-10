@@ -55,16 +55,15 @@ namespace Orders
             {
                 if (e.Key == Key.Enter && Id!=null)
                 {
-                    int id = int.Parse(Id);//int.Parse(IdTextBox.Text);                  
-                    orderTracking = bl?.Order.TrackingOrder(id);
+                    int id = int.Parse(Id);                 
+                    orderTracking = bl?.Order.TrackingOrder(id)!;
                 }
             }
-            catch(BoDoesNoExistException ex)
+            catch(BoDoesNoExistException)
             {
                 MessageBox.Show("No Order exists with this ID!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 Id = "";
             }
-
         }
 
         private void ViewOrderButton_Click(object sender, RoutedEventArgs e)
@@ -76,7 +75,7 @@ namespace Orders
                     new OrderWindow(int.Parse(Id)).Show();
                 }
             }
-            catch(BO.BoDoesNoExistException ex)
+            catch(BO.BoDoesNoExistException)
             {
                 MessageBox.Show("No Order exists with this ID!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 Id = "";
@@ -88,6 +87,5 @@ namespace Orders
             Regex regex = new("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
-
     }
 }

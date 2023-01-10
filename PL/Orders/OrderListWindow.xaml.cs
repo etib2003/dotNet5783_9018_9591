@@ -22,7 +22,7 @@ namespace Orders
     /// </summary>
     public partial class OrderListWindow : Window
     {
-        BlApi.IBl? bl = BlApi.Factory.Get();
+        static readonly BlApi.IBl? bl = BlApi.Factory.Get();
         public ObservableCollection<OrderForList> OrderForList { set; get; }
         private int selectedIndex;
         Action action;
@@ -31,10 +31,10 @@ namespace Orders
             try
             {
                 this.action = action;
-                OrderForList = new ObservableCollection<OrderForList>(bl?.Order.GetOrderListForManager());
+                OrderForList = new ObservableCollection<OrderForList>(bl?.Order.GetOrderListForManager()!);
                 InitializeComponent();
             }
-            catch (BO.BoDoesNoExistException ex)
+            catch (BO.BoDoesNoExistException)
             {
                 MessageBox.Show("We could not load the data..\n Please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -48,10 +48,10 @@ namespace Orders
                 {
                     selectedIndex = OrderForListView.SelectedIndex;
                     int oflId = ((OrderForList)OrderForListView.SelectedItem).Id;
-                    new OrderWindow(oflId, (orderId) => OrderForList[selectedIndex] = bl?.Order.GetOrderForList(orderId), action).Show();
+                    new OrderWindow(oflId, (orderId) => OrderForList[selectedIndex] = bl?.Order.GetOrderForList(orderId)!, action).Show();
                 }
             }
-            catch(BO.BoDoesNoExistException ex)
+            catch(BO.BoDoesNoExistException)
             {
                 MessageBox.Show("We could not find the order\n Please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }

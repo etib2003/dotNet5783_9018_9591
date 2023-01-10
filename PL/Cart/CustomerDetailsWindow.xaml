@@ -11,7 +11,9 @@
     <Window.Resources>
         <converter:IsValidCTBConverter x:Key="isValidCTBConverter"></converter:IsValidCTBConverter>
         <converter:IsValidDetailsConverter x:Key="isValidDetailsConverter"></converter:IsValidDetailsConverter>
-        <converter:ExplainCvv x:Key="explainCvv"></converter:ExplainCvv>
+        <converter:ExplainCvvConverter x:Key="explainCvvConverter"></converter:ExplainCvvConverter>
+        <converter:FormatValidityConverter x:Key="formatValidityConverter"></converter:FormatValidityConverter>
+
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -38,7 +40,7 @@
         <TextBox x:Name="EmailTB" Grid.Column="1" Text="{Binding CustomerEmail}" HorizontalAlignment="Left" Height="20" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" Margin="37,3,0,0" FontFamily="Candara" FontSize="14"/>
         <TextBox x:Name="AddressTB" Grid.Column="1" Text="{Binding CustomerAddress}" HorizontalAlignment="Left" Height="20" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" Margin="37,3,0,0" FontFamily="Candara" FontSize="14"/>
         <TextBox x:Name="CardNumberTB" Grid.Column="1" PreviewTextInput="PreviewTextInputDecimal" HorizontalAlignment="Left" Height="20" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" Margin="37,3,0,0" FontFamily="Candara" FontSize="14"/>
-        <TextBox x:Name="CvvTB" Grid.Column="1" PreviewTextInput="PreviewTextInputDecimal" HorizontalAlignment="Left" Height="20" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" Margin="37,3,0,0" FontFamily="Candara" FontSize="14"/>
+        <TextBox x:Name="CvvTB" Grid.Column="1" MaxLength="3" PreviewTextInput="PreviewTextInputDecimal" HorizontalAlignment="Left" Height="20" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" Margin="37,3,0,0" FontFamily="Candara" FontSize="14"/>
         <TextBox x:Name="ValidityTB" Grid.Column="1" PreviewTextInput="PreviewTextInputDecimal" HorizontalAlignment="Left" Height="20" Grid.Row="6" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" Margin="37,3,0,0" FontFamily="Candara" FontSize="14"/>
         <Label x:Name="DetailLabel" Content="Customer Details" HorizontalAlignment="Left" Height="34" Margin="218,0,0,0" VerticalAlignment="Center" Width="266" HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="22" FontFamily="Candara" Grid.ColumnSpan="2"/>
         <Button x:Name="endOrderbutton" Content="Complete order payment" HorizontalAlignment="Left" Margin="240,0,0,0" Grid.Row="7" VerticalAlignment="Center" FontFamily="Candara" FontWeight="Bold" FontSize="19" Click="endOrderbutton_Click" Height="27" Width="222" Grid.ColumnSpan="2">
@@ -71,7 +73,8 @@
         <Label Content="*" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="18" FontSize="10" Margin="26,1,0,0" RenderTransformOrigin="0.522,1.832" Grid.Row="2" Grid.Column="1"/>
 
         <Image HorizontalAlignment="Left" Height="64" VerticalAlignment="Top" Width="118" Source="/LOGO.png" Grid.Row="7" Margin="0,14,0,0"/>
-        <Label Content="3 digit on the back of the card" HorizontalAlignment="Left" Margin="10,11,0,0" Grid.Row="5" Visibility="{Binding ElementName=CvvTB, Path=IsMouseOver,Converter={StaticResource explainCvv}}" VerticalAlignment="Top" Height="31" Grid.RowSpan="2" FontSize="10" FontWeight="Bold" FontFamily="Candara"/>
+        <Label Content="ℹ️ 3 digit on the back of the card" HorizontalAlignment="Left" Margin="7,11,0,0" Grid.Row="5" Visibility="{Binding ElementName=CvvTB, Path=IsMouseOver,Converter={StaticResource explainCvvConverter}}" VerticalAlignment="Top" Height="31" Grid.RowSpan="2" FontSize="10" FontWeight="Bold" FontFamily="Candara"/>
+        <Label Content="ℹ️ Format dd/mm/yy" HorizontalAlignment="Left" Margin="58,10,0,0" Grid.Row="6" Visibility="{Binding ElementName=ValidityTB, Path=IsMouseOver,Converter={StaticResource formatValidityConverter}}" VerticalAlignment="Top" Height="31" FontSize="10" FontWeight="Bold" FontFamily="Candara" Grid.RowSpan="2"/>
 
 
     </Grid>

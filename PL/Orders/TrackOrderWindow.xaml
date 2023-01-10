@@ -15,9 +15,9 @@
         <Label Content="Status:" HorizontalAlignment="Left" Height="28" Margin="231,136,0,0" VerticalAlignment="Top" Width="82" FontWeight="Bold" FontSize="18" FontFamily="Candara"/>
         <TextBlock Text="{Binding Path=orderTracking.Id}" HorizontalAlignment="Left" Height="28" Margin="345,105,0,0" VerticalAlignment="Top" Width="126" FontSize="16"/>
         <TextBlock Text="{Binding Path=orderTracking.Status}" HorizontalAlignment="Left" Height="28" Margin="345,138,0,0" VerticalAlignment="Top" Width="126" FontSize="16"/>
-        <TextBlock Text="{Binding Path=orderTracking.OrderProgress[0].Item1}" HorizontalAlignment="Left" Height="28" Margin="430,174,0,0" VerticalAlignment="Top" Width="196"/>
-        <TextBlock Text="{Binding Path=orderTracking.OrderProgress[1].Item1}" HorizontalAlignment="Left" Height="28" Margin="427,209,0,0" VerticalAlignment="Top" Width="198"/>
-        <TextBlock Text="{Binding Path=orderTracking.OrderProgress[2].Item1}" HorizontalAlignment="Left" Height="28" Margin="430,245,0,0" VerticalAlignment="Top" Width="196"/>
+        <TextBlock Text="{Binding Path=orderTracking.OrderProgress[0].Item1}" HorizontalAlignment="Left" Height="28" Margin="438,174,0,0" VerticalAlignment="Top" Width="196"/>
+        <TextBlock Text="{Binding Path=orderTracking.OrderProgress[1].Item1}" HorizontalAlignment="Left" Height="28" Margin="435,209,0,0" VerticalAlignment="Top" Width="198"/>
+        <TextBlock Text="{Binding Path=orderTracking.OrderProgress[2].Item1}" HorizontalAlignment="Left" Height="28" Margin="438,245,0,0" VerticalAlignment="Top" Width="196"/>
         <TextBlock Text="{Binding Path=orderTracking.OrderProgress[0].Item2}" HorizontalAlignment="Left" Height="30" Margin="235,173,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="221" FontSize="15" FontFamily="Candara" FontWeight="Bold"/>
         <TextBlock Text="{Binding Path=orderTracking.OrderProgress[1].Item2}" HorizontalAlignment="Left" Height="30" Margin="235,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="221" FontSize="15" FontFamily="Candara" FontWeight="Bold"/>
         <TextBlock Text="{Binding Path=orderTracking.OrderProgress[2].Item2}" HorizontalAlignment="Left" Height="30" Margin="235,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="221" FontSize="15" FontFamily="Candara" FontWeight="Bold"/>

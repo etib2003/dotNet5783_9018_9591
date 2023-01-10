@@ -8,13 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Orders
 {
@@ -24,7 +17,8 @@ namespace Orders
     public partial class OrderWindow : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
-        private Action<int> action;
+        private Action<int>? action;
+        Action? _action;
 
         public BO.Order Order
         {
@@ -37,7 +31,6 @@ namespace Orders
             DependencyProperty.Register("Order", typeof(BO.Order), typeof(OrderWindow));
 
 
-
         public bool ViewCondition
         {
             get { return (bool)GetValue(ViewConditionProperty); }
@@ -48,38 +41,34 @@ namespace Orders
         public static readonly DependencyProperty ViewConditionProperty =
             DependencyProperty.Register("ViewCondition", typeof(bool), typeof(OrderWindow));
 
-
-
-        Action _action;
         public OrderWindow(int ordLId, Action<int> action, Action _action)
         {
             this.action = action;
             this._action = _action;
-            Order = bl?.Order.GetOrderDetails(ordLId);
+            Order = bl?.Order.GetOrderDetails(ordLId)!;
             ViewCondition = false;
             InitializeComponent();
         }
 
         public OrderWindow(int ordLId)
         {
-            Order = bl?.Order.GetOrderDetails(ordLId);
+            Order = bl?.Order.GetOrderDetails(ordLId)!;
             ViewCondition=true;
             InitializeComponent();
         }
 
-
         private void ShipCheck_Checked(object sender, RoutedEventArgs e)
         {
-            Order = bl?.Order.UpdateOrderShip(Order.Id);
-            action(Order.Id);
-            _action();
+            Order = bl?.Order.UpdateOrderShip(Order.Id)!;
+            action!(Order.Id);
+            _action!();
         }
 
         private void DeliveryCheck_Checked(object sender, RoutedEventArgs e)
         {
-            Order = bl?.Order.UpdateOrderDelivery(Order.Id);
-            action(Order.Id);
-            _action();
+            Order = bl?.Order.UpdateOrderDelivery(Order.Id)!;
+            action!(Order.Id);
+            _action!();
         }
     }
 }

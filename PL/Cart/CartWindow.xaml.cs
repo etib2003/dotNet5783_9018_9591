@@ -64,7 +64,7 @@ namespace Cart
                     collectionView.Refresh();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Out of stock!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -84,7 +84,7 @@ namespace Cart
                     collectionView.Refresh();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Out of stock!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -109,7 +109,7 @@ namespace Cart
                     collectionView.Refresh();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Out of stock!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
