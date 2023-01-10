@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Cart"
         xmlns:converter="clr-namespace:Converters"
         mc:Ignorable="d"
-        DataContext="{Binding Cart, RelativeSource={RelativeSource Self}}"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="CustomerDetailsWindow" Height="400" Width="700">
     <Window.Resources>
         <converter:IsValidCTBConverter x:Key="isValidCTBConverter"></converter:IsValidCTBConverter>
@@ -21,29 +21,34 @@
             <ColumnDefinition Width="250*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="78*"/>
-            <RowDefinition Height="40*"/>
-            <RowDefinition Height="40*"/>
-            <RowDefinition Height="40*"/>
-            <RowDefinition Height="40*"/>
-            <RowDefinition Height="40*"/>
-            <RowDefinition Height="40*"/>
-            <RowDefinition Height="94*"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="39*"/>
+            <RowDefinition Height="39*"/>
+            <RowDefinition Height="39*"/>
+            <RowDefinition Height="39*"/>
+            <RowDefinition Height="39*"/>
+            <RowDefinition Height="39*"/>
+            <RowDefinition Height="39*"/>
+            <RowDefinition Height="71*"/>
         </Grid.RowDefinitions>
-        <Label x:Name="NameLabel" Content="Name:" HorizontalAlignment="Left" Height="30" Grid.Row="1" Width="191" FontFamily="Candara" VerticalAlignment="Center" Margin="159,0,0,0" FontSize="18"/>
-        <Label x:Name="EmailLabel" Content="Email:" HorizontalAlignment="Left" Height="30" Grid.Row="2" VerticalAlignment="Center" Width="191" FontFamily="Candara" Margin="159,0,0,0" FontSize="18"/>
-        <Label x:Name="AddressLabel" Content="Address:" HorizontalAlignment="Left" Height="30" Grid.Row="3" VerticalAlignment="Center" Width="191" FontFamily="Candara" Margin="159,0,0,0" FontSize="18"/>
-        <Label x:Name="CardNumLabel" Content="Credit card number:" HorizontalAlignment="Left" Height="30" Grid.Row="4" VerticalAlignment="Center" Width="191" FontFamily="Candara" Margin="159,0,0,0" FontSize="18"/>
-        <Label x:Name="CvvLabel" Content="CVV:" HorizontalAlignment="Left" Height="30" Grid.Row="5" VerticalAlignment="Center" Width="191" FontFamily="Candara" Margin="159,0,0,0" FontSize="18"/>
-        <Label x:Name="ValidityLabel" Content="Card validity:" HorizontalAlignment="Left" Height="30" Grid.Row="6" VerticalAlignment="Center" Width="191" FontFamily="Candara" Margin="159,0,0,0" FontSize="18"/>
-        <TextBox x:Name="NameTB" Grid.Column="1" Text="{Binding CustomerName}" HorizontalAlignment="Left" Height="20" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" Margin="37,3,0,0" FontFamily="Candara" FontSize="14"/>
-        <TextBox x:Name="EmailTB" Grid.Column="1" Text="{Binding CustomerEmail}" HorizontalAlignment="Left" Height="20" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" Margin="37,3,0,0" FontFamily="Candara" FontSize="14"/>
-        <TextBox x:Name="AddressTB" Grid.Column="1" Text="{Binding CustomerAddress}" HorizontalAlignment="Left" Height="20" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" Margin="37,3,0,0" FontFamily="Candara" FontSize="14"/>
-        <TextBox x:Name="CardNumberTB" Grid.Column="1" PreviewTextInput="PreviewTextInputDecimal" HorizontalAlignment="Left" Height="20" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" Margin="37,3,0,0" FontFamily="Candara" FontSize="14"/>
+        <Label x:Name="NameLabel" Content="Name:" HorizontalAlignment="Left" Height="30" Width="191" FontFamily="Candara" VerticalAlignment="Top" Margin="159,47,0,0" FontSize="18" Grid.RowSpan="2"/>
+        <Label x:Name="EmailLabel" Content="Email:" HorizontalAlignment="Left" Height="30" Grid.Row="1" VerticalAlignment="Top" Width="191" FontFamily="Candara" Margin="159,37,0,0" FontSize="18" Grid.RowSpan="2"/>
+        <Label x:Name="AddressLabel" Content="Address:" HorizontalAlignment="Left" Height="30" Grid.Row="2" VerticalAlignment="Top" Width="191" FontFamily="Candara" Margin="159,37,0,0" FontSize="18" Grid.RowSpan="2"/>
+        <Label x:Name="CardNumLabel" Content="Credit card number:" HorizontalAlignment="Left" Height="30" Grid.Row="3" VerticalAlignment="Top" Width="191" FontFamily="Candara" Margin="159,37,0,0" FontSize="18" Grid.RowSpan="2"/>
+        <Label x:Name="CvvLabel" Content="CVV:" HorizontalAlignment="Left" Height="30" Grid.Row="4" VerticalAlignment="Top" Width="191" FontFamily="Candara" Margin="159,37,0,0" FontSize="18" Grid.RowSpan="2"/>
+        <Label x:Name="ValidityLabel" Content="Card validity:" HorizontalAlignment="Left" Height="30" Grid.Row="5" VerticalAlignment="Top" Width="191" FontFamily="Candara" Margin="159,37,0,0" FontSize="18" Grid.RowSpan="2"/>
+        <Label x:Name="CouponLabel" Content="Coupon code:" HorizontalAlignment="Left" Height="30" Grid.Row="7" VerticalAlignment="Top" Width="191" FontFamily="Candara" Margin="159,0,0,0" FontSize="18"/>
+
+        <TextBox x:Name="NameTB" Grid.Column="1" Text="{Binding Cart.CustomerName}" HorizontalAlignment="Left" Height="20" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" Margin="37,3,0,0" FontFamily="Candara" FontSize="14" Grid.Row="1"/>
+        <TextBox x:Name="EmailTB" Grid.Column="1" Text="{Binding Cart.CustomerEmail}" HorizontalAlignment="Left" Height="20" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" Margin="37,4,0,0" FontFamily="Candara" FontSize="14"/>
+        <TextBox x:Name="AddressTB" Grid.Column="1" Text="{Binding Cart.CustomerAddress}" HorizontalAlignment="Left" Height="20" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" Margin="37,4,0,0" FontFamily="Candara" FontSize="14"/>
+        <TextBox x:Name="CardNumberTB" Grid.Column="1" PreviewTextInput="PreviewTextInputDecimal" HorizontalAlignment="Left" Height="20" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" Margin="37,4,0,0" FontFamily="Candara" FontSize="14"/>
         <TextBox x:Name="CvvTB" Grid.Column="1" MaxLength="3" PreviewTextInput="PreviewTextInputDecimal" HorizontalAlignment="Left" Height="20" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" Margin="37,3,0,0" FontFamily="Candara" FontSize="14"/>
-        <TextBox x:Name="ValidityTB" Grid.Column="1" PreviewTextInput="PreviewTextInputDecimal" HorizontalAlignment="Left" Height="20" Grid.Row="6" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" Margin="37,3,0,0" FontFamily="Candara" FontSize="14"/>
+        <TextBox x:Name="ValidityTB" Grid.Column="1" PreviewTextInput="PreviewTextInputDecimal" HorizontalAlignment="Left" Height="20" Grid.Row="6" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" Margin="37,4,0,0" FontFamily="Candara" FontSize="14"/>
+        <TextBox x:Name="CouponTB" Grid.Column="1" Text="{Binding Coupon}" HorizontalAlignment="Left" Height="20" Grid.Row="7" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" Margin="37,5,0,0" FontFamily="Candara" FontSize="14"/>
+
         <Label x:Name="DetailLabel" Content="Customer Details" HorizontalAlignment="Left" Height="34" Margin="218,0,0,0" VerticalAlignment="Center" Width="266" HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="22" FontFamily="Candara" Grid.ColumnSpan="2"/>
-        <Button x:Name="endOrderbutton" Content="Complete order payment" HorizontalAlignment="Left" Margin="240,0,0,0" Grid.Row="7" VerticalAlignment="Center" FontFamily="Candara" FontWeight="Bold" FontSize="19" Click="endOrderbutton_Click" Height="27" Width="222" Grid.ColumnSpan="2">
+        <Button x:Name="endOrderbutton" Content="Complete order payment" HorizontalAlignment="Left" Margin="240,17,0,0" Grid.Row="8" VerticalAlignment="Top" FontFamily="Candara" FontWeight="Bold" FontSize="19" Click="endOrderbutton_Click" Height="27" Width="222" Grid.ColumnSpan="2">
             <Button.IsEnabled>
                 <MultiBinding Converter="{StaticResource isValidDetailsConverter}">
                     <MultiBinding.Bindings>
@@ -63,16 +68,16 @@
         <Label x:Name="NoAddress" Visibility="{Binding ElementName=AddressTB, Path=Text,Converter={StaticResource isValidCTBConverter}}" Grid.Column="1" Content="*Please enter details" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="24" Width="88" FontFamily="Candara" Foreground="Red" FontSize="9" Grid.Row="3" Margin="84,0,0,30" Grid.RowSpan="2"/>
         <Label x:Name="NoCardNumber" Visibility="{Binding ElementName=CardNumberTB, Path=Text,Converter={StaticResource isValidCTBConverter}}" Grid.Column="1" Content="*Please enter details" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="24" Width="88" FontFamily="Candara" Foreground="Red" FontSize="9" Grid.Row="4" Margin="84,0,0,30" Grid.RowSpan="2"/>
         <Label x:Name="NoCvv" Visibility="{Binding ElementName=CvvTB, Path=Text,Converter={StaticResource isValidCTBConverter}}" Grid.Column="1" Content="*Please enter details" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="24" Width="88" FontFamily="Candara" Foreground="Red" FontSize="9" Grid.Row="5" Margin="84,0,0,30" Grid.RowSpan="2"/>
-        <Label x:Name="NoValidity" Visibility="{Binding ElementName=ValidityTB, Path=Text,Converter={StaticResource isValidCTBConverter}}" Grid.Column="1" Content="*Please enter details" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="24" Width="88" FontFamily="Candara" Foreground="Red" FontSize="9" Grid.Row="6" Margin="84,0,0,80" Grid.RowSpan="2"/>
+        <Label x:Name="NoValidity" Visibility="{Binding ElementName=ValidityTB, Path=Text,Converter={StaticResource isValidCTBConverter}}" Grid.Column="1" Content="*Please enter details" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="24" Width="88" FontFamily="Candara" Foreground="Red" FontSize="9" Grid.Row="6" Margin="84,0,0,29" Grid.RowSpan="2"/>
 
-        <Label Content="*" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="18" FontSize="10" Margin="26,1,0,0" RenderTransformOrigin="0.522,1.832" Grid.Row="1" Grid.Column="1"/>
-        <Label Content="*" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="18" FontSize="10" Margin="26,1,0,0" RenderTransformOrigin="0.522,1.832" Grid.Row="3" Grid.Column="1"/>
-        <Label Content="*" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="18" FontSize="10" Margin="26,1,0,0" RenderTransformOrigin="0.522,1.832" Grid.Row="4" Grid.Column="1"/>
-        <Label Content="*" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="18" FontSize="10" Margin="26,1,0,0" RenderTransformOrigin="0.522,1.832" Grid.Row="5" Grid.Column="1"/>
-        <Label Content="*" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="18" FontSize="10" Margin="26,1,0,0" RenderTransformOrigin="0.522,1.832" Grid.Row="6" Grid.Column="1"/>
-        <Label Content="*" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="18" FontSize="10" Margin="26,1,0,0" RenderTransformOrigin="0.522,1.832" Grid.Row="2" Grid.Column="1"/>
+        <Label Content="*" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="18" FontSize="10" Margin="26,43,0,0" RenderTransformOrigin="0.522,1.832" Grid.Column="1" Grid.RowSpan="2"/>
+        <Label Content="*" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="18" FontSize="10" Margin="26,33,0,0" RenderTransformOrigin="0.522,1.832" Grid.Row="2" Grid.Column="1" Grid.RowSpan="2"/>
+        <Label Content="*" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="18" FontSize="10" Margin="26,33,0,0" RenderTransformOrigin="0.522,1.832" Grid.Row="3" Grid.Column="1" Grid.RowSpan="2"/>
+        <Label Content="*" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="18" FontSize="10" Margin="26,33,0,0" RenderTransformOrigin="0.522,1.832" Grid.Row="4" Grid.Column="1" Grid.RowSpan="2"/>
+        <Label Content="*" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="18" FontSize="10" Margin="26,33,0,0" RenderTransformOrigin="0.522,1.832" Grid.Row="5" Grid.Column="1" Grid.RowSpan="2"/>
+        <Label Content="*" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="18" FontSize="10" Margin="26,33,0,0" RenderTransformOrigin="0.522,1.832" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2"/>
 
-        <Image HorizontalAlignment="Left" Height="64" VerticalAlignment="Top" Width="118" Source="/LOGO.png" Grid.Row="7" Margin="0,14,0,0"/>
+        <Image HorizontalAlignment="Left" Height="64" VerticalAlignment="Top" Width="118" Source="/LOGO.png" Grid.Row="7" Margin="0,21,0,0" Grid.RowSpan="2"/>
         <Label Content="ℹ️ 3 digit on the back of the card" HorizontalAlignment="Left" Margin="7,11,0,0" Grid.Row="5" Visibility="{Binding ElementName=CvvTB, Path=IsMouseOver,Converter={StaticResource explainCvvConverter}}" VerticalAlignment="Top" Height="31" Grid.RowSpan="2" FontSize="10" FontWeight="Bold" FontFamily="Candara"/>
         <Label Content="ℹ️ Format dd/mm/yy" HorizontalAlignment="Left" Margin="58,10,0,0" Grid.Row="6" Visibility="{Binding ElementName=ValidityTB, Path=IsMouseOver,Converter={StaticResource formatValidityConverter}}" VerticalAlignment="Top" Height="31" FontSize="10" FontWeight="Bold" FontFamily="Candara" Grid.RowSpan="2"/>
 

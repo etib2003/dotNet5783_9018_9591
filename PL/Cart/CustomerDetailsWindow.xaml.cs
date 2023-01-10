@@ -34,6 +34,21 @@ namespace Cart
         public static readonly DependencyProperty cartProperty =
             DependencyProperty.Register("Cart", typeof(BO.Cart), typeof(CustomerDetailsWindow));
 
+
+        private string codeCoupon = "CE";
+        private double discount = 0.8;
+
+
+        public string Coupon
+        {
+            get { return (string)GetValue(CouponProperty); }
+            set { SetValue(CouponProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Coupon.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CouponProperty =
+            DependencyProperty.Register("Coupon", typeof(string), typeof(CustomerDetailsWindow));
+
         public CustomerDetailsWindow(BO.Cart _cart)
         {
             Cart = _cart;
@@ -45,6 +60,8 @@ namespace Cart
             try
             {
                 var order = bl?.Cart.CommitOrder(Cart);
+                if (Coupon == codeCoupon)
+                    order.TotalPrice *= discount;
                 new CompleteWindow(order!).Show();
                 this.Close();
             }
