@@ -4,9 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cart"
+        xmlns:converter="clr-namespace:Converters"
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource self}}"
         Title="CartWindow" Height="450" Width="800">
+    <Window.Resources>
+        <converter:IsEmptyTotalPriceConverter x:Key="isEmptyTotalPriceConverter"></converter:IsEmptyTotalPriceConverter>
+    </Window.Resources>
     <Grid x:Name="CartGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="361*"/>
@@ -49,9 +53,8 @@
             </ListView.View>
         </ListView>
         <Label x:Name="CartLabel" Content="Your Shopping Cart" HorizontalAlignment="Center" Margin="0,7,0,0" VerticalAlignment="Top" Height="51" Width="288" FontFamily="Candara" FontWeight="Bold" FontSize="30" HorizontalContentAlignment="Center"/>
-        <Label x:Name="TotalPriceLabel" Content="Total Price:" HorizontalAlignment="Left" Margin="584,7,0,0" VerticalAlignment="Top" FontFamily="Candara" FontWeight="Bold" FontSize="20" RenderTransformOrigin="0.109,0.061" Grid.Row="1" Height="34" Width="104"/>
-        <Button x:Name="ContToPayButton" Content="Proceed to Payment" HorizontalAlignment="Center" Margin="0,13,0,0" VerticalAlignment="Top" Click="ContToPayButton_Click" FontFamily="Candara" FontWeight="Bold" FontSize="20" Grid.Row="1" Height="28" Width="178"/>
-        <Label Content="{Binding Cart.TotalPrice}" ContentStringFormat=" {0} ₪" Height="41" Margin="694,10,0,22" Width="112" FontSize="18" HorizontalAlignment="Left" Grid.Row="1"/>
+        <Button x:Name="ContToPayButton" IsEnabled="{Binding ElementName=totalPraiceText, Path=Content, Converter={StaticResource isEmptyTotalPriceConverter}}" Content="Proceed to Payment" HorizontalAlignment="Center" Margin="0,13,0,0" VerticalAlignment="Top" Click="ContToPayButton_Click" FontFamily="Candara" FontWeight="Bold" FontSize="20" Grid.Row="1" Height="28" Width="178"/>
+        <Label x:Name="totalPraiceText" Content="{Binding Cart.TotalPrice}" ContentStringFormat="Total Price: {0} ₪" Height="41" Margin="553,10,0,22" Width="217" FontSize="18" HorizontalAlignment="Left" Grid.Row="1" HorizontalContentAlignment="Right" FontFamily="Candara"/>
         <Image HorizontalAlignment="Left" Height="64" VerticalAlignment="Top" Width="118" Source="/LOGO.png" Margin="2,353,0,0" Grid.RowSpan="2"/>
 
     </Grid>

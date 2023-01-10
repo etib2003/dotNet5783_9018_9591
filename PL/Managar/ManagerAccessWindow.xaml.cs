@@ -21,7 +21,7 @@ namespace Managar
     /// </summary>
     public partial class ManagerAccessWindow : Window
     {
-        string password = "2022";
+        string password = "1";
 
         public string Password
         {

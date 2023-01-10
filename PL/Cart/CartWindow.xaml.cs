@@ -29,9 +29,8 @@ namespace Cart
         public static readonly DependencyProperty cartProperty =
             DependencyProperty.Register("Cart", typeof(BO.Cart), typeof(CartWindow));
 
-        //public ObservableCollection<BO.OrderItem?> CartItems { set; get; }
 
-        public CartWindow(BO.Cart _cart/*, ObservableCollection<ProductItem> ProductItems*/)
+        public CartWindow(BO.Cart _cart)
         {
             Cart = _cart;
             collectionView = CollectionViewSource.GetDefaultView(Cart.Items);           
@@ -47,8 +46,7 @@ namespace Cart
         private void Add1(object sender, RoutedEventArgs e)
         {
             try
-            {
-             
+            {          
                 FrameworkElement frameworkElement = (sender as FrameworkElement)!;
                 int productId;
                 int amount;
