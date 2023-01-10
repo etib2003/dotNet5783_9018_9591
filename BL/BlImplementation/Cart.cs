@@ -20,7 +20,7 @@ internal class Cart : BlApi.ICart
             DO.Product product = dal?.Product.GetById(productId) ?? default; //get the right product using its id
             BO.OrderItem? orderItem = (from OrderItem in cart.Items
                                        where OrderItem.ProductID == productId
-                                       select OrderItem).FirstOrDefault(); //            if (cart.Items != null)
+                                       select OrderItem).FirstOrDefault();
 
             if (orderItem is null)
             {

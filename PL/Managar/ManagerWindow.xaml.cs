@@ -39,7 +39,7 @@ namespace PL
         {
             try
             {
-                Statistics = bl?.Order.GroupByStatistics();
+                Statistics = bl?.Order.GroupByStatistics()!;
                 InitializeComponent();
             }
             catch(Exception ex)

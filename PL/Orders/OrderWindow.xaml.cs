@@ -30,7 +30,6 @@ namespace Orders
         public static readonly DependencyProperty OrderProperty =
             DependencyProperty.Register("Order", typeof(BO.Order), typeof(OrderWindow));
 
-
         public bool ViewCondition
         {
             get { return (bool)GetValue(ViewConditionProperty); }
@@ -43,32 +42,88 @@ namespace Orders
 
         public OrderWindow(int ordLId, Action<int> action, Action _action)
         {
-            this.action = action;
-            this._action = _action;
-            Order = bl?.Order.GetOrderDetails(ordLId)!;
-            ViewCondition = false;
-            InitializeComponent();
+            try
+            {
+                this.action = action;
+                this._action = _action;
+                Order = bl?.Order.GetOrderDetails(ordLId)!;
+                ViewCondition = false;
+                InitializeComponent();
+            }
+            catch(BO.NegativeNumberException)
+            {
+                MessageBox.Show("Negative ID!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (BO.BoDoesNoExistException)
+            {
+                MessageBox.Show("No Order exists with this ID!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         public OrderWindow(int ordLId)
         {
-            Order = bl?.Order.GetOrderDetails(ordLId)!;
-            ViewCondition=true;
-            InitializeComponent();
+            try
+            {
+                Order = bl?.Order.GetOrderDetails(ordLId)!;
+                ViewCondition = true;
+                InitializeComponent();
+            }
+            catch (BO.NegativeNumberException)
+            {
+                MessageBox.Show("Negative ID!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (BO.BoDoesNoExistException)
+            {
+                MessageBox.Show("No Order exists with this ID!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void ShipCheck_Checked(object sender, RoutedEventArgs e)
         {
-            Order = bl?.Order.UpdateOrderShip(Order.Id)!;
-            action!(Order.Id);
-            _action!();
+            try
+            {
+                Order = bl?.Order.UpdateOrderShip(Order.Id)!;
+                action!(Order.Id);
+                _action!();
+            }
+            catch (BO.NegativeNumberException)
+            {
+                MessageBox.Show("Negative ID!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (BO.BoDoesNoExistException)
+            {
+                MessageBox.Show("No Order exists with this ID!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch(BO.DateAlreadyUpdatedException ex)
+            {
+                MessageBox.Show(ex.Message+"\nPlease try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void DeliveryCheck_Checked(object sender, RoutedEventArgs e)
         {
-            Order = bl?.Order.UpdateOrderDelivery(Order.Id)!;
-            action!(Order.Id);
-            _action!();
+            try
+            {
+                Order = bl?.Order.UpdateOrderDelivery(Order.Id)!;
+                action!(Order.Id);
+                _action!();
+            }
+            catch (BO.NegativeNumberException)
+            {
+                MessageBox.Show("Negative ID!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (BO.BoDoesNoExistException)
+            {
+                MessageBox.Show("No Order exists with this ID!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (BO.DateHasNotUpdatedYetException ex)
+            {
+                MessageBox.Show(ex.Message + "\nPlease try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch(BO.DateAlreadyUpdatedException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

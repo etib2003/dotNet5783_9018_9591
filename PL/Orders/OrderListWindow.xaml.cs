@@ -23,9 +23,9 @@ namespace Orders
     public partial class OrderListWindow : Window
     {
         static readonly BlApi.IBl? bl = BlApi.Factory.Get();
-        public ObservableCollection<OrderForList> OrderForList { set; get; }
+        public ObservableCollection<OrderForList>? OrderForList { set; get; }
         private int selectedIndex;
-        Action action;
+        Action? action;
         public OrderListWindow(Action action)
         {
             try
@@ -48,7 +48,7 @@ namespace Orders
                 {
                     selectedIndex = OrderForListView.SelectedIndex;
                     int oflId = ((OrderForList)OrderForListView.SelectedItem).Id;
-                    new OrderWindow(oflId, (orderId) => OrderForList[selectedIndex] = bl?.Order.GetOrderForList(orderId)!, action).Show();
+                    new OrderWindow(oflId, (orderId) => OrderForList![selectedIndex] = bl?.Order.GetOrderForList(orderId)!, action).Show();
                 }
             }
             catch(BO.BoDoesNoExistException)

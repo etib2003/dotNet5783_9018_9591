@@ -21,8 +21,6 @@ using System.Windows.Input;
 
 namespace Products
 {
-    
-
     /// <summary>
     /// Interaction logic for NewOrderWindow.xaml
     /// </summary>
@@ -35,7 +33,7 @@ namespace Products
         private string groupName = "Category";
         PropertyGroupDescription propertyGroupDescription;
         public ICollectionView CollectionViewProductItemList { set; get; }
-        public BO.Cart cart
+        public BO.Cart Cart
         {
             get { return (BO.Cart)GetValue(cartProperty); }
             set { SetValue(cartProperty, value); }
@@ -44,8 +42,6 @@ namespace Products
         // Using a DependencyProperty as the backing store for Cart.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty cartProperty =
             DependencyProperty.Register("Cart", typeof(BO.Cart), typeof(NewOrderWindow));
-
-
 
         public BO.Category? CategorySelected
         {
@@ -56,8 +52,6 @@ namespace Products
         // Using a DependencyProperty as the backing store for CategorySelected.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CategorySelectedProperty =
             DependencyProperty.Register("CategorySelected", typeof(BO.Category?), typeof(NewOrderWindow));
-
-
 
         public ObservableCollection<ProductItem> ProductsItems
         {
@@ -72,21 +66,39 @@ namespace Products
         private int selectedIndex { set; get; }
 
         public NewOrderWindow(BO.Cart _cart)
-        {            
+        {
+            try
+            {
+                Cart = _cart;
+                var pList = bl?.Product.GetListProductForCatalog(Cart)!;
+                ProductsItems = new ObservableCollection<ProductItem>(pList);
+                Categories = Enum.GetValues(typeof(BO.Category));
+                CollectionViewProductItemList = CollectionViewSource.GetDefaultView(ProductsItems);
+                propertyGroupDescription = new PropertyGroupDescription(groupName);
 
-            cart = _cart;
-            ProductsItems = new ObservableCollection<ProductItem>(bl?.Product.GetListProductForCatalog(cart));
-            Categories = Enum.GetValues(typeof(BO.Category));
-            CollectionViewProductItemList = CollectionViewSource.GetDefaultView(ProductsItems);
-            propertyGroupDescription = new PropertyGroupDescription(groupName);
+                CollectionViewProductItemList.GroupDescriptions.Clear();
 
-            CollectionViewProductItemList.GroupDescriptions.Clear();
+                restartAndAdd(pList);
+                CategorySelected = null;
 
-            restartAndAdd(bl?.Product.GetListProductForCatalog(cart));
-            CategorySelected = null;
-
-            InitializeComponent();
-
+                InitializeComponent();
+            }
+            catch(BO.BoDoesNoExistException)
+            {
+                MessageBox.Show("We could not load the data..\n Please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (BO.NegativeNumberException)
+            {
+                MessageBox.Show("Ivalide Id\nPlease try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (BO.WrongLengthException)
+            {
+                MessageBox.Show("Too short Id number\nPlease try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error\n Please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void restartAndAdd(IEnumerable<ProductItem> objects)
@@ -101,18 +113,30 @@ namespace Products
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //CategorySelected = (BO.Category)CategoryComboBox.SelectedItem;
-
-
-            if (ProductsItems.Any(p => p.Category == CategorySelected) == false)
-                restartAndAdd(bl?.Product.GetListProductForCatalog(cart, x => (BO.Category)x?.Category! == CategorySelected));
-            else
+            try
             {
-                List<ProductItem> objects = bl?.Product.GetListProductForCatalogView(cart, ProductsItems, x => (BO.Category)x?.Category! == CategorySelected).ToList();
-                if (objects.Any())
+                if (ProductsItems.Any(p => p.Category == CategorySelected) == false)
+                    restartAndAdd(bl?.Product.GetListProductForCatalog(Cart, x => (BO.Category)x?.Category! == CategorySelected)!);
+                else
                 {
-                    restartAndAdd(objects);
+                    List<ProductItem> objects = bl?.Product.GetListProductForCatalogView(Cart, ProductsItems, x => (BO.Category)x?.Category! == CategorySelected).ToList()!;
+                    if (objects.Any())
+                    {
+                        restartAndAdd(objects);
+                    }
                 }
+            }
+            catch(BO.BoDoesNoExistException)
+            {
+                MessageBox.Show("We could not load the data..\n Please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (BO.NegativeNumberException)
+            {
+                MessageBox.Show("Ivalide Id\nPlease try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (BO.WrongLengthException)
+            {
+                MessageBox.Show("Too short Id number\nPlease try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -126,13 +150,13 @@ namespace Products
             CollectionViewProductItemList.GroupDescriptions.Clear();
             CategorySelected = null;
 
-            restartAndAdd(bl?.Product.GetListProductForCatalog(cart));
-            Categories = Enum.GetValues(typeof(BO.Category)); //לא מסנן כשזה מסומן כבר על הקטגוריה
+            restartAndAdd(bl?.Product.GetListProductForCatalog(Cart)!);
+            Categories = Enum.GetValues(typeof(BO.Category));
         }
 
         private void CartButton_Click(object sender, RoutedEventArgs e)
         {
-            new CartWindow(cart).Show();
+            new CartWindow(Cart).Show();
             this.Close();
         }
 
@@ -151,15 +175,26 @@ namespace Products
                 if (frameworkElement is not null && frameworkElement.DataContext is not null)
                 {
                     productId = ((ProductItem)(frameworkElement.DataContext)).Id;
-                    bl?.Cart.AddProductToCart(cart, productId);
+                    bl?.Cart.AddProductToCart(Cart, productId);
                     var p = ProductsItems.First(p => p.Id == productId);
-                    ProductsItems[ProductsItems.IndexOf(p)] = bl?.Product.GetProductDetailsForCustomer(productId, cart);
+                    ProductsItems[ProductsItems.IndexOf(p)] = bl?.Product.GetProductDetailsForCustomer(productId, Cart)!;
                 }
+            }      
+            catch(BO.BoDoesNoExistException)
+            {
+                MessageBox.Show("No Order exists with this ID!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (Exception)
+            catch (BO.NotInStockException)
             {
                 MessageBox.Show("Out of stock!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-
+            }
+            catch (BO.NegativeNumberException)
+            {
+                MessageBox.Show("Negative ID!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (BO.WrongLengthException)
+            {
+                MessageBox.Show("Wrong length ID", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -171,17 +206,20 @@ namespace Products
                 var product = (BO.ProductItem)lv!.DataContext;
                 int piId = product.Id;
 
-                new ProductItemWindow(piId, cart, () => ProductsItems![ProductsItems!.IndexOf(product)] = bl.Product.GetProductDetailsForCustomer(piId, cart)).Show();
-                //if (CatalogListView.SelectedItem is ProductItem p)
-                //{
-                //    selectedIndex = CatalogListView.SelectedIndex;
-                //    int pflId = ((ProductItem)CatalogListView.SelectedItem).Id;
-                //    new ProductItemWindow(pflId, cart, (productId) => ProductsItems[selectedIndex] = bl?.Product.GetProductDetailsForCustomer(pflId, cart)).Show();
-                //}
+                new ProductItemWindow(piId, Cart, () => ProductsItems![ProductsItems!.IndexOf(product)] = bl.Product.GetProductDetailsForCustomer(piId, Cart)).Show();
+
             }
             catch (BO.BoDoesNoExistException)//catches the exception from the data layer
             {
                 MessageBox.Show("We could not find the product..\n Please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (BO.NegativeNumberException)
+            {
+                MessageBox.Show("Negative ID!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (BO.WrongLengthException)
+            {
+                MessageBox.Show("Wrong length ID", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
