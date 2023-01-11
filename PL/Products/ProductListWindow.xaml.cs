@@ -33,7 +33,7 @@ namespace PL.productsWindows
         public static readonly DependencyProperty CategorySelectedProperty =
             DependencyProperty.Register("CategorySelected", typeof(BO.Category?), typeof(ProductListWindow));
 
-
+        //shows the products
         public ProductListWindow()
         {
             try
@@ -51,6 +51,7 @@ namespace PL.productsWindows
             }
         }
 
+        //add a product to the store
         private void addProductForList(int productId)
         {
             ProductsForList!.Add(bl?.Product.GetProductForList(productId));
@@ -82,8 +83,7 @@ namespace PL.productsWindows
         {
             try
             {
-                //BO.Category category = (BO.Category)selectCategory.SelectedItem;
-                if (ProductsForList!.Any(p => p.Category == CategorySelected) == false)
+                 if (ProductsForList!.Any(p => p.Category == CategorySelected) == false)
                 {
                     restartAndAdd(bl.Product.GetListProductForManagerAndCatalog(x => (BO.Category)x?.Category! == CategorySelected));
                 }
