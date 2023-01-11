@@ -40,6 +40,7 @@ namespace Orders
         public static readonly DependencyProperty ViewConditionProperty =
             DependencyProperty.Register("ViewCondition", typeof(bool), typeof(OrderWindow));
 
+        //show all the orders without an option to update
         public OrderWindow(int ordLId, Action<int> action, Action _action)
         {
             try
@@ -60,6 +61,7 @@ namespace Orders
             }
         }
 
+        //show all the orders with an option to update
         public OrderWindow(int ordLId)
         {
             try
@@ -78,6 +80,7 @@ namespace Orders
             }
         }
 
+        //update the shipDate
         private void ShipCheck_Checked(object sender, RoutedEventArgs e)
         {
             try
@@ -99,7 +102,7 @@ namespace Orders
                 MessageBox.Show(ex.Message+"\nPlease try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
+        //update the deliveryDate
         private void DeliveryCheck_Checked(object sender, RoutedEventArgs e)
         {
             try

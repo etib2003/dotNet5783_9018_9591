@@ -26,6 +26,7 @@ namespace Orders
         public ObservableCollection<OrderForList>? OrderForList { set; get; }
         private int selectedIndex;
         Action? action;
+        //shows all the orders
         public OrderListWindow(Action action)
         {
             try
@@ -40,6 +41,7 @@ namespace Orders
             }
         }
 
+        //update an order
         private void Update_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             try

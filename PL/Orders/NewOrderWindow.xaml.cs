@@ -28,8 +28,6 @@ namespace Products
     public partial class NewOrderWindow : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
-        //private CollectionView? view;
-
         private string groupName = "Category";
         PropertyGroupDescription propertyGroupDescription;
         public ICollectionView CollectionViewProductItemList { set; get; }
@@ -66,6 +64,7 @@ namespace Products
         private int selectedIndex { set; get; }
 
         Action<BO.Cart> action;
+        //a window that shows the catalog
         public NewOrderWindow(BO.Cart _cart, Action<BO.Cart> action)
         {
             try
@@ -76,13 +75,11 @@ namespace Products
                 ProductsItems = new ObservableCollection<ProductItem>(pList);
                 Categories = Enum.GetValues(typeof(BO.Category));
                 CollectionViewProductItemList = CollectionViewSource.GetDefaultView(ProductsItems);
+                //grouping
                 propertyGroupDescription = new PropertyGroupDescription(groupName);
-
                 CollectionViewProductItemList.GroupDescriptions.Clear();
-
                 restartAndAdd(pList);
                 CategorySelected = null;
-
                 InitializeComponent();
             }
             catch(BO.BoDoesNoExistException)
@@ -103,6 +100,7 @@ namespace Products
             }
         }
 
+        //put in productItem the objects
         private void restartAndAdd(IEnumerable<ProductItem> objects)
         {
             ProductsItems.Clear();
@@ -113,6 +111,7 @@ namespace Products
             }
         }
 
+        //a comboBox to choose a certain category of products
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
@@ -156,18 +155,20 @@ namespace Products
             Categories = Enum.GetValues(typeof(BO.Category));
         }
 
+        //go to cart
         private void CartButton_Click(object sender, RoutedEventArgs e)
         {
             new CartWindow(Cart, action).ShowDialog() ;
             this.Close();
         }
-
+        //sort the products into groups
         private void grouping_Click(object sender, RoutedEventArgs e)
         {
             ShowAllCategories_Click(sender, e);
             CollectionViewProductItemList.GroupDescriptions.Add(propertyGroupDescription);
         }
 
+        //add a product to cart
         private void AddToCart_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -179,8 +180,6 @@ namespace Products
                     productId = ((ProductItem)(frameworkElement.DataContext)).Id;
                     
                     Cart= bl?.Cart.AddProductToCart(Cart, productId)!;
-                    //var tmpCart =
-                    //Cart=bl?.Cart.CopyCarts(tmpCart, Cart);
                     var p = ProductsItems.First(p => p.Id == productId);
                     ProductsItems[ProductsItems.IndexOf(p)] = bl?.Product.GetProductDetailsForCustomer(productId, Cart)!;
                 }
@@ -203,6 +202,7 @@ namespace Products
             }
         }
 
+        //open a window that shows details of a choosen product
         private void ShowItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             try

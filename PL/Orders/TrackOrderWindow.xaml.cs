@@ -48,6 +48,7 @@ namespace Orders
             InitializeComponent();
         }
 
+        //shows order details by enter
         private void Enter(object sender, KeyEventArgs e)
         {
             try
@@ -66,6 +67,7 @@ namespace Orders
             }
         }
 
+        //open the order window
         private void ViewOrderButton_Click(object sender, RoutedEventArgs e)
         {
             try

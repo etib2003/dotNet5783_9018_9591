@@ -42,7 +42,7 @@ namespace Orders
 
         private Action? action;
 
-
+        //shows details of the products
         public ProductItemWindow(int id, BO.Cart _cart, Action action)
         {
             try
