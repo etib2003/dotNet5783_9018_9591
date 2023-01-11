@@ -49,8 +49,10 @@ namespace Cart
         public static readonly DependencyProperty CouponProperty =
             DependencyProperty.Register("Coupon", typeof(string), typeof(CustomerDetailsWindow));
 
-        public CustomerDetailsWindow(BO.Cart _cart)
+        Action<BO.Cart> action;
+        public CustomerDetailsWindow(BO.Cart _cart, Action<BO.Cart> action)
         {
+            this.action = action;
             Cart = _cart;
             InitializeComponent();
         }
@@ -60,6 +62,7 @@ namespace Cart
             try
             {
                 var order = bl?.Cart.CommitOrder(Cart);
+                action(Cart);
                 if (Coupon == codeCoupon)
                     order.TotalPrice *= discount;
                 new CompleteWindow(order!).Show();

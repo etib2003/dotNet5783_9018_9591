@@ -1,4 +1,5 @@
 ﻿using BO;
+using PL;
 using Products;
 using System;
 using System.Collections.Generic;
@@ -31,38 +32,39 @@ namespace Cart
             DependencyProperty.Register("Cart", typeof(BO.Cart), typeof(CartWindow));
 
         //Action<BO.Cart> action;
-
-        public CartWindow(BO.Cart _cart/*, Action<BO.Cart> action*/)
+        Action<BO.Cart> action;
+        public CartWindow(BO.Cart cart, Action<BO.Cart> action)
         {
-            //this.action = action;
-            Cart = _cart;
+            this.action = action;
+            Cart = cart;
             //Cart = bl.Cart.CopyCarts(_cart, Cart);
-            collectionView = CollectionViewSource.GetDefaultView(Cart.Items);           
-            InitializeComponent();             
+            collectionView = CollectionViewSource.GetDefaultView(Cart.Items);
+            InitializeComponent();
         }
 
         private void ContToPayButton_Click(object sender, RoutedEventArgs e)
         {
-            new CustomerDetailsWindow(Cart).Show();
+            new CustomerDetailsWindow(Cart, action).Show();
             this.Close();
         }
 
         private void Add1(object sender, RoutedEventArgs e)
         {
             try
-            {          
+            {
                 FrameworkElement frameworkElement = (sender as FrameworkElement)!;
                 int productId;
                 int amount;
                 if (frameworkElement is not null && frameworkElement.DataContext is not null)
                 {
                     productId = ((OrderItem)(frameworkElement.DataContext)).ProductID;
-                    amount= ((OrderItem)(frameworkElement.DataContext)).Amount;
+                    amount = ((OrderItem)(frameworkElement.DataContext)).Amount;
                     //var tmpCart= bl?.Cart.UpdateAmountOfProduct(Cart, productId,amount+1)!;
                     //Cart= bl.Cart.CopyCarts(tmpCart, Cart);
 
-                    Cart= bl?.Cart.UpdateAmountOfProduct(Cart, productId, amount + 1)!;
-                    //action(Cart);
+                    Cart = bl?.Cart.UpdateAmountOfProduct(Cart, productId, amount + 1)!;
+
+                    action(Cart);
                     collectionView.Refresh();
                 }
             }
@@ -74,26 +76,27 @@ namespace Cart
             {
                 MessageBox.Show("We could not load the data..\n Please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-             
-           
+
+
         }
-            private void remove1(object sender, RoutedEventArgs e)
-        { 
+        private void remove1(object sender, RoutedEventArgs e)
+        {
             try
             {
                 FrameworkElement frameworkElement = (sender as FrameworkElement)!;
                 int productId;
                 int amount;
                 if (frameworkElement is not null && frameworkElement.DataContext is not null)
-                {                
+                {
                     productId = ((OrderItem)(frameworkElement.DataContext)).ProductID;
                     amount = ((OrderItem)(frameworkElement.DataContext)).Amount;
                     //var tmpCart = bl?.Cart.UpdateAmountOfProduct(Cart, productId, amount - 1)!;
                     //Cart = bl.Cart.CopyCarts(tmpCart, Cart);
-                    Cart= bl?.Cart.UpdateAmountOfProduct(Cart, productId, amount - 1)!;
+                    Cart = bl?.Cart.UpdateAmountOfProduct(Cart, productId, amount - 1)!;
 
                     //action(Cart);
                     collectionView.Refresh();
+                    action(Cart);
                 }
             }
             catch (BO.BoDoesNoExistException)
@@ -115,9 +118,9 @@ namespace Cart
                     amount = ((OrderItem)(frameworkElement.DataContext)).Amount;
                     //var tmpCart = bl?.Cart.UpdateAmountOfProduct(Cart, productId, 0)!;
                     //Cart = bl.Cart.CopyCarts(tmpCart, Cart);
-                    Cart= bl?.Cart.UpdateAmountOfProduct(Cart, productId, 0)!;
+                    Cart = bl?.Cart.UpdateAmountOfProduct(Cart, productId, 0)!;
                     //action(Cart);
-
+                    action(Cart);
                     collectionView.Refresh();
                 }
             }

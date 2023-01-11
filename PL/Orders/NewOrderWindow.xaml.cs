@@ -65,12 +65,13 @@ namespace Products
         public Array Categories { set; get; }
         private int selectedIndex { set; get; }
 
-        public NewOrderWindow(BO.Cart _cart)
+        Action<BO.Cart> action;
+        public NewOrderWindow(BO.Cart _cart, Action<BO.Cart> action)
         {
             try
             {
                 Cart = _cart;
-
+                this.action = action;
                 var pList = bl?.Product.GetListProductForCatalog(Cart)!;
                 ProductsItems = new ObservableCollection<ProductItem>(pList);
                 Categories = Enum.GetValues(typeof(BO.Category));
@@ -157,7 +158,7 @@ namespace Products
 
         private void CartButton_Click(object sender, RoutedEventArgs e)
         {
-            new CartWindow(Cart /*,(Cart) => this.Cart = Cart*/).Show() ;
+            new CartWindow(Cart, action).ShowDialog() ;
             this.Close();
         }
 

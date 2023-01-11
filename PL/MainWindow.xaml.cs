@@ -57,9 +57,8 @@ namespace PL
         /// </summary>
         public MainWindow()
         {
-            Cart = new BO.Cart() { Items = new List<BO.OrderItem>(), TotalPrice=0 };
+            Cart = new BO.Cart() { Items = new List<BO.OrderItem?>(), TotalPrice=0 };
           
-
             backgroundWorker = new BackgroundWorker();
             backgroundWorker.DoWork += BackgroundWorker_DoWork;
             backgroundWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
@@ -104,12 +103,12 @@ namespace PL
         {
             new TrackOrderWindow().Show();
         }
-
+        private void initCart(BO.Cart cart) => Cart = cart;
         private void NewOrderButton_click(object sender, RoutedEventArgs e)
         {
-            new  NewOrderWindow(Cart).ShowDialog();
-            BO.Cart c = Cart; 
-            MessageBox.Show(Cart.ToString());
+            new  NewOrderWindow(Cart, initCart).ShowDialog();
+            //BO.Cart c = Cart; 
+            //MessageBox.Show(Cart.ToString());
         }
 
         private void back_Click(object sender, RoutedEventArgs e)

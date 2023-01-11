@@ -42,4 +42,5 @@ public interface ICart
     /// </summary>
     /// <param name="cart">the cart</param>
     void CheckFormat(BO.Cart cart);
+    //public BO.Cart CopyCarts(BO.Cart cart1, BO.Cart cart2);
 }

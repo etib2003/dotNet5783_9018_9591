@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cart"
+
         xmlns:converter="clr-namespace:Converters"
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource self}}"
@@ -17,7 +18,7 @@
             <RowDefinition Height="73*"/>
         </Grid.RowDefinitions>
 
-        <ListView x:Name="CartItemsView" ItemsSource="{Binding Cart.Items, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontFamily="Candara" Foreground="Black" Margin="0,63,0,2" FontSize="16" >
+        <ListView x:Name="CartItemsView" ItemsSource="{Binding  Cart.Items, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontFamily="Candara" Foreground="Black" Margin="0,63,0,2" FontSize="16" >
             <ListView.Background>
                 <ImageBrush/>
             </ListView.Background>
