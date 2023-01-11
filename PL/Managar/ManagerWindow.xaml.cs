@@ -25,6 +25,7 @@ namespace PL
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
 
+        //statistics of the orders' status
         public IEnumerable<OrderStatistics> Statistics
         {
             get { return (IEnumerable<OrderStatistics>)GetValue(StatisticsProperty); }
@@ -35,6 +36,7 @@ namespace PL
         public static readonly DependencyProperty StatisticsProperty =
             DependencyProperty.Register("Statistics", typeof(IEnumerable<OrderStatistics>), typeof(ManagerWindow));
 
+        //show the statistics of the orders' status
         public ManagerWindow()
         {
             try

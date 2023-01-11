@@ -38,6 +38,7 @@ namespace Managar
             InitializeComponent();
         }
 
+        //a window to access manager
         private void Enter(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
