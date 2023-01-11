@@ -31,13 +31,11 @@ namespace Cart
         public static readonly DependencyProperty cartProperty =
             DependencyProperty.Register("Cart", typeof(BO.Cart), typeof(CartWindow));
 
-        //Action<BO.Cart> action;
         Action<BO.Cart> action;
         public CartWindow(BO.Cart cart, Action<BO.Cart> action)
         {
             this.action = action;
             Cart = cart;
-            //Cart = bl.Cart.CopyCarts(_cart, Cart);
             collectionView = CollectionViewSource.GetDefaultView(Cart.Items);
             InitializeComponent();
         }
