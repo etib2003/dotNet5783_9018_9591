@@ -91,21 +91,21 @@ internal static class DataSource
     {
         string[] images = {"photoes\\percussions\\A set of cymbals.jpg",
             "photoes\\string instruments\\black electric guitar.jpg",
-        "C:\\dotNet5783_9018_9591\\PL\\photoes\\wind instruments\\10 hole harmonica.jpg",
-        "C:\\dotNet5783_9018_9591\\PL\\photoes\\keyboard\\Electric piano 88 keys.jpg",
-        "C:\\dotNet5783_9018_9591\\PL\\photoes\\bow instruments\\violin 4.4.jpg",
-        "C:\\dotNet5783_9018_9591\\PL\\photoes\\percussions\\wooden drum.jpg",
-        "C:\\dotNet5783_9018_9591\\PL\\photoes\\string instruments\\red electric guitar.jpg",
-        "C:\\dotNet5783_9018_9591\\PL\\photoes\\wind instruments\\trombone.jpg",
-        "C:\\dotNet5783_9018_9591\\PL\\photoes\\keyboard\\Grand piano.jpg",
-        "C:\\dotNet5783_9018_9591\\PL\\photoes\\bow instruments\\electric violin.jpg"};
+        "photoes\\wind instruments\\10 hole harmonica.jpg",
+        "photoes\\keyboard\\Electric piano 88 keys.jpg",
+        "photoes\\bow instruments\\violin 4.4.jpg",
+        "photoes\\percussions\\wooden drum.jpg",
+        "photoes\\string instruments\\red electric guitar.jpg",
+        "photoes\\wind instruments\\trombone.jpg",
+        "photoes\\keyboard\\Grand piano.jpg",
+        "photoes\\bow instruments\\electric violin.jpg"};
         int AmountOfProducts = 10;
         for (int i = 1; i <= AmountOfProducts; i++)
         {
             Product product = new Product();//create a new object
             do
             {
-                product.Id = 100000 + i;//random.Next(100000, 999999);
+                product.Id = 100000 + i;
             }
             while (_products.Exists(x => x?.Id == product.Id));
             product.Name = "product" + i;
@@ -119,46 +119,6 @@ internal static class DataSource
             _products.Add(product);
         }
     }
-
-
-    /// <summary>
-    /// initialize the products list
-    /// </summary>
-    //static void productInitialize()//initializing products
-    //{
-    //    DirectoryInfo directoryInfo = new DirectoryInfo("C:\\Users\\user\\Desktop\\לימודים שנה ב\\מיניפ\\instruments photos");
-    //    List<Category> categories = Enum.GetValues(typeof(Category)).Cast<Category>().ToList();
-
-    //    Dictionary<string, List<string>> imagesNames = directoryInfo.GetDirectories()
-    //        .Where(f => f.Name != "background photos" || f.Name != "tools")
-    //        .Select(f => (f.Name, f.GetFiles().Select(f => f.Name)))
-    //        .ToDictionary(f => f.Name.Trim().ToUpper(), f => f.Item2.ToList());
-
-    //    foreach (var category in categories)
-    //    {
-    //        foreach (var name in imagesNames[category.ToString().ToUpper()])
-    //        {
-    //            Product product = new Product();//create a new object
-    //            do
-    //            {
-    //                product.Id = random.Next(100000, 999999);
-    //            }
-    //            while (_products.Exists(x => x?.Id == product.Id));
-
-    //            product.Name = name;
-    //            product.Price = random.Next(200, 2000);
-    //            product.Category = category;
-
-    //            if ((Convert.ToInt32(imagesNames.Count()) * 0.05) > 0)
-    //                product.InStock = 0;
-    //            else
-    //                product.InStock = random.Next(3, 30);
-    //            _products.Add(product);
-    //        }
-    //    }
-
-        
-    //}
 
     /// <summary>
     /// initialize the order items list
