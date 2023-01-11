@@ -57,6 +57,7 @@ namespace Cart
             InitializeComponent();
         }
 
+        //a button to end the order
         private void endOrderbutton_Click(object sender, RoutedEventArgs e)
         {
             try

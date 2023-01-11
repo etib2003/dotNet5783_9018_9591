@@ -42,12 +42,14 @@ namespace Cart
             InitializeComponent();
         }
 
+        //a button to continue to payment
         private void ContToPayButton_Click(object sender, RoutedEventArgs e)
         {
             new CustomerDetailsWindow(Cart, action).Show();
             this.Close();
         }
 
+        //add a product to the cart
         private void Add1(object sender, RoutedEventArgs e)
         {
             try
@@ -59,11 +61,7 @@ namespace Cart
                 {
                     productId = ((OrderItem)(frameworkElement.DataContext)).ProductID;
                     amount = ((OrderItem)(frameworkElement.DataContext)).Amount;
-                    //var tmpCart= bl?.Cart.UpdateAmountOfProduct(Cart, productId,amount+1)!;
-                    //Cart= bl.Cart.CopyCarts(tmpCart, Cart);
-
                     Cart = bl?.Cart.UpdateAmountOfProduct(Cart, productId, amount + 1)!;
-
                     action(Cart);
                     collectionView.Refresh();
                 }
@@ -79,6 +77,7 @@ namespace Cart
 
 
         }
+        //remove a product from the cart
         private void remove1(object sender, RoutedEventArgs e)
         {
             try
@@ -90,11 +89,7 @@ namespace Cart
                 {
                     productId = ((OrderItem)(frameworkElement.DataContext)).ProductID;
                     amount = ((OrderItem)(frameworkElement.DataContext)).Amount;
-                    //var tmpCart = bl?.Cart.UpdateAmountOfProduct(Cart, productId, amount - 1)!;
-                    //Cart = bl.Cart.CopyCarts(tmpCart, Cart);
                     Cart = bl?.Cart.UpdateAmountOfProduct(Cart, productId, amount - 1)!;
-
-                    //action(Cart);
                     collectionView.Refresh();
                     action(Cart);
                 }
@@ -105,6 +100,7 @@ namespace Cart
             }
         }
 
+        //delete a product from the cart
         private void deleteProduct(object sender, RoutedEventArgs e)
         {
             try
@@ -116,10 +112,7 @@ namespace Cart
                 {
                     productId = ((OrderItem)(frameworkElement.DataContext)).ProductID;
                     amount = ((OrderItem)(frameworkElement.DataContext)).Amount;
-                    //var tmpCart = bl?.Cart.UpdateAmountOfProduct(Cart, productId, 0)!;
-                    //Cart = bl.Cart.CopyCarts(tmpCart, Cart);
                     Cart = bl?.Cart.UpdateAmountOfProduct(Cart, productId, 0)!;
-                    //action(Cart);
                     action(Cart);
                     collectionView.Refresh();
                 }
