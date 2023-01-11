@@ -107,7 +107,6 @@ namespace PL
         private void NewOrderButton_click(object sender, RoutedEventArgs e)
         {
             new  NewOrderWindow(Cart, initCart).ShowDialog();
-            //BO.Cart c = Cart; 
             //MessageBox.Show(Cart.ToString());
         }
 
