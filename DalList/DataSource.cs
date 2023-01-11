@@ -89,8 +89,8 @@ internal static class DataSource
     /// </summary>
     static void productInitialize()//initializing products
     {
-        string[] images = { "C:\\dotNet5783_9018_9591\\PL\\photoes\\percussions\\A set of cymbals.jpg",
-            "C:\\dotNet5783_9018_9591\\PL\\photoes\\string instruments\\black electric guitar.jpg",
+        string[] images = {"photoes\\percussions\\A set of cymbals.jpg",
+            "photoes\\string instruments\\black electric guitar.jpg",
         "C:\\dotNet5783_9018_9591\\PL\\photoes\\wind instruments\\10 hole harmonica.jpg",
         "C:\\dotNet5783_9018_9591\\PL\\photoes\\keyboard\\Electric piano 88 keys.jpg",
         "C:\\dotNet5783_9018_9591\\PL\\photoes\\bow instruments\\violin 4.4.jpg",
