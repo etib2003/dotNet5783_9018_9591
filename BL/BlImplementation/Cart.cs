@@ -160,13 +160,7 @@ internal class Cart : BlApi.ICart
             throw new BO.BoDoesNoExistException("Data exception:", ex);
         }
     }
-
-
-    //public BO.Cart CopyCarts(BO.Cart cart1, BO.Cart cart2)
-    //{
-    //    cart1.CopyPropTo(cart2);
-    //    return cart2;
-    //}
+ 
     private BO.Cart getCart(BO.Cart cart) => new BO.Cart { Items = cart.Items, TotalPrice = cart.TotalPrice};
 }
 
