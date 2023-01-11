@@ -129,8 +129,7 @@ namespace PL
             }
             
            PictureHolderSource = new BitmapImage(new System.Uri(_path + $"{i}.jpg"));
-           
-           
+                    
         }
 
         private void replaceImages()
