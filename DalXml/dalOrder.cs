@@ -1,5 +1,5 @@
 ﻿using Dal;
-using DalApi;
+using DO;
 using DO;
 using System.Xml.Linq;
  
@@ -119,9 +119,9 @@ internal class dalOrder : IOrder
     /// <param name="Or">ordrer</param>
     public void Update(Order Or)
     {
-        List<Order> OrLst = XmlTools.LoadListFromXMLSerializer<Order>(path);
         Delete(Or.Id);//delete the old one
-        OrLst.Add(Or);//add the new one
+        List<Order> OrLst = XmlTools.LoadListFromXMLSerializer<Order>(path);
+        OrLst.Add(Or);
         XmlTools.SaveListToXMLSerializer(OrLst, path);//save to the file
     }
 }

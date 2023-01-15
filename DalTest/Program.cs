@@ -1,12 +1,12 @@
 ﻿using Dal;
 using DO;
-using DalApi;
+using DO;
 
 namespace DalTest
 {
     public class Program
     {
-        static IDal? dalList = DalApi.Factory.Get();
+        static IDal? dalList = DO.Factory.Get();
          static void Main()
         {
             //for the switch loop

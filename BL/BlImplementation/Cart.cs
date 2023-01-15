@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 internal class Cart : BlApi.ICart
 {
-    private DalApi.IDal? dal = DalApi.Factory.Get();
+    private DO.IDal? dal = DO.Factory.Get();
 
     public void CheckFormat(BO.Cart cart)
     {
@@ -46,7 +46,7 @@ internal class Cart : BlApi.ICart
 
             return getCart(cart);
         }
-        catch (DalApi.DalDoesNoExistException ex) //catches the exception from the data layer
+        catch (DO.DalDoesNoExistException ex) //catches the exception from the data layer
         {
             throw new BO.BoDoesNoExistException("Data exception:", ex);
         }
@@ -90,7 +90,7 @@ internal class Cart : BlApi.ICart
             return getCart(cart);
 
         }
-        catch (DalApi.DalDoesNoExistException ex) //catches the exception from the data layer
+        catch (DO.DalDoesNoExistException ex) //catches the exception from the data layer
         {
             throw new BO.BoDoesNoExistException("Data exception:", ex);
         }
@@ -155,7 +155,7 @@ internal class Cart : BlApi.ICart
             return boOrder;
 
         }
-        catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
+        catch (DO.DalDoesNoExistException ex)//catches the exception from the data layer
         {
             throw new BO.BoDoesNoExistException("Data exception:", ex);
         }

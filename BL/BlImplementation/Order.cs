@@ -7,7 +7,7 @@ using System.Numerics;
 
 internal class Order : BlApi.IOrder
 {
-    private DalApi.IDal? dal = DalApi.Factory.Get();
+    private DO.IDal? dal = DO.Factory.Get();
 
     public IEnumerable<BO.OrderForList> GetOrderListForManager()
     {
@@ -24,7 +24,7 @@ internal class Order : BlApi.IOrder
                 return boOrderForList;
             });
         }
-        catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
+        catch (DO.DalDoesNoExistException ex)//catches the exception from the data layer
         {
             throw new BO.BoDoesNoExistException("Data exception:", ex);
         }
@@ -68,7 +68,7 @@ internal class Order : BlApi.IOrder
             boOrder.TotalPrice = boOrder.OrderItems.Sum(OrderItem => OrderItem.TotalPrice);
             return boOrder;
         }
-        catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
+        catch (DO.DalDoesNoExistException ex)//catches the exception from the data layer
         {
             throw new BO.BoDoesNoExistException("Data exception:", ex);
         }
@@ -81,7 +81,7 @@ internal class Order : BlApi.IOrder
             orderID.negativeNumber();//exception
             return getBoOrder(dal?.Order.GetById(orderID) ?? default); //gets the right order using its id,call the help function
         }
-        catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
+        catch (DO.DalDoesNoExistException ex)//catches the exception from the data layer
         {
             throw new BO.BoDoesNoExistException("Data exception:", ex);
         }
@@ -109,7 +109,7 @@ internal class Order : BlApi.IOrder
             }
             return order;
         }
-        catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
+        catch (DO.DalDoesNoExistException ex)//catches the exception from the data layer
         {
             throw new BO.BoDoesNoExistException("Data exception:", ex);
         }
@@ -140,7 +140,7 @@ internal class Order : BlApi.IOrder
             }
             return order;
         }
-        catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
+        catch (DO.DalDoesNoExistException ex)//catches the exception from the data layer
         {
             throw new BO.BoDoesNoExistException("Data exception:", ex);
         }
@@ -181,7 +181,7 @@ internal class Order : BlApi.IOrder
             return orderTracking;
 
         }
-        catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
+        catch (DO.DalDoesNoExistException ex)//catches the exception from the data layer
         {
             throw new BO.BoDoesNoExistException("Data exception:", ex);
         }
@@ -200,7 +200,7 @@ internal class Order : BlApi.IOrder
             orderForList.TotalPrice = oiOfOrder.Sum(orderItem => orderItem?.Price * orderItem?.Amount) ?? 0;
             return orderForList;
         }
-        catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
+        catch (DO.DalDoesNoExistException ex)//catches the exception from the data layer
         {
             throw new BO.BoDoesNoExistException("Data exception:", ex);
         }

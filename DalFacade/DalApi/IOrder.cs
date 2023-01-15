@@ -5,7 +5,7 @@
 //using System.Threading.Tasks;
 using DO;
 
-namespace DalApi;
+namespace DO;
 
 public interface IOrder : ICrud<Order>
 {

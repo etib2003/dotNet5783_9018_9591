@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 
 internal class Product : BlApi.IProduct
 {
-    private DalApi.IDal? dal = DalApi.Factory.Get();
+    private DO.IDal? dal = DO.Factory.Get();
 
     public IEnumerable<BO.ProductForList> GetListProductForManagerAndCatalog(Func<DO.Product?, bool>? cond)
     {
@@ -13,7 +13,7 @@ internal class Product : BlApi.IProduct
             IEnumerable<DO.Product?> doProductList = dal?.Product.RequestAll(p => cond is null ? true : cond!(p))!;//gets the products from the data layer
             return doProductList.CopyPropToList<DO.Product?, BO.ProductForList>();
         }
-        catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
+        catch (DO.DalDoesNoExistException ex)//catches the exception from the data layer
         {
             throw new BO.BoDoesNoExistException("Data exception:", ex);
         }
@@ -28,7 +28,7 @@ internal class Product : BlApi.IProduct
                                                           select GetProductDetailsForCustomer(id, cart);
             return ProductItemList;
         }
-        catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
+        catch (DO.DalDoesNoExistException ex)//catches the exception from the data layer
         {
             throw new BO.BoDoesNoExistException("Data exception:", ex);
         }
@@ -44,7 +44,7 @@ internal class Product : BlApi.IProduct
                                                             select GetProductDetailsForCustomer(id, cart);
             return doProductItemList;
         }
-        catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
+        catch (DO.DalDoesNoExistException ex)//catches the exception from the data layer
         {
             throw new BO.BoDoesNoExistException("Data exception:", ex);
         }
@@ -63,7 +63,7 @@ internal class Product : BlApi.IProduct
             boProduct.Category = (Category?)(doProduct?.Category);
             return boProduct;
         }
-        catch (DalApi.DalDoesNoExistException ex) //catches the exception from the data layer
+        catch (DO.DalDoesNoExistException ex) //catches the exception from the data layer
         {
             throw new BO.BoDoesNoExistException("Data exception:", ex);
         }
@@ -88,7 +88,7 @@ internal class Product : BlApi.IProduct
             return boProductItem;
 
         }
-        catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
+        catch (DO.DalDoesNoExistException ex)//catches the exception from the data layer
         {
             throw new BO.BoDoesNoExistException("Data exception:", ex);
         }
@@ -109,7 +109,7 @@ internal class Product : BlApi.IProduct
             doProduct.Category = (DO.Category?)product.Category;
             return dal?.Product.Create(doProduct) ?? default;
         }
-        catch (DalApi.DalAlreadyExistsException ex)//catches the exception from the data layer
+        catch (DO.DalAlreadyExistsException ex)//catches the exception from the data layer
         {
             throw new BO.BoAlreadyExistsException("Data exception:", ex);
         }
@@ -130,7 +130,7 @@ internal class Product : BlApi.IProduct
 
             dal?.Product.Update(doProduct);//send the product to the data layer function that updates it
         }
-        catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
+        catch (DO.DalDoesNoExistException ex)//catches the exception from the data layer
         {
             throw new BO.BoDoesNoExistException("Data exception:", ex);
         }
@@ -160,7 +160,7 @@ internal class Product : BlApi.IProduct
         {
             return dal?.Product.GetById(productId).CopyPropTo(new ProductForList());
         }
-        catch (DalApi.DalDoesNoExistException ex)//catches the exception from the data layer
+        catch (DO.DalDoesNoExistException ex)//catches the exception from the data layer
         {
             throw new BO.BoDoesNoExistException("Data exception:", ex);
         }

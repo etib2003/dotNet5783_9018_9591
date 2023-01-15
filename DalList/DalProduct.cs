@@ -1,4 +1,4 @@
-﻿using DalApi;
+﻿using DO;
 
 using DO;
 using System.Linq;
@@ -96,7 +96,7 @@ internal class dalProduct : IProduct
 </config>
 
 //static class dal config to read the dal-config.xml file to static fields  s_dalName and  s_dalPackages
-namespace DalApi;
+namespace DO;
 using System.Xml.Linq;
 
 static class DalConfig
@@ -138,9 +138,9 @@ public class DalConfigException : Exception
 
 
 //create DalFactory in DalFacade
-namespace DalApi;
+namespace DO;
 using System.Reflection;
-using static DalApi.DalConfig;
+using static DO.DalConfig;
 
 public static class Factory
 {
@@ -163,7 +163,7 @@ public static class Factory
 
 
 //dalList and dalXML implement Idal and Singleton
-using DalApi;
+using DO;
 
 namespace Dal;
 
@@ -180,7 +180,7 @@ sealed internal class DalList : IDal
 }
 
 
-using DalApi;
+using DO;
 
 namespace Dal;
 
