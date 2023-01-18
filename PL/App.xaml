@@ -7,6 +7,7 @@
         <ResourceDictionary>
             <!--<ResourceDictionary.MergedDictionaries>                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />            </ResourceDictionary.MergedDictionaries>-->
 
+            
             <ImageBrush x:Key="WindowBackgroundImage" ImageSource="/background3.jpg" />
             <Style TargetType="Window">
                 <Setter Property="Background" Value="{StaticResource WindowBackgroundImage}"/>
@@ -34,6 +35,7 @@
             </Style>
             <Style TargetType="TextBox">
                 <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <EventSetter Event="GotFocus" Handler="TextBox_GotFocus" />
             </Style>
 
         </ResourceDictionary>
@@ -41,3 +43,4 @@
 
     </Application.Resources>
 </Application>
+

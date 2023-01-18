@@ -4,11 +4,13 @@ using DocumentFormat.OpenXml.Wordprocessing;
 using OtherFunctions;
 using System.Linq;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 
 internal class Order : BlApi.IOrder
 {
     private DO.IDal? dal = DO.Factory.Get();
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<BO.OrderForList> GetOrderListForManager()
     {
         try
@@ -45,6 +47,7 @@ internal class Order : BlApi.IOrder
         };
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     /// <summary>
     /// Help function that gets an order from the data layer
     /// </summary>
@@ -74,6 +77,7 @@ internal class Order : BlApi.IOrder
         }
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.Order GetOrderDetails(int orderID)
     {
         try
@@ -87,7 +91,7 @@ internal class Order : BlApi.IOrder
         }
     }
 
-
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.Order UpdateOrderShip(int orderID)
     {
         try
@@ -115,6 +119,7 @@ internal class Order : BlApi.IOrder
         }
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.Order UpdateOrderDelivery(int orderID)
     {
         try
@@ -146,6 +151,7 @@ internal class Order : BlApi.IOrder
         }
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.OrderTracking TrackingOrder(int orderID)
     {
         try
@@ -187,6 +193,7 @@ internal class Order : BlApi.IOrder
         }
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public OrderForList GetOrderForList(int orderId)
     {
         try
@@ -206,6 +213,7 @@ internal class Order : BlApi.IOrder
         }
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<OrderStatistics> GroupByStatistics()
     {
         try
@@ -218,7 +226,7 @@ internal class Order : BlApi.IOrder
                        CountPerStatus = newGroup.Count()
                    };
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             throw new Exception("Failed to divide into groups");
         }
@@ -227,21 +235,15 @@ internal class Order : BlApi.IOrder
     //הפונקציה מחזירה את האחרונה שלא שולחה
     //ואם כולן שולחו אז את האחרונה שלא סופקה. ובסוף זה יהיה נאל
     //עבור סימולטור
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public int? GetOldestOrder()
     {
-        var oldestOrderNoShip = ((dal?.Order.RequestAll(x => x?.ShipDate == null)).OrderBy(x => x?.OrderDate)).First();
-        if (oldestOrderNoShip != null)
-        {
-            return oldestOrderNoShip?.Id;
-        }
+        //אולי תהיה שגיאת ריצה כי ימיין הזמנות לפי שיפדייט למרות שזה מאל
+        var oldestOrder = ((dal?.Order.RequestAll(x => x?.ShipDate == null || x?.DeliveryDate == null)).OrderBy(x => x?.OrderDate).ThenBy(x => x?.ShipDate)).First();
+        if (oldestOrder != null)
+            return oldestOrder?.Id;
         else
-        {
-            var oldestOrderNoDelivery = ((dal?.Order.RequestAll(x => x?.DeliveryDate == null)).OrderBy(x => x?.ShipDate)).First();
-            if (oldestOrderNoDelivery!=null)
-                return oldestOrderNoDelivery?.Id;
-            else
-                return null;   
-        }
+            return null;
     }
 }
 

@@ -1,6 +1,6 @@
 ﻿using Dal;
 using DO;
-using DO;
+using System.Runtime.CompilerServices;
 using System.Xml.Linq;
  
 
@@ -33,6 +33,7 @@ internal class dalOrder : IOrder
         }
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     /// <summary>
     /// constructor
     /// </summary>
@@ -41,6 +42,7 @@ internal class dalOrder : IOrder
         LoadData();
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     /// <summary>
     /// create a new order and save it to the file
     /// </summary>
@@ -65,6 +67,7 @@ internal class dalOrder : IOrder
         return Or.Id;
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     /// <summary>
     /// delete an order
     /// </summary>
@@ -76,6 +79,7 @@ internal class dalOrder : IOrder
         XmlTools.SaveListToXMLSerializer(OrLst, path);//save the changes to the file
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     /// <summary>
     /// load an order from the file that matches the given condition
     /// </summary>
@@ -88,6 +92,7 @@ internal class dalOrder : IOrder
             ?? throw new DalDoesNoExistException("Order");
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     /// <summary>
     /// gets an order by its id
     /// </summary>
@@ -98,6 +103,7 @@ internal class dalOrder : IOrder
         return Get(x => x?.Id == id);
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     /// <summary>
     /// gets all the orders that matches the cond
     /// </summary>
@@ -113,6 +119,7 @@ internal class dalOrder : IOrder
         return OrLst.Where(cond);
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     /// <summary>
     /// update an order
     /// </summary>

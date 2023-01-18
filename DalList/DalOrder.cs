@@ -1,9 +1,7 @@
 ﻿using DO;
-using DO;
 using System.Runtime.CompilerServices;
 using DocumentFormat.OpenXml.Office2010.Excel;
 using System.Linq;
-//using static Dal.DataSource;
 
 namespace Dal;
 /// <summary>
@@ -11,6 +9,7 @@ namespace Dal;
 /// </summary>
 internal class dalOrder : IOrder
 {
+    [MethodImpl(MethodImplOptions.Synchronized)]
     /// <summary>
     /// the function adds a new order to the orders' list
     /// </summary>
@@ -26,6 +25,7 @@ internal class dalOrder : IOrder
         return Or.Id;
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     /// <summary>
     /// the function returns the order of the given id
     /// </summary>
@@ -37,6 +37,7 @@ internal class dalOrder : IOrder
         return Get(order => order?.Id == id);
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     /// <summary>
     /// the function updates a certain order with the given one
     /// </summary>
@@ -51,6 +52,7 @@ internal class dalOrder : IOrder
         }
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     /// <summary>
     /// the function deletes the order with the given id
     /// </summary>
@@ -61,6 +63,7 @@ internal class dalOrder : IOrder
         DataSource._orders.Remove(GetById(id));
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     /// <summary>
     /// the function returns the order according to the given condition
     /// </summary>
@@ -72,6 +75,7 @@ internal class dalOrder : IOrder
         return DataSource._orders.FirstOrDefault(cond!) ?? throw new DalDoesNoExistException("Order");
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     /// <summary>
     /// the function returns a list of orders according to the given condition
     /// </summary>

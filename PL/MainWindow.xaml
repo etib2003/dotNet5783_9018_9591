@@ -26,7 +26,7 @@
         <Image HorizontalAlignment="Left" Height="68" Stretch="Uniform" VerticalAlignment="Center" Width="118" Source="/LOGO.png" Grid.Row="2" Margin="10,0,0,0" />
         <Button x:Name="managerButton" Content="Log in as manager" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="32" Width="143" FontFamily="Candara" FontSize="16" Click="managerButton_Click" Background="White" FontWeight="Bold"/>
         <Button x:Name="TrackingOrderButton" Content="Track your order" HorizontalAlignment="Left" Margin="138,239,0,0" Grid.Row="1" VerticalAlignment="Top" FontFamily="Candara" Height="45" Width="192" Click="TrackingOrderButton_Click" FontSize="20" Background="White" FontWeight="Bold"/>
-        <Button x:Name="NewOrderButton" Content="View Catalog" HorizontalAlignment="Left" Margin="496,239,0,0" Grid.Row="1" VerticalAlignment="Top" Click="NewOrderButton_click" FontSize="20" FontFamily="Candara" Height="45" Width="192" FontWeight="Bold" Background="White"/>
+        <Button x:Name="NewOrderButton"  Content="View Catalog" HorizontalAlignment="Left" Margin="496,239,0,0" Grid.Row="1" VerticalAlignment="Top" Click="NewOrderButton_click" FontSize="20" FontFamily="Candara" Height="45" Width="192" FontWeight="Bold" Background="White"/>
         <TextBlock x:Name="AboutusBox" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Sitka Small" Foreground="Black" FontWeight="Bold" FontSize="13
                    " Height="242" Width="288" TextWrapping="Wrap" TextAlignment="Center" Grid.RowSpan="2" RenderTransformOrigin="0.523,0.706" Margin="448,75,0,0">
         About Us: <LineBreak />
