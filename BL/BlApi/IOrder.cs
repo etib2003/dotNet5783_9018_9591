@@ -51,5 +51,7 @@ public interface IOrder
     /// <returns>order tracking object</returns>
     /// <exception cref="order does not exist"></exception>
     public BO.OrderTracking TrackingOrder(int orderID);
+
+    public int? GetOldestOrder();
  
 }

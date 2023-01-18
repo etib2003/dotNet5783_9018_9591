@@ -63,7 +63,6 @@ namespace PL
             backgroundWorker.DoWork += BackgroundWorker_DoWork;
             backgroundWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
             backgroundWorker.WorkerReportsProgress = true;
-            backgroundWorker.WorkerSupportsCancellation = true;
             backgroundWorker.RunWorkerAsync();
             InitializeComponent();
         }
@@ -131,18 +130,23 @@ namespace PL
                     
         }
 
-        private void replaceImages()
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            int i = 1;
-            while (true)
-            {
-                i = i < 8 ? i : 1;
-                PictureHolderSource = new BitmapImage(new System.Uri(_path + $"{i}.jpg"));
-                i++;
-                Thread.Sleep(2300);
-                i = i < 8 ? i : 1;
-                PictureHolderSource = new BitmapImage(new System.Uri(_path + $"{i}.jpg"));
-            }
+            new SimulatorWindow().Show();
         }
+
+        //private void replaceImages()
+        //{
+        //    int i = 1;
+        //    while (true)
+        //    {
+        //        i = i < 8 ? i : 1;
+        //        PictureHolderSource = new BitmapImage(new System.Uri(_path + $"{i}.jpg"));
+        //        i++;
+        //        Thread.Sleep(2300);
+        //        i = i < 8 ? i : 1;
+        //        PictureHolderSource = new BitmapImage(new System.Uri(_path + $"{i}.jpg"));
+        //    }
+        //}
     }
 }

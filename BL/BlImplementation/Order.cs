@@ -222,7 +222,27 @@ internal class Order : BlApi.IOrder
         {
             throw new Exception("Failed to divide into groups");
         }
-    } 
+    }
+
+    //הפונקציה מחזירה את האחרונה שלא שולחה
+    //ואם כולן שולחו אז את האחרונה שלא סופקה. ובסוף זה יהיה נאל
+    //עבור סימולטור
+    public int? GetOldestOrder()
+    {
+        var oldestOrderNoShip = ((dal?.Order.RequestAll(x => x?.ShipDate == null)).OrderBy(x => x?.OrderDate)).First();
+        if (oldestOrderNoShip != null)
+        {
+            return oldestOrderNoShip?.Id;
+        }
+        else
+        {
+            var oldestOrderNoDelivery = ((dal?.Order.RequestAll(x => x?.DeliveryDate == null)).OrderBy(x => x?.ShipDate)).First();
+            if (oldestOrderNoDelivery!=null)
+                return oldestOrderNoDelivery?.Id;
+            else
+                return null;   
+        }
+    }
 }
 
 public class OrderStatistics
