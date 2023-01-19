@@ -41,6 +41,9 @@
                 <Setter Property="HorizontalContentAlignment" Value="Center"/>
                 <EventSetter Event="GotFocus" Handler="TextBox_GotFocus" />
             </Style>
+            <Style TargetType="TextBlock">
+                <Setter Property="TextAlignment" Value="Center"/>
+            </Style>
 
         </ResourceDictionary>
 

@@ -8,15 +8,17 @@
         mc:Ignorable="d"
         Title="SimulatorWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Stop Simulation" HorizontalAlignment="Left" Height="56" Margin="551,339,0,0" VerticalAlignment="Top" Width="194" FontSize="22" FontWeight="Bold" Click="Stop_Click"/>
+        <Button Content="Stop Simulation" HorizontalAlignment="Left" Height="50" Margin="551,327,0,0" VerticalAlignment="Top" Width="167" FontSize="20" FontWeight="Bold" Click="Stop_Click"/>
         <TextBlock x:Name="timerTextBlock" HorizontalAlignment="Left" Height="56" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="226" FontSize="22" FontWeight="Bold" FontFamily="Candara" TextAlignment="Center"/>
         <TextBlock x:Name="barTB" HorizontalAlignment="Left" Height="26" Margin="189,374,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="202" FontSize="22" FontWeight="Bold" FontFamily="Candara" TextAlignment="Center"/>
         <ProgressBar x:Name="resultProgressBar" Minimum="0" Maximum="100" Margin="46,322,0,67" HorizontalAlignment="Left" Width="480" />
-        <TextBlock HorizontalAlignment="Center" Height="27" Margin="0,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="318" FontFamily="Candara" FontSize="24" FontWeight="Bold" TextAlignment="Center"><Run Text="Order "/><Run Text="in progress"/><Run Text=" details"/></TextBlock>
-        <TextBlock HorizontalAlignment="Center" Height="27" Margin="0,94,0,0" TextWrapping="Wrap" Text="Order number in processing:" VerticalAlignment="Top" Width="266" FontSize="18" TextAlignment="Center"/>
+        <TextBlock HorizontalAlignment="Center" Height="43" Margin="0,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="318" FontFamily="Candara" FontSize="27" FontWeight="Bold" TextAlignment="Center"><Run Text="Order "/><Run Text="in progress"/><Run Text=" details"/></TextBlock>
+        <TextBlock x:Name="idText"  HorizontalAlignment="Center" Height="28" Margin="0,95,0,0" TextWrapping="Wrap" Text="Order number in processing:" VerticalAlignment="Top" Width="324" FontSize="21" TextAlignment="Center"/>
         <!--בשני הטקסטים האלה עם ביינדינג את הסטטוס הנוכחי ותאריך וסטטוס עתידי ותאריך-->
-        <TextBlock HorizontalAlignment="Left" Height="26" Margin="304,138,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="146"/>
-        <TextBlock HorizontalAlignment="Left" Height="20" Margin="304,169,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="73"/>
+        <TextBlock x:Name="oldStatusText" HorizontalAlignment="Center" Height="39" Margin="0,141,0,0"  VerticalAlignment="Top" Width="635" FontSize="20"/>
+        <TextBlock x:Name="newStatusText" HorizontalAlignment="Center" Height="35" Margin="0,187,0,0" VerticalAlignment="Top" Width="635" FontSize="20"/>
+        <TextBlock x:Name="estimateTime" HorizontalAlignment="Center" Height="30" Margin="0,229,0,0"  VerticalAlignment="Top" Width="635" FontSize="20"/>
+        <TextBlock x:Name="finishOrder" HorizontalAlignment="Center" Height="34" Margin="0,267,0,0"  VerticalAlignment="Top" Width="635" FontSize="20"/>
 
     </Grid>
 </Window>

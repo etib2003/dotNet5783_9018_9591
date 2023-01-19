@@ -232,18 +232,25 @@ internal class Order : BlApi.IOrder
         }
     }
 
-    //הפונקציה מחזירה את האחרונה שלא שולחה
-    //ואם כולן שולחו אז את האחרונה שלא סופקה. ובסוף זה יהיה נאל
+    //הפונקציה מחזירה את האחרונה שלא טופלה
+    //ובסוף זה יהיה נאל
     //עבור סימולטור
     [MethodImpl(MethodImplOptions.Synchronized)]
     public int? GetOldestOrder()
     {
-        //אולי תהיה שגיאת ריצה כי ימיין הזמנות לפי שיפדייט למרות שזה מאל
-        var oldestOrder = ((dal?.Order.RequestAll(x => x?.ShipDate == null || x?.DeliveryDate == null)).OrderBy(x => x?.OrderDate).ThenBy(x => x?.ShipDate)).First();
-        if (oldestOrder != null)
-            return oldestOrder?.Id;
-        else
-            return null;
+        try
+        {
+            //אולי תהיה שגיאת ריצה כי ימיין הזמנות לפי שיפדייט למרות שזה נאל
+            var oldestOrder = ((dal?.Order.RequestAll(x => x?.ShipDate == null || x?.DeliveryDate == null)).OrderBy(x => x?.OrderDate).ThenBy(x => x?.ShipDate)).First();
+            if (oldestOrder != null)
+                return oldestOrder?.Id;
+            else
+                return null;
+        }
+        catch(Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
     }
 }
 
