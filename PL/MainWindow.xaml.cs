@@ -143,7 +143,21 @@ namespace PL
         {
             new SimulatorWindow().Show();
         }
- 
+
+        private void SoundButton_Click(object sender, RoutedEventArgs e)
+        {
+            player.Pause();
+            SoundB.Visibility = Visibility.Collapsed;
+            NoSoundB.Visibility=Visibility.Visible;
+        }
+
+        private void NoSoundButton_Click(object sender, RoutedEventArgs e)
+        {
+            player.Play();
+            NoSoundB.Visibility = Visibility.Collapsed;
+            SoundB.Visibility = Visibility.Visible;
+        }
+
 
         //private void replaceImages()
         //{
