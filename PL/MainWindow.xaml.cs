@@ -70,7 +70,7 @@ namespace PL
             backgroundWorker.WorkerReportsProgress = true;
             backgroundWorker.RunWorkerAsync();
             string sound = Environment.CurrentDirectory;
-            sound = sound.Remove(23, 4);
+            sound = sound.Remove(sound.Length-4, 4);
             sound += @"\PL\sound.mp3";
             player.Open(new Uri(sound, UriKind.RelativeOrAbsolute));
             player.Play();
