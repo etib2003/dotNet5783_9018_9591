@@ -1,4 +1,5 @@
-﻿using Managar;
+﻿using Converters;
+using Managar;
 using Orders;
 using PL.productsWindows;
 using Products;
@@ -149,6 +150,10 @@ namespace PL
             player.Pause();
             SoundB.Visibility = Visibility.Collapsed;
             NoSoundB.Visibility=Visibility.Visible;
+            //Visibility="{Binding ElementName=NoSoundB, Path=Visibility,Converter={StaticResource soundConverter}}"
+    //    < Window.Resources >
+    //    < converter:SoundConverter x:Key = "soundConverter" ></ converter:SoundConverter >
+    //</ Window.Resources >
         }
 
         private void NoSoundButton_Click(object sender, RoutedEventArgs e)

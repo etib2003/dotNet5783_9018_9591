@@ -17,14 +17,11 @@ public static class Simulator
     {
         _shouldStop = false;
     }
-    public static void startSimulator()
+
+    public static void simulatorActivate()
     {
-        new Thread(simulatorActivate).Start();
-    }
-    private static void simulatorActivate()
-    {
-        try
-        {
+        new Thread(()=>
+        { 
             while (_shouldStop)
             {
 
@@ -49,11 +46,8 @@ public static class Simulator
                 Thread.Sleep(1000);
             }
             //report("finish simulation");
-        }
-        catch (Exception)
-        {
-            throw new Exception("Error");
-        }
+        }).Start();
+        
 
     }
 

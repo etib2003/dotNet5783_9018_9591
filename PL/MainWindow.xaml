@@ -4,10 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
+        xmlns:converter="clr-namespace:Converters"
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource self}}"
         Title="tempraryMain" Height="450" Width="800" >
-
     <Grid RenderTransformOrigin="0.419,0.483">
         <!--<Grid.Background>
             <ImageBrush ImageSource="/background.jpg"/>

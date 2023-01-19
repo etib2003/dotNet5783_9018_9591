@@ -137,7 +137,7 @@ namespace PL
             //רשמו מתודות משקיפות (ראו בהמשך) לאירועי הסימולטור
 
             //then
-            Simulator.Simulator.startSimulator();
+            Simulator.Simulator.simulatorActivate();
             while (backgroundWorker.CancellationPending != false)
             {
                 timerWorker.ReportProgress(1);
