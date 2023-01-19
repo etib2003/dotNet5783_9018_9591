@@ -7,6 +7,10 @@
         <ResourceDictionary>
             <!--<ResourceDictionary.MergedDictionaries>                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />            </ResourceDictionary.MergedDictionaries>-->
 
+            <!--<MediaElement x:Key="BackgroundMusic" 
+                  Source="C:\dotNet5783_9018_9591\PL\music.mp3" 
+                  Volume="1.0" 
+                  IsMuted="False" />-->
             
             <ImageBrush x:Key="WindowBackgroundImage" ImageSource="/background3.jpg" />
             <Style TargetType="Window">

@@ -56,6 +56,7 @@
 
         </Grid>
         <Button Content="Start Simulation" HorizontalAlignment="Left" Height="32" Margin="631,10,0,0" VerticalAlignment="Top" Width="148" FontFamily="Candara" FontSize="16" FontWeight="Bold" Click="Button_Click"/>
+
     </Grid>
 </Window>
 

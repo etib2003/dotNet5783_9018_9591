@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Media;
+using System.Numerics;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -52,6 +54,8 @@ namespace PL
         BackgroundWorker backgroundWorker;
         int i=1;
 
+        MediaPlayer player = new MediaPlayer();
+
         /// <summary>
         /// constructor
         /// </summary>
@@ -64,6 +68,11 @@ namespace PL
             backgroundWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
             backgroundWorker.WorkerReportsProgress = true;
             backgroundWorker.RunWorkerAsync();
+            string sound = Environment.CurrentDirectory;
+            sound = sound.Remove(23, 4);
+            sound += @"\PL\sound.mp3";
+            player.Open(new Uri(sound, UriKind.RelativeOrAbsolute));
+            player.Play();
             InitializeComponent();
         }
 
@@ -134,6 +143,7 @@ namespace PL
         {
             new SimulatorWindow().Show();
         }
+ 
 
         //private void replaceImages()
         //{
