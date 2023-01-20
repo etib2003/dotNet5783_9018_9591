@@ -47,14 +47,18 @@ namespace PL
         BackgroundWorker backgroundWorker;
         BackgroundWorker barWorker;
         private bool finish=false;
+        private bool canClose = false;
 
         public SimulatorWindow()
         {
             InitializeComponent();
-            this.Closing += (s, e) =>
-            {
-                e.Cancel = true;
-            };
+
+            Closing += SimulatorWindow_Closing;
+
+            //this.Closing += (s, e) =>
+            //{
+            //    e.Cancel = true;
+            //};
 
             timerStopWatch = new Stopwatch();
             timerStopWatch.Start();
@@ -62,7 +66,9 @@ namespace PL
             backgroundWorker = new BackgroundWorker();
             backgroundWorker.DoWork += BackgroundWorker_DoWork;
             backgroundWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
+            backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
             backgroundWorker.WorkerReportsProgress = true;
+            backgroundWorker.WorkerSupportsCancellation = true;
             isTimerRun = true;
             backgroundWorker.RunWorkerAsync();
 
@@ -76,9 +82,15 @@ namespace PL
             barWorker.WorkerSupportsCancellation = true;
            
         }
+
+        private void SimulatorWindow_Closing(object sender, CancelEventArgs e)
+        {
+            e.Cancel = !canClose;
+        }
+
         private void BarWorker_DoWork(object? sender, DoWorkEventArgs e)
         {
-             int length = (int)e.Argument;
+            int length = (int)e.Argument;
             for (int i = 1; i <= length; i++)
             {
                 if (barWorker.CancellationPending == true)
@@ -138,24 +150,27 @@ namespace PL
             {
                 p = new(0, e);
                 BackgroundWorker_ProgressChanged(sender, p);
-
             }
 
         }
-
-  
 
         //עבור הפעלת ההדמיה:
         private void BackgroundWorker_DoWork(object? sender, DoWorkEventArgs e)
         {
             //רשמו מתודות משקיפות (ראו בהמשך) לאירועי הסימולטור
-            Simulator.Simulator.Report += reportFunc;
+            Simulator.Simulator.s_Report += reportFunc;
+            Simulator.Simulator.s_StopSimulator += cancelAsync;
             Simulator.Simulator.simulatorActivate();
-            while (isTimerRun)
+            while (!backgroundWorker.CancellationPending)
             {
                 backgroundWorker.ReportProgress(0);
                 Thread.Sleep(1000);
             }
+        }
+
+        private void cancelAsync()
+        {
+            backgroundWorker.CancelAsync();
         }
 
         private void BackgroundWorker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
@@ -219,22 +234,21 @@ namespace PL
             }
         }
 
+        private void BackgroundWorker_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
+        {
+            Simulator.Simulator.s_Report -= reportFunc;
+            Simulator.Simulator.s_StopSimulator -= cancelAsync;
+          
+            timerStopWatch.Stop();
+            isTimerRun = false;
+            barWorker.CancelAsync();
+
+            canClose = true;
+            Close();
+        }
         private void Stop_Click(object sender, RoutedEventArgs e)
         {
-
-            if (isTimerRun)         //עבור שעון עצר:
-            {
-                timerStopWatch.Stop();
-                isTimerRun = false;
                 Simulator.Simulator.stopSim();
-                barWorker.CancelAsync();
-                Simulator.Simulator.Report -= reportFunc;
-
-                this.Closing += (s, e) =>
-                {
-                    e.Cancel = false;
-                };
-            }
         }
     }
 
