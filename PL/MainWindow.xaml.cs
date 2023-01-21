@@ -1,4 +1,5 @@
 ﻿using Converters;
+using DocumentFormat.OpenXml.Presentation;
 using Managar;
 using Orders;
 using PL.productsWindows;
@@ -40,8 +41,6 @@ namespace PL
         public static readonly DependencyProperty cartProperty =
             DependencyProperty.Register("Cart", typeof(BO.Cart), typeof(MainWindow));
 
-
-
         public ImageSource PictureHolderSource
         {
             get { return (ImageSource)GetValue(PictureHolderProperty); }
@@ -51,6 +50,26 @@ namespace PL
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PictureHolderProperty =
             DependencyProperty.Register("PictureHolderSource", typeof(ImageSource), typeof(MainWindow));
+
+        public Visibility SoundProp
+        {
+            get { return (Visibility)GetValue(SoundProperty); }
+            set { SetValue(SoundProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SoundProp.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SoundProperty =
+            DependencyProperty.Register("SoundProp", typeof(Visibility), typeof(MainWindow));
+
+        public Visibility NoSoundProp
+        {
+            get { return (Visibility)GetValue(NoSoundProperty); }
+            set { SetValue(NoSoundProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SoundProp.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty NoSoundProperty =
+            DependencyProperty.Register("NoSoundProp", typeof(Visibility), typeof(MainWindow));
 
         BackgroundWorker backgroundWorker;
         int i=1;
@@ -74,6 +93,8 @@ namespace PL
             sound += @"\PL\sound.mp3";
             player.Open(new Uri(sound, UriKind.RelativeOrAbsolute));
             player.Play();
+            NoSoundProp = Visibility.Collapsed;
+            SoundProp = Visibility.Visible;
             InitializeComponent();
         }
 
@@ -148,34 +169,16 @@ namespace PL
         private void SoundButton_Click(object sender, RoutedEventArgs e)
         {
             player.Pause();
-            SoundB.Visibility = Visibility.Collapsed;
-            NoSoundB.Visibility=Visibility.Visible;
-            //Visibility="{Binding ElementName=NoSoundB, Path=Visibility,Converter={StaticResource soundConverter}}"
-    //    < Window.Resources >
-    //    < converter:SoundConverter x:Key = "soundConverter" ></ converter:SoundConverter >
-    //</ Window.Resources >
+            SoundProp = Visibility.Collapsed;
+            NoSoundProp= Visibility.Visible;
+ 
         }
 
         private void NoSoundButton_Click(object sender, RoutedEventArgs e)
         {
             player.Play();
-            NoSoundB.Visibility = Visibility.Collapsed;
-            SoundB.Visibility = Visibility.Visible;
+            SoundProp = Visibility.Visible;
+            NoSoundProp=Visibility.Collapsed;
         }
-
-
-        //private void replaceImages()
-        //{
-        //    int i = 1;
-        //    while (true)
-        //    {
-        //        i = i < 8 ? i : 1;
-        //        PictureHolderSource = new BitmapImage(new System.Uri(_path + $"{i}.jpg"));
-        //        i++;
-        //        Thread.Sleep(2300);
-        //        i = i < 8 ? i : 1;
-        //        PictureHolderSource = new BitmapImage(new System.Uri(_path + $"{i}.jpg"));
-        //    }
-        //}
     }
 }

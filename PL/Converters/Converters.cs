@@ -40,7 +40,7 @@ namespace Converters
     public class IsEmptyTotalPriceConverter : IValueConverter
     {
         //convert from source property type to target property type
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => (double)value==0 ? false : true;
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => (double)value == 0 ? false : true;
 
         //convert from target property type to source property type
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -52,7 +52,7 @@ namespace Converters
     public class SoundConverter : IValueConverter
     {
         //convert from source property type to target property type
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => (Visibility)value==Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => (Visibility)value == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
 
         //convert from target property type to source property type
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -65,7 +65,7 @@ namespace Converters
     {
         //convert from source property type to target property type
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => (bool)value ? Visibility.Visible : Visibility.Collapsed;
- 
+
         //convert from target property type to source property type
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -89,7 +89,7 @@ namespace Converters
     {
         //convert from source property type to target property type
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-            => ((string)value).Length==0 || ((string)value)=="0" ? Visibility.Visible : Visibility.Collapsed;
+            => ((string)value).Length == 0 || ((string)value) == "0" ? Visibility.Visible : Visibility.Collapsed;
 
         //convert from target property type to source property type
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -103,7 +103,7 @@ namespace Converters
         //convert from source property type to target property type
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (string)value == "Update" ? Visibility.Visible :Visibility.Collapsed;
+            return (string)value == "Update" ? Visibility.Visible : Visibility.Collapsed;
         }
 
         //convert from target property type to source property type
@@ -117,7 +117,7 @@ namespace Converters
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            return values.All(t => !string.IsNullOrWhiteSpace(t as string)) && (string)values[0]!="0" && (string)values[2]!="0";
+            return values.All(t => !string.IsNullOrWhiteSpace(t as string)) && (string)values[0] != "0" && (string)values[2] != "0";
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
@@ -164,6 +164,4 @@ namespace Converters
             throw new NotImplementedException();
         }
     }
-
-
 }

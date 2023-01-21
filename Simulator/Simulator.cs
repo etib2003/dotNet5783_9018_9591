@@ -30,8 +30,6 @@ public static class Simulator
         remove => s_report -= value;
     }
 
-
-
     public static void stopSim()
     {
         _shouldStop = true;

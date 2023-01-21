@@ -56,8 +56,8 @@
 
         </Grid>
         <Button Content="Start Simulation" HorizontalAlignment="Left" Height="32" Margin="631,10,0,0" VerticalAlignment="Top" Width="148" FontFamily="Candara" FontSize="16" FontWeight="Bold" Click="Button_Click"/>
-        <Button Name="SoundB" Content="🔊" HorizontalAlignment="Left" Height="37" Margin="107,3,0,0" Grid.Row="2" VerticalAlignment="Top" Width="33" Click="SoundButton_Click" FontSize="18" BorderBrush="{x:Null}" Background="{x:Null}"/>
-        <Button Name="NoSoundB" Content="🔇" Visibility="Collapsed" HorizontalAlignment="Left" Height="37" Margin="107,3,0,0" Grid.Row="2" VerticalAlignment="Top" Width="33" Click="NoSoundButton_Click" FontSize="18" BorderBrush="{x:Null}" Background="{x:Null}"/>
+        <Button Name="SoundB" Content="🔊" Visibility="{Binding SoundProp}" HorizontalAlignment="Left" Height="37" Margin="107,3,0,0" Grid.Row="2" VerticalAlignment="Top" Width="33" Click="SoundButton_Click" FontSize="18" BorderBrush="{x:Null}" Background="{x:Null}"/>
+        <Button Name="NoSoundB" Content="🔇" Visibility="{Binding NoSoundProp}" HorizontalAlignment="Left" Height="37" Margin="107,3,0,0" Grid.Row="2" VerticalAlignment="Top" Width="33" Click="NoSoundButton_Click" FontSize="18" BorderBrush="{x:Null}" Background="{x:Null}"/>
 
     </Grid>
 </Window>

@@ -11,6 +11,7 @@ Bonuses:
 9. Updating the progress of the order transition from state to state with the help of a progress bar (=3)
 10. Images change using Thread in the main window
 11. Changing the input method to English by clicking on the text box
+12. Use of IMultiValueConverter
 
 
 from stage0:

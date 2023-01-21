@@ -240,26 +240,8 @@ internal class Order : BlApi.IOrder
     {
         try
         {
-            ////אולי תהיה שגיאת ריצה כי ימיין הזמנות לפי שיפדייט למרות שזה נאל
-            //var oldestOrder = ((dal?.Order.RequestAll(x => x?.ShipDate == null || x?.DeliveryDate == null)).OrderBy(x => x?.OrderDate).ThenBy(x => x?.ShipDate)).First();
-            //if (oldestOrder != null)
-            //    return oldestOrder?.Id;
-            //else
-            //    return null;
-
-
-            //var oldestShip = (dal?.Order.RequestAll(x => x?.ShipDate == null)).OrderBy(x => x?.OrderDate).First();
-            //var oldestDelivery = (dal?.Order.RequestAll(x => x?.ShipDate != null && x?.DeliveryDate == null)).OrderBy(x => x?.ShipDate).First();
-            //DO.Order? oldest;
-            //oldest = oldestShip?.OrderDate < oldestDelivery?.ShipDate ? oldestShip : oldestDelivery;
-
-            //if (oldest != null)
-            //    return oldest?.Id;
-            //else
-            //    return null;
             var orders = dal?.Order.RequestAll(x => x?.DeliveryDate is null);
-
-           return orders!.Any() ? orders!.MinBy(x => x?.ShipDate is null ? x?.OrderDate : x?.ShipDate)?.Id : null;
+            return orders!.Any() ? orders!.MinBy(x => x?.ShipDate is null ? x?.OrderDate : x?.ShipDate)?.Id : null;
         }
         catch (Exception ex)
         {

@@ -16,7 +16,6 @@ namespace Simulator
         {
             delay = _delay ;
             order = _order ;
-            massege = null;
         }
 
         public ReportArgs(string _massege)
@@ -24,6 +23,5 @@ namespace Simulator
             massege = _massege;
             delay = -1;
         }
-
     }
 }

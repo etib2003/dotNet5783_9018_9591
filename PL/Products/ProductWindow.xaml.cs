@@ -177,7 +177,7 @@ namespace PL.productsWindows
             }
             catch (BO.NotValidDeleteException)
             {
-                MessageBox.Show("Product is already in order prosses\nYou can't delete it!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Product is already in order process\nYou can't delete it!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
