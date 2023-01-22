@@ -50,7 +50,7 @@ namespace Orders
                 {
                     selectedIndex = OrderForListView.SelectedIndex;
                     int oflId = ((OrderForList)OrderForListView.SelectedItem).Id;
-                    new OrderWindow(oflId, (orderId) => OrderForList![selectedIndex] = bl?.Order.GetOrderForList(orderId)!, action).Show();
+                    new OrderWindow(oflId, (orderId) => OrderForList![selectedIndex] = bl?.Order.GetOrderForList(orderId)!, action!).Show();
                 }
             }
             catch(BO.BoDoesNoExistException)

@@ -28,7 +28,6 @@ namespace Orders
         public static readonly DependencyProperty orderTrackingProperty =
             DependencyProperty.Register("orderTracking", typeof(BO.OrderTracking), typeof(TrackOrderWindow));
 
-
         public string Id
         {
             get { return (string)GetValue(IdProperty); }
@@ -38,8 +37,6 @@ namespace Orders
         // Using a DependencyProperty as the backing store for Id.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IdProperty =
             DependencyProperty.Register("Id", typeof(string), typeof(TrackOrderWindow));
-
-
 
         public TrackOrderWindow()
         {

@@ -48,9 +48,9 @@ public static class Simulator
                     int? orderId = bl?.Order.GetOldestOrder();
                     if (orderId != null)
                     {
-                        BO.Order order = bl?.Order.GetOrderDetails((int)orderId);
+                        BO.Order order = bl?.Order.GetOrderDetails((int)orderId)!;
                         delay = random.Next(3, 11);
-                        s_report(Thread.CurrentThread, new ReportArgs(delay, order));
+                        s_report!(Thread.CurrentThread, new ReportArgs(delay, order));
                         Thread.Sleep(delay * 1000);
                         if (order.ShipDate == null)
                             bl?.Order.UpdateOrderShip((int)orderId);
@@ -67,9 +67,9 @@ public static class Simulator
                     Thread.Sleep(SEC);
                 }
                 if (_shouldStop && finishAll)
-                    s_report(Thread.CurrentThread, new ReportArgs("Finish simulation"));
+                    s_report!(Thread.CurrentThread, new ReportArgs("Finish simulation"));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //s_report(Thread.CurrentThread, new ReportArgs("Finish simulation"));
             }

@@ -65,7 +65,7 @@ namespace Cart
                 var order = bl?.Cart.CommitOrder(Cart);
                 action(Cart);
                 if (Coupon == codeCoupon)
-                    order.TotalPrice *= discount;
+                    order!.TotalPrice *= discount;
                 new CompleteWindow(order!).Show();
                 this.Close();
             }

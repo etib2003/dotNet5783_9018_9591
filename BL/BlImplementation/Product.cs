@@ -139,7 +139,7 @@ internal class Product : BlApi.IProduct
     public void DeleteProduct(int productId)
     {
         //find the product to delete
-        IEnumerable<DO.OrderItem?> doOrderItemList = dal?.OrderItem.RequestAll(orderItem => orderItem?.ProductID == productId);//gets the products from the data layer
+        IEnumerable<DO.OrderItem?> doOrderItemList = dal?.OrderItem.RequestAll(orderItem => orderItem?.ProductID == productId)!;//gets the products from the data layer
 
         if (!doOrderItemList.Any())
             dal?.Product.Delete(productId);
@@ -158,7 +158,7 @@ internal class Product : BlApi.IProduct
     {
         try
         {
-            return dal?.Product.GetById(productId).CopyPropTo(new ProductForList());
+            return dal?.Product.GetById(productId).CopyPropTo(new ProductForList())!;
         }
         catch (DO.DalDoesNoExistException ex)//catches the exception from the data layer
         {

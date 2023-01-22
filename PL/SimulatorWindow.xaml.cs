@@ -93,17 +93,17 @@ namespace PL
             DependencyProperty.Register("FutureStatus", typeof(string), typeof(SimulatorWindow));
 
         private Stopwatch timerStopWatch;
-        private bool isTimerRun;
+        //private bool isTimerRun;
         BackgroundWorker backgroundWorker;
         BackgroundWorker barWorker;
-        private bool finish = false;
+        //private bool finish = false;
         private bool canClose = false;
 
         public SimulatorWindow()
         {
             InitializeComponent();
 
-            Closing += SimulatorWindow_Closing;
+            Closing += SimulatorWindow_Closing!;
 
             timerStopWatch = new Stopwatch();
             timerStopWatch.Start();
@@ -114,7 +114,7 @@ namespace PL
             backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
             backgroundWorker.WorkerReportsProgress = true;
             backgroundWorker.WorkerSupportsCancellation = true;
-            isTimerRun = true;
+            //isTimerRun = true;
             backgroundWorker.RunWorkerAsync();
 
             //עבור bar:
@@ -133,7 +133,7 @@ namespace PL
 
         private void BarWorker_DoWork(object? sender, DoWorkEventArgs e)
         {
-            int length = (int)e.Argument;
+            int length = (int)e.Argument!;
             for (int i = 1; i <= length; i++)
             {
                 if (barWorker.CancellationPending == true)
@@ -168,15 +168,15 @@ namespace PL
         private void reportFunc(object sender, EventArgs e)
         {
             ProgressChangedEventArgs p;
-            if (e.GetType() == typeof(ReportArgs) && (e as ReportArgs).delay != -1)
+            if (e.GetType() == typeof(ReportArgs) && (e as ReportArgs)!.delay != -1)
             {
-                Tuple<int, BO.Order> tuple = new((e as ReportArgs).delay, (e as ReportArgs).order);
+                Tuple<int, BO.Order> tuple = new((e as ReportArgs)!.delay, (e as ReportArgs)!.order);
                 p = new(1, tuple);
                 BackgroundWorker_ProgressChanged(sender, p);
             }
-            else if ((e as ReportArgs).delay == -1)
+            else if ((e as ReportArgs)!.delay == -1)
             {
-                string massege = (e as ReportArgs).massege;
+                string massege = (e as ReportArgs)!.massege;
                 if (massege == "Finish order progress")
                 {
                     p = new(2, massege);
@@ -199,7 +199,7 @@ namespace PL
         private void BackgroundWorker_DoWork(object? sender, DoWorkEventArgs e)
         {
             //רשמו מתודות משקיפות (ראו בהמשך) לאירועי הסימולטור
-            Simulator.Simulator.s_Report += reportFunc;
+            Simulator.Simulator.s_Report += reportFunc!;
             Simulator.Simulator.s_StopSimulator += cancelAsync;
             Simulator.Simulator.simulatorActivate();
             while (!backgroundWorker.CancellationPending)
@@ -225,19 +225,19 @@ namespace PL
                     Dispatcher.Invoke(() =>
                     {
                         TupleBind = e.UserState as Tuple<int, BO.Order>;
-                        if ((e.UserState as Tuple<int, BO.Order>).Item2.Status.ToString() == "confirmed")
+                        if ((e.UserState as Tuple<int, BO.Order>)!.Item2.Status.ToString() == "confirmed")
                         {
-                            CurrentStatus= $"Current status: confirmed, {(e.UserState as Tuple<int, BO.Order>).Item2.OrderDate}";
-                            FutureStatus= $"Future status: shipped, {DateTime.Now.AddSeconds((e.UserState as Tuple<int, BO.Order>).Item1)}";
+                            CurrentStatus= $"Current status: confirmed, {(e.UserState as Tuple<int, BO.Order>)!.Item2.OrderDate}";
+                            FutureStatus= $"Future status: shipped, {DateTime.Now.AddSeconds((e.UserState as Tuple<int, BO.Order>)!.Item1)}";
                         }
                         else
                         {
-                            CurrentStatus = $"Current status: shipped, {(e.UserState as Tuple<int, BO.Order>).Item2.ShipDate}";
-                            FutureStatus = $"Future status: provided, {DateTime.Now.AddSeconds((e.UserState as Tuple<int, BO.Order>).Item1)}";
+                            CurrentStatus = $"Current status: shipped, {(e.UserState as Tuple<int, BO.Order>)!.Item2.ShipDate}";
+                            FutureStatus = $"Future status: provided, {DateTime.Now.AddSeconds((e.UserState as Tuple<int, BO.Order>)!.Item1)}";
                         }
                         if (barWorker.IsBusy != true)
                             // Start the asynchronous operation.
-                            barWorker.RunWorkerAsync((e.UserState as Tuple<int, BO.Order>).Item1); //צריך להיות מותאם לזמן השינה של הסימולטור בין הזמנה להזמנה
+                            barWorker.RunWorkerAsync((e.UserState as Tuple<int, BO.Order>)!.Item1); //צריך להיות מותאם לזמן השינה של הסימולטור בין הזמנה להזמנה
 
                     });
                     break;
@@ -260,11 +260,11 @@ namespace PL
 
         private void BackgroundWorker_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
         {
-            Simulator.Simulator.s_Report -= reportFunc;
+            Simulator.Simulator.s_Report -= reportFunc!;
             Simulator.Simulator.s_StopSimulator -= cancelAsync;
 
             timerStopWatch.Stop();
-            isTimerRun = false;
+            //isTimerRun = false;
             barWorker.CancelAsync();
 
             canClose = true;

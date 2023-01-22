@@ -211,7 +211,7 @@ namespace Products
                 var product = (BO.ProductItem)lv!.DataContext;
                 int piId = product.Id;
 
-                new ProductItemWindow(piId, Cart, () => ProductsItems![ProductsItems!.IndexOf(product)] = bl.Product.GetProductDetailsForCustomer(piId, Cart)).Show();
+                new ProductItemWindow(piId, Cart, () => ProductsItems![ProductsItems!.IndexOf(product)] = bl?.Product.GetProductDetailsForCustomer(piId, Cart)!).Show();
 
             }
             catch (BO.BoDoesNoExistException)//catches the exception from the data layer

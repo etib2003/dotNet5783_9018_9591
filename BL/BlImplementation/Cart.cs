@@ -26,7 +26,7 @@ internal class Cart : BlApi.ICart
             {
                 if (product.InStock > 0) // the stock is not empty
                 {
-                    cart.Items.Add(new BO.OrderItem { Name = product.Name, ProductID = product.Id, Amount = 1, Price = product.Price, TotalPrice = product.Price });
+                    cart.Items!.Add(new BO.OrderItem { Name = product.Name, ProductID = product.Id, Amount = 1, Price = product.Price, TotalPrice = product.Price });
                     cart.TotalPrice += product.Price;
                 }
                 else
@@ -65,7 +65,7 @@ internal class Cart : BlApi.ICart
             if (newAmount == 0) //remove the product's order from the cart
             {
                 cart.TotalPrice -= orderItem.TotalPrice;
-                cart.Items.Remove(orderItem);
+                cart.Items!.Remove(orderItem);
             }
             else if (orderItem.Amount > newAmount) //in case the new amount is smaller- remove products from the cart
             {
@@ -148,7 +148,7 @@ internal class Cart : BlApi.ICart
                 DeliveryDate = null,
                 TotalPrice = cart.TotalPrice,
                 Status = BO.OrderStatus.confirmed,
-                OrderItems = cart.Items
+                OrderItems = cart.Items!
             };
             cart.Items.Clear();
             cart.TotalPrice = 0;

@@ -83,13 +83,13 @@ namespace PL.productsWindows
         {
             try
             {
-                 if (ProductsForList!.Any(p => p.Category == CategorySelected) == false)
+                 if (ProductsForList!.Any(p => p!.Category == CategorySelected) == false)
                 {
                     restartAndAdd(bl.Product.GetListProductForManagerAndCatalog(x => (BO.Category)x?.Category! == CategorySelected));
                 }
                 else
                 {
-                    List<BO.ProductForList?> objects = bl?.Product.GetProductForListByCond(ProductsForList, product => product.Category == CategorySelected).ToList();
+                    List<BO.ProductForList?> objects = bl?.Product.GetProductForListByCond(ProductsForList!, product => product!.Category == CategorySelected).ToList();
                     if (objects!.Any())
                     {
                         restartAndAdd(objects!);

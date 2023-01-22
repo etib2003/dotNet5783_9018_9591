@@ -21,8 +21,8 @@ internal class Order : BlApi.IOrder
                 BO.OrderForList boOrderForList = order.CopyPropTo(new BO.OrderForList());
                 boOrderForList.Status = getOrderStatus(order);
                 var oiOfOrder = dal?.OrderItem.RequestAll(x => x?.OrderID == boOrderForList.Id);
-                boOrderForList.AmountOfItems = oiOfOrder.Count();
-                boOrderForList.TotalPrice = oiOfOrder.Sum(orderItem => orderItem?.Price * orderItem?.Amount) ?? 0;//calculate the total price
+                boOrderForList.AmountOfItems = oiOfOrder!.Count();
+                boOrderForList.TotalPrice = oiOfOrder!.Sum(orderItem => orderItem?.Price * orderItem?.Amount) ?? 0;//calculate the total price
                 return boOrderForList;
             });
         }
@@ -180,7 +180,7 @@ internal class Order : BlApi.IOrder
                 }
             }
             //Initializes the data  
-            orderTracking.OrderProgress = tupleList;
+            orderTracking.OrderProgress = tupleList!;
             orderTracking.Id = orderID;
             orderTracking.Status = getOrderStatus(doOrder);//call the help function
 
@@ -203,8 +203,8 @@ internal class Order : BlApi.IOrder
             BO.OrderForList orderForList = doOrderForList.CopyPropTo(new OrderForList());
             orderForList.Status = getOrderStatus(doOrderForList);
             var oiOfOrder = dal?.OrderItem.RequestAll(x => x?.OrderID == orderForList.Id);
-            orderForList.AmountOfItems = oiOfOrder.Count();
-            orderForList.TotalPrice = oiOfOrder.Sum(orderItem => orderItem?.Price * orderItem?.Amount) ?? 0;
+            orderForList.AmountOfItems = oiOfOrder!.Count();
+            orderForList.TotalPrice = oiOfOrder!.Sum(orderItem => orderItem?.Price * orderItem?.Amount) ?? 0;
             return orderForList;
         }
         catch (DO.DalDoesNoExistException ex)//catches the exception from the data layer
@@ -226,7 +226,7 @@ internal class Order : BlApi.IOrder
                        CountPerStatus = newGroup.Count()
                    };
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             throw new Exception("Failed to divide into groups");
         }
