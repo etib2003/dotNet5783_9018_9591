@@ -237,17 +237,11 @@ namespace PL
                         if (barWorker.IsBusy != true)
                             // Start the asynchronous operation.
                             barWorker.RunWorkerAsync((e.UserState as Tuple<int, BO.Order>)!.Item1); //צריך להיות מותאם לזמן השינה של הסימולטור בין הזמנה להזמנה
-
                     break;
-                case 2: //סיים לטפל בהזמנה/עדכון מצב אובייקט (אם נדרש)
-                    //Dispatcher.Invoke(() =>
-                    //{
-                    //});
+                case 2: //סיים לטפל בהזמנה/עדכון מצב אובייקט (אם נדרש)     
                     break;
-                case 3: //סיים את הסימולאציה/לבונוס: עדכון התקדמות (עבור progress bar)
-                    
+                case 3: //סיים את הסימולאציה/לבונוס: עדכון התקדמות (עבור progress bar)                   
                         FinishText = "There are no orders left that are not updated - we have sent them all :)";
-
                     break;
                 default:
                     break;
