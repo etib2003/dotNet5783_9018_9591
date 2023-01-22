@@ -1,4 +1,6 @@
-﻿using Converters;
+﻿using BO;
+using Converters;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using DocumentFormat.OpenXml.Presentation;
 using Managar;
 using Orders;
@@ -71,10 +73,25 @@ namespace PL
         public static readonly DependencyProperty NoSoundProperty =
             DependencyProperty.Register("NoSoundProp", typeof(Visibility), typeof(MainWindow));
 
+
+
+        public bool isSimActive
+        {
+            get { return (bool)GetValue(isSimActiveProperty); }
+            set { SetValue(isSimActiveProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for isSimActive.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty isSimActiveProperty =
+            DependencyProperty.Register("isSimActive", typeof(bool), typeof(MainWindow), new PropertyMetadata(true));
+
+
+
         BackgroundWorker backgroundWorker;
         int i=1;
 
         MediaPlayer player = new MediaPlayer();
+
 
         /// <summary>
         /// constructor
@@ -82,7 +99,7 @@ namespace PL
         public MainWindow()
         {
             Cart = new BO.Cart() { Items = new List<BO.OrderItem?>(), TotalPrice=0 };
-          
+
             backgroundWorker = new BackgroundWorker();
             backgroundWorker.DoWork += BackgroundWorker_DoWork;
             backgroundWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
@@ -160,10 +177,9 @@ namespace PL
            PictureHolderSource = new BitmapImage(new System.Uri(_path + $"{i}.jpg"));
                     
         }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new SimulatorWindow().Show();
+            new SimulatorWindow(()=> isSimActive=!isSimActive).Show();
         }
 
         private void SoundButton_Click(object sender, RoutedEventArgs e)

@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Bibliography;
+using DocumentFormat.OpenXml.Spreadsheet;
 using Simulator;
 using System;
 using System.Collections.Generic;
@@ -93,13 +94,13 @@ namespace PL
             DependencyProperty.Register("FutureStatus", typeof(string), typeof(SimulatorWindow));
 
         private Stopwatch timerStopWatch;
-        //private bool isTimerRun;
         BackgroundWorker backgroundWorker;
         BackgroundWorker barWorker;
-        //private bool finish = false;
         private bool canClose = false;
 
-        public SimulatorWindow()
+        private Action action;
+
+        public SimulatorWindow(Action isSimActive)
         {
             InitializeComponent();
 
@@ -124,6 +125,9 @@ namespace PL
             barWorker.RunWorkerCompleted += BarWorker_RunWorkerCompleted;
             barWorker.WorkerReportsProgress = true;
             barWorker.WorkerSupportsCancellation = true;
+
+            this.action = isSimActive;
+            action();
         }
 
         private void SimulatorWindow_Closing(object sender, CancelEventArgs e)
@@ -167,31 +171,27 @@ namespace PL
 
         private void reportFunc(object sender, EventArgs e)
         {
-            ProgressChangedEventArgs p;
+      
             if (e.GetType() == typeof(ReportArgs) && (e as ReportArgs)!.delay != -1)
             {
                 Tuple<int, BO.Order> tuple = new((e as ReportArgs)!.delay, (e as ReportArgs)!.order);
-                p = new(1, tuple);
-                BackgroundWorker_ProgressChanged(sender, p);
+                backgroundWorker.ReportProgress(1, tuple);             
             }
             else if ((e as ReportArgs)!.delay == -1)
             {
                 string massege = (e as ReportArgs)!.massege;
                 if (massege == "Finish order progress")
                 {
-                    p = new(2, massege);
-                    BackgroundWorker_ProgressChanged(sender, p);
+                    backgroundWorker.ReportProgress(2, massege);
                 }
                 else if (massege == "Finish simulation")
                 {
-                    p = new(3, massege);
-                    BackgroundWorker_ProgressChanged(sender, p);
+                    backgroundWorker.ReportProgress(3, massege);
                 }
             }
             else
             {
-                p = new(0, e);
-                BackgroundWorker_ProgressChanged(sender, p);
+                backgroundWorker.ReportProgress(0, e);
             }
         }
 
@@ -222,8 +222,7 @@ namespace PL
                     timerText = timerStopWatch.Elapsed.ToString().Substring(0, 8);
                     break;
                 case 1://עדכון אובייקט הישות שבהדמיה-מגיע עם פרטי ההזמנה וכו'
-                    Dispatcher.Invoke(() =>
-                    {
+                 
                         TupleBind = e.UserState as Tuple<int, BO.Order>;
                         if ((e.UserState as Tuple<int, BO.Order>)!.Item2.Status.ToString() == "confirmed")
                         {
@@ -239,18 +238,15 @@ namespace PL
                             // Start the asynchronous operation.
                             barWorker.RunWorkerAsync((e.UserState as Tuple<int, BO.Order>)!.Item1); //צריך להיות מותאם לזמן השינה של הסימולטור בין הזמנה להזמנה
 
-                    });
                     break;
                 case 2: //סיים לטפל בהזמנה/עדכון מצב אובייקט (אם נדרש)
-                    Dispatcher.Invoke(() =>
-                    {
-                    });
+                    //Dispatcher.Invoke(() =>
+                    //{
+                    //});
                     break;
                 case 3: //סיים את הסימולאציה/לבונוס: עדכון התקדמות (עבור progress bar)
-                    Dispatcher.Invoke(() =>
-                    {
+                    
                         FinishText = "There are no orders left that are not updated - we have sent them all :)";
-                    });
 
                     break;
                 default:
@@ -264,8 +260,8 @@ namespace PL
             Simulator.Simulator.s_StopSimulator -= cancelAsync;
 
             timerStopWatch.Stop();
-            //isTimerRun = false;
             barWorker.CancelAsync();
+            action();
 
             canClose = true;
             Close();
