@@ -49,7 +49,7 @@ public static class Simulator
                     if (orderId != null)
                     {
                         BO.Order order = bl?.Order.GetOrderDetails((int)orderId)!;
-                        delay =  random.Next(3, 11);
+                        delay = random.Next(3, 11);
                         s_report!(Thread.CurrentThread, new ReportArgs(delay, order));
                         Thread.Sleep(delay * 1000);
                         if (order.ShipDate == null)

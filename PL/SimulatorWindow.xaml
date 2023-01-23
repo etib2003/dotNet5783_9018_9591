@@ -18,7 +18,7 @@
         <Label x:Name="idText" Content="{Binding TupleBind.Item2.Id}" ContentStringFormat="Order number in processing: {0}" HorizontalAlignment="Center" Height="39" Margin="0,84,0,0" VerticalAlignment="Top" Width="324" FontSize="21" HorizontalContentAlignment="Center"/>
         <Label x:Name="oldStatusText" Content="{Binding CurrentStatus}" HorizontalAlignment="Center" Height="39" Margin="0,141,0,0"  VerticalAlignment="Top" Width="635" FontSize="20" HorizontalContentAlignment="Center"/>
         <Label x:Name="newStatusText"  Content="{Binding FutureStatus}" HorizontalAlignment="Center" Height="35" Margin="0,187,0,0" VerticalAlignment="Top" Width="635" FontSize="20" HorizontalContentAlignment="Center"/>
-        <Label x:Name="estimateTime" Content="{Binding TupleBind.Item1}" ContentStringFormat="Estimate time: {0} seconds" HorizontalAlignment="Center" Height="30" Margin="0,229,0,0"  VerticalAlignment="Top" Width="635" FontSize="20" HorizontalContentAlignment="Center"/>
-        <TextBlock x:Name="finishOrder" Text="{Binding FinishText}" HorizontalAlignment="Center" Height="50" Margin="0,267,0,0"  VerticalAlignment="Top" Width="636" FontSize="20"/>
+        <Label x:Name="estimateTime" Content="{Binding TupleBind.Item1}" ContentStringFormat="Estimate time: {0} seconds" HorizontalAlignment="Center" Height="32" Margin="0,229,0,0"  VerticalAlignment="Top" Width="635" FontSize="20" HorizontalContentAlignment="Center"/>
+        <TextBlock x:Name="finishOrder" Text="{Binding FinishText}" HorizontalAlignment="Center" Height="42" Margin="0,270,0,0"  VerticalAlignment="Top" Width="636" FontSize="20"/>
     </Grid>
 </Window>
