@@ -115,10 +115,9 @@ namespace PL
             backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
             backgroundWorker.WorkerReportsProgress = true;
             backgroundWorker.WorkerSupportsCancellation = true;
-            //isTimerRun = true;
             backgroundWorker.RunWorkerAsync();
 
-            //עבור bar:
+            //bar:
             barWorker = new BackgroundWorker();
             barWorker.DoWork += BarWorker_DoWork;
             barWorker.ProgressChanged += BarWorker_ProgressChanged;
@@ -171,41 +170,60 @@ namespace PL
 
         private void reportFunc(object sender, EventArgs e)
         {
-      
-            if (e.GetType() == typeof(ReportArgs) && (e as ReportArgs)!.delay != -1)
+            try
             {
-                Tuple<int, BO.Order> tuple = new((e as ReportArgs)!.delay, (e as ReportArgs)!.order);
-                backgroundWorker.ReportProgress(1, tuple);             
-            }
-            else if ((e as ReportArgs)!.delay == -1)
-            {
-                string massege = (e as ReportArgs)!.massege;
-                if (massege == "Finish order progress")
+                // Check if the event argument is of type ReportArgs and the delay property is not -1
+                if (e.GetType() == typeof(ReportArgs) && (e as ReportArgs)!.delay != -1)
                 {
-                    backgroundWorker.ReportProgress(2, massege);
+                    Tuple<int, BO.Order> tuple = new((e as ReportArgs)!.delay, (e as ReportArgs)!.order);
+                    // Report progress with the tuple as the user state
+                    backgroundWorker.ReportProgress(1, tuple);
                 }
-                else if (massege == "Finish simulation")
+                // Check if the delay property of the ReportArgs object is -1
+                else if ((e as ReportArgs)!.delay == -1)
                 {
-                    backgroundWorker.ReportProgress(3, massege);
+                    // Get the massege property of the ReportArgs object
+                    string massege = (e as ReportArgs)!.massege;
+                    if (massege == "Finish order progress")
+                    {
+                        // Report progress with the massege as the user state
+                        backgroundWorker.ReportProgress(2, massege);
+                    }
+                    else if (massege == "Finish simulation")
+                    {
+                        // Report progress with the massege as the user state
+                        backgroundWorker.ReportProgress(3, massege);
+                    }
+                }
+                // If the event argument is not of type ReportArgs or the delay property is -1
+                else
+                {
+                    // Report progress with the event argument as the user state
+                    backgroundWorker.ReportProgress(0, e);
                 }
             }
-            else
+            catch(Exception)
             {
-                backgroundWorker.ReportProgress(0, e);
+                MessageBox.Show("Erorr, Please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
-        //עבור הפעלת ההדמיה:
         private void BackgroundWorker_DoWork(object? sender, DoWorkEventArgs e)
         {
-            //רשמו מתודות משקיפות (ראו בהמשך) לאירועי הסימולטור
-            Simulator.Simulator.s_Report += reportFunc!;
-            Simulator.Simulator.s_StopSimulator += cancelAsync;
-            Simulator.Simulator.simulatorActivate();
-            while (!backgroundWorker.CancellationPending)
+            try
             {
-                backgroundWorker.ReportProgress(0);
-                Thread.Sleep(1000);
+                Simulator.Simulator.s_Report += reportFunc!;
+                Simulator.Simulator.s_StopSimulator += cancelAsync;
+                Simulator.Simulator.simulatorActivate();
+                while (!backgroundWorker.CancellationPending)
+                {
+                    backgroundWorker.ReportProgress(0);
+                    Thread.Sleep(1000);
+                }
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("Erorr, Please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -216,35 +234,44 @@ namespace PL
 
         private void BackgroundWorker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
         {
-            switch (e.ProgressPercentage)
+            try
             {
-                case 0: //מגיע מפי אל-התקדמות השעון של הדמיה כנ"ל
-                    timerText = timerStopWatch.Elapsed.ToString().Substring(0, 8);
-                    break;
-                case 1://עדכון אובייקט הישות שבהדמיה-מגיע עם פרטי ההזמנה וכו'
-                 
+                switch (e.ProgressPercentage)
+                {
+                    case 0:
+                        timerText = timerStopWatch.Elapsed.ToString().Substring(0, 8);
+                        break;
+                    case 1:
+                        FinishText = "";
                         TupleBind = e.UserState as Tuple<int, BO.Order>;
                         if ((e.UserState as Tuple<int, BO.Order>)!.Item2.Status.ToString() == "confirmed")
                         {
-                            CurrentStatus= $"Current status: confirmed, {(e.UserState as Tuple<int, BO.Order>)!.Item2.OrderDate}";
-                            FutureStatus= $"Future status: shipped, {DateTime.Now.AddSeconds((e.UserState as Tuple<int, BO.Order>)!.Item1)}";
+                            CurrentStatus = $"Current status: confirmed, {TupleBind!.Item2.OrderDate}";
+                            FutureStatus = $"Future status: shipped, {DateTime.Now.AddSeconds(TupleBind!.Item1)}";
                         }
                         else
                         {
-                            CurrentStatus = $"Current status: shipped, {(e.UserState as Tuple<int, BO.Order>)!.Item2.ShipDate}";
-                            FutureStatus = $"Future status: provided, {DateTime.Now.AddSeconds((e.UserState as Tuple<int, BO.Order>)!.Item1)}";
+                            CurrentStatus = $"Current status: shipped, {TupleBind!.Item2.ShipDate}";
+                            FutureStatus = $"Future status: provided, {DateTime.Now.AddSeconds(TupleBind!.Item1)}";
                         }
                         if (barWorker.IsBusy != true)
                             // Start the asynchronous operation.
-                            barWorker.RunWorkerAsync((e.UserState as Tuple<int, BO.Order>)!.Item1); //צריך להיות מותאם לזמן השינה של הסימולטור בין הזמנה להזמנה
-                    break;
-                case 2: //סיים לטפל בהזמנה/עדכון מצב אובייקט (אם נדרש)     
-                    break;
-                case 3: //סיים את הסימולאציה/לבונוס: עדכון התקדמות (עבור progress bar)                   
+                            barWorker.RunWorkerAsync(TupleBind!.Item1);
+                        break;
+                    case 2:
+                        if(TupleBind!=null)
+                                FinishText = $"Finish Order number {TupleBind.Item2.Id}";
+                        break;
+                    case 3:
                         FinishText = "There are no orders left that are not updated - we have sent them all :)";
-                    break;
-                default:
-                    break;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("Erorr, Please try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

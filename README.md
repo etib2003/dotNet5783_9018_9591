@@ -12,6 +12,7 @@ Bonuses:
 10. Images change using Thread in the main window
 11. Changing the input method to English by clicking on the text box
 12. Use of IMultiValueConverter (=1)
+13. Sound-song
 
 
 from stage0:

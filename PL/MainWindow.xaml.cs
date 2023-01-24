@@ -73,8 +73,6 @@ namespace PL
         public static readonly DependencyProperty NoSoundProperty =
             DependencyProperty.Register("NoSoundProp", typeof(Visibility), typeof(MainWindow));
 
-
-
         public bool isSimActive
         {
             get { return (bool)GetValue(isSimActiveProperty); }
@@ -84,7 +82,6 @@ namespace PL
         // Using a DependencyProperty as the backing store for isSimActive.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty isSimActiveProperty =
             DependencyProperty.Register("isSimActive", typeof(bool), typeof(MainWindow), new PropertyMetadata(true));
-
 
 
         BackgroundWorker backgroundWorker;
@@ -105,6 +102,8 @@ namespace PL
             backgroundWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
             backgroundWorker.WorkerReportsProgress = true;
             backgroundWorker.RunWorkerAsync();
+
+            //for the sound:
             string sound = Environment.CurrentDirectory;
             sound = sound.Remove(sound.Length-4, 4);
             sound += @"\PL\sound.mp3";
@@ -112,12 +111,8 @@ namespace PL
             player.Play();
             NoSoundProp = Visibility.Collapsed;
             SoundProp = Visibility.Visible;
-            InitializeComponent();
-        }
 
-        private void BackgroundWorker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
-        {
-            PictureHolderSource = new BitmapImage(new System.Uri(_path + $"{e.ProgressPercentage}.jpg"));
+            InitializeComponent();
         }
 
         private void BackgroundWorker_DoWork(object? sender, DoWorkEventArgs e)
@@ -129,6 +124,11 @@ namespace PL
                 i = i < 7 ? i : 1;
                 Thread.Sleep(2000);
             }
+        }
+
+        private void BackgroundWorker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
+        {
+            PictureHolderSource = new BitmapImage(new System.Uri(_path + $"{e.ProgressPercentage}.jpg"));
         }
 
         /// <summary>
@@ -187,7 +187,6 @@ namespace PL
             player.Pause();
             SoundProp = Visibility.Collapsed;
             NoSoundProp= Visibility.Visible;
- 
         }
 
         private void NoSoundButton_Click(object sender, RoutedEventArgs e)

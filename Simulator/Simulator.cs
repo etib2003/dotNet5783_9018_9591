@@ -42,7 +42,6 @@ public static class Simulator
         {
             try
             {
-                _shouldStop = false;
                 while (!_shouldStop)
                 {
                     int? orderId = bl?.Order.GetOldestOrder();
@@ -52,6 +51,7 @@ public static class Simulator
                         delay = random.Next(3, 11);
                         s_report!(Thread.CurrentThread, new ReportArgs(delay, order));
                         Thread.Sleep(delay * 1000);
+
                         if (order.ShipDate == null)
                             bl?.Order.UpdateOrderShip((int)orderId);
                         else
@@ -68,10 +68,12 @@ public static class Simulator
                 }
                 if (_shouldStop && finishAll)
                     s_report!(Thread.CurrentThread, new ReportArgs("Finish simulation"));
+                _shouldStop = false;
+
             }
             catch (Exception)
             {
-                //s_report(Thread.CurrentThread, new ReportArgs("Finish simulation"));
+                throw new Exception();
             }
         }).Start();
        
