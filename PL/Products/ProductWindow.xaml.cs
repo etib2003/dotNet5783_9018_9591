@@ -85,7 +85,7 @@ namespace PL.productsWindows
             }
             catch (BO.WrongLengthException)
             {
-                MessageBox.Show("Too short Id number\nPlease try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Too short Id number,\nPlease enter a six digits number", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -150,7 +150,7 @@ namespace PL.productsWindows
             }
             catch (BO.WrongLengthException)
             {
-                MessageBox.Show("Too short id, please try again!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Too short id\n Please enter a six digits number", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (BO.NotValidFormatNameException ex)
             {
