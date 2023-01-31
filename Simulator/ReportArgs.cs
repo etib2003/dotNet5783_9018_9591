@@ -4,8 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Simulator
 {
+    /// <summary>
+    /// An object for reporting the report function
+    /// </summary>
     public class ReportArgs: EventArgs
     {
         public int delay { get; set; }

@@ -30,34 +30,41 @@ public static class Simulator
         remove => s_report -= value;
     }
 
+    /// <summary>
+    /// Stop the simulator
+    /// </summary>
     public static void stopSim()
     {
         _shouldStop = true;
         s_stopSimulator();
     }
-
+    /// <summary>
+    /// Runs the simulator - updates shipping and delivery dates of the orders
+    /// </summary>
+    /// <exception cref="Exception"></exception>
     public static void simulatorActivate()
     {
         new Thread(()=>
         {
             try
             {
-                while (!_shouldStop)
+                while (!_shouldStop) //As long as they didn't stop it or finish all orders
                 {
                     int? orderId = bl?.Order.GetOldestOrder();
                     if (orderId != null)
                     {
                         BO.Order order = bl?.Order.GetOrderDetails((int)orderId)!;
                         delay = random.Next(3, 11);
-                        s_report!(Thread.CurrentThread, new ReportArgs(delay, order));
+                        s_report!(Thread.CurrentThread, new ReportArgs(delay, order)); //Reports to update the simulator window
                         Thread.Sleep(delay * 1000);
 
+                        //Update:
                         if (order.ShipDate == null)
                             bl?.Order.UpdateOrderShip((int)orderId);
                         else
                             bl?.Order.UpdateOrderDelivery((int)orderId);
                         if (!_shouldStop)
-                            s_report(Thread.CurrentThread, new ReportArgs("Finish order progress"));
+                            s_report(Thread.CurrentThread, new ReportArgs("Finish order progress")); //Reports about Finish order progress
                     }
                     else
                     {
@@ -67,7 +74,7 @@ public static class Simulator
                     Thread.Sleep(SEC);
                 }
                 if (_shouldStop && finishAll)
-                    s_report!(Thread.CurrentThread, new ReportArgs("Finish simulation"));
+                    s_report!(Thread.CurrentThread, new ReportArgs("Finish simulation")); //Reports about Finish all orders
                 _shouldStop = false;
 
             }

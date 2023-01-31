@@ -15,10 +15,28 @@ public interface IProduct
     /// <returns>list of products</returns>
     public IEnumerable<BO.ProductForList?> GetListProductForManagerAndCatalog(Func<DO.Product?, bool>? cond = null);
 
+    /// <summary>
+    /// Get list of ProductForList
+    /// </summary>
+    /// <param name="productId"> product id</param>
+    /// <returns>list of ProductForList</returns>
     public ProductForList GetProductForList(int productId);
 
+    /// <summary>
+    /// GetListProductForCatalog
+    /// </summary>
+    /// <param name="cart"></param>
+    /// <param name="cond">A condition to filter by</param>
+    /// <returns>List of Product For the Catalog</returns>
     public IEnumerable<BO.ProductItem> GetListProductForCatalog(BO.Cart cart, Func<DO.Product?, bool>? cond = null);
 
+    /// <summary>
+    /// Get List Product For Catalog View
+    /// </summary>
+    /// <param name="cart"></param>
+    /// <param name="productItems">The list from the view</param>
+    /// <param name="cond">A condition to filter by</param>
+    /// <returns>List Product For Catalog View</returns>
     public IEnumerable<BO.ProductItem> GetListProductForCatalogView(BO.Cart cart, IEnumerable<ProductItem> productItems, Func<BO.ProductItem?, bool>? cond = null);
 
     /// <summary>

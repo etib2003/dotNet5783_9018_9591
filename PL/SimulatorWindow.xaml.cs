@@ -133,6 +133,9 @@ namespace PL
         {
             e.Cancel = !canClose;
         }
+        /// <summary>
+        /// Handles the progress of the bar
+        /// </summary>
 
         private void BarWorker_DoWork(object? sender, DoWorkEventArgs e)
         {
@@ -149,6 +152,11 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// Handles the progress of the bar in view
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BarWorker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
         {
             int progress = e.ProgressPercentage;
@@ -156,6 +164,11 @@ namespace PL
             ProgressBarValue=progress;
         }
 
+        /// <summary>
+        /// Finish bar progress
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BarWorker_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Cancelled == true)
@@ -168,6 +181,9 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// Acts according to the report received from the simulator
+        /// </summary>
         private void reportFunc(object sender, EventArgs e)
         {
             try
@@ -208,6 +224,9 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// Activates the simulator operation
+        /// </summary>
         private void BackgroundWorker_DoWork(object? sender, DoWorkEventArgs e)
         {
             try
@@ -232,6 +251,10 @@ namespace PL
             backgroundWorker.CancelAsync();
         }
 
+        /// <summary>
+        /// Updates the display in the simulator window
+        /// </summary>
+
         private void BackgroundWorker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
         {
             try
@@ -241,7 +264,7 @@ namespace PL
                     case 0:
                         timerText = timerStopWatch.Elapsed.ToString().Substring(0, 8);
                         break;
-                    case 1:
+                    case 1: //Updates order details in the display
                         FinishText = "";
                         TupleBind = e.UserState as Tuple<int, BO.Order>;
                         if ((e.UserState as Tuple<int, BO.Order>)!.Item2.Status.ToString() == "confirmed")
@@ -275,6 +298,9 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// Completes the simulator operation
+        /// </summary>
         private void BackgroundWorker_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
         {
             Simulator.Simulator.s_Report -= reportFunc!;
@@ -287,6 +313,10 @@ namespace PL
             canClose = true;
             Close();
         }
+
+        /// <summary>
+        /// Helps the simulator by pressing the stop button
+        /// </summary>
         private void Stop_Click(object sender, RoutedEventArgs e)
         {
             Simulator.Simulator.stopSim();

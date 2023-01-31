@@ -13,6 +13,10 @@ public interface IOrder
     /// <returns>list of orders</returns>
     public IEnumerable<BO.OrderForList?> GetOrderListForManager();
 
+    /// <summary>
+    /// Get orders grouping by dates
+    /// </summary>
+    /// <returns>Orders grouping by dates</returns>
     public IEnumerable<OrderStatistics> GroupByStatistics();
 
     /// <summary>
@@ -24,6 +28,11 @@ public interface IOrder
 
     public OrderForList GetOrderForList(int orderId);
 
+    /// <summary>
+    /// Get Order Details
+    /// </summary>
+    /// <param name="orderID"></param>
+    /// <returns>BO.Order Order Details(</returns>
     public BO.Order GetOrderDetails(int orderID);
 
     /// <summary>
@@ -52,5 +61,9 @@ public interface IOrder
     /// <exception cref="order does not exist"></exception>
     public BO.OrderTracking TrackingOrder(int orderID);
 
+    /// <summary>
+    /// Returns the order that has not been updated the longest
+    /// </summary>
+    /// <returns>id of the order that has not been updated the longest</returns>
     public int? GetOldestOrder();
 }
